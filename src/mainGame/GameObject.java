@@ -19,7 +19,7 @@ public abstract class GameObject {
 	protected double velX, velY;
 	protected boolean isMoving;
 	protected int health;
-
+	//fat black men
 	public GameObject(double x, double y, ID id) {
 		this.x = x;
 		this.y = y;
