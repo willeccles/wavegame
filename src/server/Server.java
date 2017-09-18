@@ -6,8 +6,7 @@ import java.util.HashMap;
 
 public class Server extends Thread {
 	private ServerSocket serverSocket;
-	public static HashMap<int, Instance> instances; // map each instance to an ID so we can manage them
-	private int nextInstanceID = 0; // the ID of the next instance to be created. This will not allow reuse of instances, but really the number of them should never exceed 2^32-1 anyway.
+	public static HashMap<String, Instance> instances; // map each instance to an ID so we can manage them
 
 	public Server(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
@@ -38,8 +37,10 @@ public class Server extends Thread {
 					String username = args[0];
 					String roomname = args[2];
 					String roompass = args[3];
-					instances.put(nextInstanceID, new Instance(roomname, roompass, username, clientSocket));
-					instances.get(nextInstanceID).start();
+					// TODO: handle when a roomname is already used
+					instances.put(roomname, new Instance(roomname, roompass, username, clientSocket));
+					instances.get(roomname).start();
+					nextInstanceID++;
 				} else if (input.matches("^[^|]+\\|JOIN\\|[^|]+\\|[^|]+")) {
 					// join the given instance (if it exists)
 					// if it doesn't exist, send back an error message
