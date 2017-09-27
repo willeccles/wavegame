@@ -37,16 +37,33 @@ public class Server extends Thread {
 					String username = args[0];
 					String roomname = args[2];
 					String roompass = args[3];
-					// TODO: handle when a roomname is already used
+					// TODO: handle when a roomname is already used (create new one if it's dead, if it's alive make an error of some sort happen
 					instances.put(roomname, new Instance(roomname, roompass, username, clientSocket));
 					instances.get(roomname).start();
 					nextInstanceID++;
 				} else if (input.matches("^[^|]+\\|JOIN\\|[^|]+\\|[^|]+")) {
 					// join the given instance (if it exists)
 					// if it doesn't exist, send back an error message
+					String args[] = input.split("\\|");
+					String username = args[0];
+					String roomname = args[2];
+					String roompass = args[3];
+					if (instances.containsKey(roomname)) {
+						if (instances.get(roomname).isAlive()) {
+							// join the user into the room if the password matches
+							if (instances.get(roomname).checkPass(roompass)) {
+								if (instances.get(roomname).getClientCount() < 2) {
+									//user can join
+									instances.get(roomname).joinUser(username, clientSocket);
+								}
+							}
+						}
+					}
 				}
 			} catch (IOException ioe) {
+				// TODO
 			} catch (SocketTimeoutException ste) {
+				// TODO
 			}
 		}
 	}

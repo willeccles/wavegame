@@ -30,13 +30,27 @@ public class ClientConnection extends Thread {
 			try {
 				input = in.readUTF();
 				// deal with input here
+				/* if the message is telling the server the player's current velocity vector and position, this should be relayed ASAP to the other client, whose game will then display the player's change in velocity */
 			} catch (IOException ioe) {
+				// TODO
 			} catch (EOFException eof) {
+				// TODO
 				// this is when the client has disconnected and the inputstream reaches EOF
 			}
 		}
 
 		// try{}catch(){}
 		// close streams, socket, this.join(), etc
+	}
+
+	// sends a message to this client using the socket
+	// TODO: determine whether or not this should be synchronized
+	public void sendMessage(String message) {
+		// send a message to the client
+		try {
+			out.writeUTF(message);
+		} catch (IOException ioe) {
+			// TODO
+		}
 	}
 }
