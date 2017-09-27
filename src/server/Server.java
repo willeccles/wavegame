@@ -11,7 +11,7 @@ public class Server extends Thread {
 	public Server(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(0);
-		instances = new HashMap<int, Instance>;
+		instances = new HashMap<String, Instance>();
 	}
 
 	public void run() {
@@ -26,7 +26,7 @@ public class Server extends Thread {
 			// Any other message should be responded to with some sort of "bad message" thing
 			// This tells the client to disconnect and try again
 			try {
-				System.out.println("Listening for clients on port " + port + "...");
+				System.out.println("Listening for clients on port " + serverSocket.getLocalPort() + "...");
 				Socket clientSocket = serverSocket.accept();
 				DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 				String input = in.readUTF();
@@ -40,7 +40,6 @@ public class Server extends Thread {
 					// TODO: handle when a roomname is already used (create new one if it's dead, if it's alive make an error of some sort happen
 					instances.put(roomname, new Instance(roomname, roompass, username, clientSocket));
 					instances.get(roomname).start();
-					nextInstanceID++;
 				} else if (input.matches("^[^|]+\\|JOIN\\|[^|]+\\|[^|]+")) {
 					// join the given instance (if it exists)
 					// if it doesn't exist, send back an error message
@@ -61,8 +60,6 @@ public class Server extends Thread {
 					}
 				}
 			} catch (IOException ioe) {
-				// TODO
-			} catch (SocketTimeoutException ste) {
 				// TODO
 			}
 		}

@@ -9,12 +9,12 @@ import java.util.HashMap;
  * @author Will Eccles
  */
 public class Instance extends Thread {
-	private HashMap<int, ClientConnection> clients;
+	private HashMap<Integer, ClientConnection> clients;
 	private String roomname;
 	private String roompass;
 	
 	public Instance(String name, String pass, String hostName, Socket clientSocket) throws IOException {
-		clients = new HashMap<int, ClientConnection>;
+		clients = new HashMap<Integer, ClientConnection>();
 		try {
 			clients.put(0, new ClientConnection(hostName, 0, clientSocket, this));
 			clients.get(0).start();
@@ -28,15 +28,19 @@ public class Instance extends Thread {
 		while (clients.size() != 2) {
 			// here we should check if the number hits 0 (aka if the host DC's during this time)
 			if (clients.size() == 0) {
-				this.join();
+				try {
+					this.join();
+				} catch (InterruptedException ie) {
+					// TODO
+				}
 			}
 		}
 		
-		if (this.isAlive()) {}
-		/* TODO: tell clients that the game is starting */
-		
-		/* TODO: every time the velocity (vector) of a client changes, it's change should be relayed to the other client through the server (see ClientConnection.java) */
-		/* TODO: at certain intervals, tell client which kinds of enemies (AKA what level) are spawning and where they are (assuming it's not a constant based on the level), everything else (rendering, health, etc.) are all clientside */
+		if (this.isAlive()) {
+			/* TODO: tell clients that the game is starting */
+			/* TODO: every time the velocity (vector) of a client changes, it's change should be relayed to the other client through the server (see ClientConnection.java) */
+			/* TODO: at certain intervals, tell client which kinds of enemies (AKA what level) are spawning and where they are (assuming it's not a constant based on the level), everything else (rendering, health, etc.) are all clientside */
+		}
 	}
 
 	public boolean checkPass(String pass) {
@@ -47,13 +51,13 @@ public class Instance extends Thread {
 		return clients.size();
 	}
 
-	public synchronized int removeClient(int id) {
+	public synchronized void removeClient(int id) {
 		clients.remove(id);
 	}
 
 	public void joinUser(String clientName, Socket clientSocket) {
 		try {
-			clients.set(1, new ClientConnection(clientName, 1, clientSocket, this));
+			clients.put(1, new ClientConnection(clientName, 1, clientSocket, this));
 			clients.get(1).start();
 		} catch (IOException ioe) {
 			// TODO
