@@ -115,7 +115,7 @@ public class Menu {
 			g.drawRect(1440, 585, 400, 400);
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawString("Survival", 1550, 665);
+			g.drawString("Hunger", 1550, 665);
 
 			g.setColor(Color.white);
 			g.drawRect(80, 135, 850, 250);
@@ -144,51 +144,12 @@ public class Menu {
 			g.drawString("Help", 900, 70);
 
 			g.setFont(font2);
-<<<<<<< HEAD
 			g.drawString("Waves: Use arrow keys to move player. Within Waves your goal is to, avoid enemies until the player is teleported to a new level." 
 				, 40, 200);
 			g.drawString("After beating 4 levels on level 5, there will be a boss fight that rewards you with a single use Power Up.", 80, 250);
 			
-=======
-			g.drawString("Waves: Use arrow keys to move player. "
-					+ "Within Waves your goal is to, avoid enemies until the player is teleported to a new level. \n After beating 4 levels on level 5, there will be a boss fight that rewards you with a single use Power Up." , 40, 200);
-
->>>>>>> a79cce4956488c2b3870b5fba540287dc3bb81f4
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
-		} else if (game.gameState == STATE.Bosses){
-			Font font = new Font("Comic Sans MS", 1, 50);
-			Font font2 = new Font("Comic Sans MS", 1, 30);
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Bosses", 900, 70);
-			
-			g.setFont(font2);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
-		} else if (game.gameState == STATE.Attack){
-			Font font = new Font("Comic Sans MS", 1, 50);
-			Font font2 = new Font("Comic Sans MS", 1, 30);
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Attack", 900, 70);
-			
-			g.setFont(font2);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
-		} else if (game.gameState == STATE.Survival){
-			Font font = new Font("Comic Sans MS", 1, 50);
-			Font font2 = new Font("Comic Sans MS", 1, 30);
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Survival", 900, 70);
-
-			g.setFont(font2);
 			g.drawRect(850, 300, 200, 64);
 			g.drawString("Back", 920, 340);
 		}
