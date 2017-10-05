@@ -19,14 +19,14 @@ public class MouseListener extends MouseAdapter {
 	private Game game;
 	private Handler handler;
 	private HUD hud;
-	private Spawn1to5 spawner;
-	private Spawn5to10 spawner2;
+	private Spawn1to10 spawner;
+	private Spawn10to20 spawner2;
 	private UpgradeScreen upgradeScreen;
 	private Upgrades upgrades;
 	private Player player;
 	private String upgradeText;
 
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2,
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to10 spawner, Spawn10to20 spawner2,
 			UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
 		this.game = game;
 		this.handler = handler;
@@ -52,7 +52,7 @@ public class MouseListener extends MouseAdapter {
 			spawner.addLevels();
 			spawner2.restart();
 			spawner2.addLevels();
-			Spawn1to5.LEVEL_SET = 1;
+			Spawn1to10.LEVEL_SET = 1;
 			game.gameState = STATE.Menu;
 		}
 
