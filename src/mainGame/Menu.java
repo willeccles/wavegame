@@ -144,9 +144,10 @@ public class Menu {
 			g.drawString("Help", 900, 70);
 
 			g.setFont(font2);
-			g.drawString("Waves: Simply use WASD to avoid enemies. Once you avoid" + " \n"
-					+ "them long enough, a new batch will spawn in! Defeat each boss to win!", 40, 200);
-
+			g.drawString("Waves: Use arrow keys to move player. Within Waves your goal is to, avoid enemies until the player is teleported to a new level." 
+				, 40, 200);
+			g.drawString("After beating 4 levels on level 5, there will be a boss fight that rewards you with a single use Power Up.", 80, 250);
+			
 			g.setFont(font2);
 			g.setColor(Color.white);
 			g.drawRect(850, 300, 200, 64);
