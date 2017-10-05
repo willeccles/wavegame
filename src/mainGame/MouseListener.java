@@ -117,8 +117,43 @@ public class MouseListener extends MouseAdapter {
 			else if (mouseOver(mx, my, 80, 735, 850, 250)) {
 				System.exit(1);
 			}
+			
+			//Attack Mode
+			else if (mouseOver(mx, my, 990, 585, 400, 400)) {
+				game.gameState = STATE.Attack;
+			}
+			
+			//Survival Mode
+			else if (mouseOver(mx, my, 1440, 585, 400, 400)) {
+				game.gameState = STATE.Survival;
+			}
+			
+			//Bosses Mode
+			else if (mouseOver(mx, my, 1440, 135, 400, 400)) {
+				game.gameState = STATE.Bosses;
+			}
 		}
-
+		//Back Button for Attack screen
+		else if (game.gameState == STATE.Attack) {
+			if (mouseOver(mx, my, 850, 300, 200, 64)) {
+				game.gameState = STATE.Menu;
+				return;
+			}
+		}
+		//Back Button for Bosses screen
+				else if (game.gameState == STATE.Bosses) {
+					if (mouseOver(mx, my, 850, 300, 200, 64)) {
+						game.gameState = STATE.Menu;
+						return;
+					}
+				}
+		//Back Button for Survival screen
+				else if (game.gameState == STATE.Survival) {
+					if (mouseOver(mx, my, 850, 300, 200, 64)) {
+						game.gameState = STATE.Menu;
+						return;
+					}
+				}
 		// Back Button for Help screen
 		else if (game.gameState == STATE.Help) {
 			if (mouseOver(mx, my, 850, 300, 200, 64)) {
