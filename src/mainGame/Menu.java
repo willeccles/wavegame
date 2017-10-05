@@ -34,9 +34,9 @@ public class Menu {
 	private Random r;
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
 	private int colorIndex;
-	private Spawn1to10 spawner;
+	private Spawn1to5 spawner;
 
-	public Menu(Game game, Handler handler, HUD hud, Spawn1to10 spawner) {
+	public Menu(Game game, Handler handler, HUD hud, Spawn1to5 spawner) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
