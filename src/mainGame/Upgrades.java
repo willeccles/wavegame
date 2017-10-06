@@ -13,13 +13,13 @@ public class Upgrades {
 	private Handler handler;
 	private HUD hud;
 	private Player player;
-	private Spawn1to10 spawner;
-	private Spawn10to20 spawner2;
+	private Spawn1to5 spawner;
+	private Spawn5to10 spawner2;
 	private UpgradeScreen upgradeScreen;
 	private String ability;
 
-	public Upgrades(Game game, Handler handler, HUD hud, UpgradeScreen upgradeScreen, Player player, Spawn1to10 spawner,
-			Spawn10to20 spawner2) {
+	public Upgrades(Game game, Handler handler, HUD hud, UpgradeScreen upgradeScreen, Player player, Spawn1to5 spawner,
+			Spawn5to10 spawner2) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -60,9 +60,9 @@ public class Upgrades {
 	public void levelSkipAbility() {
 		handler.clearEnemies();
 		hud.setLevel(hud.getLevel() + 1);
-		if (Spawn1to10.LEVEL_SET == 1) {
+		if (Spawn1to5.LEVEL_SET == 1) {
 			spawner.skipLevel();
-		} else if (Spawn1to10.LEVEL_SET == 2) {
+		} else if (Spawn1to5.LEVEL_SET == 2) {
 			spawner2.skipLevel();
 		}
 		hud.setAbilityUses(hud.getAbilityUses() - 1);
