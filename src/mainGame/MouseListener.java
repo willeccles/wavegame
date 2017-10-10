@@ -59,6 +59,18 @@ public class MouseListener extends MouseAdapter {
 		else if (game.gameState == STATE.Game) {
 
 		}
+		
+		else if (game.gameState == STATE.Attack) {
+
+		}
+		
+		else if (game.gameState == STATE.Bosses) {
+
+		}
+		
+		else if (game.gameState == STATE.Survival) {
+
+		}
 
 		else if (game.gameState == STATE.Upgrade) {
 			if (mouseOver(mx, my, 100, 300, 1721, 174)) {
@@ -120,23 +132,23 @@ public class MouseListener extends MouseAdapter {
 
 			//Attack Mode
 			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
+				handler.object.clear();
 				game.gameState = STATE.Attack;
 				handler.addObject(player);
-				handler.object.clear();
 			}
 
 			//Survival Mode
 			else if (mouseOver(mx, my, 960, 390, 266, 266)) {
+				handler.object.clear();
 				game.gameState = STATE.Survival;
 				handler.addObject(player);
-				handler.object.clear();
 			}
 
 			//Bosses Mode
 			else if (mouseOver(mx, my, 960, 90, 266, 266)) {
+				handler.object.clear();
 				game.gameState = STATE.Bosses;
 				handler.addObject(player);
-				handler.object.clear();
 			}
 		}
 		// Back Button for Help screen
