@@ -185,7 +185,7 @@ public class Game extends Canvas implements Runnable {
 
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME SCREEN
 
-		if (gameState == STATE.Wave || gameState == STATE.Help || gameState == STATE.Attack || gameState == STATE.Bosses || gameState == STATE.Survival) {// user is playing game, draw game objects
+		if (gameState == STATE.Wave || gameState == STATE.Help) {// user is playing game, draw game objects
 			hud.render(g);
 		} else if (gameState == STATE.Menu) {// user is in help or the menu, draw the menu
 			// and help objects

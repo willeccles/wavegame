@@ -149,48 +149,13 @@ public class Menu {
 			g.setFont(font2);
 
 			g.drawString("Waves: Use arrow keys to move player. Within Waves your goal is to, avoid enemies until the player is teleported to a new level." 
-				, 26, 133);
+					, 26, 133);
 			g.drawString("After beating 4 levels on level 5, there will be a boss fight that rewards you with a single use Power Up.", 53, 166);
 
 			g.setFont(font2);
 			g.setColor(Color.white);
 			g.drawRect(566, 200, 133, 42);
 			g.drawString("Back", 613, 226);
-		} else if (game.gameState == STATE.Bosses){
-			Font font = new Font("Comic Sans MS", 1, 33);
-			Font font2 = new Font("Comic Sans MS", 1, 20);
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Bosses", 600, 46);
-			
-			g.setFont(font2);
-			g.drawRect(566, 200, 133, 42);
-			g.drawString("Back", 613, 226);
-		} else if (game.gameState == STATE.Attack){
-			Font font = new Font("Comic Sans MS", 1, 33);
-			Font font2 = new Font("Comic Sans MS", 1, 20);
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Attack", 600, 46);
-			
-			g.setFont(font2);
-			g.drawRect(566, 200, 133, 42);
-			g.drawString("Back", 613, 226);
-		} else if (game.gameState == STATE.Survival){
-			Font font = new Font("Comic Sans MS", 1, 33);
-			Font font2 = new Font("Comic Sans MS", 1, 20);
-
-			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Survival", 600, 46);
-
-			g.setFont(font2);
-			g.drawRect(566, 200, 133, 42);
-			g.drawString("Back", 613, 226);
 		}
-
 	}
-
 }
