@@ -55,12 +55,11 @@ public class UpgradeScreen {
 		text = "Select an Upgrade!";
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, 200);
+		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, 133);
 
-		// All pictures are 1721 x 174
-		g.drawImage(getImage(imagePaths.get(index1)), 100, 300, 1147, 200, null);
-		g.drawImage(getImage(imagePaths.get(index2)), 100, 300 + (60 + Game.HEIGHT / 6), 1147, 200, null);
-		g.drawImage(getImage(imagePaths.get(index3)), 100, 300 + 2 * (60 + Game.HEIGHT / 6), 1147, 200, null);
+		g.drawImage(getImage(imagePaths.get(index1)), 210, 200, 860, 150, null);
+		g.drawImage(getImage(imagePaths.get(index2)), 210, 200 + 150, 860, 150, null);
+		g.drawImage(getImage(imagePaths.get(index3)), 210, 200 + 2 * 150, 860, 150, null);
 
 	}
 
