@@ -56,7 +56,19 @@ public class MouseListener extends MouseAdapter {
 			game.gameState = STATE.Menu;
 		}
 
-		else if (game.gameState == STATE.Game) {
+		else if (game.gameState == STATE.Wave) {
+
+		}
+		
+		else if (game.gameState == STATE.Attack) {
+
+		}
+		
+		else if (game.gameState == STATE.Bosses) {
+
+		}
+		
+		else if (game.gameState == STATE.Survival) {
 
 		}
 
@@ -68,7 +80,7 @@ public class MouseListener extends MouseAdapter {
 
 				upgradeScreen.removeUpgradeOption(1);
 
-				game.gameState = STATE.Game;
+				game.gameState = STATE.Wave;
 			} else if (mouseOver(mx, my, 100, 300 + (60 + Game.HEIGHT / 6), 1721, 174)) {
 				upgradeText = upgradeScreen.getPath(2);
 
@@ -76,7 +88,7 @@ public class MouseListener extends MouseAdapter {
 
 				upgradeScreen.removeUpgradeOption(2);
 
-				game.gameState = STATE.Game;
+				game.gameState = STATE.Wave;
 			} else if (mouseOver(mx, my, 100, 300 + 2 * (60 + Game.HEIGHT / 6), 1721, 174)) {
 				upgradeText = upgradeScreen.getPath(3);
 
@@ -84,7 +96,7 @@ public class MouseListener extends MouseAdapter {
 
 				upgradeScreen.removeUpgradeOption(3);
 
-				game.gameState = STATE.Game;
+				game.gameState = STATE.Wave;
 			}
 
 		}
@@ -93,7 +105,7 @@ public class MouseListener extends MouseAdapter {
 			// Waves Button
 			if (mouseOver(mx, my, 660, 90, 266, 266)) {
 				handler.object.clear();
-				game.gameState = STATE.Game;
+				game.gameState = STATE.Wave;
 				handler.addObject(player);
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "images/PickupHealth.png", handler));
@@ -120,23 +132,23 @@ public class MouseListener extends MouseAdapter {
 
 			//Attack Mode
 			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
+				handler.object.clear();
 				game.gameState = STATE.Attack;
 				handler.addObject(player);
-				handler.object.clear();
 			}
 
 			//Survival Mode
 			else if (mouseOver(mx, my, 960, 390, 266, 266)) {
+				handler.object.clear();
 				game.gameState = STATE.Survival;
 				handler.addObject(player);
-				handler.object.clear();
 			}
 
 			//Bosses Mode
 			else if (mouseOver(mx, my, 960, 90, 266, 266)) {
+				handler.object.clear();
 				game.gameState = STATE.Bosses;
 				handler.addObject(player);
-				handler.object.clear();
 			}
 		}
 		// Back Button for Help screen

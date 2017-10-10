@@ -58,9 +58,9 @@ public class UpgradeScreen {
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, 200);
 
 		// All pictures are 1721 x 174
-		g.drawImage(getImage(imagePaths.get(index1)), 100, 300, 1721, 174, null);
-		g.drawImage(getImage(imagePaths.get(index2)), 100, 300 + (60 + Game.HEIGHT / 6), 1721, 174, null);
-		g.drawImage(getImage(imagePaths.get(index3)), 100, 300 + 2 * (60 + Game.HEIGHT / 6), 1721, 174, null);
+		g.drawImage(getImage(imagePaths.get(index1)), 100, 300, 1147, 200, null);
+		g.drawImage(getImage(imagePaths.get(index2)), 100, 300 + (60 + Game.HEIGHT / 6), 1147, 200, null);
+		g.drawImage(getImage(imagePaths.get(index3)), 100, 300 + 2 * (60 + Game.HEIGHT / 6), 1147, 200, null);
 
 	}
 
