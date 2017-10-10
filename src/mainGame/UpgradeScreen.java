@@ -51,7 +51,7 @@ public class UpgradeScreen {
 	}
 
 	public void render(Graphics g) {
-		Font font = new Font("Amoebic", 1, 175);
+		Font font = new Font("Amoebic", 1, 116);
 		text = "Select an Upgrade!";
 		g.setFont(font);
 		g.setColor(Color.WHITE);
