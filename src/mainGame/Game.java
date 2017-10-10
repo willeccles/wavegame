@@ -16,7 +16,7 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final int WIDTH = 1920, HEIGHT = 1080;
+	public static final int WIDTH = 1280, HEIGHT = 720;
 	private Thread thread;
 	private boolean running = false;
 
@@ -137,11 +137,26 @@ public class Game extends Canvas implements Runnable {
 		} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
 			gameOver.tick();
 		} else if (gameState == STATE.Attack){
-			menu.tick();
+			hud.tick();
+			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+				spawner.tick();
+			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+				spawner2.tick();
+			}
 		} else if (gameState == STATE.Bosses){
-			menu.tick();
+			hud.tick();
+			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+				spawner.tick();
+			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+				spawner2.tick();
+			}
 		} else if (gameState == STATE.Survival){
-			menu.tick();
+			hud.tick();
+			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+				spawner.tick();
+			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+				spawner2.tick();
+			}
 		}
 
 	}
@@ -170,9 +185,9 @@ public class Game extends Canvas implements Runnable {
 
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME SCREEN
 
-		if (gameState == STATE.Wave) {// user is playing game, draw game objects
+		if (gameState == STATE.Wave || gameState == STATE.Help || gameState == STATE.Attack || gameState == STATE.Bosses || gameState == STATE.Survival) {// user is playing game, draw game objects
 			hud.render(g);
-		} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.Attack || gameState == STATE.Bosses || gameState == STATE.Survival) {// user is in help or the menu, draw the menu
+		} else if (gameState == STATE.Menu) {// user is in help or the menu, draw the menu
 			// and help objects
 			menu.render(g);
 		} else if (gameState == STATE.Upgrade) {// user is on the upgrade screen, draw the upgrade screen
