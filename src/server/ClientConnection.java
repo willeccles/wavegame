@@ -39,9 +39,6 @@ public class ClientConnection extends Thread {
 				}
 			} catch (IOException ioe) {
 				// TODO
-			} catch (EOFException eof) {
-				// TODO
-				// this is when the client has disconnected and the inputstream reaches EOF
 			}
 		}
 
@@ -53,6 +50,8 @@ public class ClientConnection extends Thread {
 			socket.close();
 			this.join();
 		} catch (IOException ioe) {
+			// TODO
+		} catch (InterruptedException ie) {
 			// TODO
 		}
 	}

@@ -7,11 +7,13 @@ import java.util.HashMap;
 public class Server extends Thread {
 	private ServerSocket serverSocket;
 	public static HashMap<String, Instance> instances; // map each instance to an ID so we can manage them
+	private Leaderboard lb;
 
 	public Server(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(0);
 		instances = new HashMap<String, Instance>();
+		lb = new Leaderboard("leaderboard.csv");
 	}
 
 	public void run() {
@@ -58,6 +60,14 @@ public class Server extends Thread {
 							}
 						}
 					}
+				} else if (input.matches("^NEWSCORE|[^|,]+,[0-9]+$")) {
+					String username = input.split("|")[1].split(",")[0];
+					int score = Integer.parseInt(input.split(",")[1]);
+					int pos = lb.insert(username, score);
+					DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+					out.writeUTF("POSITION:" + pos + "|SCORESLIST:" + lb.top(10));
+					out.close();
+					lb.saveToFile();
 				}
 			} catch (IOException ioe) {
 				// TODO

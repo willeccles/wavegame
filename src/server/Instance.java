@@ -3,6 +3,7 @@ package server;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Instance of a game. Manages clients and manages the game between them.
@@ -110,9 +111,9 @@ public class Instance extends Thread {
 	public void sendToAll(String message) {
 		Iterator it = clients.entrySet().iterator();
 		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
+			HashMap.Entry pair = (HashMap.Entry) it.next();
 			if (clients.get(pair.getKey()).isAlive()) {
-				sendToClient(pair.getKey(), message);
+				sendToClient((Integer)pair.getKey(), message);
 			}
 			it.remove(); // avoids ConcurrentModificationException, which a for each doesn't
 		}
