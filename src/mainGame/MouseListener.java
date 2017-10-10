@@ -91,7 +91,7 @@ public class MouseListener extends MouseAdapter {
 
 		else if (game.gameState == STATE.Menu) {
 			// Waves Button
-			if (mouseOver(mx, my, 990, 135, 400, 400)) {
+			if (mouseOver(mx, my, 660, 90, 266, 266)) {
 				handler.object.clear();
 				game.gameState = STATE.Game;
 				handler.addObject(player);
@@ -100,12 +100,12 @@ public class MouseListener extends MouseAdapter {
 			}
 
 			// Help Button
-			else if (mouseOver(mx, my, 80, 135, 850, 250)) {
+			else if (mouseOver(mx, my, 53, 90, 566, 166)) {
 				game.gameState = STATE.Help;
 			}
 
 			// Credits
-			else if (mouseOver(mx, my, 80, 435, 850, 250)) {
+			else if (mouseOver(mx, my, 53, 290, 566, 166)) {
 				JOptionPane.showMessageDialog(game,
 						"Made by Brandon Loehle for his "
 								+ "final project in AP Computer Science senior year, 2015 - 2016."
@@ -114,34 +114,34 @@ public class MouseListener extends MouseAdapter {
 			}
 
 			// Quit Button
-			else if (mouseOver(mx, my, 80, 735, 850, 250)) {
+			else if (mouseOver(mx, my, 53, 490, 566, 166)) {
 				System.exit(1);
 			}
 
 			//Attack Mode
-			else if (mouseOver(mx, my, 990, 585, 400, 400)) {
-				handler.object.clear();
+			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
 				game.gameState = STATE.Attack;
 				handler.addObject(player);
+				handler.object.clear();
 			}
 
 			//Survival Mode
-			else if (mouseOver(mx, my, 1440, 585, 400, 400)) {
-				handler.object.clear();
+			else if (mouseOver(mx, my, 960, 390, 266, 266)) {
 				game.gameState = STATE.Survival;
 				handler.addObject(player);
+				handler.object.clear();
 			}
 
 			//Bosses Mode
-			else if (mouseOver(mx, my, 1440, 135, 400, 400)) {
-				handler.object.clear();
+			else if (mouseOver(mx, my, 960, 90, 266, 266)) {
 				game.gameState = STATE.Bosses;
 				handler.addObject(player);
+				handler.object.clear();
 			}
 		}
 		// Back Button for Help screen
 		else if (game.gameState == STATE.Help) {
-			if (mouseOver(mx, my, 850, 300, 200, 64)) {
+			if (mouseOver(mx, my, 566, 200, 133, 42)) {
 				game.gameState = STATE.Menu;
 				return;
 			}

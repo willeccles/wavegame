@@ -23,7 +23,7 @@ public class HUD {
 
 	private boolean regen = false;
 	private int timer = 60;
-	private int healthBarWidth = 400;
+	private int healthBarWidth = 200;
 	private int healthBarModifier = 2;
 	private boolean doubleHealth = false;
 	private String ability = "";
@@ -52,12 +52,12 @@ public class HUD {
 	}
 
 	public void render(Graphics g) {
-		Font font = new Font("Amoebic", 1, 30);
+		Font font = new Font("Amoebic", 1, 20);
 
 		g.setColor(Color.GRAY);
 		g.fillRect(15, 15, healthBarWidth, 64);
 		g.setColor(new Color(75, (int) greenValue, 0));
-		g.fillRect((int) 15, (int) 15, (int) health * 4, 64);
+		g.fillRect((int) 15, (int) 15, (int) health * 2, 64);
 		g.setColor(scoreColor);
 		g.drawRect(15, 15, healthBarWidth, 64);
 
@@ -133,7 +133,7 @@ public class HUD {
 		healthMax = 200;
 		this.health = healthMax;
 		healthBarModifier = 1;
-		healthBarWidth = 800;
+		healthBarWidth = 400;
 	}
 
 	public void resetHealth() {
@@ -141,7 +141,7 @@ public class HUD {
 		healthMax = 100;
 		this.health = healthMax;
 		healthBarModifier = 2;
-		healthBarWidth = 400;
+		healthBarWidth = 200;
 	}
 
 	public void restoreHealth() {

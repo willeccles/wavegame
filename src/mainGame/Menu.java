@@ -71,7 +71,7 @@ public class Menu {
 		if (timer <= 0) {
 			handler.object.clear();
 			colorIndex = r.nextInt(6);
-			handler.addObject(new MenuFireworks((r.nextInt(Game.WIDTH) - 25), 1080, 100, 100, 0, -4,
+			handler.addObject(new MenuFireworks((r.nextInt(Game.WIDTH) - 25), 720, 100, 100, 0, -4,
 					colorPick.get(colorIndex), ID.Firework, this.handler));
 			timer = 300;
 		}
@@ -82,110 +82,110 @@ public class Menu {
 		if (game.gameState == STATE.Menu) {
 			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 			handler.render(g);
-			Font font = new Font("Amoebic", 1, 100);
-			Font font2 = new Font("Amoebic", 1, 60);
+			Font font = new Font("Amoebic", 1, 66);
+			Font font2 = new Font("Amoebic", 1, 40);
 
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Game Modes", 1140, 100);
+			g.drawString("Game Modes", 760, 66);
 
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Loehle's Sandbox", 75, 100);
+			g.drawString("Loehle's Sandbox", 50, 66);
 
 			g.setColor(Color.white);
-			g.drawRect(990, 135, 400, 400);
+			g.drawRect(660, 90, 266, 266);
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawString("Waves", 1110, 215);
+			g.drawString("Waves", 740, 143);
 
 			g.setColor(Color.white);
-			g.drawRect(1440, 135, 400, 400);
+			g.drawRect(960, 90, 266, 266);
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawString("Bosses", 1550, 215);
+			g.drawString("Bosses", 1033, 143);
 
 			g.setColor(Color.white);
-			g.drawRect(990, 585, 400, 400);
+			g.drawRect(660, 390, 266, 266);
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawString("Attack", 1095, 665);
+			g.drawString("Attack", 730, 443);
 
 			g.setColor(Color.white);
-			g.drawRect(1440, 585, 400, 400);
+			g.drawRect(960, 390, 266, 266);
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawString("Survival", 1550, 665);
+			g.drawString("Survival", 1033, 443);
 
 			g.setColor(Color.white);
-			g.drawRect(80, 135, 850, 250);
+			g.drawRect(53, 90, 566, 166);
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Help", 400, 280);
+			g.drawString("Help", 266, 186);
 
 			g.setColor(Color.white);
-			g.drawRect(80, 435, 850, 250);
+			g.drawRect(53, 290, 566, 166);
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Credits", 340, 600);
+			g.drawString("Credits", 226, 400);
 
 			g.setColor(Color.white);
-			g.drawRect(80, 735, 850, 250);
+			g.drawRect(53, 490, 566, 166);
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Quit", 400, 900);
+			g.drawString("Quit", 266, 600);
 
 		} else if (game.gameState == STATE.Help) {// if the user clicks on "help"
-			Font font = new Font("impact", 1, 50);
-			Font font2 = new Font("impact", 1, 30);
+			Font font = new Font("impact", 1, 33);
+			Font font2 = new Font("impact", 1, 20);
 
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Help", 900, 70);
+			g.drawString("Help", 600, 46);
 
 			g.setFont(font2);
 
 			g.drawString("Waves: Use arrow keys to move player. Within Waves your goal is to, avoid enemies until the player is teleported to a new level." 
-				, 40, 200);
-			g.drawString("After beating 4 levels on level 5, there will be a boss fight that rewards you with a single use Power Up.", 80, 250);
+				, 26, 133);
+			g.drawString("After beating 4 levels on level 5, there will be a boss fight that rewards you with a single use Power Up.", 53, 166);
 
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
+			g.drawRect(566, 200, 133, 42);
+			g.drawString("Back", 613, 226);
 		} else if (game.gameState == STATE.Bosses){
-			Font font = new Font("Comic Sans MS", 1, 50);
-			Font font2 = new Font("Comic Sans MS", 1, 30);
+			Font font = new Font("Comic Sans MS", 1, 33);
+			Font font2 = new Font("Comic Sans MS", 1, 20);
 
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Bosses", 900, 70);
+			g.drawString("Bosses", 600, 46);
 			
 			g.setFont(font2);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
+			g.drawRect(566, 200, 133, 42);
+			g.drawString("Back", 613, 226);
 		} else if (game.gameState == STATE.Attack){
-			Font font = new Font("Comic Sans MS", 1, 50);
-			Font font2 = new Font("Comic Sans MS", 1, 30);
+			Font font = new Font("Comic Sans MS", 1, 33);
+			Font font2 = new Font("Comic Sans MS", 1, 20);
 
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Attack", 900, 70);
+			g.drawString("Attack", 600, 46);
 			
 			g.setFont(font2);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
+			g.drawRect(566, 200, 133, 42);
+			g.drawString("Back", 613, 226);
 		} else if (game.gameState == STATE.Survival){
-			Font font = new Font("Comic Sans MS", 1, 50);
-			Font font2 = new Font("Comic Sans MS", 1, 30);
+			Font font = new Font("Comic Sans MS", 1, 33);
+			Font font2 = new Font("Comic Sans MS", 1, 20);
 
 			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Survival", 900, 70);
+			g.drawString("Survival", 600, 46);
 
 			g.setFont(font2);
-			g.drawRect(850, 300, 200, 64);
-			g.drawString("Back", 920, 340);
+			g.drawRect(566, 200, 133, 42);
+			g.drawString("Back", 613, 226);
 		}
 
 	}
