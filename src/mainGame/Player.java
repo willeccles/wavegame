@@ -41,7 +41,6 @@ public class Player extends GameObject {
 		this.y += velY;
 		x = Game.clamp(x, 0, Game.WIDTH - playerWidth);
 		y = Game.clamp(y, 0, Game.HEIGHT - playerHeight);
-		System.out.println(y);
 
 		// add the trail that follows it
 		handler.addObject(new Trail(x, y, ID.Trail, Color.white, playerWidth, playerHeight, 0.05, this.handler));
