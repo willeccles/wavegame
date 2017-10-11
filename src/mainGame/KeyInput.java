@@ -71,7 +71,7 @@ public class KeyInput extends KeyAdapter {
 				if (key == KeyEvent.VK_SPACE) {
 					upgrades.levelSkipAbility();
 				}
-				if (key == KeyEvent.VK_ENTER) {
+				if (key == KeyEvent.VK_SHIFT) {
 					ability = upgrades.getAbility();
 					if (ability.equals("clearScreen")) {
 						upgrades.clearScreenAbility();
@@ -79,6 +79,8 @@ public class KeyInput extends KeyAdapter {
 						upgrades.levelSkipAbility();
 					} else if (ability.equals("freezeTime")) {
 						upgrades.freezeTimeAbility();
+					} else if(ability.equals("")){
+						
 					}
 				}
 
