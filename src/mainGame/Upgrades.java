@@ -27,6 +27,7 @@ public class Upgrades {
 		this.player = player;
 		this.spawner = spawner;
 		this.spawner2 = spawner2;
+		this.ability = "";
 	}
 
 	public void clearScreenAbility() {
