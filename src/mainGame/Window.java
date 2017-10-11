@@ -1,6 +1,5 @@
 package mainGame;
 
-import java.awt.Canvas;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -11,23 +10,27 @@ import javax.swing.JFrame;
  * 5/30/16
  */
 
-public class Window extends Canvas{
+public class Window {
 
 	private static final long serialVersionUID = 1L;
-	
-	public Window(int width, int height, String title, Game game){
+
+	public Window(int width, int height, String title, Game game) {
 		JFrame frame = new JFrame(title);
-		frame.setPreferredSize(new Dimension(width, height));
-		frame.setMaximumSize(new Dimension(width, height));
-		frame.setMinimumSize(new Dimension(width, height));
-		
+		/*
+		   int _width = width + frame.getInsets().left + frame.getInsets().right;
+		   int _height = height + frame.getInsets().top + frame.getInsets().bottom;
+		   frame.setPreferredSize(new Dimension(_width, _height));
+		   frame.setMaximumSize(new Dimension(_width, _height));
+		   frame.setMinimumSize(new Dimension(_width, _height));
+		   */
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(true);
+		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.add(game);
+		frame.pack();
 		frame.setVisible(true);
 		game.start();
-		
+
 	}
 
 
