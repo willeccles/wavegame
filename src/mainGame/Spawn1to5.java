@@ -258,12 +258,11 @@ public class Spawn1to5 {
 	}
 
 	public void restart() {
-		levelNumber = -10;
+		levelNumber = -5;
 		tempCounter = 0;
 		levelTimer = 150;
-		levelsRemaining = 10;
+		levelsRemaining = 5;
 		index = r.nextInt(levelsRemaining);
-
 	}
 
 }
