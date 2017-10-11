@@ -33,8 +33,7 @@ public class EnemyBurst extends GameObject {
 			setPos();
 			setVel();
 		} else if (this.side.equals("right")) {
-			handler.object
-					.add(new EnemyBurstWarning(Game.WIDTH - 45, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
+			handler.object.add(new EnemyBurstWarning(Game.WIDTH - 25, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
 
@@ -44,8 +43,7 @@ public class EnemyBurst extends GameObject {
 			setVel();
 
 		} else if (this.side.equals("bottom")) {
-			handler.object
-					.add(new EnemyBurstWarning(0, Game.HEIGHT - 85, Game.WIDTH, 25, ID.EnemyBurstWarning, handler));
+			handler.object.add(new EnemyBurstWarning(0, Game.HEIGHT - 25, Game.WIDTH, 25, ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
 

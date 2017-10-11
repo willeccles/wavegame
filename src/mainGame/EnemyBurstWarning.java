@@ -68,7 +68,7 @@ public class EnemyBurstWarning extends GameObject {
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, 16, 16);
+		return new Rectangle((int) this.x, (int) this.y, this.width, this.height);
 	}
 
 }
