@@ -16,13 +16,6 @@ public class Window {
 
 	public Window(int width, int height, String title, Game game) {
 		JFrame frame = new JFrame(title);
-		/*
-		   int _width = width + frame.getInsets().left + frame.getInsets().right;
-		   int _height = height + frame.getInsets().top + frame.getInsets().bottom;
-		   frame.setPreferredSize(new Dimension(_width, _height));
-		   frame.setMaximumSize(new Dimension(_width, _height));
-		   frame.setMinimumSize(new Dimension(_width, _height));
-		   */
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
