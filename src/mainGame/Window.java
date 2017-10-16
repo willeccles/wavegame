@@ -3,6 +3,7 @@ package mainGame;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import java.awt.Toolkit;
 
 /**
  * Loads the window of the game, and sets the proper dimensions
@@ -21,6 +22,9 @@ public class Window {
 		frame.setLocationRelativeTo(null);
 		frame.add(game);
 		frame.pack();
+		// set the location to be centered
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.setVisible(true);
 		game.start();
 
