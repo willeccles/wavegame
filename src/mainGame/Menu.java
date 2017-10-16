@@ -14,6 +14,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import javax.imageio.ImageIO;
 
@@ -57,6 +61,22 @@ public class Menu {
 
 		handler.addObject(new MenuFireworks((r.nextInt(Game.WIDTH) - 25), 500, 50, 50, 0, -2,
 				colorPick.get(r.nextInt(6)), ID.Firework, this.handler));
+		
+		// to play main menu song 
+		/*
+		try {
+			FileInputStream fileInputStream = new FileInputStream("main.mp3");
+			Player player = new Player(fileInputStream);
+			System.out.println("Song is playing...");
+			player.play();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JavaLayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+*/
 	}
 
 	public void addColors() {
