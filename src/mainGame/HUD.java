@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import mainGame.Game.STATE;
+
 /**
  * The main Heads Up Display of the game
  * 
@@ -13,26 +15,50 @@ import java.awt.Graphics;
 
 public class HUD {
 
-	public double health = 100;
-	private double healthMax = 100;
+	public double health;
+	private double healthMax;
 
-	private double greenValue = 255;
+	private double greenValue;
 
-	private int score = 00000000000;
-	private int level = 0;
+	private int score;
+	private int level;
 
-	private boolean regen = false;
-	private int timer = 60;
-	private int healthBarWidth = 200;
-	private int healthBarModifier = 2;
-	private boolean doubleHealth = false;
-	private String ability = "";
+	private boolean regen;
+	private int timer;
+	private int healthBarWidth;
+	private int healthBarModifier;
+	private boolean doubleHealth;
+	private String ability;
 	private int abilityUses;
 
-	private Color scoreColor = Color.white;
+	private Color scoreColor;
 
-	private int extraLives = 0;
+	private int extraLives;
 
+	public Game game;
+
+	public HUD(Game game){
+		this.game = game;
+		health = 100;
+		healthMax = 100;
+
+		greenValue = 255;
+
+		score = 00000000000;
+		level = 0;
+
+		regen = false;
+		timer = 60;
+		healthBarWidth = 200;
+		healthBarModifier = 2;
+		doubleHealth = false;
+		ability = "";
+		abilityUses = 0;
+
+		scoreColor = Color.white;
+
+		extraLives = 0;
+	}
 	public void tick() {
 		health = Game.clamp(health, 0, health);
 
@@ -64,8 +90,12 @@ public class HUD {
 		g.setFont(font);
 
 		g.drawString("Score: " + score, 15, 115);
-		g.drawString("Level: " + level, 15, 150);
-		g.drawString("Extra Lives: " + extraLives, 15, 185);
+		if(!(game.getGameState() == STATE.Survival)){
+			g.drawString("Level: " + level, 15, 150);
+			g.drawString("Extra Lives: " + extraLives, 15, 185);
+		} else {
+			g.drawString("Extra Lives: " + extraLives, 15, 150);
+		}
 
 		if (ability.equals("freezeTime")) {
 			g.drawString("Time Freezes: " + abilityUses, Game.WIDTH - 300, 64);
