@@ -32,6 +32,11 @@ public class EnemySweep extends GameObject {
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.cyan, 16, 16, 0.025, this.handler));
 
+		// remove this from the handler. this makes a HUGE reduction in memory usage by the handler (something like 75% reduction at times)
+		if (this.y <= -16 || this.y >= Game.HEIGHT) {
+			handler.removeObject(this);
+		}
+
 	}
 
 	public void render(Graphics g) {

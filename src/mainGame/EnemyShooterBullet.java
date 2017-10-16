@@ -39,7 +39,7 @@ public class EnemyShooterBullet extends GameObject {
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 			if (tempObject.getId() == ID.EnemyShooterBullet) {
-				if (tempObject.getX() >= Game.WIDTH || tempObject.getY() >= Game.HEIGHT) {
+				if (tempObject.getX() >= Game.WIDTH || tempObject.getY() >= Game.HEIGHT || tempObject.getX() < 0 || tempObject.getY() < 0) {
 					handler.removeObject(tempObject);
 				}
 			}

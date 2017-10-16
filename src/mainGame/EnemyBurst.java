@@ -28,6 +28,7 @@ public class EnemyBurst extends GameObject {
 		this.timer = 60;
 		this.side = side;
 		this.size = size;
+
 		if (this.side.equals("left")) {
 			handler.object.add(new EnemyBurstWarning(0, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
 			setPos();
@@ -36,25 +37,18 @@ public class EnemyBurst extends GameObject {
 			handler.object.add(new EnemyBurstWarning(Game.WIDTH - 25, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
-
 		} else if (this.side.equals("top")) {
 			handler.object.add(new EnemyBurstWarning(0, 0, Game.WIDTH, 25, ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
-
 		} else if (this.side.equals("bottom")) {
 			handler.object.add(new EnemyBurstWarning(0, Game.HEIGHT - 25, Game.WIDTH, 25, ID.EnemyBurstWarning, handler));
 			setPos();
 			setVel();
-
 		}
-
 	}
 
 	public void tick() {
-
-		// if (this.y <= 0 || this.y >= Game.HEIGHT - 40) velY *= -1;
-		// if (this.x <= 0 || this.x >= Game.WIDTH - 16) velX *= -1;
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.orange, this.size, this.size, 0.025, this.handler));
 
@@ -62,7 +56,17 @@ public class EnemyBurst extends GameObject {
 		if (timer <= 0) {
 			this.x += velX;
 			this.y += velY;
+		}
 
+		// MASSIVE reduction in memory usage from handler. at the end before it had about 375+ objects, now it ends with 22 or so
+		if (this.side.equals("left") && this.x > Game.WIDTH) {
+			handler.removeObject(this);
+		} else if (this.side.equals("right") && this.x < -(size)) {
+			handler.removeObject(this);
+		} else if (this.side.equals("top") && this.y > Game.HEIGHT) {
+			handler.removeObject(this);
+		} else if (this.side.equals("bottom") && this.y < -(size)) {
+			handler.removeObject(this);
 		}
 
 	}
@@ -73,16 +77,12 @@ public class EnemyBurst extends GameObject {
 		} else if (this.side.equals("right")) {
 			this.x = Game.WIDTH + 200;
 			this.y = r.nextInt(((Game.HEIGHT - size) - 0) + 1) + 0;
-
 		} else if (this.side.equals("top")) {
 			this.y = -(size);
 			this.x = r.nextInt(((Game.WIDTH - size) - 0) + 1) + 0;
-
 		} else if (this.side.equals("bottom")) {
 			this.y = Game.HEIGHT + 200;
-			;
 			this.x = r.nextInt(((Game.WIDTH - size) - 0) + 1) + 0;
-
 		}
 	}
 
@@ -105,7 +105,6 @@ public class EnemyBurst extends GameObject {
 	public void render(Graphics g) {
 		g.setColor(Color.orange);
 		g.fillRect((int) x, (int) y, this.size, this.size);
-
 	}
 
 	@Override
