@@ -91,8 +91,8 @@ public class UpgradeScreen {
 	}
 
 	/**
-	 * Gets 3 index's of pictures, and ensures that they are all different. These 3
-	 * index's will load 3 different upgrade options for the user
+	 * Gets 3 indices of pictures, and ensures that they are all different. These 3
+	 * indices will load 3 different upgrade options for the user
 	 */
 	public void setIndex() {
 		index1 = getIndex(9);

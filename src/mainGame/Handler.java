@@ -22,17 +22,14 @@ public class Handler {
 	public void tick() {
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
-			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail || tempObject.getId() == ID.EnemyBurstWarning) {// we don't want these to ever be frozen by the
-																	// Screen Freeze ability
+			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail || tempObject.getId() == ID.EnemyBurstWarning) {// we don't want these to ever be frozen by the Screen Freeze ability
 
-				// Every GameObject has a tick method, so this effectively updates every single
-				// object
+				// Every GameObject has a tick method, so this effectively updates every single object
 				tempObject.tick();
 
 			} else {
 				timer--;
-				if (timer <= 0) {// if Screen Freeze power-up is unlocked, enemy ID's will pause for the length
-									// of the timer, and not update
+				if (timer <= 0) {// if Screen Freeze power-up is unlocked, enemy ID's will pause for the length of the timer, and not update
 					tempObject.tick();
 				}
 			}
@@ -40,8 +37,7 @@ public class Handler {
 		for (int i = 0; i < pickups.size(); i++) {
 			Pickup tempObject = pickups.get(i);
 
-			// Every Pickup has a tick method, so this effectively updates every single
-			// object
+			// Every Pickup has a tick method, so this effectively updates every single object
 			tempObject.tick();
 		}
 
