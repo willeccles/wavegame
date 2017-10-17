@@ -65,7 +65,7 @@ public class Game extends Canvas implements Runnable {
 		this.setSize(new Dimension(WIDTH, HEIGHT));
 		JFXPanel jfxp = new JFXPanel(); // trust
 		soundplayer = new SoundPlayer("sounds/main.mp3");
-		player.start();
+		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "Wave Game", this);
 	}
 
