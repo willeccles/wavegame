@@ -86,4 +86,8 @@ public class SpawnSurvival {
 	public int randInt(){
 		return (int) (Math.random()*(differentEnemies));
 	}
+	
+	public void restart(){
+		spawnTimer = 0;
+	}
 }

@@ -36,12 +36,13 @@ public class Game extends Canvas implements Runnable {
 	public STATE gameState = STATE.Menu;
 	public static int TEMP_COUNTER;
 	private SoundPlayer soundplayer;
+	private Leaderboard leaderboard;
 
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Attack
+		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Attack, Leaderboard
 	};
 
 	/**
@@ -58,7 +59,7 @@ public class Game extends Canvas implements Runnable {
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
-		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.upgradeScreen, this.player, this.upgrades, this.soundplayer);
+		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades));
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
@@ -67,6 +68,7 @@ public class Game extends Canvas implements Runnable {
 		soundplayer = new SoundPlayer("sounds/main.mp3");
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "Wave Game", this);
+		leaderboard = new Leaderboard(this);
 	}
 
 	/**
@@ -201,6 +203,8 @@ public class Game extends Canvas implements Runnable {
 			upgradeScreen.render(g);
 		} else if (gameState == STATE.GameOver) {// game is over, draw the game over screen
 			gameOver.render(g);
+		} else if (gameState == STATE.Leaderboard){
+			leaderboard.render(g);
 		}
 
 		///////// Draw things above this//////////////
