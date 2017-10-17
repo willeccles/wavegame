@@ -26,6 +26,7 @@ public class Game extends Canvas implements Runnable {
 	private HUD hud;
 	private Spawn1to5 spawner;
 	private Spawn5to10 spawner2;
+	private SpawnSurvival spawnSurvival;
 	private Menu menu;
 	private GameOver gameOver;
 	private UpgradeScreen upgradeScreen;
@@ -48,14 +49,15 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public Game() {
 		handler = new Handler();
-		hud = new HUD();
+		hud = new HUD(this);
 		spawner = new Spawn1to5(this.handler, this.hud, this);
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
+		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2);
-		gameOver = new GameOver(this, this.handler, this.hud);
+		gameOver = new GameOver(this, this.handler, this.hud, player);
 		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.upgradeScreen, this.player, this.upgrades);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades));
 		this.addMouseListener(mouseListener);
@@ -158,11 +160,7 @@ public class Game extends Canvas implements Runnable {
 			}
 		} else if (gameState == STATE.Survival){
 			hud.tick();
-			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
-				spawner.tick();
-			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
-				spawner2.tick();
-			}
+			spawnSurvival.tick();
 		}
 
 	}
@@ -232,6 +230,9 @@ public class Game extends Canvas implements Runnable {
 	public static void main(String[] args) {
 
 		new Game();
+	}
+	public STATE getGameState(){
+		return gameState;
 	}
 
 }

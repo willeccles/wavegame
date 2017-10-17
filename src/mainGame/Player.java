@@ -24,6 +24,7 @@ public class Player extends GameObject {
 	private int damage;
 	private int playerWidth, playerHeight;
 	public static int playerSpeed = 10;
+	public String gameMode;
 
 	public Player(double x, double y, ID id, Handler handler, HUD hud, Game game) {
 		super(x, y, id);
@@ -49,11 +50,22 @@ public class Player extends GameObject {
 		checkIfDead();
 
 	}
-
+	public String checkGame(){
+		return gameMode;
+	}
 	public void checkIfDead() {
 		if (hud.health <= 0) {// player is dead, game over!
 
 			if (hud.getExtraLives() == 0) {
+				if(game.gameState == STATE.Survival){
+					gameMode = "survival";
+				} else if(game.gameState == STATE.Wave){
+					gameMode = "waves";
+				} else if(game.gameState == STATE.Bosses){
+					gameMode = "bosses";
+				} else if(game.gameState == STATE.Attack){
+					gameMode = "attack";
+				}
 				game.gameState = STATE.GameOver;
 			}
 

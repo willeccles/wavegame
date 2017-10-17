@@ -6,6 +6,10 @@ import java.awt.Graphics;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
+import com.sun.glass.ui.EventLoop.State;
+
+import mainGame.Game.STATE;
+
 /**
  * The game over screen
  * 
@@ -21,10 +25,12 @@ public class GameOver {
 	private int timer;
 	private Color retryColor;
 	private String text;
+	private Player player;
 
-	public GameOver(Game game, Handler handler, HUD hud) {
+	public GameOver(Game game, Handler handler, HUD hud, Player player) {
 		this.game = game;
 		this.handler = handler;
+		this.player = player;
 		this.hud = hud;
 		timer = 90;
 		this.retryColor = Color.white;
@@ -39,15 +45,22 @@ public class GameOver {
 	public void render(Graphics g) {
 		Font font = new Font("Amoebic", 1, 100);
 		Font font2 = new Font("Amoebic", 1, 60);
+		
 		g.setFont(font);
+		g.setColor(this.retryColor);
+
 		text = "Game Over";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, Game.HEIGHT / 2 - 150);
 		g.setFont(font2);
-		text = "Level: " + hud.getLevel();
-		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
-		text = "Score: " + hud.getScore();
-		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 50);
-		g.setColor(this.retryColor);
+		if(!(player.checkGame().equals("survival"))){
+			text = "Level: " + hud.getLevel();
+			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
+			text = "Score: " + hud.getScore();
+			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 50);
+		} else {
+			text = "Score: " + hud.getScore();
+			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
+		}
 		g.setFont(font2);
 		text = "Click anywhere to play again";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 150);
