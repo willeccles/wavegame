@@ -20,6 +20,9 @@ public class Handler {
 	 * the tick() function on each object
 	 */
 	public void tick() {
+		if (timer > 0) {
+			timer--;
+		}
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
 			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail || tempObject.getId() == ID.EnemyBurstWarning) {// we don't want these to ever be frozen by the Screen Freeze ability
@@ -28,7 +31,6 @@ public class Handler {
 				tempObject.tick();
 
 			} else {
-				timer--;
 				if (timer <= 0) {// if Screen Freeze power-up is unlocked, enemy ID's will pause for the length of the timer, and not update
 					tempObject.tick();
 				}
@@ -60,7 +62,7 @@ public class Handler {
 	}
 
 	public void pause() {
-		timer = 1000;
+		timer = 120;
 	}
 
 	public boolean isPaused() {
