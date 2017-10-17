@@ -38,7 +38,6 @@ public class GameOver {
 
 	public void tick() {
 		handler.clearPlayer();
-		flash();
 
 	}
 
@@ -65,16 +64,6 @@ public class GameOver {
 		text = "Click anywhere to play again";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 150);
 
-	}
-
-	public void flash() {
-		timer--;
-		if (timer == 45) {
-			this.retryColor = Color.black;
-		} else if (timer == 0) {
-			this.retryColor = Color.white;
-			timer = 90;
-		}
 	}
 
 	/**

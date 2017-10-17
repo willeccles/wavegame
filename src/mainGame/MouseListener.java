@@ -21,12 +21,13 @@ public class MouseListener extends MouseAdapter {
 	private HUD hud;
 	private Spawn1to5 spawner;
 	private Spawn5to10 spawner2;
+	private SpawnSurvival spawnSurvival;
 	private UpgradeScreen upgradeScreen;
 	private Upgrades upgrades;
 	private Player player;
 	private String upgradeText;
 
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -35,38 +36,46 @@ public class MouseListener extends MouseAdapter {
 		this.upgradeScreen = upgradeScreen;
 		this.player = player;
 		this.upgrades = upgrades;
+		this.spawnSurvival = spawnSurvival;
 	}
 
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
-
-		if (game.gameState == STATE.GameOver) {
-			handler.object.clear();
-			upgrades.resetUpgrades();
-			hud.health = 100;
-			hud.setScore(0);
-			hud.setLevel(1);
-			spawner.restart();
-			spawner.addLevels();
-			spawner2.restart();
-			spawner2.addLevels();
-			Spawn1to5.LEVEL_SET = 1;
-			game.gameState = STATE.Menu;
+		if(game.gameState == STATE.GameOver){
+			if (player.checkGame() == "waves") {
+				handler.object.clear();
+				upgrades.resetUpgrades();
+				hud.health = 100;
+				hud.setScore(0);
+				hud.setLevel(1);
+				spawner.restart();
+				spawner.addLevels();
+				spawner2.restart();
+				spawner2.addLevels();
+				Spawn1to5.LEVEL_SET = 1;
+				game.gameState = STATE.Menu;
+			} else if (player.checkGame() == "survival"){
+				handler.object.clear();
+				hud.health=100;
+				hud.setScore(0);
+				spawnSurvival.restart();
+				game.gameState = STATE.Leaderboard;
+			}
 		}
 
 		else if (game.gameState == STATE.Wave) {
 
 		}
-		
+
 		else if (game.gameState == STATE.Attack) {
 
 		}
-		
+
 		else if (game.gameState == STATE.Bosses) {
 
 		}
-		
+
 		else if (game.gameState == STATE.Survival) {
 
 		}
