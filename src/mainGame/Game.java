@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.Dimension;
+import javafx.embed.swing.JFXPanel;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
@@ -33,6 +34,7 @@ public class Game extends Canvas implements Runnable {
 	private Player player;
 	public STATE gameState = STATE.Menu;
 	public static int TEMP_COUNTER;
+	private SoundPlayer soundplayer;
 
 	/**
 	 * Used to switch between each of the screens shown to the user
@@ -59,6 +61,9 @@ public class Game extends Canvas implements Runnable {
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
 		this.setSize(new Dimension(WIDTH, HEIGHT));
+		JFXPanel jfxp = new JFXPanel(); // trust
+		soundplayer = new SoundPlayer("sounds/main.mp3");
+		player.start();
 		new Window((int) WIDTH, (int) HEIGHT, "Wave Game", this);
 	}
 

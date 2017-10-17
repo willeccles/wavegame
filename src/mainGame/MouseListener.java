@@ -26,8 +26,7 @@ public class MouseListener extends MouseAdapter {
 	private Player player;
 	private String upgradeText;
 
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2,
-			UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
