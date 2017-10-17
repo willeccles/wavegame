@@ -75,9 +75,7 @@ public class Spawn1to5 {
 				handler.clearEnemies();
 				tempCounter = 0;
 				levelNumber = levels.get(index);
-				//will need to update how the levels are generated to allow for additional enemies
-				//used for testing purposes for the new enemy
-				//levelNumber = 6;
+				//will need to update in the future to add more enemies
 			}
 
 		}
@@ -232,14 +230,14 @@ public class Spawn1to5 {
 			if(trackerTimer == 999){
 				trackerColor = Color.blue;
 			} else if (trackerTimer == 500){
-				trackerColor = Color.white;
+				trackerColor = Color.black;
 			} else if (trackerTimer == 0){
 				trackerTimer = 1000;
 			}
 			trackerTimer--;
 			if(spawnTimer == 0){
 			handler.addObject(
-					new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor));
+					new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
 			spawnTimer = 100;
 			}
 		}
