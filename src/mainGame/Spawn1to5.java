@@ -74,9 +74,10 @@ public class Spawn1to5 {
 			if (levelTimer <= 0) {// time to play!
 				handler.clearEnemies();
 				tempCounter = 0;
-				//levelNumber= levels.get(index)
-				//used for testing purposes original is above will need to update for additional enemies though
-				levelNumber = 6;
+				levelNumber = levels.get(index);
+				//will need to update how the levels are generated to allow for additional enemies
+				//used for testing purposes for the new enemy
+				//levelNumber = 6;
 			}
 
 		}
