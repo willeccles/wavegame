@@ -114,9 +114,10 @@ public class Game extends Canvas implements Runnable {
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FPS: " + frames);
-				System.out.println(gameState);
-				System.out.println(Spawn1to5.LEVEL_SET);
+				// disabled because i like my battery life
+				//System.out.println("FPS: " + frames);
+				//System.out.println(gameState);
+				//System.out.println(Spawn1to5.LEVEL_SET);
 				frames = 0;
 			}
 		}
@@ -132,11 +133,13 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
 		if (gameState == STATE.Wave) {// game is running
-			hud.tick();
-			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
-				spawner.tick();
-			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
-				spawner2.tick();
+			if (!handler.isPaused()) {
+				hud.tick();
+				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+					spawner.tick();
+				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+					spawner2.tick();
+				}
 			}
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
 			menu.tick();
@@ -144,21 +147,21 @@ public class Game extends Canvas implements Runnable {
 			upgradeScreen.tick();
 		} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
 			gameOver.tick();
-		} else if (gameState == STATE.Attack){
+		} else if (gameState == STATE.Attack) {
 			hud.tick();
 			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
 				spawner.tick();
 			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
 				spawner2.tick();
 			}
-		} else if (gameState == STATE.Bosses){
+		} else if (gameState == STATE.Bosses) {
 			hud.tick();
 			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
 				spawner.tick();
 			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
 				spawner2.tick();
 			}
-		} else if (gameState == STATE.Survival){
+		} else if (gameState == STATE.Survival) {
 			hud.tick();
 			spawnSurvival.tick();
 		}
@@ -231,7 +234,7 @@ public class Game extends Canvas implements Runnable {
 
 		new Game();
 	}
-	public STATE getGameState(){
+	public STATE getGameState() {
 		return gameState;
 	}
 

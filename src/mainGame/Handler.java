@@ -63,6 +63,10 @@ public class Handler {
 		timer = 1000;
 	}
 
+	public boolean isPaused() {
+		return (timer > 0);
+	}
+
 	public void addObject(GameObject object) {
 		this.object.add(object);
 	}

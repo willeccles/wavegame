@@ -250,7 +250,6 @@ public class Spawn1to5 {
 		} else if (levelsRemaining > 1) {
 			levels.remove(index);
 			levelsRemaining--;
-			System.out.println(levelsRemaining);
 			tempCounter = 0;
 			index = r.nextInt(levelsRemaining);
 			levelNumber = levels.get(index);
