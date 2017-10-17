@@ -13,7 +13,7 @@ public class Handler {
 
 	ArrayList<GameObject> object = new ArrayList<GameObject>();
 	ArrayList<Pickup> pickups = new ArrayList<Pickup>();
-	private int timer = 0;
+	private static int timer = 0;
 
 	/**
 	 * Updates each entity in the game by looping through each ArrayList and calling
@@ -104,8 +104,7 @@ public class Handler {
 			GameObject tempObject = this.object.get(i);
 			if (tempObject.getId() == ID.Player) {
 				this.removeObject(tempObject);
-				i--; // Removing shrinks the array by 1, causing the loop to skip a player (should
-						// there be more than one)
+				i--; // Removing shrinks the array by 1, causing the loop to skip a player (should there be more than one)
 			}
 		}
 	}

@@ -53,7 +53,7 @@ public class HUD {
 		healthBarModifier = 2;
 		doubleHealth = false;
 		ability = "";
-		abilityUses = 10;
+		abilityUses = 0;
 
 		scoreColor = Color.white;
 
