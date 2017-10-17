@@ -1,5 +1,6 @@
 package mainGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,6 +28,8 @@ public class Spawn1to5 {
 	private int levelsRemaining;
 	private int levelNumber = 0;
 	private int tempCounter = 0;
+	private Color trackerColor;
+	private int trackerTimer;
 
 	public Spawn1to5(Handler handler, HUD hud, Game game) {
 		this.handler = handler;
@@ -44,7 +47,8 @@ public class Spawn1to5 {
 		addLevels();
 		index = r.nextInt(levelsRemaining);
 		levelNumber = 0;
-
+		trackerColor = Color.blue;
+		trackerTimer = 1000;
 	}
 
 	/**
@@ -70,7 +74,9 @@ public class Spawn1to5 {
 			if (levelTimer <= 0) {// time to play!
 				handler.clearEnemies();
 				tempCounter = 0;
-				levelNumber = levels.get(index);
+				//levelNumber= levels.get(index)
+				//used for testing purposes original is above will need to update for additional enemies though
+				levelNumber = 6;
 			}
 
 		}
@@ -220,8 +226,23 @@ public class Spawn1to5 {
 					levelNumber = levels.get(index);
 				}
 			}
-		} 
-
+		} else if (levelNumber == 6){
+			spawnTimer--;
+			if(trackerTimer == 999){
+				trackerColor = Color.blue;
+			} else if (trackerTimer == 500){
+				trackerColor = Color.white;
+			} else if (trackerTimer == 0){
+				trackerTimer = 1000;
+			}
+			trackerTimer--;
+			if(spawnTimer == 0){
+			handler.addObject(
+					new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor));
+			spawnTimer = 100;
+			}
+		}
+		
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
