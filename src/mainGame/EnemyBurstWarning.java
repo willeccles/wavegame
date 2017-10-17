@@ -37,15 +37,16 @@ public class EnemyBurstWarning extends GameObject {
 	}
 
 	public void flash() {
-		timer--;
-		if (timer == 5) {
-			this.color = Color.black;
-		} else if (timer == 0) {
-			this.color = Color.orange;
-			this.hasFlashed++;
-			timer = 10;
+		if (!handler.isPaused()) {
+			timer--;
+			if (timer == 5) {
+				this.color = Color.black;
+			} else if (timer == 0) {
+				this.color = Color.orange;
+				this.hasFlashed++;
+				timer = 10;
+			}
 		}
-
 	}
 
 	public void checkFlash() {
