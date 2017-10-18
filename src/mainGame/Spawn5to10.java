@@ -258,7 +258,7 @@ public class Spawn5to10 {
 					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
 					tempCounter++;
 				}
-
+			
 			}
 		}
 		// WINNER

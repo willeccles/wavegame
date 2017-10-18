@@ -25,6 +25,6 @@ public enum ID {
 	PickupHealth(),
 	Levels1to10Text(),
 	EnemyBasic(), 
-	EnemyTracker();
-	
+	EnemyTracker(),
+	EnemyExpand();
 }
