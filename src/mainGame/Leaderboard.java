@@ -6,17 +6,32 @@ import java.awt.Graphics;
 
 public class Leaderboard {
 	private Game game;
+	int x, y;
 	
 	public Leaderboard(Game game){
 		this.game = game;
+		x = 353;
+		y = 490;
 	}
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
+		//1280x720
 		Font font = new Font("Comic Sans MS", 1 , 66);
 		g.setColor(Color.white);
-		g.drawRect(53, 90, 566, 166);
+		g.drawRect(x, y, 566, 166);
 		g.setFont(font);
-		g.drawString("Done", 266, 186);
+		g.drawString("Done", x+213, y+96);
+		
+		g.setColor(Color.white);
+		g.drawRect(x, y-200, 566, 166);
+	}
+	
+	public String updateUser(String temp){
+		return temp;
+	}
+	public int updateLoc(int temp){
+		return temp;
+		this.render(g);
 	}
 
 }
