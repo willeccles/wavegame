@@ -2,7 +2,7 @@ package mainGame;
 
 import java.net.*;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A class that does work related to the leaderboard, AKA sending and receiving information.
