@@ -14,8 +14,9 @@ public class Leaderboard {
 		// TODO Auto-generated method stub
 		Font font = new Font("Comic Sans MS", 1 , 66);
 		g.setColor(Color.white);
-		g.setFont(font);
 		g.drawRect(53, 90, 566, 166);
+		g.setFont(font);
+		g.drawString("Done", 266, 186);
 	}
 
 }
