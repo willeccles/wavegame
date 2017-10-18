@@ -227,6 +227,7 @@ public class Spawn1to5 {
 			}
 		} else if (levelNumber == 6){
 			spawnTimer--;
+			levelTimer--;
 			if(trackerTimer == 999){
 				trackerColor = Color.blue;
 			} else if (trackerTimer == 500){
@@ -236,29 +237,44 @@ public class Spawn1to5 {
 			}
 			trackerTimer--;
 			if(spawnTimer == 0){
-			handler.addObject(
-					new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
-			spawnTimer = 100;
-			}
-		}
-		
-		else if (levelNumber == 101) {// arbitrary number for the boss
-			if (tempCounter < 1) {
-				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
-				tempCounter++;
-			} else if (tempCounter >= 1) {
-				for (int i = 0; i < handler.object.size(); i++) {
-					GameObject tempObject = handler.object.get(i);
-					if (tempObject.getId() == ID.EnemyBoss) {
-						if (tempObject.getHealth() <= 0) {
-							handler.removeObject(tempObject);
-							LEVEL_SET++;
-							game.gameState = STATE.Upgrade;
-						}
-					}
+				handler.addObject(
+						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
+				spawnTimer = 100;
+			} 
+			
+			if (levelTimer == 0) {
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				trackerColor = Color.blue;
+				trackerTimer = 1000;
+				if (levelsRemaining == 1) {
+					levelNumber = 101;
+				} else {
+					levels.remove(index);
+					levelsRemaining--;
+					index = r.nextInt(levelsRemaining);
+					levelNumber = levels.get(index);
 				}
 			}
 
+			else if (levelNumber == 101) {// arbitrary number for the boss
+				if (tempCounter < 1) {
+					handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
+					tempCounter++;
+				} else if (tempCounter >= 1) {
+					for (int i = 0; i < handler.object.size(); i++) {
+						GameObject tempObject = handler.object.get(i);
+						if (tempObject.getId() == ID.EnemyBoss) {
+							if (tempObject.getHealth() <= 0) {
+								handler.removeObject(tempObject);
+								LEVEL_SET++;
+								game.gameState = STATE.Upgrade;
+							}
+						}
+					}
+				}
+
+			}
 		}
 
 	}

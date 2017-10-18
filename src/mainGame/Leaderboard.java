@@ -1,5 +1,7 @@
 package mainGame;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class Leaderboard {
@@ -10,7 +12,10 @@ public class Leaderboard {
 	}
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
-		
+		Font font = new Font("Comic Sans MS", 1 , 66);
+		g.setColor(Color.white);
+		g.setFont(font);
+		g.drawRect(53, 90, 566, 166);
 	}
 
 }
