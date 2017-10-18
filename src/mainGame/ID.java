@@ -23,8 +23,8 @@ public enum ID {
 	FireworkSpark(),
 	CircleTrail(),
 	PickupHealth(),
-	Levels1to10Text(),
+	Levels1to5Text(),
 	EnemyBasic(), 
-	EnemyTracker();
-	
+	EnemyTracker(),
+	EnemyExpand();
 }

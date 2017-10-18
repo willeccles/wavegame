@@ -59,9 +59,9 @@ public class Spawn5to10 {
 			levelTimer--;
 			if (tempCounter < 1) {
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Same levels...",
-						ID.Levels1to10Text));
+						ID.Levels1to5Text));
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2, "...but a little harder now",
-						ID.Levels1to10Text));
+						ID.Levels1to5Text));
 				tempCounter++;
 			}
 			if (levelTimer <= 0) {

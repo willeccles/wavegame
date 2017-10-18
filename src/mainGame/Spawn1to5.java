@@ -68,13 +68,14 @@ public class Spawn1to5 {
 			levelTimer--;
 			if (tempCounter < 1) {// display intro game message ONE time
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Let's start off easy...",
-						ID.Levels1to10Text));
+						ID.Levels1to5Text));
 				tempCounter++;
 			}
 			if (levelTimer <= 0) {// time to play!
 				handler.clearEnemies();
 				tempCounter = 0;
-				levelNumber = levels.get(index);
+				//levelNumber = levels.get(index);
+				levelNumber = 7;
 				//will need to update in the future to add more enemies
 			}
 
@@ -241,6 +242,26 @@ public class Spawn1to5 {
 			spawnTimer = 100;
 			}
 		}
+		else if (levelNumber == 7) {
+			spawnTimer--;
+			if (spawnTimer <= 0) {
+				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, handler));
+			}
+			if (levelTimer == 0) {
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				spawnTimer = 10;
+				tempCounter = 0;
+				if (levelsRemaining == 1) {
+					levelNumber = 101;
+				} else {
+					levels.remove(index);
+					levelsRemaining--;
+					index = r.nextInt(levelsRemaining);
+					levelNumber = levels.get(index);
+				}
+			}
+		}
 		
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
@@ -258,10 +279,9 @@ public class Spawn1to5 {
 					}
 				}
 			}
-
 		}
-
 	}
+
 
 	public void skipLevel() {
 		if (levelsRemaining == 1) {
