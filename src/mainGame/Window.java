@@ -22,6 +22,7 @@ public class Window {
 		frame.setLocationRelativeTo(null);
 		frame.add(game);
 		frame.pack();
+		game.setFrame(frame);
 		// set the location to be centered
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
