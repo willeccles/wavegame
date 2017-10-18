@@ -244,7 +244,7 @@ public class Spawn5to10 {
 					levelNumber = levels.get(index);
 				}
 			}
-
+		}
 			else if (levelNumber == 101) {
 				if (tempCounter < 1) {
 					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
@@ -260,7 +260,6 @@ public class Spawn5to10 {
 				}
 			
 			}
-		}
 		// WINNER
 		// else if(levelNumber){
 		// levelTimer --;
