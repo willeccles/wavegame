@@ -235,6 +235,30 @@ public class Spawn5to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				trackerColor = Color.blue;
 				trackerTimer = 1000;
+				timer = 10;
+				if (randomMax == 1) {
+					levelNumber = 101;
+				} else {
+					levels.remove(index);
+					randomMax--;
+					index = r.nextInt(randomMax);
+					levelNumber = levels.get(index);
+				}
+			}
+		}
+		else if (levelNumber == 7) {
+			timer--;
+			levelTimer--;
+			if (timer == 0) {
+				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
+				timer = 300;
+				levelTimer = 1300;
+			} 
+			
+			if (levelTimer == 0) {
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				timer = 10;
 				if (randomMax == 1) {
 					levelNumber = 101;
 				} else {

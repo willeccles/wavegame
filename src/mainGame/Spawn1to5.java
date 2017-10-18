@@ -247,6 +247,7 @@ public class Spawn1to5 {
 				hud.setLevel(hud.getLevel() + 1);
 				trackerColor = Color.blue;
 				trackerTimer = 1000;
+				spawnTimer = 10;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
 				} else {
@@ -264,6 +265,20 @@ public class Spawn1to5 {
 				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
 				spawnTimer = 300;
 				levelTimer = 1300;
+			} 
+
+			if (levelTimer == 0) {
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				spawnTimer = 10;
+				if (levelsRemaining == 1) {
+					levelNumber = 101;
+				} else {
+					levels.remove(index);
+					levelsRemaining--;
+					index = r.nextInt(levelsRemaining);
+					levelNumber = levels.get(index);
+				}
 			}
 		}
 
