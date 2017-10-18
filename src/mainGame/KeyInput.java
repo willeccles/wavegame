@@ -24,7 +24,7 @@ public class KeyInput extends KeyAdapter {
 	private Upgrades upgrades;
 	private String ability;
 	private Leaderboard leaderboard;
-	
+
 	// uses current handler created in Game as parameter
 	public KeyInput(Handler handler, Game game, HUD hud, Player player, Spawn1to5 spawner, Upgrades upgrades, Leaderboard leaderboard) {
 		this.handler = handler;
@@ -82,7 +82,7 @@ public class KeyInput extends KeyAdapter {
 					} else if (ability.equals("freezeTime")) {
 						upgrades.freezeTimeAbility();
 					} else if(ability.equals("")){
-						
+
 					}
 				}
 
@@ -198,9 +198,14 @@ public class KeyInput extends KeyAdapter {
 			}else if(key == KeyEvent.VK_0){
 				leaderboard.updateUser("0");
 				leaderboard.updateLoc(1);
+			}else if(key == KeyEvent.VK_SPACE){
+				leaderboard.updateUser(" ");
+				leaderboard.updateLoc(1);
 			}else if(key == KeyEvent.VK_BACK_SPACE){
-				leaderboard.updateUser("back");
-				leaderboard.updateLoc(-1);
+				if(leaderboard.getLoc() >= 0){
+					leaderboard.updateUser("back");
+					leaderboard.updateLoc(-1);
+				}
 			}
 		}
 	}

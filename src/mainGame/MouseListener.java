@@ -27,8 +27,9 @@ public class MouseListener extends MouseAdapter {
 	private Player player;
 	private String upgradeText;
 	private SoundPlayer soundplayer;
-
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
+	private Leaderboard leaderboard;
+	
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades, Leaderboard leaderboard) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -38,6 +39,7 @@ public class MouseListener extends MouseAdapter {
 		this.player = player;
 		this.upgrades = upgrades;
 		this.spawnSurvival = spawnSurvival;
+		this.leaderboard = leaderboard;
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -175,6 +177,8 @@ public class MouseListener extends MouseAdapter {
 		//Leaderboard screen
 		else if (game.gameState == STATE.Leaderboard){
 			if(mouseOver(mx, my, 353, 490, 566, 166)){
+				leaderboard.updateLoc(0);
+				leaderboard.updateUser("empty");
 				game.gameState = STATE.Menu;
 				return;
 			}
