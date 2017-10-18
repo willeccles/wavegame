@@ -172,6 +172,13 @@ public class MouseListener extends MouseAdapter {
 				return;
 			}
 		}
+		//Leaderboard screen
+		else if (game.gameState == STATE.Leaderboard){
+			if(mouseOver(mx, my, 353, 490, 566, 166)){
+				game.gameState = STATE.Menu;
+				return;
+			}
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {

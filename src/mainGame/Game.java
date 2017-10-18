@@ -60,7 +60,8 @@ public class Game extends Canvas implements Runnable {
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades);
-		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades));
+		leaderboard = new Leaderboard(this);
+		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
 		this.setSize(new Dimension(WIDTH, HEIGHT));
@@ -68,7 +69,6 @@ public class Game extends Canvas implements Runnable {
 		soundplayer = new SoundPlayer("sounds/main.mp3");
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "Wave Game", this);
-		leaderboard = new Leaderboard(this);
 	}
 
 	/**

@@ -23,9 +23,10 @@ public class KeyInput extends KeyAdapter {
 	private Spawn1to5 spawner;
 	private Upgrades upgrades;
 	private String ability;
-
+	private Leaderboard leaderboard;
+	
 	// uses current handler created in Game as parameter
-	public KeyInput(Handler handler, Game game, HUD hud, Player player, Spawn1to5 spawner, Upgrades upgrades) {
+	public KeyInput(Handler handler, Game game, HUD hud, Player player, Spawn1to5 spawner, Upgrades upgrades, Leaderboard leaderboard) {
 		this.handler = handler;
 		this.speed = Player.playerSpeed;
 		this.game = game;
@@ -33,6 +34,7 @@ public class KeyInput extends KeyAdapter {
 		this.hud = hud;
 		this.spawner = spawner;
 		this.upgrades = upgrades;
+		this.leaderboard = leaderboard;
 		keyDown[0] = false;
 		keyDown[1] = false;
 		keyDown[2] = false;
@@ -87,7 +89,13 @@ public class KeyInput extends KeyAdapter {
 			}
 
 		}
-
+		if(game.getGameState() == STATE.Leaderboard) {
+			int temp = 0;
+			if(key == KeyEvent.VK_A){
+				
+				temp++;
+			}
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
