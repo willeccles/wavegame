@@ -241,7 +241,7 @@ public class Spawn1to5 {
 						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
 				spawnTimer = 100;
 			} 
-			
+
 			if (levelTimer == 0) {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
@@ -256,8 +256,8 @@ public class Spawn1to5 {
 					levelNumber = levels.get(index);
 				}
 			}
+		}
 
-		
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
@@ -295,7 +295,6 @@ public class Spawn1to5 {
 			}
 		}
 	}
-}
 
 
 	public void skipLevel() {

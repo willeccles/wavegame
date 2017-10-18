@@ -13,12 +13,15 @@ import java.awt.Color;
 
 public class Leaderboard {
 	private Game game;
-	int x, y;
+	int x, y, charLoc;
+	String user;
 	
 	public Leaderboard(Game game){
 		this.game = game;
 		x = 353;
 		y = 490;
+		user = "";
+		charLoc = 0;
 	}
 
 	public void render(Graphics g) {
@@ -34,11 +37,19 @@ public class Leaderboard {
 		g.drawRect(x, y-200, 566, 166);
 	}
 	
-	public String updateUser(String temp){
-		return temp;
+	public void updateUser(String temp){
+		if(temp.equals("back")){
+			user = user.substring(0, charLoc);
+		} else {
+		user = user + temp;
+		}
+		System.out.println(user);
 	}
-	public int updateLoc(int temp){
-		return temp;
+	public String getUser(){
+		return user;
+	}
+	public void updateLoc(int temp){
+		 charLoc = charLoc + temp;
 	}
 
 }
