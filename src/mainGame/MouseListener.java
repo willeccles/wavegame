@@ -26,6 +26,7 @@ public class MouseListener extends MouseAdapter {
 	private Upgrades upgrades;
 	private Player player;
 	private String upgradeText;
+	private SoundPlayer soundplayer;
 
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades) {
 		this.game = game;
@@ -115,6 +116,11 @@ public class MouseListener extends MouseAdapter {
 				handler.object.clear();
 				game.gameState = STATE.Wave;
 				handler.addObject(player);
+				/*
+				soundplayer.stop_playing();
+				soundplayer.setSong("sounds/memories.mp3");
+				soundplayer.start();
+				*/
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "images/PickupHealth.png", handler));
 			}

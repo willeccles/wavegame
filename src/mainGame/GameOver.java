@@ -22,7 +22,6 @@ public class GameOver {
 	private Game game;
 	private Handler handler;
 	private HUD hud;
-	private int timer;
 	private Color retryColor;
 	private String text;
 	private Player player;
@@ -32,7 +31,6 @@ public class GameOver {
 		this.handler = handler;
 		this.player = player;
 		this.hud = hud;
-		timer = 90;
 		this.retryColor = Color.white;
 	}
 

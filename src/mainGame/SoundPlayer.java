@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 public class SoundPlayer extends Thread {
 	private String soundfile;
 	//private Player player;
-	private MediaPlayer player;
+	private static MediaPlayer player;
 
 	public SoundPlayer(String songfile) {
 		soundfile = songfile;
@@ -27,8 +27,15 @@ public class SoundPlayer extends Thread {
 			use.printStackTrace();
 		}
 	}
+	
+	public void setSong(String song) {
+		soundfile = song;
+	}
 
 	public void play() {
+		if (!this.isAlive()) {
+			this.start();
+		}
 		player.play();
 	}
 

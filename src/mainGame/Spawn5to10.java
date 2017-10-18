@@ -1,5 +1,6 @@
 package mainGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,6 +28,8 @@ public class Spawn5to10 {
 	private int levelNumber = 0;
 	private int tempCounter = 0;
 	public static int LEVEL_SET_2_RESET = 0;
+	private Color trackerColor;
+	private int trackerTimer;
 
 	public Spawn5to10(Handler handler, HUD hud, Spawn1to5 spawner, Game game) {
 		restart();
@@ -42,6 +45,8 @@ public class Spawn5to10 {
 		addLevels();
 		index = r.nextInt(randomMax);
 		levelNumber = 0;
+		trackerColor = Color.blue;
+		trackerTimer = 1000;
 	}
 
 	public void addLevels() {
@@ -208,22 +213,53 @@ public class Spawn5to10 {
 					levelNumber = levels.get(index);
 				}
 			}
-		}
-		
-		else if (levelNumber == 101) {
-			if (tempCounter < 1) {
-				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
-				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
-				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
-				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 4));
-				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 5));
-				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 6));
-				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
-				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
-				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
-				tempCounter++;
+		} else if (levelNumber == 6){
+			timer--;
+			levelTimer--;
+			if(trackerTimer == 999){
+				trackerColor = Color.blue;
+			} else if (trackerTimer == 500){
+				trackerColor = Color.black;
+			} else if (trackerTimer == 0){
+				trackerTimer = 1000;
+			}
+			trackerTimer--;
+			if(timer == 0){
+				handler.addObject(
+						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
+				timer = 100;
+			} 
+
+			if (levelTimer == 0) {
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				trackerColor = Color.blue;
+				trackerTimer = 1000;
+				if (randomMax == 1) {
+					levelNumber = 101;
+				} else {
+					levels.remove(index);
+					randomMax--;
+					index = r.nextInt(randomMax);
+					levelNumber = levels.get(index);
+				}
 			}
 
+			else if (levelNumber == 101) {
+				if (tempCounter < 1) {
+					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
+					handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
+					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
+					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 4));
+					handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 5));
+					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 6));
+					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
+					handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
+					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
+					tempCounter++;
+				}
+
+			}
 		}
 		// WINNER
 		// else if(levelNumber){

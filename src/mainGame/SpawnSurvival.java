@@ -1,5 +1,6 @@
 package mainGame;
 
+import java.awt.Color;
 import java.util.Random;
 
 public class SpawnSurvival {
@@ -11,6 +12,9 @@ public class SpawnSurvival {
 	private int differentEnemies;
 	private Random r;
 	private String[] side = {"left", "right", "top", "bottom"};
+	private int trackerTimer;
+	private Color trackerColor;
+	private int count;
 
 	public SpawnSurvival(Handler handler, HUD hud, Game game){
 		this.handler = handler;
@@ -23,12 +27,26 @@ public class SpawnSurvival {
 		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
-		differentEnemies = 5;	
+		differentEnemies = 6;	
+		trackerTimer = 1000;
+		trackerColor = Color.blue;
+		count = 0;
 	}
 
 	public void tick() {
 		hud.tick();
-		// TODO Auto-generated method stub
+		// updates the trackers color
+		if(trackerTimer == 999){
+			trackerColor = Color.blue;
+		} else if (trackerTimer == 500){
+			trackerColor = Color.black;
+		} else if (trackerTimer == 0){
+			trackerTimer = 1000;
+		}
+		//prevents the trackers from spawning invisible 
+		if(count == 1){
+		trackerTimer--;
+		}
 		int temp = randInt();
 		//System.out.println(spawnTimer);
 		if(spawnTimer == 100){
@@ -76,6 +94,12 @@ public class SpawnSurvival {
 
 				handler.addObject(
 						new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,-20, ID.EnemyShooter, this.handler));
+				spawnTimer = 0;
+			} else if(temp == 5){
+				//spawns Tracker enemy
+				count = 1;
+				handler.addObject(
+						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
 				spawnTimer = 0;
 			}
 		}

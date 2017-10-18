@@ -1,5 +1,7 @@
 package mainGame;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -50,16 +52,12 @@ public class Leaderboard {
 	}
 
 	public void render(Graphics g) {
-		// we don't care about the Graphics, we aren't drawing
-		// we just need to make sure that the button and textbox are visible
-		if (!isShown) {
-			game.getFrame().add(panel);
-			game.getFrame().pack();
-			panel.setVisible(true);
-			textBox.requestFocus();
-			isShown = true;
-		}
-		panel.paint(g);
+		// TODO Auto-generated method stub
+		Font font = new Font("Comic Sans MS", 1 , 66);
+		g.setColor(Color.white);
+		g.drawRect(53, 90, 566, 166);
+		g.setFont(font);
+		g.drawString("Done", 266, 186);
 	}
 
 }
