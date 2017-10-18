@@ -12,7 +12,7 @@ public class LBWorker {
 	private String _address;
 	private int _port;
 	private HashMap<String, Integer> scores = null;
-	private int userpos = null;
+	private int userpos = -1;
 
 	public LBWorker(String address, int port) {
 		_address = address;
@@ -33,7 +33,7 @@ public class LBWorker {
 		DataInputStream in = new DataInputStream(client.getInputStream());
 
 		// send the user's score and wait for the server response
-		out.writeUTF("NEWSCORE|" + _username + "," + score);
+		out.writeUTF("NEWSCORE|" + username + "," + score);
 		
 		String input = "";
 		if (client.isConnected()) {
