@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.Dimension;
 import javafx.embed.swing.JFXPanel;
+import javax.swing.JFrame;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
@@ -37,6 +38,7 @@ public class Game extends Canvas implements Runnable {
 	public static int TEMP_COUNTER;
 	private SoundPlayer soundplayer;
 	private Leaderboard leaderboard;
+	private JFrame frame;
 
 	/**
 	 * Used to switch between each of the screens shown to the user
@@ -203,7 +205,7 @@ public class Game extends Canvas implements Runnable {
 			upgradeScreen.render(g);
 		} else if (gameState == STATE.GameOver) {// game is over, draw the game over screen
 			gameOver.render(g);
-		} else if (gameState == STATE.Leaderboard){
+		} else if (gameState == STATE.Leaderboard) {
 			leaderboard.render(g);
 		}
 
@@ -242,4 +244,11 @@ public class Game extends Canvas implements Runnable {
 		return gameState;
 	}
 
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JFrame getFrame() {
+		return this.frame;
+	}
 }
