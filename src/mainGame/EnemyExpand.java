@@ -54,11 +54,11 @@ public class EnemyExpand extends GameObject {
 	}
 
 	public void updateEnemy() {
-		this.sizeX--;
-		this.sizeY--;
-
-		if (sizeX <= 0) {
-			handler.removeObject(this);
+		this.sizeX++;
+		this.sizeY++;
+		
+		if (sizeX == 300) {
+			this.handler.removeObject(this);
 		}
 	}
 

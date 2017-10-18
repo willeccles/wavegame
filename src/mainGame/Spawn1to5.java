@@ -257,6 +257,15 @@ public class Spawn1to5 {
 				}
 			}
 		}
+		else if (levelNumber == 7) {
+			spawnTimer--;
+			levelTimer--;
+			if (spawnTimer == 0) {
+				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
+				spawnTimer = 300;
+				levelTimer = 1300;
+			}
+		}
 
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
