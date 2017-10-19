@@ -3,6 +3,8 @@ package mainGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.lang.reflect.Array;
+
 import javax.swing.JPanel;
 
 public class Leaderboard extends JPanel {
@@ -10,8 +12,10 @@ public class Leaderboard extends JPanel {
 	private int x, y, charLoc, strX;
 	private String user;
 	private Boolean full;
+	public String [][] leaderboard;
+	private HUD hud;
 
-	public Leaderboard(Game game){
+	public Leaderboard(Game game, HUD hud){
 		this.game = game;
 		x = 353;
 		y = 490;
@@ -19,6 +23,8 @@ public class Leaderboard extends JPanel {
 		user = "";
 		charLoc = 0;
 		full = false;
+		leaderboard = new String[5][2];
+		this.hud = hud;
 	}
 
 	public void paint (Graphics g) {
@@ -81,6 +87,16 @@ public class Leaderboard extends JPanel {
 	}
 	public Boolean getFull(){
 		return full;
+	}
+	public void nextUser(){
+			int temp = 0;
+			leaderboard[temp][temp] = user;
+			leaderboard[temp][temp+1] = Integer.toString(hud.getScore()); 
+			System.out.println(leaderboard);
+			temp++;
+			user = "";
+			charLoc = 0;
+			strX = x +213;
 	}
 
 }
