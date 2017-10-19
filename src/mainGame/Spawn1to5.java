@@ -3,14 +3,8 @@ package mainGame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
-
 import mainGame.Game.STATE;
 
-/**
- * Contains the programming of levels 1-10, as well as handles level progression
- * 
- * @author Brandon Loehle 5/30/16
- */
 
 public class Spawn1to5 {
 
@@ -18,18 +12,17 @@ public class Spawn1to5 {
 	private Handler handler;
 	private HUD hud;
 	private Game game;
-	private int scoreKeep = 0;
 	private Random r = new Random();
 	private int spawnTimer;
 	private int levelTimer;
 	private String[] side = { "left", "right", "top", "bottom" };
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
-	private int index;
 	private int levelsRemaining;
 	private int levelNumber = 0;
 	private int tempCounter = 0;
 	private Color trackerColor;
 	private int trackerTimer;
+	private int differentEnemies;
 
 	public Spawn1to5(Handler handler, HUD hud, Game game) {
 		this.handler = handler;
@@ -45,17 +38,17 @@ public class Spawn1to5 {
 		hud.setLevel(1);
 		tempCounter = 0;
 		addLevels();
-		index = r.nextInt(levelsRemaining);
 		levelNumber = 0;
 		trackerColor = Color.blue;
 		trackerTimer = 1000;
+		differentEnemies = 8;
 	}
 
 	/**
 	 * Pre-load every level
 	 */
 	public void addLevels() {
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 8; i++) {
 			levels.add(i);
 		}
 	}
@@ -74,7 +67,7 @@ public class Spawn1to5 {
 			if (levelTimer <= 0) {// time to play!
 				handler.clearEnemies();
 				tempCounter = 0;
-				levelNumber = levels.get(index);
+				levelNumber = this.rand();
 				//will need to update in the future to add more enemies
 			}
 
@@ -87,7 +80,7 @@ public class Spawn1to5 {
 		 * Please refer to this bit of code to understand how each level works
 		 * 
 		 */
-		else if (levelNumber == 1) {// this is level 1
+		else if (levelNumber == 0) {// this is level 1
 			spawnTimer--;// keep decrementing the spawning spawnTimer 60 times a second
 			levelTimer--;// keep decrementing the level spawnTimer 60 times a second
 			if (tempCounter < 1) {// called only once, but sets the levelTimer to how long we want this level to
@@ -109,13 +102,11 @@ public class Spawn1to5 {
 				if (levelsRemaining == 1) {// time for the boss!
 					levelNumber = 101;// arbitrary number for the boss level
 				} else {// not time for the boss, just go to the next level
-					levels.remove(index);// remove the current level from being selected
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);// pick another level at random
-					levelNumber = levels.get(index);// set levelNumber to whatever index was randomly selected
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
-		} else if (levelNumber == 2) {
+		} else if (levelNumber == 1) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -143,14 +134,12 @@ public class Spawn1to5 {
 				tempCounter = 0;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
-				} else {
-					levels.remove(index);
+				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);
-					levelNumber = levels.get(index);
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
-		} else if (levelNumber == 3) {
+		} else if (levelNumber == 2) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -169,14 +158,12 @@ public class Spawn1to5 {
 				tempCounter = 0;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
-				} else {
-					levels.remove(index);
+				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);
-					levelNumber = levels.get(index);
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
-		} else if (levelNumber == 4) {
+		} else if (levelNumber == 3) {
 			levelTimer--;
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, -20, ID.EnemyShooter, this.handler));
@@ -191,14 +178,12 @@ public class Spawn1to5 {
 				tempCounter = 0;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
-				} else {
-					levels.remove(index);
+				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);
-					levelNumber = levels.get(index);
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
-		} else if (levelNumber == 5) {
+		} else if (levelNumber == 4) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -217,14 +202,12 @@ public class Spawn1to5 {
 				tempCounter = 0;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
-				} else {
-					levels.remove(index);
+				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);
-					levelNumber = levels.get(index);
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
-		} else if (levelNumber == 6){
+		} else if (levelNumber == 5){
 			spawnTimer--;
 			levelTimer--;
 			if(trackerTimer == 999){
@@ -244,19 +227,18 @@ public class Spawn1to5 {
 			if (levelTimer == 0) {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
+				spawnTimer = 10;
 				trackerColor = Color.blue;
 				trackerTimer = 1000;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
-				} else {
-					levels.remove(index);
+				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);
-					levelNumber = levels.get(index);
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
 		}
-		else if (levelNumber == 7) {
+		else if (levelNumber == 6) {
 			spawnTimer--;
 			levelTimer--;
 			if (spawnTimer == 0) {
@@ -267,17 +249,16 @@ public class Spawn1to5 {
 			if (levelTimer == 0) {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
+				spawnTimer = 10;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
-				} else {
-					levels.remove(index);
+				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);
-					levelNumber = levels.get(index);
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
 		}
-		else if (levelNumber == 8) {
+		else if (levelNumber == 7) {
 			spawnTimer--;
 			levelTimer--;
 			if(spawnTimer == 0) {
@@ -288,13 +269,12 @@ public class Spawn1to5 {
 			if (levelTimer == 0) {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
+				spawnTimer = 10;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
-				} else {
-					levels.remove(index);
+				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					index = r.nextInt(levelsRemaining);
-					levelNumber = levels.get(index);
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
 		}
@@ -324,11 +304,9 @@ public class Spawn1to5 {
 			tempCounter = 0;
 			levelNumber = 101;
 		} else if (levelsRemaining > 1) {
-			levels.remove(index);
 			levelsRemaining--;
 			tempCounter = 0;
-			index = r.nextInt(levelsRemaining);
-			levelNumber = levels.get(index);
+			levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 		}
 	}
 
@@ -337,7 +315,9 @@ public class Spawn1to5 {
 		tempCounter = 0;
 		levelTimer = 150;
 		levelsRemaining = 5;
-		index = r.nextInt(levelsRemaining);
+	}
+	public int rand(){
+		return (int) (Math.random() * differentEnemies);
 	}
 
 }

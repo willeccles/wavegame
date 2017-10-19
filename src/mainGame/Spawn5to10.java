@@ -17,19 +17,18 @@ public class Spawn5to10 {
 	private Handler handler;
 	private HUD hud;
 	private Game game;
-	private int scoreKeep = 0;
 	private Random r = new Random();
 	private int timer;
 	private int levelTimer;
 	private String[] side = { "left", "right", "top", "bottom" };
 	ArrayList<Integer> levels = new ArrayList<Integer>();
-	private int index;
-	private int randomMax;
+	private int levelsLeft;
 	private int levelNumber = 0;
 	private int tempCounter = 0;
 	public static int LEVEL_SET_2_RESET = 0;
 	private Color trackerColor;
 	private int trackerTimer;
+	private int differentEnemies = 8;
 
 	public Spawn5to10(Handler handler, HUD hud, Spawn1to5 spawner, Game game) {
 		restart();
@@ -39,18 +38,17 @@ public class Spawn5to10 {
 		hud.restoreHealth();
 		timer = 10;
 		levelTimer = 150;
-		randomMax = 5;
+		levelsLeft = 5;
 		hud.setLevel(1);
 		tempCounter = 0;
 		addLevels();
-		index = r.nextInt(randomMax);
 		levelNumber = 0;
 		trackerColor = Color.blue;
 		trackerTimer = 1000;
 	}
 
 	public void addLevels() {
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 8; i++) {
 			levels.add(i);
 		}
 	}
@@ -72,7 +70,7 @@ public class Spawn5to10 {
 			if (levelTimer <= 0) {
 				handler.clearEnemies();
 				tempCounter = 0;
-				levelNumber = levels.get(index);
+				levelNumber = levels.get(this.rand());
 			}
 
 		}
@@ -94,13 +92,11 @@ public class Spawn5to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				timer = 40;
 				tempCounter = 0;
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		} else if (levelNumber == 2) {
@@ -129,13 +125,11 @@ public class Spawn5to10 {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				tempCounter = 0;
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		} else if (levelNumber == 3) {
@@ -155,13 +149,11 @@ public class Spawn5to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				timer = 10;
 				tempCounter = 0;
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		} else if (levelNumber == 4) {
@@ -178,13 +170,11 @@ public class Spawn5to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				timer = 10;
 				tempCounter = 0;
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		} else if (levelNumber == 5) {
@@ -204,13 +194,11 @@ public class Spawn5to10 {
 				hud.setLevel(hud.getLevel() + 1);
 				timer = 10;
 				tempCounter = 0;
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		} else if (levelNumber == 6){
@@ -236,13 +224,11 @@ public class Spawn5to10 {
 				trackerColor = Color.blue;
 				trackerTimer = 1000;
 				timer = 10;
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		}
@@ -259,13 +245,11 @@ public class Spawn5to10 {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				timer = 10;
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		}
@@ -280,13 +264,11 @@ public class Spawn5to10 {
 			if (levelTimer == 0) {
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
-				if (randomMax == 1) {
+				if (levelsLeft == 1) {
 					levelNumber = 101;
 				} else {
-					levels.remove(index);
-					randomMax--;
-					index = r.nextInt(randomMax);
-					levelNumber = levels.get(index);
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());
 				}
 			}
 		}
@@ -326,15 +308,13 @@ public class Spawn5to10 {
 	}
 
 	public void skipLevel() {
-		if (randomMax == 1) {
+		if (levelsLeft == 1) {
 			tempCounter = 0;
 			levelNumber = 101;
-		} else if (randomMax > 1) {
-			levels.remove(index);
-			randomMax--;
+		} else if (levelsLeft > 1) {
+			levelsLeft--;
 			tempCounter = 0;
-			index = r.nextInt(randomMax);
-			levelNumber = levels.get(index);
+			levelNumber = levels.get(this.rand());
 		}
 	}
 
@@ -342,9 +322,11 @@ public class Spawn5to10 {
 		levelNumber = -10;
 		tempCounter = 0;
 		levelTimer = 150;
-		randomMax = 10;
-		index = r.nextInt(randomMax);
+		levelsLeft = 10;
 
+	}
+	public int rand(){
+		return (int) (Math.random() * differentEnemies);
 	}
 
 }
