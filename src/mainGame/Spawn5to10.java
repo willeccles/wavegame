@@ -75,7 +75,7 @@ public class Spawn5to10 {
 
 		}
 
-		else if (levelNumber == 1) {
+		else if (levelNumber == 0) {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -99,7 +99,7 @@ public class Spawn5to10 {
 					levelNumber = levels.get(this.rand());
 				}
 			}
-		} else if (levelNumber == 2) {
+		} else if (levelNumber == 1) {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -132,7 +132,7 @@ public class Spawn5to10 {
 					levelNumber = levels.get(this.rand());
 				}
 			}
-		} else if (levelNumber == 3) {
+		} else if (levelNumber == 2) {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -156,7 +156,7 @@ public class Spawn5to10 {
 					levelNumber = levels.get(this.rand());
 				}
 			}
-		} else if (levelNumber == 4) {
+		} else if (levelNumber == 3) {
 			levelTimer--;
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,
@@ -177,7 +177,7 @@ public class Spawn5to10 {
 					levelNumber = levels.get(this.rand());
 				}
 			}
-		} else if (levelNumber == 5) {
+		} else if (levelNumber == 4) {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -201,7 +201,7 @@ public class Spawn5to10 {
 					levelNumber = levels.get(this.rand());
 				}
 			}
-		} else if (levelNumber == 6){
+		} else if (levelNumber == 5){
 			timer--;
 			levelTimer--;
 			if(trackerTimer == 999){
@@ -232,7 +232,7 @@ public class Spawn5to10 {
 				}
 			}
 		}
-		else if (levelNumber == 7) {
+		else if (levelNumber == 6) {
 			timer--;
 			levelTimer--;
 			if (timer == 0) {
@@ -253,7 +253,7 @@ public class Spawn5to10 {
 				}
 			}
 		}
-		else if (levelNumber == 8) {
+		else if (levelNumber == 7) {
 			timer--;
 			levelTimer--;
 			if(timer == 0) {
@@ -269,6 +269,24 @@ public class Spawn5to10 {
 				} else {
 					levelsLeft--;
 					levelNumber = levels.get(this.rand());
+				}
+			}
+		}
+		else if (levelNumber == 8) {
+			timer--;
+			levelTimer--;
+			if(timer == 0) {
+				handler.addObject(new EnemyFour(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyFour, this.handler, -2));
+			}
+			if (levelTimer == 0){
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				timer = 10;
+				if (levelsLeft == 1) {
+					levelNumber = 101;
+				} else {// not time for the boss, just go to the next level
+					levelsLeft--;
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
 		}
