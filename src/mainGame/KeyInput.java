@@ -90,122 +90,134 @@ public class KeyInput extends KeyAdapter {
 
 		}
 		if(game.getGameState() == STATE.Leaderboard) {
-			if(key == KeyEvent.VK_A){
-				leaderboard.updateUser("a");
-				leaderboard.updateLoc(1);
-			} else if(key == KeyEvent.VK_B){
-				leaderboard.updateUser("b");
-				leaderboard.updateLoc(1);
-			} else if(key == KeyEvent.VK_C){
-				leaderboard.updateUser("c");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_D){
-				leaderboard.updateUser("d");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_E){
-				leaderboard.updateUser("e");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_F){
-				leaderboard.updateUser("f");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_G){
-				leaderboard.updateUser("g");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_H){
-				leaderboard.updateUser("h");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_I){
-				leaderboard.updateUser("i");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_J){
-				leaderboard.updateUser("j");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_K){
-				leaderboard.updateUser("k");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_L){
-				leaderboard.updateUser("l");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_M){
-				leaderboard.updateUser("m");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_N){
-				leaderboard.updateUser("n");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_O){
-				leaderboard.updateUser("o");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_P){
-				leaderboard.updateUser("p");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_Q){
-				leaderboard.updateUser("q");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_R){
-				leaderboard.updateUser("r");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_S){
-				leaderboard.updateUser("s");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_T){
-				leaderboard.updateUser("t");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_U){
-				leaderboard.updateUser("u");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_V){
-				leaderboard.updateUser("v");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_W){
-				leaderboard.updateUser("w");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_X){
-				leaderboard.updateUser("x");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_Y){
-				leaderboard.updateUser("y");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_Z){
-				leaderboard.updateUser("z");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_1){
-				leaderboard.updateUser("1");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_2){
-				leaderboard.updateUser("2");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_3){
-				leaderboard.updateUser("3");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_4){
-				leaderboard.updateUser("4");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_5){
-				leaderboard.updateUser("5");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_6){
-				leaderboard.updateUser("6");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_7){
-				leaderboard.updateUser("7");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_8){
-				leaderboard.updateUser("8");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_9){
-				leaderboard.updateUser("9");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_0){
-				leaderboard.updateUser("0");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_SPACE){
-				leaderboard.updateUser(" ");
-				leaderboard.updateLoc(1);
-			}else if(key == KeyEvent.VK_BACK_SPACE){
-				if(leaderboard.getLoc() >= 0){
-					leaderboard.updateUser("back");
-					leaderboard.updateLoc(-1);
+			if(leaderboard.getFull()){
+				if(key == KeyEvent.VK_BACK_SPACE){
+					if(leaderboard.getLoc() >= 0){
+						leaderboard.updateUser("back");
+						leaderboard.updateLoc(-1);
+					}
 				}
+
+			} else {
+				if(key == KeyEvent.VK_A){
+					leaderboard.updateUser("a");
+					leaderboard.updateLoc(1);
+				} else if(key == KeyEvent.VK_B){
+					leaderboard.updateUser("b");
+					leaderboard.updateLoc(1);
+				} else if(key == KeyEvent.VK_C){
+					leaderboard.updateUser("c");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_D){
+					leaderboard.updateUser("d");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_E){
+					leaderboard.updateUser("e");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_F){
+					leaderboard.updateUser("f");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_G){
+					leaderboard.updateUser("g");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_H){
+					leaderboard.updateUser("h");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_I){
+					leaderboard.updateUser("i");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_J){
+					leaderboard.updateUser("j");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_K){
+					leaderboard.updateUser("k");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_L){
+					leaderboard.updateUser("l");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_M){
+					leaderboard.updateUser("m");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_N){
+					leaderboard.updateUser("n");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_O){
+					leaderboard.updateUser("o");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_P){
+					leaderboard.updateUser("p");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_Q){
+					leaderboard.updateUser("q");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_R){
+					leaderboard.updateUser("r");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_S){
+					leaderboard.updateUser("s");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_T){
+					leaderboard.updateUser("t");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_U){
+					leaderboard.updateUser("u");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_V){
+					leaderboard.updateUser("v");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_W){
+					leaderboard.updateUser("w");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_X){
+					leaderboard.updateUser("x");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_Y){
+					leaderboard.updateUser("y");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_Z){
+					leaderboard.updateUser("z");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_1){
+					leaderboard.updateUser("1");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_2){
+					leaderboard.updateUser("2");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_3){
+					leaderboard.updateUser("3");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_4){
+					leaderboard.updateUser("4");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_5){
+					leaderboard.updateUser("5");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_6){
+					leaderboard.updateUser("6");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_7){
+					leaderboard.updateUser("7");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_8){
+					leaderboard.updateUser("8");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_9){
+					leaderboard.updateUser("9");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_0){
+					leaderboard.updateUser("0");
+					leaderboard.updateLoc(1);
+				}else if(key == KeyEvent.VK_SPACE){
+					leaderboard.updateUser(" ");
+					leaderboard.updateLoc(1);
+				} else if(key == KeyEvent.VK_BACK_SPACE){
+					if(leaderboard.getLoc() >= 0){
+						leaderboard.updateUser("back");
+						leaderboard.updateLoc(-1);
+
+					}
+				}
+
 			}
 		}
 	}
