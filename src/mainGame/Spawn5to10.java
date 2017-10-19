@@ -269,6 +269,27 @@ public class Spawn5to10 {
 				}
 			}
 		}
+		else if (levelNumber == 8) {
+			timer--;
+			levelTimer--;
+			if(timer == 0) {
+				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -15, ID.EnemyMiniShooter, this.handler));
+				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -15, ID.EnemyMiniShooter, this.handler));
+				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -15, ID.EnemyMiniShooter, this.handler));
+			}
+			if (levelTimer == 0) {
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				if (randomMax == 1) {
+					levelNumber = 101;
+				} else {
+					levels.remove(index);
+					randomMax--;
+					index = r.nextInt(randomMax);
+					levelNumber = levels.get(index);
+				}
+			}
+		}
 			else if (levelNumber == 101) {
 				if (tempCounter < 1) {
 					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));

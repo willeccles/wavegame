@@ -26,5 +26,7 @@ public enum ID {
 	Levels1to10Text(),
 	EnemyBasic(), 
 	EnemyTracker(),
-	EnemyExpand();
+	EnemyExpand(),
+	EnemyMiniShooter(),
+	EnemyMiniShooterBullet();
 }
