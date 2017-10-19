@@ -4,8 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.lang.reflect.Array;
-
 import javax.swing.JPanel;
+
+/**
+ * Leaderboard inpupt screen in the game
+ * 
+ * @author Kyle Gorman 10/19/17
+ *
+ */
 
 public class Leaderboard extends JPanel {
 	private Game game;

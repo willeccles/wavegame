@@ -3,6 +3,13 @@ package mainGame;
 import java.awt.Color;
 import java.util.Random;
 
+/**
+ * A type of game mode in the game
+ * 
+ * @author Kyle Gorman 10/16/17
+ *
+ */
+
 public class SpawnSurvival {
 
 	private Handler handler;

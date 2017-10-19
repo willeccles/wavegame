@@ -312,6 +312,7 @@ public class Spawn5to10 {
 			tempCounter = 0;
 			levelNumber = 101;
 		} else if (levelsLeft > 1) {
+			timer = 10;
 			levelsLeft--;
 			tempCounter = 0;
 			levelNumber = levels.get(this.rand());
