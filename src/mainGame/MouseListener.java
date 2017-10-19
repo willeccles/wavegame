@@ -135,10 +135,10 @@ public class MouseListener extends MouseAdapter {
 			// Credits
 			else if (mouseOver(mx, my, 53, 290, 566, 166)) {
 				JOptionPane.showMessageDialog(game,
-						"Made by Brandon Loehle for his "
-								+ "final project in AP Computer Science senior year, 2015 - 2016."
-								+ "\n\nThis game is grossly unfinished with minor bugs. However,"
-								+ " it is 100% playable, enjoy!");
+						"Made by Team A1"
+								+ " for the Computer Science 225 project in fall 2017."
+								+ "\n\nThis game was originally one wave mode but now all of gamemodes"
+								+ " are 100% playable, enjoy!");
 			}
 
 			// Quit Button

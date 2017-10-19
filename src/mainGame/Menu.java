@@ -49,7 +49,7 @@ public class Menu {
 
 		img = null;
 		try {
-			URL imageURL = Game.class.getResource("images/background.jpg");
+			URL imageURL = Game.class.getResource("images/backgroundimage.jpg");
 			img = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,13 +60,13 @@ public class Menu {
 	}
 
 	public void addColors() {
-		colorPick.add(Color.blue);
 		colorPick.add(Color.white);
-		colorPick.add(Color.green);
-		colorPick.add(Color.red);
-		colorPick.add(Color.cyan);
-		colorPick.add(Color.magenta);
-		colorPick.add(Color.yellow);
+		colorPick.add(Color.white);
+		colorPick.add(Color.white);
+		colorPick.add(Color.white);
+		colorPick.add(Color.white);
+		colorPick.add(Color.white);
+		colorPick.add(Color.white);
 	}
 
 	public void tick() {
@@ -84,57 +84,57 @@ public class Menu {
 		if (game.gameState == STATE.Menu) {
 			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 			handler.render(g);
-			Font font = new Font("Amoebic", 1, 66);
+			Font font = new Font("Amoebic", 1, 50);
 			Font font2 = new Font("Amoebic", 1, 40);
 
 			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Game Modes", 760, 66);
+			g.setColor(Color.orange);
+			g.drawString("Game Modes", 792, 66);
 
 			g.setFont(font);
-			g.setColor(Color.white);
-			g.drawString("Loehle's Sandbox", 50, 66);
+			g.setColor(Color.orange);
+			g.drawString("Player Known BattleLands", 20, 66);
 
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawRect(660, 90, 266, 266);
 			g.setFont(font2);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Waves", 740, 143);
 
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawRect(960, 90, 266, 266);
 			g.setFont(font2);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Bosses", 1033, 143);
 
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawRect(660, 390, 266, 266);
 			g.setFont(font2);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Attack", 730, 443);
 
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawRect(960, 390, 266, 266);
 			g.setFont(font2);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Survival", 1033, 443);
 
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawRect(53, 90, 566, 166);
 			g.setFont(font);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Help", 266, 186);
 
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawRect(53, 290, 566, 166);
 			g.setFont(font);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Credits", 226, 400);
 
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawRect(53, 490, 566, 166);
 			g.setFont(font);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Quit", 266, 600);
 
 		} else if (game.gameState == STATE.Help) {// if the user clicks on "help"
