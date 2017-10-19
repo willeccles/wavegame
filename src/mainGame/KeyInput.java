@@ -207,9 +207,6 @@ public class KeyInput extends KeyAdapter {
 				}else if(key == KeyEvent.VK_0){
 					leaderboard.updateUser("0");
 					leaderboard.updateLoc(1);
-				}else if(key == KeyEvent.VK_SPACE){
-					leaderboard.updateUser(" ");
-					leaderboard.updateLoc(1);
 				} else if(key == KeyEvent.VK_BACK_SPACE){
 					if(leaderboard.getLoc() >= 0){
 						leaderboard.updateUser("back");
