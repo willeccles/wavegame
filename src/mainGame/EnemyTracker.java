@@ -4,6 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+/**
+ * A type of enemy in the game
+ * 
+ * @author Kyle Gorman 10/17/17
+ *
+ */
+
 public class EnemyTracker extends GameObject {
 
 	private Handler handler;
