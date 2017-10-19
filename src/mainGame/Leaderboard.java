@@ -19,7 +19,7 @@ public class Leaderboard extends JPanel {
 		this.game = game;
 		x = 353;
 		y = 490;
-		strX = x + 213;
+		strX = x + 250;
 		user = "";
 		charLoc = 0;
 		full = false;
@@ -31,13 +31,14 @@ public class Leaderboard extends JPanel {
 		// TODO Auto-generated method stub
 		//1280x720
 		Font font = new Font("Comic Sans MS", 1 , 50);
-		g.setColor(Color.white);
+		g.setColor(Color.orange);
 		g.drawRect(x, y, 566, 166);
 
 		g.setFont(font);
+		g.setColor(Color.orange);
 		g.drawString("Done", x+213, y+96);
 
-		g.setColor(Color.white);
+		g.setColor(Color.orange);
 		g.drawRect(x, y-200, 566, 166);
 
 		g.setFont(font);
