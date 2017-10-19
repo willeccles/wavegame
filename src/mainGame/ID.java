@@ -9,6 +9,7 @@ public enum ID {
 	Player,
 	Trail,
 	BossEye,
+	BossBattle,
 	EnemyFast,
 	EnemySmart,
 	EnemyBoss,
