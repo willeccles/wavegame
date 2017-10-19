@@ -92,7 +92,6 @@ public class Leaderboard extends JPanel {
 			int temp = 0;
 			leaderboard[temp][temp] = user;
 			leaderboard[temp][temp+1] = Integer.toString(hud.getScore()); 
-			System.out.println(leaderboard);
 			temp++;
 			user = "";
 			charLoc = 0;
