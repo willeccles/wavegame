@@ -1,10 +1,5 @@
 package mainGame;
 
-/**
- * Used to easily identify each game entity
- * @author Brandon Loehle
- * 5/30/16
- */
 public enum ID {
 	Player,
 	Trail,
@@ -27,5 +22,6 @@ public enum ID {
 	EnemyTracker,
 	EnemyExpand,
 	EnemyMiniShooter,
-	EnemyMiniShooterBullet;
+	EnemyMiniShooterBullet,
+	EnemyFour;
 }
