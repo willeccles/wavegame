@@ -166,7 +166,7 @@ public class Spawn1to5 {
 		} else if (levelNumber == 3) {
 			levelTimer--;
 			if (tempCounter < 1) {
-				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, -20, ID.EnemyShooter, this.handler));
+				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 100, r.nextInt(Game.HEIGHT) -100, 100, 100, -20, ID.EnemyShooter, this.handler));
 				levelTimer = 1300;
 				tempCounter++;
 			}
