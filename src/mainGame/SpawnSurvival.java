@@ -27,7 +27,7 @@ public class SpawnSurvival {
 		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
-		differentEnemies = 7;	
+		differentEnemies = 8;	
 		trackerTimer = 1000;
 		trackerColor = Color.blue;
 		count = 0;
@@ -104,6 +104,10 @@ public class SpawnSurvival {
 			} else if (temp == 6){
 				//spawns Expansion enemy
 				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
+				spawnTimer = 0;
+			} else if (temp == 7){
+				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
+				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
 				spawnTimer = 0;
 			}
 		}
