@@ -304,6 +304,7 @@ public class Spawn1to5 {
 			tempCounter = 0;
 			levelNumber = 101;
 		} else if (levelsRemaining > 1) {
+			spawnTimer = 10;
 			levelsRemaining--;
 			tempCounter = 0;
 			levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
