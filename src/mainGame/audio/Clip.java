@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URI;
 import java.awt.Toolkit;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Clip {
 	private double volume; // double from 0.0-1.0 representing the relative volume to play the file at. Will be clamped at playback, so even 123.123 just = 1.0
@@ -32,19 +33,17 @@ public class Clip {
 		this(filesource, 1.0);
 	}
 
-	/**
-	 * Get the playback volume for the clip.
-	 * @return the playback volume as a double
-	 */
-	public double getVolume() {
-		return volume;
-	}
-
-	/**
-	 * Get the Media representing the audio file.
-	 * @return the clip's Media for playback
-	 */
-	public Media getMedia() {
-		return media;
+	public void play() {
+		Thread t = new Thread(() -> {
+			try {
+				MediaPlayer player = new MediaPlayer(media);
+				player.setVolume(volume);
+				player.play();
+				t.join();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		t.start();
 	}
 }
