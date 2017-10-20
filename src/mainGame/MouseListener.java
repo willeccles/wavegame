@@ -26,7 +26,6 @@ public class MouseListener extends MouseAdapter {
 	private Upgrades upgrades;
 	private Player player;
 	private String upgradeText;
-	private SoundPlayer soundplayer;
 	private Leaderboard leaderboard;
 	
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades, Leaderboard leaderboard) {

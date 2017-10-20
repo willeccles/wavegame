@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.Dimension;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
+import mainGame.audio.SoundPlayer;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder

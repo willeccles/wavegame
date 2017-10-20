@@ -1,4 +1,4 @@
-package mainGame;
+package mainGame.audio;
 
 import java.io.File;
 import java.net.URI;
@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import mainGame.Game;
 
 public class SoundPlayer extends Thread {
 	private String soundfile;
