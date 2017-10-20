@@ -149,7 +149,7 @@ public class Game extends Canvas implements Runnable {
 			// switch the sound that's playing if the mode is waves
 			if (!soundplayer.getSong().equals("sounds/memories.mp3")) {
 				soundplayer.stop_playing();
-				soundplayer = new SoundPlayer("sounds/memories.mp3");
+				soundplayer = new SoundPlayer("sounds/memories.mp3", true);
 				soundplayer.start();
 			}
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
@@ -157,7 +157,7 @@ public class Game extends Canvas implements Runnable {
 			// make sure the menu is playing the right song
 			if (!soundplayer.getSong().equals("sounds/main.mp3")) {
 				soundplayer.stop_playing();
-				soundplayer = new SoundPlayer("sounds/main.mp3");
+				soundplayer = new SoundPlayer("sounds/main.mp3", true);
 				soundplayer.start();
 			}
 		} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
@@ -181,6 +181,11 @@ public class Game extends Canvas implements Runnable {
 		} else if (gameState == STATE.Survival) {
 			hud.tick();
 			spawnSurvival.tick();
+			if (!soundplayer.getSong().equals("sounds/135.mp3")) {
+				soundplayer.stop_playing();
+				soundplayer = new SoundPlayer("sounds/135.mp3", true);
+				soundplayer.start();
+			}
 		}
 
 	}
