@@ -16,7 +16,6 @@ import mainGame.Game;
 public class ClipPlayer {
 	
 	public ClipPlayer() {
-		super(soundfile, false);
 	}
 
 	/**
