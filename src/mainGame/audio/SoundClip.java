@@ -5,6 +5,7 @@ import java.net.URI;
 import java.awt.Toolkit;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import mainGame.Game;
 
 /**
  * A sound clip that is played asynchronously.
@@ -47,7 +48,6 @@ public class SoundClip {
 				MediaPlayer player = new MediaPlayer(media);
 				player.setVolume(volume);
 				player.play();
-				t.join();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
