@@ -33,6 +33,9 @@ public class Clip {
 		this(filesource, 1.0);
 	}
 
+	/**
+	 * Play the sound clip one time.
+	 */
 	public void play() {
 		Thread t = new Thread(() -> {
 			try {
