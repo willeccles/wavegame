@@ -68,7 +68,7 @@ public class Game extends Canvas implements Runnable {
 		// technically, this is bad practice but I don't care right now
 		this.setSize(new Dimension(WIDTH, HEIGHT));
 		JFXPanel jfxp = new JFXPanel(); // trust
-		soundplayer = new SoundPlayer("sounds/main.mp3");
+		soundplayer = new SoundPlayer("sounds/main.mp3", true);
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "Wave Game", this);
 	}
@@ -145,8 +145,20 @@ public class Game extends Canvas implements Runnable {
 					spawner2.tick();
 				}
 			}
+			// switch the sound that's playing if the mode is waves
+			if (!soundplayer.getSong().equals("sounds/memories.mp3")) {
+				soundplayer.stop_playing();
+				soundplayer = new SoundPlayer("sounds/memories.mp3");
+				soundplayer.start();
+			}
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
 			menu.tick();
+			// make sure the menu is playing the right song
+			if (!soundplayer.getSong().equals("sounds/main.mp3")) {
+				soundplayer.stop_playing();
+				soundplayer = new SoundPlayer("sounds/main.mp3");
+				soundplayer.start();
+			}
 		} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
 			upgradeScreen.tick();
 		} else if (gameState == STATE.GameOver) {// game is over, update the game over screen

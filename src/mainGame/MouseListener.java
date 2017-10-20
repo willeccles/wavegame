@@ -118,11 +118,6 @@ public class MouseListener extends MouseAdapter {
 				handler.object.clear();
 				game.gameState = STATE.Wave;
 				handler.addObject(player);
-				/*
-				soundplayer.stop_playing();
-				soundplayer.setSong("sounds/memories.mp3");
-				soundplayer.start();
-				*/
 				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 				// "images/PickupHealth.png", handler));
 			}

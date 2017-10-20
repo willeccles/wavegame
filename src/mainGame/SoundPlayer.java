@@ -6,14 +6,30 @@ import java.net.URISyntaxException;
 import java.awt.Toolkit;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class SoundPlayer extends Thread {
 	private String soundfile;
 	//private Player player;
 	private static MediaPlayer player;
+	private boolean repeats = false;
 
-	public SoundPlayer(String songfile) {
+	/**
+	 * Create a soundplayer with a songfile and whether or not it should repeat.
+	 * @param songfile The path to the file.
+	 * @param repeat Whether or not the player should repeat when the file ends.
+	 */
+	public SoundPlayer(String songfile, boolean repeat) {
 		soundfile = songfile;
+		repeats = repeat;
+	}
+
+	/**
+	 * Create a soundplayer with just a given songfile that doesn't repeat.
+	 * @param songfile The path of the file.
+	 */
+	public SoundPlayer(String songfile) {
+		this(songfile, false);
 	}
 
 	public void run() {
@@ -22,6 +38,12 @@ public class SoundPlayer extends Thread {
 			Media song = new Media(f.toString().replaceAll("\\\\", "/"));
 			player = new MediaPlayer(song);
 			player.setVolume(0.25);
+			// this will make the player repeat
+			player.setOnEndOfMedia(() -> {
+				if (repeats) {
+					player.seek(Duration.ZERO); // goes back to the beginning of the song
+				}
+			});
 			player.play();
 		} catch (URISyntaxException use) {
 			use.printStackTrace();
@@ -32,7 +54,20 @@ public class SoundPlayer extends Thread {
 		soundfile = song;
 	}
 
+	public String getSong() { 
+		return soundfile;
+	}
+
+	public void setRepeat(boolean r) {
+		repeats = r;
+	}
+
+	public boolean doesRepeat() {
+		return repeats;
+	}
+
 	public void play() {
+		// just in case the thread is not started
 		if (!this.isAlive()) {
 			this.start();
 		}
