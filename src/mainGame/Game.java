@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 		JFXPanel jfxp = new JFXPanel(); // trust
 		soundplayer = new SoundPlayer("sounds/main.mp3", true);
 		soundplayer.start();
-		new Window((int) WIDTH, (int) HEIGHT, "Wave Game", this);
+		new Window((int) WIDTH, (int) HEIGHT, "Player Known BattleLands", this);
 	}
 
 	/**
