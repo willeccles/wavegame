@@ -329,6 +329,7 @@ public class Spawn1to5 {
 	}
 
 	public void restart() {
+		spawnTimer = 10;
 		levelNumber = -5;
 		tempCounter = 0;
 		levelTimer = 150;
