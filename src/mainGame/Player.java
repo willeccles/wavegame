@@ -90,7 +90,8 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.EnemySweep || tempObject.getId() == ID.EnemyShooterBullet
 					|| tempObject.getId() == ID.EnemyBurst || tempObject.getId() == ID.EnemyShooter
 					|| tempObject.getId() == ID.BossEye || tempObject.getId() == ID.EnemyTracker || tempObject.getId() == ID.EnemyExpand
-					|| tempObject.getId() == ID.EnemyMiniShooter || tempObject.getId() == ID.EnemyMiniShooterBullet) {// tempObject is an enemy
+					|| tempObject.getId() == ID.EnemyMiniShooter || tempObject.getId() == ID.EnemyMiniShooterBullet 
+					|| tempObject.getId() == ID.EnemyFour) {// tempObject is an enemy
 
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy

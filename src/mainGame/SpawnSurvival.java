@@ -34,7 +34,7 @@ public class SpawnSurvival {
 		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
-		differentEnemies = 8;	
+		differentEnemies = 9;	
 		trackerTimer = 1000;
 		trackerColor = Color.blue;
 		count = 0;
@@ -117,7 +117,7 @@ public class SpawnSurvival {
 				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
 				spawnTimer = 0;
 			} else if (temp == 8){
-				handler.addObject(new EnemyFour(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler, -2));
+				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler, -1, -2));
 			}
 		}
 		spawnTimer++;

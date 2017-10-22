@@ -28,7 +28,7 @@ public class Spawn5to10 {
 	public static int LEVEL_SET_2_RESET = 0;
 	private Color trackerColor;
 	private int trackerTimer;
-	private int differentEnemies = 8;
+	private int differentEnemies;
 
 	public Spawn5to10(Handler handler, HUD hud, Spawn1to5 spawner, Game game) {
 		restart();
@@ -41,14 +41,15 @@ public class Spawn5to10 {
 		levelsLeft = 5;
 		hud.setLevel(1);
 		tempCounter = 0;
-		addLevels();
-		levelNumber = 0;
+		levelNumber = -1;
 		trackerColor = Color.blue;
 		trackerTimer = 1000;
+		differentEnemies = 9;
+		addLevels();
 	}
 
 	public void addLevels() {
-		for (int i = 1; i <= 8; i++) {
+		for (int i = 0; i <= differentEnemies; i++) {
 			levels.add(i);
 		}
 	}
@@ -58,7 +59,7 @@ public class Spawn5to10 {
 		// restart();
 		// LEVEL_SET_2_RESET ++;
 		// }
-		if (levelNumber <= 0) {
+		if (levelNumber < 0) {
 			levelTimer--;
 			if (tempCounter < 1) {
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Same levels...",
@@ -276,7 +277,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if(timer == 0) {
-				handler.addObject(new EnemyFour(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyFour, this.handler, -2));
+				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyFour, this.handler, -1, -2));
 			}
 			if (levelTimer == 0){
 				handler.clearEnemies();

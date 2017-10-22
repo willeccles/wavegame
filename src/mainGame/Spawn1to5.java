@@ -37,18 +37,19 @@ public class Spawn1to5 {
 		levelsRemaining = 5;
 		hud.setLevel(1);
 		tempCounter = 0;
-		addLevels();
-		levelNumber = 0;
+		levelNumber = -1;
 		trackerColor = Color.blue;
 		trackerTimer = 1000;
-		differentEnemies = 8;
+		differentEnemies = 9;
+		addLevels();
+
 	}
 
 	/**
 	 * Pre-load every level
 	 */
 	public void addLevels() {
-		for (int i = 1; i <= 8; i++) {
+		for (int i = 0; i <= differentEnemies; i++) {
 			levels.add(i);
 		}
 	}
@@ -57,7 +58,7 @@ public class Spawn1to5 {
 	 * Called once every 60 seconds by the Game loop
 	 */
 	public void tick() {
-		if (levelNumber <= 0) {
+		if (levelNumber < 0) {
 			levelTimer--;
 			if (tempCounter < 1) {// display intro game message ONE time
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Let's start off easy...",
@@ -68,7 +69,6 @@ public class Spawn1to5 {
 				handler.clearEnemies();
 				tempCounter = 0;
 				levelNumber = this.rand();
-				//will need to update in the future to add more enemies
 			}
 
 		}
@@ -282,7 +282,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if(spawnTimer == 0) {
-				handler.addObject(new EnemyFour(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyFour, this.handler, -2));
+				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyFour, this.handler, -1, -2));
 			}
 			if (levelTimer == 0){
 				handler.clearEnemies();

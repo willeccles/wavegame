@@ -70,7 +70,7 @@ public class EnemyShooter extends GameObject {
 		bulletVelY = ((this.bulletSpeed / distance) * diffY);// numerator affects speed of enemy
 
 		handler.addObject(
-				new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler));
+				new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.yellow));
 	}
 
 	public void updateEnemy() {
