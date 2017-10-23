@@ -38,6 +38,7 @@ public class LBWorker {
 		String input = "";
 		if (client.isConnected()) {
 			input = in.readUTF();
+			System.out.println(input);
 		}
 
 		in.close();
