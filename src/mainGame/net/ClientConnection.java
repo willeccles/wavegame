@@ -10,7 +10,7 @@ public class ClientConnection {
 	private DataInputStream in;
 	private DataOutputStream out;
 	private Thread inputThread;
-	
+
 	public ClientConnection(String address, int port) throws UnknownHostException, IOException {
 		this.address = address;
 		this.port = port;
@@ -30,7 +30,7 @@ public class ClientConnection {
 				} catch(IOException ioe) {
 					// this means the server closed the connection (or there was some sort of DC problem)
 					// TODO: this should send the user back to the menu and show an alert box or something
-					
+
 					try {
 						client.close();
 					} catch (IOException e) {
@@ -44,6 +44,22 @@ public class ClientConnection {
 		});
 
 		inputThread.start();
+	}
+
+	/**
+	 * Send the server updated info on the given player.
+	 * @param p The player to send info on.
+	 */
+	public void sendPos(Player p) {
+		double x = p.getX();
+		double y = p.getY();
+		double velX = p.getVelX();
+		double velY = p.getVelY();
+		try {
+			out.writeUTF(x + "," + y + "," + velX + "," + velY);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

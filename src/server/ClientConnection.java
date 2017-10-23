@@ -32,10 +32,10 @@ public class ClientConnection extends Thread {
 				// TODO: deal with input here
 				/* if the message is telling the server the player's current velocity vector and position, this should be relayed ASAP to the other client, whose game will then display the player's change in velocity */
 
-				if (input.matches("^DIR=[0-9]+ POS=[0-9]+,[0-9]+")) {
-					// DIR is the angle the character is moving at (0, 45, 90, etc)
-					// POS is the x,y coords of the character in pixels, based on the display of 1280x720
+				if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+,")) {
+					// send the info about the player to the other client
 					// the ID of the other player is abs(this.id-1)
+					instance.sendToClient(Math.abs(this.id-1), input);
 				}
 			} catch (IOException ioe) {
 				// TODO
