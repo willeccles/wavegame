@@ -81,7 +81,6 @@ public class Leaderboard extends JPanel {
 			}
 		}
 		repaint();
-		System.out.println(user);
 	}
 	public String getUser(){
 		return user;
@@ -103,9 +102,8 @@ public class Leaderboard extends JPanel {
 	}
 	public void nextUser(){
 		int temp = 0;
-		leaderboard[temp][1] = user;
-		leaderboard[temp][2] = Integer.toString(hud.getScore()); 
-		temp++;
+		leaderboard[temp][0] = user;
+		leaderboard[temp][1] = Integer.toString(hud.getScore()); 
 		user = "";
 		charLoc = 0;
 		strX = x +213;
