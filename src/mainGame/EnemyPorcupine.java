@@ -55,7 +55,7 @@ public class EnemyPorcupine extends GameObject {
 		if (this.x <= 0 || this.x >= Game.WIDTH - 16)
 			velX *= -1;
 
-		handler.addObject(new Trail(x, y, ID.Trail, Color.magenta, this.sizeX, this.sizeY, 0.025, this.handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.orange, this.sizeX, this.sizeY, 0.025, this.handler));
 		
 		this.x += velX;
 		this.y += velY;
@@ -99,7 +99,7 @@ public class EnemyPorcupine extends GameObject {
 		
 	}
 	public void render(Graphics g) {
-		g.setColor(Color.magenta);
+		g.setColor(Color.orange);
 		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);
 
 	}
