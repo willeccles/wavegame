@@ -39,7 +39,9 @@ public class LBWorker {
 		if (client.isConnected()) {
 			input = in.readUTF();
 		}
-		
+
+		in.close();
+		out.close();
 		client.close();
 		
 		// check input
@@ -52,6 +54,7 @@ public class LBWorker {
 				scores.put(datum.split(",")[0], Integer.parseInt(datum.split(",")[1]));
 			}
 		}
+
 	}
 
 	/**

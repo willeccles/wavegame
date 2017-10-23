@@ -71,6 +71,7 @@ public class Server extends Thread {
 				}
 			} catch (IOException ioe) {
 				// TODO
+				ioe.printStackTrace();
 			}
 		}
 	}
