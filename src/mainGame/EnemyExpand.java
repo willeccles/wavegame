@@ -26,7 +26,7 @@ public class EnemyExpand extends GameObject {
 		this.velY = 0;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
-		this.timer = 60;
+		this.timer = 3;
 
 		for (int i = 0; i < handler.object.size(); i++) {
 			if (handler.object.get(i).getId() == ID.Player)
@@ -48,16 +48,16 @@ public class EnemyExpand extends GameObject {
 		timer--;
 		if (timer <= 0) {
 			updateEnemy();
-			timer = 10;
+			timer = 3;
 		}
 
 	}
 
 	public void updateEnemy() {
-		this.sizeX++;
-		this.sizeY++;
+		this.sizeX+=5;
+		this.sizeY+=5;
 		
-		if (sizeX == 300) {
+		if (sizeX == 350) {
 			this.handler.removeObject(this);
 		}
 	}

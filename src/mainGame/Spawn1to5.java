@@ -68,7 +68,8 @@ public class Spawn1to5 {
 			if (levelTimer <= 0) {// time to play!
 				handler.clearEnemies();
 				tempCounter = 0;
-				levelNumber = this.rand();
+				//levelNumber = this.rand();
+				levelNumber = 6;
 			}
 
 		}
@@ -252,7 +253,7 @@ public class Spawn1to5 {
 			}
 			if (spawnTimer == 0) {
 				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
-				spawnTimer = 300;
+				spawnTimer = 50;
 			}
 			if (levelTimer == 0) {
 				tempCounter = 0;
