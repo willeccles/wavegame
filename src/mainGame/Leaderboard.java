@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.lang.reflect.Array;
 import javax.swing.JPanel;
+import mainGame.net.LBWorker;
 
 /**
  * Leaderboard inpupt screen in the game
@@ -20,6 +21,7 @@ public class Leaderboard extends JPanel {
 	private Boolean full;
 	public String [][] leaderboard;
 	private HUD hud;
+	private LBWorker lbworker;
 
 	public Leaderboard(Game game, HUD hud){
 		this.game = game;
@@ -31,6 +33,7 @@ public class Leaderboard extends JPanel {
 		full = false;
 		leaderboard = new String[5][2];
 		this.hud = hud;
+		lbworker = new LBWorker("emcee.eccles.net", 25565);
 	}
 
 	public void paint (Graphics g) {
