@@ -205,6 +205,10 @@ public class Spawn5to10 {
 		} else if (levelNumber == 5){
 			timer--;
 			levelTimer--;
+			if (tempCounter < 1) {
+				levelTimer = 2000;
+				tempCounter++;
+			}
 			if(trackerTimer == 999){
 				trackerColor = Color.blue;
 			} else if (trackerTimer == 500){
@@ -220,6 +224,7 @@ public class Spawn5to10 {
 			} 
 
 			if (levelTimer == 0) {
+				tempCounter = 0;
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				trackerColor = Color.blue;
@@ -236,6 +241,11 @@ public class Spawn5to10 {
 		else if (levelNumber == 6) {
 			timer--;
 			levelTimer--;
+			if (tempCounter < 1) {
+				tempCounter = 0;
+				levelTimer = 2000;
+				tempCounter++;
+			}
 			if (timer == 0) {
 				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
 				timer = 300;
@@ -243,6 +253,7 @@ public class Spawn5to10 {
 			} 
 			
 			if (levelTimer == 0) {
+				tempCounter = 0;
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				timer = 10;
@@ -257,12 +268,17 @@ public class Spawn5to10 {
 		else if (levelNumber == 7) {
 			timer--;
 			levelTimer--;
+			if (tempCounter < 1) {
+				levelTimer = 2000;
+				tempCounter++;
+			}
 			if(timer == 0) {
 				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -15, ID.EnemyMiniShooter, this.handler));
 				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -15, ID.EnemyMiniShooter, this.handler));
 				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -15, ID.EnemyMiniShooter, this.handler));
 			}
 			if (levelTimer == 0) {
+				tempCounter = 0;
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				if (levelsLeft == 1) {
@@ -276,10 +292,16 @@ public class Spawn5to10 {
 		else if (levelNumber == 8) {
 			timer--;
 			levelTimer--;
+			if (tempCounter < 1) {
+				levelTimer = 2000;
+				tempCounter++;
+			}
 			if(timer == 0) {
+				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
 				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
 			}
 			if (levelTimer == 0){
+				tempCounter = 0;
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
 				timer = 10;
