@@ -71,6 +71,7 @@ public class Server extends Thread {
 					out.close();
 					lb.saveToFile();
 				}
+				System.out.println(input);
 			} catch (IOException ioe) {
 				// TODO
 				ioe.printStackTrace();
