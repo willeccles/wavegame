@@ -33,7 +33,7 @@ public class Leaderboard extends JPanel {
 		full = false;
 		leaderboard = new String[5][2];
 		this.hud = hud;
-		lbworker = new LBWorker("emcee.eccles.net", 25565);
+		lbworker = new LBWorker("will.eccles.net", 25565);
 	}
 
 	public void paint (Graphics g) {
