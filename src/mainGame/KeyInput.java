@@ -71,8 +71,8 @@ public class KeyInput extends KeyAdapter{
 
 			// using only if's allows multiple keys to be triggered at once
 			if (tempObject.getId() == ID.Player) {// find the player object, as
-													// he is the only one the
-													// user can control
+				// he is the only one the
+				// user can control
 				// key events for player 1
 				if (key == KeyEvent.VK_UP && handler.getTimer() <= 0) {
 					tempObject.setVelY(-(this.speed));
@@ -117,8 +117,11 @@ public class KeyInput extends KeyAdapter{
 				}
 
 			}
+		}
 
 			if (game.getGameState() == STATE.Leaderboard) {
+				if (key == KeyEvent.VK_A) 
+					System.out.println("test");
 				if (leaderboard.getFull()) {
 					if (key == KeyEvent.VK_BACK_SPACE) {
 						if (leaderboard.getLoc() >= 0) {
@@ -247,7 +250,7 @@ public class KeyInput extends KeyAdapter{
 				}
 			}
 		}
-	}
+	
 
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();

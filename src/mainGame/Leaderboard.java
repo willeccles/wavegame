@@ -60,6 +60,7 @@ public class Leaderboard extends JPanel {
 	}
 
 	public void updateUser(String temp){
+		System.out.println(user);
 		if(charLoc == 15){
 			full = true;
 		} else {
