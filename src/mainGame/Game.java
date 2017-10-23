@@ -40,6 +40,7 @@ public class Game extends Canvas implements Runnable {
 	private SoundPlayer soundplayer;
 	private Leaderboard leaderboard;
 	private JFrame frame;
+	private boolean isPaused = false;
 
 	/**
 	 * Used to switch between each of the screens shown to the user
@@ -136,58 +137,59 @@ public class Game extends Canvas implements Runnable {
 	 * appearance, etc).
 	 */
 	private void tick() {
-		handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
-		if (gameState == STATE.Wave) {// game is running
-			if (!handler.isPaused()) {
+		if (!isPaused()) {
+			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
+			if (gameState == STATE.Wave) {// game is running
+				if (!handler.isPaused()) {
+					hud.tick();
+					if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+						spawner.tick();
+					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+						spawner2.tick();
+					}
+				}
+				// switch the sound that's playing if the mode is waves
+				if (!soundplayer.getSong().equals("sounds/memories.mp3")) {
+					soundplayer.stop_playing();
+					soundplayer = new SoundPlayer("sounds/memories.mp3", true);
+					soundplayer.start();
+				}
+			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
+				menu.tick();
+				// make sure the menu is playing the right song
+				if (!soundplayer.getSong().equals("sounds/main.mp3")) {
+					soundplayer.stop_playing();
+					soundplayer = new SoundPlayer("sounds/main.mp3", true);
+					soundplayer.start();
+				}
+			} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
+				upgradeScreen.tick();
+			} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
+				gameOver.tick();
+			} else if (gameState == STATE.Attack) {
 				hud.tick();
 				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
 					spawner.tick();
 				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
 					spawner2.tick();
 				}
-			}
-			// switch the sound that's playing if the mode is waves
-			if (!soundplayer.getSong().equals("sounds/memories.mp3")) {
-				soundplayer.stop_playing();
-				soundplayer = new SoundPlayer("sounds/memories.mp3", true);
-				soundplayer.start();
-			}
-		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
-			menu.tick();
-			// make sure the menu is playing the right song
-			if (!soundplayer.getSong().equals("sounds/main.mp3")) {
-				soundplayer.stop_playing();
-				soundplayer = new SoundPlayer("sounds/main.mp3", true);
-				soundplayer.start();
-			}
-		} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
-			upgradeScreen.tick();
-		} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
-			gameOver.tick();
-		} else if (gameState == STATE.Attack) {
-			hud.tick();
-			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
-				spawner.tick();
-			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
-				spawner2.tick();
-			}
-		} else if (gameState == STATE.Bosses) {
-			hud.tick();
-			if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
-				spawner.tick();
-			} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
-				spawner2.tick();
-			}
-		} else if (gameState == STATE.Survival) {
-			hud.tick();
-			spawnSurvival.tick();
-			if (!soundplayer.getSong().equals("sounds/135.mp3")) {
-				soundplayer.stop_playing();
-				soundplayer = new SoundPlayer("sounds/135.mp3", true);
-				soundplayer.start();
+			} else if (gameState == STATE.Bosses) {
+				hud.tick();
+				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+					spawner.tick();
+				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+					spawner2.tick();
+				}
+			} else if (gameState == STATE.Survival) {
+				hud.tick();
+				spawnSurvival.tick();
+				if (!soundplayer.getSong().equals("sounds/135.mp3")) {
+					soundplayer.stop_playing();
+					soundplayer = new SoundPlayer("sounds/135.mp3", true);
+					soundplayer.start();
+				}
 			}
 		}
-
 	}
 
 	/**
@@ -268,5 +270,17 @@ public class Game extends Canvas implements Runnable {
 
 	public JFrame getFrame() {
 		return this.frame;
+	}
+
+	public void pause() {
+		isPaused = true;
+	}
+
+	public void unPause() {
+		isPaused = false;
+	}
+
+	public boolean isPaused() {
+		return isPaused;
 	}
 }

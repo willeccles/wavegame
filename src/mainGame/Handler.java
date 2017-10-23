@@ -78,12 +78,6 @@ public class Handler {
 		setTimer(120);
 	}
 
-	public void pauseEnemy() {
-		setTimer(100000000);
-	}
-	
-	
-
 	public boolean isPaused() {
 		return (getTimer() > 0);
 	}
