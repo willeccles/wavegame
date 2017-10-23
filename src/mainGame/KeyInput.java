@@ -107,9 +107,11 @@ public class KeyInput extends KeyAdapter{
 					}
 				}
 				if (key == KeyEvent.VK_ESCAPE) {
-					tempObject.setVelY(0);
-					tempObject.setVelX(0);
-					handler.pauseEnemy();
+					if (game.isPaused()) {
+						game.unPause();
+					} else {
+						game.pause();
+					}
 					//paint(getImage("images/bosseye.png"));
 
 				}

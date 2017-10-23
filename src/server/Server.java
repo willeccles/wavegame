@@ -61,16 +61,20 @@ public class Server extends Thread {
 						}
 					}
 				} else if (input.matches("^NEWSCORE|[a-zA-Z0-9_]+,[0-9]+$")) {
+					System.out.println("got here");
 					String username = input.split("|")[1].split(",")[0];
 					int score = Integer.parseInt(input.split(",")[1]);
 					int pos = lb.insert(username, score);
+					lb.print();
 					DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
-					out.writeUTF("POSITION:" + pos + "|SCORESLIST:" + lb.top(10));
+					out.writeUTF("POSITION:" + pos + "|SCORESLIST:" + lb.top(5));
 					out.close();
 					lb.saveToFile();
 				}
+				System.out.println(input);
 			} catch (IOException ioe) {
 				// TODO
+				ioe.printStackTrace();
 			}
 		}
 	}

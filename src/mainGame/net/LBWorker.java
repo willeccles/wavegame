@@ -38,8 +38,11 @@ public class LBWorker {
 		String input = "";
 		if (client.isConnected()) {
 			input = in.readUTF();
+			System.out.println(input);
 		}
-		
+
+		in.close();
+		out.close();
 		client.close();
 		
 		// check input
@@ -52,6 +55,7 @@ public class LBWorker {
 				scores.put(datum.split(",")[0], Integer.parseInt(datum.split(",")[1]));
 			}
 		}
+
 	}
 
 	/**
