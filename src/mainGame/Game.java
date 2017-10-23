@@ -189,6 +189,8 @@ public class Game extends Canvas implements Runnable {
 					soundplayer.start();
 				}
 			}
+		} else {
+			// tick the pause screen
 		}
 	}
 
