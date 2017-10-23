@@ -24,5 +24,5 @@ public enum ID {
 	EnemyExpand,
 	EnemyMiniShooter,
 	EnemyMiniShooterBullet,
-	EnemyFour;
+	EnemyPorcupine;
 }
