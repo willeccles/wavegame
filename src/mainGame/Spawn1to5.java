@@ -58,7 +58,6 @@ public class Spawn1to5 {
 	 * Called once every 60 seconds by the Game loop
 	 */
 	public void tick() {
-		System.out.println(levelTimer);
 		if (levelNumber < 0) {
 			levelTimer--;
 			if (tempCounter < 1) {// display intro game message ONE time
