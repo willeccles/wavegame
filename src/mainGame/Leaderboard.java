@@ -22,6 +22,7 @@ public class Leaderboard extends JPanel {
 	public String [][] leaderboard;
 	private HUD hud;
 	private LBWorker lbworker;
+	private int leaderboardAmount;
 
 	public Leaderboard(Game game, HUD hud){
 		this.game = game;
@@ -31,7 +32,8 @@ public class Leaderboard extends JPanel {
 		user = "";
 		charLoc = 0;
 		full = false;
-		leaderboard = new String[5][2];
+		leaderboardAmount = 5;
+		leaderboard = new String[leaderboardAmount][2];
 		this.hud = hud;
 		lbworker = new LBWorker("will.eccles.net", 25565);
 	}
@@ -100,13 +102,13 @@ public class Leaderboard extends JPanel {
 		return full;
 	}
 	public void nextUser(){
-			int temp = 0;
-			leaderboard[temp][temp] = user;
-			leaderboard[temp][temp+1] = Integer.toString(hud.getScore()); 
-			temp++;
-			user = "";
-			charLoc = 0;
-			strX = x +213;
+		int temp = 0;
+		leaderboard[temp][1] = user;
+		leaderboard[temp][2] = Integer.toString(hud.getScore()); 
+		temp++;
+		user = "";
+		charLoc = 0;
+		strX = x +213;
 	}
 
 }
