@@ -60,9 +60,9 @@ public class Server extends Thread {
 							}
 						}
 					}
-				} else if (input.matches("^NEWSCORE|[a-zA-Z0-9_]+,[0-9]+$")) {
-					System.out.println("got here");
-					String username = input.split("|")[1].split(",")[0];
+				} else if (input.matches("NEWSCORE\\|[a-zA-Z0-9_]+,[0-9]+")) {
+					String username = input.split("\\|")[1].split(",")[0];
+					System.out.println(username);
 					int score = Integer.parseInt(input.split(",")[1]);
 					int pos = lb.insert(username, score);
 					lb.print();
@@ -71,7 +71,6 @@ public class Server extends Thread {
 					out.close();
 					lb.saveToFile();
 				}
-				System.out.println(input);
 			} catch (IOException ioe) {
 				// TODO
 				ioe.printStackTrace();

@@ -46,11 +46,11 @@ public class LBWorker {
 		client.close();
 		
 		// check input
-		if (input.matches("^POSITION:[0-9]+|SCORELIST:([a-zA-Z0-9]{1,15},[0-9]+|)$")) {
+		if (input.matches("POSITION:[0-9]+\\|SCORESLIST:([a-zA-Z0-9]{1,15},[0-9]+\\|)+")) {
 			// so this means that the input is usable
-			userpos = Integer.parseInt(input.split(":")[1].split("|")[0]);
+			userpos = Integer.parseInt(input.split(":")[1].split("\\|")[0]);
 			scores = new HashMap<String, Integer>();
-			String rawData[] = input.split(":")[2].split("|");
+			String rawData[] = input.split(":")[2].split("\\|");
 			for (String datum : rawData) {
 				scores.put(datum.split(",")[0], Integer.parseInt(datum.split(",")[1]));
 			}

@@ -41,9 +41,10 @@ public class Leaderboard {
 		scores.sort(null);
 		modified = true; // this way we know to write it to the file when told to
 
+		// TODO: implement binary search or similar
 		for (int i = 0; i < scores.size(); i++) {
 			if (scores.get(i).equals(newScore))
-				return i;
+				return scores.size() - i + 1; // i+1 since 0 = 1st place, etc.
 		}
 
 		return -1; // this only happens if something goes horribly wrong.
@@ -56,7 +57,11 @@ public class Leaderboard {
 	 */
 	public String top(int num) {
 		String r = "";
-		for (int i = scores.size() - num; i < scores.size(); i++) {
+		int n = num;
+		if (num > scores.size()) {
+			n = scores.size();
+		}
+		for (int i = scores.size() - n; i < scores.size(); i++) {
 			r += scores.get(i).username() + ",";
 			r += scores.get(i).score();
 			r += '|'; // end pair
@@ -73,6 +78,7 @@ public class Leaderboard {
 				for (Score s : scores) {
 					fw.write("\"" + s.username() + "\"," + s.score() + System.lineSeparator());
 				}
+				modified = false;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
