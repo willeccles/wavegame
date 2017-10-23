@@ -16,22 +16,34 @@ public class Handler {
 	private static int timer = 0;
 
 	/**
-	 * Updates each entity in the game by looping through each ArrayList and calling
-	 * the tick() function on each object
+	 * Updates each entity in the game by looping through each ArrayList and
+	 * calling the tick() function on each object
 	 */
 	public void tick() {
-		if (timer > 0) {
-			timer--;
+		if (getTimer() > 0) {
+			setTimer(getTimer() - 1);
 		}
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
-			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail || tempObject.getId() == ID.EnemyBurstWarning) {// we don't want these to ever be frozen by the Screen Freeze ability
+			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail
+					|| tempObject.getId() == ID.EnemyBurstWarning) {// we don't
+																	// want
+																	// these to
+																	// ever be
+																	// frozen by
+																	// the
+																	// Screen
+																	// Freeze
+																	// ability
 
-				// Every GameObject has a tick method, so this effectively updates every single object
+				// Every GameObject has a tick method, so this effectively
+				// updates every single object
 				tempObject.tick();
 
 			} else {
-				if (timer <= 0) {// if Screen Freeze power-up is unlocked, enemy ID's will pause for the length of the timer, and not update
+				if (getTimer() <= 0) {// if Screen Freeze power-up is unlocked, enemy
+									// ID's will pause for the length of the
+									// timer, and not update
 					tempObject.tick();
 				}
 			}
@@ -39,15 +51,16 @@ public class Handler {
 		for (int i = 0; i < pickups.size(); i++) {
 			Pickup tempObject = pickups.get(i);
 
-			// Every Pickup has a tick method, so this effectively updates every single object
+			// Every Pickup has a tick method, so this effectively updates every
+			// single object
 			tempObject.tick();
 		}
 
 	}
 
 	/**
-	 * Redraws each entity in the game by looping through each ArrayList and calling
-	 * the tick() function on each object
+	 * Redraws each entity in the game by looping through each ArrayList and
+	 * calling the tick() function on each object
 	 */
 	public void render(Graphics g) {
 		for (int i = 0; i < object.size(); i++) {
@@ -62,11 +75,17 @@ public class Handler {
 	}
 
 	public void pause() {
-		timer = 120;
+		setTimer(120);
 	}
 
+	public void pauseEnemy() {
+		setTimer(100000000);
+	}
+	
+	
+
 	public boolean isPaused() {
-		return (timer > 0);
+		return (getTimer() > 0);
 	}
 
 	public void addObject(GameObject object) {
@@ -93,7 +112,8 @@ public class Handler {
 			GameObject tempObject = this.object.get(i);
 			if (tempObject.getId() != ID.Player) {
 				this.removeObject(tempObject);
-				i--; // Removing shrinks the array by 1, causing the loop to skip an enemy
+				i--; // Removing shrinks the array by 1, causing the loop to
+						// skip an enemy
 			}
 		}
 	}
@@ -106,8 +126,23 @@ public class Handler {
 			GameObject tempObject = this.object.get(i);
 			if (tempObject.getId() == ID.Player) {
 				this.removeObject(tempObject);
-				i--; // Removing shrinks the array by 1, causing the loop to skip a player (should there be more than one)
+				i--; // Removing shrinks the array by 1, causing the loop to
+						// skip a player (should there be more than one)
 			}
 		}
+	}
+
+	/**
+	 * @return the timer
+	 */
+	public static int getTimer() {
+		return timer;
+	}
+
+	/**
+	 * @param timer the timer to set
+	 */
+	public static void setTimer(int timer) {
+		Handler.timer = timer;
 	}
 }
