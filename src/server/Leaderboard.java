@@ -33,7 +33,7 @@ public class Leaderboard {
 	 * Insert a score into the list.
 	 * @param username The name of the user to whom the score belongs.
 	 * @param value The score itself.
-	 * @return The index in the list where the score is located.
+	 * @return The place (NOT index) in the list where the score is located. In case of tie, will pick lower number (i.e. 2nd place instead of 3rd place, even if they are the same)
 	 */
 	public int insert(String username, int value) {
 		Score newScore = new Score(username, value);
@@ -41,13 +41,20 @@ public class Leaderboard {
 		scores.sort(null);
 		modified = true; // this way we know to write it to the file when told to
 
-		// TODO: implement binary search or similar
-		for (int i = 0; i < scores.size(); i++) {
-			if (scores.get(i).equals(newScore))
-				return scores.size() - i + 1; // i+1 since 0 = 1st place, etc.
+		// binary search the list
+		int rval = binarySearch(scores, newScore);
+		if (rval == -1) {
+			return rval; // score wasn't found
 		}
 
-		return -1; // this only happens if something goes horribly wrong.
+		// since there could be duplicates, check for those and get the latest value in the list
+		while (scores.get(rval+1).equals(newScore)) {
+			rval++;
+		}
+		
+		// return the position
+		return scores.size() - rval;
+
 	}
 
 	/**
@@ -92,6 +99,51 @@ public class Leaderboard {
 		for (Score s : scores) {
 			System.out.println(s.username() + ": " + s.score());
 		}
+	}
+
+	/**
+	 * Get the index in the scores list at which the score is located.
+	 * @param a The list to search in.
+	 * @param value The Score to look for.
+	 * @return The index it was found at.
+	 */
+	public static int binarySearch(List<Score> a, Score value) {
+		boolean found = false;
+		int first = 0;
+		int last = (a.size() - 1);
+		int mid = (last-first)/2;
+		
+		while((!a.get(mid).equals(value)) && (mid < a.size() - 1)) {
+			if (!a.get(mid).equals(value)) {
+				mid = (first + last)/2;
+
+				if ((a.get(mid).isGreaterThan(value)) && (mid != a.size() - 1))
+				{
+					found = false;
+					last = (mid - 1);
+				}
+				else if ((a.get(mid).isLessThan(value)) && (mid != a.size() - 1)) {
+					found = false;
+					first = mid + 1;
+				}
+				else if ((!a.get(mid).equals(value)) && (mid == a.get(a.size() - 1).score())) {
+					found = false;
+				}
+				else if (a.get(mid).equals(value)) {
+					found = true;
+				}	
+			}
+		}
+
+		if (a.get(mid).equals(value)) {
+			return mid;
+		}
+
+		if (!found) {
+			return -1;
+		}
+		
+		return mid;
 	}
 }
 
@@ -153,5 +205,13 @@ class Score implements Comparable<Score> {
 
 	public boolean equals(Score s) {
 		return (_username.equals(s.username())) && (_value == s.score());
+	}
+
+	public boolean isGreaterThan(Score s) {
+		return this.compareTo(s) > 0;
+	}
+
+	public boolean isLessThan(Score s) {
+		return this.compareTo(s) < 0;
 	}
 }
