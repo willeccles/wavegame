@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class SurvivalSpawner {
 	private Random rand;
-	// Valid usable IDs for things to spawn, should also include health once that's a thing
+	// Valid usable IDs for things to spawn (does not include health pickups, that's different)
 	private static final ID[] validIDs = {
 		ID.EnemyFast,
 		ID.EnemySmart,
@@ -21,26 +21,54 @@ public class SurvivalSpawner {
 		ID.EnemyExpand,
 		ID.EnemyMiniShooter,
 		ID.EnemyMiniBullet,
-		ID.PickupHealth
+		ID.EnemyPorcupine
 	};
-	private int lastEnemy = 0; // since 0 is an invalid ordinal (it's ID.Player) it's a good dummy value
+	private static final String[] sides = {"left", "right", "top", "bottom"};
+	private ID lastEnemy = ID.PickupHealth; // since 0 is an invalid ordinal (it's ID.Player) it's a good dummy value
+	private int healthCountDown = 0; // once this reaches 5 we spawn a health pickup and reset it
 
 	public SurvivalSpawner() {
 		rand = new Random();
 	}
 
 	/**
-	 * Gets a random enemy ID ordinal.
-	 * Will never give ID.Player, Trail, etc., nor will it repeat two in a row.
-	 * @return ordinal int, can be used with ID.values()[_]
+	 * Gets the next entity to spawn.
+	 * @return The next entity.
 	 */
-	public int getRandEnemy() {
-		// .ordinal() returns the index of the value.
-		int rval;
+	public Entity getNextEntity() {
+		return new Entity(getRandID(), getRandLocation(), rand.nextInt(4), sides[rand.nextInt(4)]);
+	}
+
+	/**
+	 * Gets a random enemy ID.
+	 * Will never give ID.Player, Trail, etc., nor will it repeat two in a row.
+	 * @return entityID
+	 */
+	public ID getRandID() {
+		// once we've spawned 5 enemies, we spawn a health pickup and reset the counter to 0
+		if (healthCountDown == 5) {
+			healthCountDown = 0;
+			return ID.PickupHealth;
+		}
+
+		healthCountDown++;
+
+		ID rval;
 		do {
-			rval = validIDs[rand.nextInt(validIDs.length)].ordinal();
+			rval = validIDs[rand.nextInt(validIDs.length)];
 		} while (rval == lastEnemy);
 		lastEnemy = rval;
+
 		return rval;
+	}
+
+	/**
+	 * Get a random location for the entity.
+	 * @return 
+	 */
+	public double[] getRandLocation() {
+		double loc[2];
+		loc[0] = rand.nextDouble(1280.0);
+		loc[1]
 	}
 }
