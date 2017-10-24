@@ -14,6 +14,7 @@ public class Instance extends Thread {
 	private String roomname;
 	private String roompass;
 	private SurvivalSpawner spawner;
+	private boolean running = false;
 	
 	/**
 	 * Constructor for Instance.
@@ -54,28 +55,45 @@ public class Instance extends Thread {
 			sendToAll(""); // also tell them their ID's so they know if they are P1 or P2 (determines their spawn location)
 			/* TODO: every time the velocity (vector) of a client changes, its change should be relayed to the other client through the server (see ClientConnection.java) */
 			/* TODO: at certain intervals, tell client which kinds of enemies (AKA what level) are spawning and where they are (assuming it's not a constant based on the level), everything else (rendering, health, etc.) are all clientside */
+			
 			// make the game clock
-
 			long lastTime = System.nanoTime();
-			double amountOfTicks = 60.0;
+			double amountOfTicks = 0.5; // instead of 60, we want 0.5 so it only ticks once every 2 seconds
 			double ns = 1000000000 / amountOfTicks;
 			double delta = 0;
-			long timer = System.currentTimeMillis();
 			while (running) {
 				long now = System.nanoTime();
 				delta += (now - lastTime) / ns;
 				lastTime = now;
 				while (delta >= 1) {
-					tick();// every  times a second, objects are being updated
+					tick(); // every 2s do stuff
 					delta--;
 				}
-				frames++;
-
-				if (System.currentTimeMillis() - timer > 1000) {
-					timer += 1000;
-				}
 			}
+
+			// now that the loop has stopped we can kill things
+			clients.get(0).close();
+			clients.get(1).close();
 		}
+	}
+
+	/**
+	 * Stops the game loop.
+	 */
+	public synchronized void close() {
+		running = false;
+	}
+
+	/**
+	 * Run every 2s to handle game stuff.
+	 */
+	private void tick() {
+		// get an entity to spawn
+		Entity e = spawner.getNext();
+		
+		// send to each of the clients
+		// msg: SPAWN:<ID ordinal>,x,y,option,side
+		sendToAll("SPAWN;" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
 	}
 
 	/**

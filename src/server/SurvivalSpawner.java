@@ -20,7 +20,7 @@ public class SurvivalSpawner {
 		ID.EnemyTracker,
 		ID.EnemyExpand,
 		ID.EnemyMiniShooter,
-		ID.EnemyMiniBullet,
+		ID.EnemyMiniShooterBullet,
 		ID.EnemyPorcupine
 	};
 	private static final String[] sides = {"left", "right", "top", "bottom"};
@@ -35,7 +35,7 @@ public class SurvivalSpawner {
 	 * Gets the next entity to spawn.
 	 * @return The next entity.
 	 */
-	public Entity getNextEntity() {
+	public Entity getNext() {
 		return new Entity(getRandID(), getRandLocation(), rand.nextInt(4), sides[rand.nextInt(4)]);
 	}
 
@@ -67,8 +67,9 @@ public class SurvivalSpawner {
 	 * @return 
 	 */
 	public double[] getRandLocation() {
-		double loc[2];
-		loc[0] = rand.nextDouble(1280.0);
-		loc[1]
+		double loc[] = {0.0, 0.0};
+		loc[0] = rand.nextDouble() * 1280.0;
+		loc[1] = rand.nextDouble() * 720.0;
+		return loc;
 	}
 }

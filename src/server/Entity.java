@@ -49,12 +49,18 @@ public class Entity {
 	}
 
 	/**
-	 * Get the location of the object.
-	 * @return {x, y} coordinates
+	 * Get the X coordinate of the object's location.
+	 * @return the X coordinate
 	 */
-	public double[] getLocation() {
-		double[2] location = {locX, locY};
-		return location;
+	public double getX() {
+		return locX;
+	}
+	/**
+	 * Get the Y coordinate of the object's location.
+	 * @return the Y coordinate
+	 */
+	public double getY() {
+		return locY;
 	}
 	
 	/**

@@ -41,17 +41,15 @@ public class ClientConnection extends Thread {
 				// TODO
 			}
 		}
+	}
 
-		// try{}catch(){}
-		// close streams, socket, this.join(), etc
+	public synchronized void close() {
 		try {
 			in.close();
 			out.close();
 			socket.close();
 			this.join();
-		} catch (IOException ioe) {
-			// TODO
-		} catch (InterruptedException ie) {
+		} catch (Exception e) {
 			// TODO
 		}
 	}
