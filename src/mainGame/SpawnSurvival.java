@@ -56,7 +56,7 @@ public class SpawnSurvival {
 		}
 		int temp = randInt();
 		//System.out.println(spawnTimer);
-		if(spawnTimer == 100){
+		if(spawnTimer == 120){
 			//spawns Basic enemy
 			if(temp == 0){
 				handler.addObject(

@@ -13,6 +13,7 @@ public class Instance extends Thread {
 	private HashMap<Integer, ClientConnection> clients;
 	private String roomname;
 	private String roompass;
+	private SurvivalSpawner spawner;
 	
 	/**
 	 * Constructor for Instance.
@@ -26,6 +27,7 @@ public class Instance extends Thread {
 		try {
 			clients.put(0, new ClientConnection(hostName, 0, clientSocket, this));
 			clients.get(0).start();
+			spawner = new SurvivalSpawner();
 		} catch (IOException ioe) {
 			// TODO
 		}
@@ -49,9 +51,30 @@ public class Instance extends Thread {
 		
 		if (this.isAlive()) {
 			/* TODO: tell clients that the game is starting */
-			sendToAll("");
-			/* TODO: every time the velocity (vector) of a client changes, it's change should be relayed to the other client through the server (see ClientConnection.java) */
+			sendToAll(""); // also tell them their ID's so they know if they are P1 or P2 (determines their spawn location)
+			/* TODO: every time the velocity (vector) of a client changes, its change should be relayed to the other client through the server (see ClientConnection.java) */
 			/* TODO: at certain intervals, tell client which kinds of enemies (AKA what level) are spawning and where they are (assuming it's not a constant based on the level), everything else (rendering, health, etc.) are all clientside */
+			// make the game clock
+
+			long lastTime = System.nanoTime();
+			double amountOfTicks = 60.0;
+			double ns = 1000000000 / amountOfTicks;
+			double delta = 0;
+			long timer = System.currentTimeMillis();
+			while (running) {
+				long now = System.nanoTime();
+				delta += (now - lastTime) / ns;
+				lastTime = now;
+				while (delta >= 1) {
+					tick();// every  times a second, objects are being updated
+					delta--;
+				}
+				frames++;
+
+				if (System.currentTimeMillis() - timer > 1000) {
+					timer += 1000;
+				}
+			}
 		}
 	}
 
