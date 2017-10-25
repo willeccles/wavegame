@@ -15,10 +15,6 @@ public class SpawnMultiplayer {
 	private Handler handler;
 	private HUD hud;
 	private Game game;
-	private int spawnTimer;
-	private int differentEnemies;
-	private Random r;
-	private String[] side = {"left", "right", "top", "bottom"};
 	private int trackerTimer;
 	private Color trackerColor;
 	private int count;
@@ -31,10 +27,7 @@ public class SpawnMultiplayer {
 		hud.health = 100;
 		hud.setScore(0);
 		hud.setLevel(1);
-		spawnTimer = 0;
-		r = new Random();
 		//different types of enemies added
-		differentEnemies = 9;	
 		trackerTimer = 1000;
 		trackerColor = Color.blue;
 		count = 0;
@@ -58,37 +51,47 @@ public class SpawnMultiplayer {
 
 	public void spawnEntity(ID type, double x, double y, int option, String side) {
 		switch (type) {
-			case EnemyBasic:
+			case ID.EnemyBasic:
 				handler.addObject(new EnemyBasic(x, y, 9, 9, type, handler));
 				break;
-			case EnemyFast:
+			case ID.EnemySmart:
+				handler.addObject(new EnemySmart(x, y, -5, type, handler));
 				break;
-			case EnemySmart:
+			case ID.EnemyBurst:
+				handler.addObject(new EnemyBurst(x, y, 50, 50, 200, side, type, handler, true));
 				break;
-			case EnemyBurst:
+			case ID.EnemySweep:
+				switch (option) {
+					case 0:
+						handler.addObject(new EnemySweep(x, y, 15, 1, type, handler));
+						break;
+					case 1:
+						handler.addObject(new EnemySweep(x, y, 15, -1, type, handler));
+						break;
+					case 2:
+						handler.addObject(new EnemySweep(x, y, 15, 3, type, handler));
+						break;
+					case 3:
+						handler.addObject(new EnemySweep(x, y, 15, -3, type, handler));
+						break;
+				}
 				break;
-			case EnemySweep:
+			case ID.EnemyShooter:
+				handler.addObject(new EnemyShooter(x, y, 100, 100, -20, type, handler));
 				break;
-			case EnemyShooter:
+			case ID.EnemyTracker:
+				count = 1;
+				handler.addObject(new EnemyTracker(x, y, -5, type, handler, trackerColor, trackerTimer));
 				break;
-			case EnemyTracker:
+			case ID.EnemyExpand:
+				handler.addObject(new EnemyExpand(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler));
 				break;
-			case EnemyExpand:
+			case ID.EnemyMiniShooter:
+				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler));
 				break;
-			case EnemyMiniShooter:
-				break;
-			case EnemyMiniShooterBullet:
-				break;
-			case EnemyPorcupine:
+			case ID.EnemyPorcupine:
+				handler.addObject(new EnemyPorcupine(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, -10, type, handler));
 				break;
 		}
-	}
-
-	public int randInt() {
-		return (int) (Math.random()*(differentEnemies));
-	}
-
-	public void restart() {
-		spawnTimer = 0;
 	}
 }

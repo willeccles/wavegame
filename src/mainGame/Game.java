@@ -257,8 +257,8 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static double clampX(double x, double width) {
-		if (Game.WIDTH - x <= width)
-			return Game.WIDTH - x;
+		if (Game.WIDTH - x < width)
+			return Game.WIDTH - width;
 		else if (x <= 0)
 			return 0;
 		else
@@ -266,8 +266,8 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static double clampY(double y, double height) {
-		if (Game.HEIGHT - y <= height)
-			return Game.HEIGHT - y;
+		if (Game.HEIGHT - y < height)
+			return Game.HEIGHT - height;
 		else if (y <= 0)
 			return 0;
 		else

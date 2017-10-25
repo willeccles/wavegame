@@ -11,7 +11,6 @@ public class SurvivalSpawner {
 	private Random rand;
 	// Valid usable IDs for things to spawn (does not include health pickups, that's different)
 	private static final ID[] validIDs = {
-		ID.EnemyFast,
 		ID.EnemySmart,
 		ID.EnemyBurst,
 		ID.EnemySweep,
@@ -20,7 +19,6 @@ public class SurvivalSpawner {
 		ID.EnemyTracker,
 		ID.EnemyExpand,
 		ID.EnemyMiniShooter,
-		ID.EnemyMiniShooterBullet,
 		ID.EnemyPorcupine
 	};
 	private static final String[] sides = {"left", "right", "top", "bottom"};
