@@ -256,6 +256,12 @@ public class Game extends Canvas implements Runnable {
 			return var;
 	}
 
+	public static double clampX(double x, double width) {
+		if (Game.WIDTH - x < width) {
+			return width;
+		}
+	}
+
 	public static void main(String[] args) {
 
 		new Game();

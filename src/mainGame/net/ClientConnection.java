@@ -10,10 +10,12 @@ public class ClientConnection {
 	private DataInputStream in;
 	private DataOutputStream out;
 	private Thread inputThread;
+	private SpawnMultiplayer spawner;
 
-	public ClientConnection(String address, int port) throws UnknownHostException, IOException {
+	public ClientConnection(String address, int port, SpawnMultiplayer spawn) throws UnknownHostException, IOException {
 		this.address = address;
 		this.port = port;
+		this.spawner = spawn;
 		client = new Socket(address, port);
 		in = new DataInputStream(client.getInputStream());
 		out = new DataOutputStream(client.getOutputStream());
@@ -26,7 +28,11 @@ public class ClientConnection {
 				try {
 					// this is where we get the input and stuff
 					input = in.readUTF();
-					// TODO: handle the info
+					
+					// if the input is to spawn an enemy
+					if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom|)")) {
+						// tell the spawner to spawn the thing
+					}
 				} catch(IOException ioe) {
 					// this means the server closed the connection (or there was some sort of DC problem)
 					// TODO: this should send the user back to the menu and show an alert box or something
