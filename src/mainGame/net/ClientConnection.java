@@ -2,6 +2,7 @@ package mainGame.net;
 
 import java.net.*;
 import java.io.*;
+import mainGame.*;
 
 public class ClientConnection {
 	private String address;
@@ -42,13 +43,18 @@ public class ClientConnection {
 					else if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom|)")) {
 						// tell the spawner to spawn the thing
 						String parts[] = input.replace("SPAWN:", "").split(",");
-						ID type = ID.values().get(Integer.parseInt(parts[0]));
+						ID type = ID.values()[Integer.parseInt(parts[0])];
 						double x = Double.parseDouble(parts[1]);
 						double y = Double.parseDouble(parts[2]);
 						int option = Integer.parseInt(parts[3]);
 						String side = parts[4];
 						spawner.spawnEntity(type, x, y, option, side);
 					}
+
+					// TODO: handle message where room already exists when trying to host
+					// TODO: handle message where room doesn't exist when trying to join
+					// TODO: handle wrong password
+					// TODO: handle full lobby
 				} catch(IOException ioe) {
 					// this means the server closed the connection (or there was some sort of DC problem)
 					// TODO: this should send the user back to the menu and show an alert box or something
@@ -77,8 +83,35 @@ public class ClientConnection {
 		double y = p.getY();
 		double velX = p.getVelX();
 		double velY = p.getVelY();
+		writeOut(x + "," + y + "," + velX + "," + velY);
+	}
+	
+	/**
+	 * Used to host a new lobby.
+	 * @param roomname The name of the lobby
+	 * @param password The password on the lobby
+	 */
+	public void host(String roomname, String password) {
+		// send the message to the server that you are starting a new lobby "^[^|]+\\|HOST\\|[^|]+\\|[^|]+"
+		writeOut("HOST|" + roomname + "|" + password);
+	}
+
+	/**
+	 * Used to join a lobby.
+	 * @param roomname The name of the lobby.
+	 * @param password The password for the lobby.
+	 */
+	public void join(String roomname, String password) {
+		writeOut("JOIN|" + roomname + "|" + password);
+	}
+
+	/**
+	 * Helper method for out.writeUTF() that just keeps me from having to put a try/catch on everything I do.
+	 * @param msg The message to send to the thing.
+	 */
+	private void writeOut(String msg) {
 		try {
-			out.writeUTF(x + "," + y + "," + velX + "," + velY);
+			out.writeUTF(msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,7 +128,7 @@ public class ClientConnection {
 			if (inputThread.isAlive()) {
 				inputThread.join();
 			}
-		} catch (IOException ioe) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

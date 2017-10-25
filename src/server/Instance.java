@@ -3,6 +3,7 @@ package server;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Iterator;
 
 /**
@@ -20,13 +21,12 @@ public class Instance extends Thread {
 	 * Constructor for Instance.
 	 * @param name The name of the room.
 	 * @param pass The password for the room.
-	 * @param hostName The username of the "host" user, AKA the one creating the room.
 	 * @param clientSocket The socket the "host" user is connected through.
 	 */
-	public Instance(String name, String pass, String hostName, Socket clientSocket) throws IOException {
+	public Instance(String name, String pass, Socket clientSocket) throws IOException {
 		clients = new HashMap<Integer, ClientConnection>();
 		try {
-			clients.put(0, new ClientConnection(hostName, 0, clientSocket, this));
+			clients.put(0, new ClientConnection(0, clientSocket, this));
 			clients.get(0).start();
 			spawner = new SurvivalSpawner();
 		} catch (IOException ioe) {
@@ -51,10 +51,12 @@ public class Instance extends Thread {
 		}
 		
 		if (this.isAlive()) {
-			/* TODO: tell clients that the game is starting */
-			sendToAll(""); // also tell them their ID's so they know if they are P1 or P2 (determines their spawn location)
-			/* TODO: every time the velocity (vector) of a client changes, its change should be relayed to the other client through the server (see ClientConnection.java) */
-			/* TODO: at certain intervals, tell client which kinds of enemies (AKA what level) are spawning and where they are (assuming it's not a constant based on the level), everything else (rendering, health, etc.) are all clientside */
+			// locations for both players (y stays the same for each)
+			double x1 = (1280.0/3.0)-(21.0/2.0);
+			double x2 = (1280.0*2.0/3.0)-(21.0/2.0);
+			double y = (720.0/2.0)-(21.0/2.0);
+			sendToClient(0, String.format("START:%f,%f,%f,%f", x1, y, x2, y)); // send each player the spawn location of both players
+			sendToClient(1, String.format("START:%f,%f,%f,%f", x2, y, x1, y));
 			
 			// make the game clock
 			long lastTime = System.nanoTime();
@@ -123,12 +125,11 @@ public class Instance extends Thread {
 
 	/**
 	 * Join a user to the instance. Should be used by the Server for the most part.
-	 * @param clientName The username of the client.
 	 * @param clientSocket The socket the client is connected to.
 	 */
-	public synchronized void joinUser(String clientName, Socket clientSocket) {
+	public synchronized void joinUser(Socket clientSocket) {
 		try {
-			clients.put(1, new ClientConnection(clientName, 1, clientSocket, this));
+			clients.put(1, new ClientConnection(1, clientSocket, this));
 			clients.get(1).start();
 		} catch (IOException ioe) {
 			// TODO

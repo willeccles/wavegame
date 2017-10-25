@@ -33,32 +33,38 @@ public class Server extends Thread {
 				DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 				String input = in.readUTF();
 
-				if (input.matches("^[^|]+\\|HOST\\|[^|]+\\|[^|]+")) {
+				if (input.matches("^HOST\\|[^|]+\\|[^|]+")) {
 					// make a new instance with the given client as the host
 					String args[] = input.split("\\|");
-					String username = args[0];
-					String roomname = args[2];
-					String roompass = args[3];
+					String roomname = args[1];
+					String roompass = args[2];
 					// TODO: handle when a roomname is already used (create new one if it's dead, if it's alive make an error of some sort happen
-					instances.put(roomname, new Instance(roomname, roompass, username, clientSocket));
+					instances.put(roomname, new Instance(roomname, roompass, clientSocket));
 					instances.get(roomname).start();
-				} else if (input.matches("^[^|]+\\|JOIN\\|[^|]+\\|[^|]+")) {
+				} else if (input.matches("^JOIN\\|[^|]+\\|[^|]+")) {
 					// join the given instance (if it exists)
 					// if it doesn't exist, send back an error message
 					String args[] = input.split("\\|");
-					String username = args[0];
-					String roomname = args[2];
-					String roompass = args[3];
+					String roomname = args[1];
+					String roompass = args[2];
 					if (instances.containsKey(roomname)) {
 						if (instances.get(roomname).isAlive()) {
 							// join the user into the room if the password matches
 							if (instances.get(roomname).checkPass(roompass)) {
 								if (instances.get(roomname).getClientCount() < 2) {
 									//user can join
-									instances.get(roomname).joinUser(username, clientSocket);
+									instances.get(roomname).joinUser(clientSocket);
+								} else {
+									// TODO: room is full
 								}
+							} else {
+								// TODO: password is wrong
 							}
+						} else {
+							// TODO: room doesn't exist
 						}
+					} else {
+						// TODO: room doesn't exist
 					}
 				} else if (input.matches("NEWSCORE\\|[a-zA-Z0-9_]+,[0-9]+")) {
 					String username = input.split("\\|")[1].split(",")[0];

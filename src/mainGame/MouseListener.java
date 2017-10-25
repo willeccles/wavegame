@@ -151,8 +151,9 @@ public class MouseListener extends MouseAdapter {
 			// Multiplayer Mode
 			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
 				handler.object.clear();
-				game.gameState = STATE.Multiplayer;
-				handler.addObject(player);
+				game.gameState = STATE.Connect;
+				// switch to the multiplayer connection screen, see Game::tick()
+				// the player gets added inside of SpawnMultiplayer at the same time as the opponent
 			}
 
 			//Survival Mode

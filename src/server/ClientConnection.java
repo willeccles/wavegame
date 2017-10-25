@@ -5,7 +5,6 @@ import java.io.*;
 
 public class ClientConnection extends Thread {
 	private Socket socket;
-	private String username;
 	private String address;
 	private int id;
 	private boolean isHost;
@@ -13,8 +12,7 @@ public class ClientConnection extends Thread {
 	private DataInputStream in;
 	private DataOutputStream out;
 
-	public ClientConnection(String username, int id, Socket clientSocket, Instance instance) throws IOException {
-		this.username = username;
+	public ClientConnection(int id, Socket clientSocket, Instance instance) throws IOException {
 		this.id = id;
 		this.socket = clientSocket;
 		this.isHost = isHost;
@@ -30,11 +28,9 @@ public class ClientConnection extends Thread {
 			try {
 				input = in.readUTF();
 				// TODO: deal with input here
-				/* if the message is telling the server the player's current velocity vector and position, this should be relayed ASAP to the other client, whose game will then display the player's change in velocity */
 
 				if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+,")) {
 					// send the info about the player to the other client
-					// the ID of the other player is abs(this.id-1)
 					instance.sendToClient(Math.abs(this.id-1), input);
 				}
 			} catch (IOException ioe) {

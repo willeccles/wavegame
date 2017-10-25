@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable {
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, Leaderboard
+		Menu, Help, Connect, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, Leaderboard
 	};
 
 	/**
@@ -76,7 +76,7 @@ public class Game extends Canvas implements Runnable {
 		JFXPanel jfxp = new JFXPanel(); // trust
 		soundplayer = new SoundPlayer("sounds/main.mp3", true);
 		soundplayer.start();
-		new Window((int) WIDTH, (int) HEIGHT, "Player Known BattleLands", this);
+		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
 	}
 
 	/**
@@ -170,6 +170,8 @@ public class Game extends Canvas implements Runnable {
 				upgradeScreen.tick();
 			} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
 				gameOver.tick();
+			} else if (gameState == STATE.Connect) { // entering connection info for MP
+				// TODO: add a connect screen @chieco
 			} else if (gameState == STATE.Multiplayer) {
 				hud.tick();
 				spawnMultiplayer.tick();

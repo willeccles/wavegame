@@ -2,6 +2,7 @@ package mainGame;
 
 import java.awt.Color;
 import java.util.Random;
+import mainGame.net.ClientConnection;
 
 /**
  * A type of game mode in the game
@@ -21,6 +22,7 @@ public class SpawnMultiplayer {
 	private Player opponent;
 	private Player player;
 	private boolean playing = false;
+	private ClientConnection client;
 
 	public SpawnMultiplayer(Handler handler, HUD hud, Game game, Player p) {
 		this.handler = handler;
@@ -38,7 +40,13 @@ public class SpawnMultiplayer {
 	}
 
 	public void tick() {
-		hud.tick();
+		// this means that the other player has not joined yet
+		if (!playing) {
+			// show a piece of text until the player joins
+			while (!playing);
+			// remove the piece of text added above
+		}
+
 		// updates the trackers color
 		if(trackerTimer == 999) {
 			trackerColor = Color.blue;
@@ -47,6 +55,7 @@ public class SpawnMultiplayer {
 		} else if (trackerTimer == 0) {
 			trackerTimer = 1000;
 		}
+
 		//prevents the trackers from spawning invisible 
 		if(count == 1) {
 			trackerTimer--;
@@ -63,21 +72,23 @@ public class SpawnMultiplayer {
 	public void startPlaying(double x1, double y1, double x2, double y2) {
 		player = new Player(x1, y1, ID.Player, this.handler, this.hud, this.game);
 		opponent = new Player(x2, y2, ID.Player, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
+		handler.addObject(opponent);
+		handler.addObject(player);
 		playing = true;
 	}
 
 	public void spawnEntity(ID type, double x, double y, int option, String side) {
 		switch (type) {
-			case ID.EnemyBasic:
+			case EnemyBasic:
 				handler.addObject(new EnemyBasic(x, y, 9, 9, type, handler));
 				break;
-			case ID.EnemySmart:
+			case EnemySmart:
 				handler.addObject(new EnemySmart(x, y, -5, type, handler));
 				break;
-			case ID.EnemyBurst:
+			case EnemyBurst:
 				handler.addObject(new EnemyBurst(x, y, 50, 50, 200, side, type, handler, true));
 				break;
-			case ID.EnemySweep:
+			case EnemySweep:
 				switch (option) {
 					case 0:
 						handler.addObject(new EnemySweep(x, y, 15, 1, type, handler));
@@ -93,21 +104,21 @@ public class SpawnMultiplayer {
 						break;
 				}
 				break;
-			case ID.EnemyShooter:
+			case EnemyShooter:
 				handler.addObject(new EnemyShooter(x, y, 100, 100, -20, type, handler));
 				break;
-			case ID.EnemyTracker:
+			case EnemyTracker:
 				count = 1;
 				handler.addObject(new EnemyTracker(x, y, -5, type, handler, trackerColor, trackerTimer));
 				break;
-			case ID.EnemyExpand:
+			case EnemyExpand:
 				handler.addObject(new EnemyExpand(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler));
 				break;
-			case ID.EnemyMiniShooter:
+			case EnemyMiniShooter:
 				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler));
 				break;
-			case ID.EnemyPorcupine:
-				handler.addObject(new EnemyPorcupine(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, -10, type, handler));
+			case EnemyPorcupine:
+				handler.addObject(new EnemyPorcupine(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler, -1, -2));
 				break;
 		}
 	}
