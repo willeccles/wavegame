@@ -25,29 +25,46 @@ public class Player extends GameObject {
 	private int playerWidth, playerHeight;
 	public static int playerSpeed = 10;
 	public String gameMode;
+	private Color color;
+	private boolean isOpponent;
 
-	public Player(double x, double y, ID id, Handler handler, HUD hud, Game game) {
+	/**
+	 * Use the other constructor unless this is an opponent in multiplayer.
+	 */
+	public Player(double x, double y, ID id, Handler handler, HUD hud, Game game, Color c, boolean isOpponent) {
 		super(x, y, id);
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
 		this.damage = 2;
+		this.color = c;
+		this.isOpponent = isOpponent;
 		playerWidth = 21;
 		playerHeight = 21;
+	}
+
+	/**
+	 * Old constructor doesn't take a color.
+	 */
+	public Player(double x, double y, ID id, Handler handler, HUD hud, Game game) {
+		this(x, y, id, handler, hud, game, Color.white, false);
 	}
 
 	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
-		x = Game.clamp(x, 0, Game.WIDTH - playerWidth);
-		y = Game.clamp(y, 0, Game.HEIGHT - playerHeight);
+		x = Game.clampX(x, playerWidth);
+		y = Game.clampY(y, playerHeight);
 
 		// add the trail that follows it
-		handler.addObject(new Trail(x, y, ID.Trail, Color.white, playerWidth, playerHeight, 0.05, this.handler));
+		handler.addObject(new Trail(x, y, ID.Trail, this.color, playerWidth, playerHeight, 0.05, this.handler));
 
-		collision();
-		checkIfDead();
+		// these things will be done by the other player's client, so if it's the opponent player we don't care.
+		if (!isOpponent) {
+			collision();
+			checkIfDead();
+		}
 
 	}
 	public String checkGame(){
@@ -63,8 +80,8 @@ public class Player extends GameObject {
 					gameMode = "waves";
 				} else if(game.gameState == STATE.Bosses){
 					gameMode = "bosses";
-				} else if(game.gameState == STATE.Attack){
-					gameMode = "attack";
+				} else if(game.gameState == STATE.Multiplayer){
+					gameMode = "multiplayer";
 				}
 				game.gameState = STATE.GameOver;
 			}
@@ -80,7 +97,6 @@ public class Player extends GameObject {
 	 * Checks for collisions with all of the enemies, and handles it accordingly
 	 */
 	public void collision() {
-
 		hud.updateScoreColor(Color.white);
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);

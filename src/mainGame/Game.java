@@ -40,6 +40,7 @@ public class Game extends Canvas implements Runnable {
 	private SoundPlayer soundplayer;
 	private Leaderboard leaderboard;
 	private SpawnBosses spawnBosses;
+	private SpawnMultiplayer spawnMultiplayer;
 	private JFrame frame;
 	private boolean isPaused = false;
 
@@ -47,7 +48,7 @@ public class Game extends Canvas implements Runnable {
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Attack, Leaderboard
+		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, Leaderboard
 	};
 
 	/**
@@ -60,6 +61,7 @@ public class Game extends Canvas implements Runnable {
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
 		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this);
 		spawnBosses = new SpawnBosses(this.handler, this.hud, this);
+		spawnMultiplayer = new SpawnMultiplayer(this.handler, this.hud, this, this.player);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
@@ -168,13 +170,9 @@ public class Game extends Canvas implements Runnable {
 				upgradeScreen.tick();
 			} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
 				gameOver.tick();
-			} else if (gameState == STATE.Attack) {
+			} else if (gameState == STATE.Multiplayer) {
 				hud.tick();
-				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
-					spawner.tick();
-				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
-					spawner2.tick();
-				}
+				spawnMultiplayer.tick();
 			} else if (gameState == STATE.Bosses) {
 				hud.tick();
 				spawnBosses.tick();
@@ -216,7 +214,7 @@ public class Game extends Canvas implements Runnable {
 
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME SCREEN
 
-		if (gameState == STATE.Wave || gameState == STATE.Attack || gameState == STATE.Bosses || gameState == STATE.Survival) {// user is playing game, draw game objects
+		if (gameState == STATE.Wave || gameState == STATE.Multiplayer || gameState == STATE.Bosses || gameState == STATE.Survival) {// user is playing game, draw game objects
 			hud.render(g);
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is in help or the menu, draw the menu
 			// and help objects
@@ -257,21 +255,11 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static double clampX(double x, double width) {
-		if (Game.WIDTH - x < width)
-			return Game.WIDTH - width;
-		else if (x <= 0)
-			return 0;
-		else
-			return x;
+		return clamp(x, 0, Game.WIDTH - width);
 	}
 
 	public static double clampY(double y, double height) {
-		if (Game.HEIGHT - y < height)
-			return Game.HEIGHT - height;
-		else if (y <= 0)
-			return 0;
-		else
-			return y;
+		return clamp(y, 0, Game.HEIGHT - height);
 	}
 
 	public static void main(String[] args) {

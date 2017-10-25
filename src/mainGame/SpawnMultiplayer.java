@@ -18,11 +18,15 @@ public class SpawnMultiplayer {
 	private int trackerTimer;
 	private Color trackerColor;
 	private int count;
+	private Player opponent;
+	private Player player;
+	private boolean playing = false;
 
-	public SpawnMultiplayer(Handler handler, HUD hud, Game game) {
+	public SpawnMultiplayer(Handler handler, HUD hud, Game game, Player p) {
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
+		this.player = p;
 		handler.object.clear();
 		hud.health = 100;
 		hud.setScore(0);
@@ -47,6 +51,19 @@ public class SpawnMultiplayer {
 		if(count == 1) {
 			trackerTimer--;
 		}
+	}
+
+	/**
+	 * Used to start gameplay from the client.
+	 * @param x1 The X coordinate of the player.
+	 * @param y1 The Y coordinate of the player.
+	 * @param x2 The X coordinate of the other player.
+	 * @param y2 The Y coordinate of the other player.
+	 */
+	public void startPlaying(double x1, double y1, double x2, double y2) {
+		player = new Player(x1, y1, ID.Player, this.handler, this.hud, this.game);
+		opponent = new Player(x2, y2, ID.Player, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
+		playing = true;
 	}
 
 	public void spawnEntity(ID type, double x, double y, int option, String side) {

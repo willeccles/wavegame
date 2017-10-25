@@ -78,7 +78,7 @@ public class MouseListener extends MouseAdapter {
 
 		}
 
-		else if (game.gameState == STATE.Attack) {
+		else if (game.gameState == STATE.Multiplayer) {
 
 		}
 
@@ -148,10 +148,10 @@ public class MouseListener extends MouseAdapter {
 				System.exit(1);
 			}
 
-			//Attack Mode
+			// Multiplayer Mode
 			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
 				handler.object.clear();
-				game.gameState = STATE.Attack;
+				game.gameState = STATE.Multiplayer;
 				handler.addObject(player);
 			}
 

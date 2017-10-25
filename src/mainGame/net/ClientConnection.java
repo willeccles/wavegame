@@ -11,11 +11,13 @@ public class ClientConnection {
 	private DataOutputStream out;
 	private Thread inputThread;
 	private SpawnMultiplayer spawner;
+	private Player opponent;
 
-	public ClientConnection(String address, int port, SpawnMultiplayer spawn) throws UnknownHostException, IOException {
+	public ClientConnection(String address, int port, SpawnMultiplayer spawn, Player op) throws UnknownHostException, IOException {
 		this.address = address;
 		this.port = port;
 		this.spawner = spawn;
+		this.opponent = op;
 		client = new Socket(address, port);
 		in = new DataInputStream(client.getInputStream());
 		out = new DataOutputStream(client.getOutputStream());
@@ -29,8 +31,15 @@ public class ClientConnection {
 					// this is where we get the input and stuff
 					input = in.readUTF();
 					
+					// the command to start the game
+					if (input.matches("START:[\\d.]+,[\\d.]+,[\\d.]+,[\\d.]+")) {
+						// the first pair of doubles is the local player's starting location
+						// the second pair is the opponent's starting location
+						String parts[] = input.replace("START:", "").split(",");
+						spawn.startPlaying(Double.parseDouble(parts[0]), Double.parseDouble(parts[1]), Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+					}
 					// if the input is to spawn an enemy
-					if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom|)")) {
+					else if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom|)")) {
 						// tell the spawner to spawn the thing
 						String parts[] = input.replace("SPAWN:", "").split(",");
 						ID type = ID.values().get(Integer.parseInt(parts[0]));
