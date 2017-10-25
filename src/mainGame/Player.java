@@ -107,8 +107,16 @@ public class Player extends GameObject {
 					hud.health -= 2;
 					hud.updateScoreColor(Color.red);
 				}
+				else if (tempObject.getId() == ID.BossBattle) {
+					// Allows player time to get out of upper area where they will get hurt once the
+					// boss starts moving
+					if (this.y <= 138 && tempObject.isMoving) {
+						hud.health -= 2;
+						hud.updateScoreColor(Color.red);
+					}
 			}
 
+		}
 		}
 	}
 

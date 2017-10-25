@@ -1,7 +1,10 @@
 package mainGame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
+
+import mainGame.Game.STATE;
 
 public class SpawnBosses {
 
@@ -9,12 +12,18 @@ public class SpawnBosses {
 	private Handler handler;
 	private HUD hud;
 	private Game game;
+	public static int LEVEL_SET = 1;
 	private int spawnTimer;
 	private int differentEnemies;
 	private Random r;
+	private int levelsRemaining;
 	private String[] side = {"left", "right", "top", "bottom"};
 	private int trackerTimer;
 	private Color trackerColor;
+	private int levelNumber = 0;
+	private int tempCounter = 0;
+	private int levelTimer;
+	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
 	private int count;
 
 	public SpawnBosses(Handler handler, HUD hud, Game game){
@@ -35,96 +44,54 @@ public class SpawnBosses {
 	}
 
 	public void tick() {
-		hud.tick();
-		// updates the trackers color
-		if(trackerTimer == 999){
-			trackerColor = Color.blue;
-		} else if (trackerTimer == 500){
-			trackerColor = Color.black;
-		} else if (trackerTimer == 0){
-			trackerTimer = 1000;
+		if (levelNumber < 0) {
+
+
 		}
-		//prevents the trackers from spawning invisible 
-		if(count == 1){
-		trackerTimer--;
-		}
-		int temp = randInt();
-		//System.out.println(spawnTimer);
-		if(spawnTimer == 100){
-			//spawns Basic enemy
-			if(temp == 0){
-				handler.addObject(
-						new EnemyBasic(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
-				spawnTimer = 0;
+		else if (levelNumber == 0) {// this is level 1
+				if (tempCounter < 1) {
+					handler.addObject(new EnemyBoss(ID.BossBattle, handler));
+					tempCounter++;
+				} else if (tempCounter >= 1) {
+					for (int i = 0; i < handler.object.size(); i++) {
+						GameObject tempObject = handler.object.get(i);
+						if (tempObject.getId() == ID.BossBattle) {
+							if (tempObject.getHealth() <= 0) {
+								handler.removeObject(tempObject);
+								//LEVEL_SET++;
+								levelNumber++;
 
-			} else if(temp == 1){
-				//spawns Burst enemy
-
-				handler.addObject(
-						new EnemyBurst(-200, 200, 50, 50, 200, side[r.nextInt(4)], ID.EnemyBurst, handler));
-				spawnTimer = 0;
-
-			} else if(temp == 2){
-				//spawns Sweep enemy
-
-				int sweepTemp = (int) (Math.random()*4);
-				if (sweepTemp == 0) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, 1, ID.EnemySweep, handler));
-				} else if (sweepTemp == 1) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, -1, ID.EnemySweep, handler));
-				} else if (sweepTemp == 2) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, 3, ID.EnemySweep, handler));
-				} else if (sweepTemp == 3) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, -3, ID.EnemySweep, handler));
+							}
+						}
+					}
 				}
-				spawnTimer = 0;
-
-			} else if(temp == 3){
-				//spawns Smart enemy
-
-				handler.addObject(
-						new EnemySmart(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemySmart, handler));
-				spawnTimer = 0;
-
-			} else if(temp == 4){
-				//spawns Shooter enemy
-
-				handler.addObject(
-						new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,-20, ID.EnemyShooter, this.handler));
-				spawnTimer = 0;
-			} else if(temp == 5){
-				//spawns Tracker enemy
-				count = 1;
-				handler.addObject(
-						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
-				spawnTimer = 0;
-			} else if (temp == 6){
-				//spawns Expansion enemy
-				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
-				spawnTimer = 0;
-			} else if (temp == 7){
-				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
-				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
-				spawnTimer = 0;
-			} else if (temp == 8){
-				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
-				spawnTimer = 0;
-			}
 		}
-		spawnTimer++;
+		else if (levelNumber == 1) {
+		if (tempCounter < 1) {
+			handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
+			handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
+			handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
+			handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 4));
+			handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 5));
+			handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 6));
+			handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
+			handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
+			handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
+			tempCounter++;
+		}
+	}
+	}
 
+	public void restart() {
+		spawnTimer = 10;
+		tempCounter = 0;
+		levelTimer = 150;
+		levelsRemaining = 5;
 	}
 
 	public int randInt(){
 		return (int) (Math.random()*(differentEnemies));
 	}
 	
-	public void restart(){
-		spawnTimer = 0;
-	}
 }
 
