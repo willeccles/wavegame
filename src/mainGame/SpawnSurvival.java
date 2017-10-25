@@ -37,7 +37,7 @@ public class SpawnSurvival {
 		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
-		differentEntities = 9;	
+		differentEntities = 10;	
 		trackerTimer = 1000;
 		trackerColor = Color.blue;
 		count = 0;
