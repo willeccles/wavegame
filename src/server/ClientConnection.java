@@ -29,7 +29,7 @@ public class ClientConnection extends Thread {
 				input = in.readUTF();
 				// TODO: deal with input here
 
-				if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+,")) {
+				if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+")) {
 					// send the info about the player to the other client
 					instance.sendToClient(Math.abs(this.id-1), input);
 				}

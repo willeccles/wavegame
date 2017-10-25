@@ -50,6 +50,14 @@ public class ClientConnection {
 						String side = parts[4];
 						spawner.spawnEntity(type, x, y, option, side);
 					}
+					// when the input is giving info about the other player
+					else if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+")) {
+						String parts[] = input.split(",");
+						opponent.setX((int)Double.parseDouble(parts[0]));
+						opponent.setY((int)Double.parseDouble(parts[1]));
+						opponent.setVelX((int)Double.parseDouble(parts[2]));
+						opponent.setVelY((int)Double.parseDouble(parts[3]));
+					}
 
 					// TODO: handle message where room already exists when trying to host
 					// TODO: handle message where room doesn't exist when trying to join

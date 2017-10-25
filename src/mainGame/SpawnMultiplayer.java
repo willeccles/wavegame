@@ -77,6 +77,10 @@ public class SpawnMultiplayer {
 		playing = true;
 	}
 
+	public void setClient(ClientConnection cc) {
+		this.client = cc;
+	}
+
 	public void spawnEntity(ID type, double x, double y, int option, String side) {
 		switch (type) {
 			case EnemyBasic:

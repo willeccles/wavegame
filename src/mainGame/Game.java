@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
 import mainGame.audio.SoundPlayer;
+import mainGame.net.ClientConnection;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
@@ -44,6 +45,12 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private boolean isPaused = false;
 
+	/* NOBODY TOUCH THESE VARS, THEY ARE FOR TESTING NETWORKING */
+	private String addr;
+	private int port;
+	private String room;
+	private String pass;
+
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
@@ -53,8 +60,13 @@ public class Game extends Canvas implements Runnable {
 
 	/**
 	 * Initialize the core mechanics of the game
+	 * @param op The operation (join/host/none) to use
+	 * @param addr The address to use
+	 * @param port The port
+	 * @param room The roomname
+	 * @param pass The password
 	 */
-	public Game() {
+	public Game(String op, String addr, int port, String room, String pass) {
 		handler = new Handler();
 		hud = new HUD(this);
 		spawner = new Spawn1to5(this.handler, this.hud, this);
@@ -77,6 +89,22 @@ public class Game extends Canvas implements Runnable {
 		soundplayer = new SoundPlayer("sounds/main.mp3", true);
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
+
+		// if the arguments are given, go straight for multiplayer
+		if (!op.equals("none")) {
+			try {
+				ClientConnection cc = new ClientConnection(addr, port, spawnMultiplayer, player);
+				spawnMultiplayer.setClient(cc);
+				if (op.equals("host")) {
+					cc.host(room, pass);
+				} else if (op.equals("join")) {
+					cc.join(room, pass);
+				}
+				gameState = STATE.Multiplayer;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -265,8 +293,19 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static void main(String[] args) {
-
-		new Game();
+		String op = "none";
+		String address = "none";
+		int port = 0;
+		String room = "";
+		String pass = "";
+		if (args.length == 5) {
+			op = args[0];
+			address = args[1];
+			port = Integer.parseInt(args[2]);
+			room = args[3];
+			pass = args[4];
+		}
+		new Game(op, address, port, room, pass);
 	}
 	public STATE getGameState() {
 		return gameState;
