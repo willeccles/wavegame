@@ -98,6 +98,7 @@ public class Player extends GameObject {
 	 */
 	public void collision() {
 		hud.updateScoreColor(Color.white);
+		//for enemies
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
 
@@ -124,9 +125,22 @@ public class Player extends GameObject {
 					hud.updateScoreColor(Color.red);
 				}
 			}
+
+		}
+		//for pickups
+		for (int i = 0; i < handler.pickups.size(); i++) {
+			Pickup tempPickup = handler.pickups.get(i);
+			
+			if (tempPickup.getId() == ID.HealthPickup){
+
+				if(getBounds().intersects(tempPickup.getBounds())) {
+					hud.health = 100;
+					handler.removePickup(tempPickup);
+				}
+			}
 		}
 	}
-			
+
 
 	@Override
 	public void render(Graphics g) {
