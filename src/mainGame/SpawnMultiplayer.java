@@ -10,7 +10,7 @@ import java.util.Random;
  *
  */
 
-public class SpawnSurvival {
+public class SpawnMultiplayer {
 
 	private Handler handler;
 	private HUD hud;
@@ -23,7 +23,7 @@ public class SpawnSurvival {
 	private Color trackerColor;
 	private int count;
 
-	public SpawnSurvival(Handler handler, HUD hud, Game game){
+	public SpawnMultiplayer(Handler handler, HUD hud, Game game){
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;

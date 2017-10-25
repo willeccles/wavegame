@@ -39,6 +39,7 @@ public class Game extends Canvas implements Runnable {
 	public static int TEMP_COUNTER;
 	private SoundPlayer soundplayer;
 	private Leaderboard leaderboard;
+	private SpawnBosses spawnBosses;
 	private JFrame frame;
 	private boolean isPaused = false;
 
@@ -58,13 +59,14 @@ public class Game extends Canvas implements Runnable {
 		spawner = new Spawn1to5(this.handler, this.hud, this);
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
 		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this);
+		spawnBosses = new SpawnBosses(this.handler, this.hud, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		leaderboard = new Leaderboard(this, hud);
-		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades, leaderboard);
+		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades, leaderboard, this.spawnBosses);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
@@ -175,11 +177,7 @@ public class Game extends Canvas implements Runnable {
 				}
 			} else if (gameState == STATE.Bosses) {
 				hud.tick();
-				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
-					spawner.tick();
-				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
-					spawner2.tick();
-				}
+				spawnBosses.tick();
 			} else if (gameState == STATE.Survival) {
 				hud.tick();
 				spawnSurvival.tick();

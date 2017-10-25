@@ -80,7 +80,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 1500;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (timer == 0) {
@@ -104,7 +104,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 1500;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (timer == 30) {
@@ -137,7 +137,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 1500;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (timer == 0) {
@@ -162,7 +162,7 @@ public class Spawn5to10 {
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,
 						-30, ID.EnemyShooter, this.handler));
-				levelTimer = 1300;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 
@@ -182,7 +182,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 1400;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (timer <= 0) {
@@ -206,7 +206,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if(trackerTimer == 999){
@@ -243,7 +243,7 @@ public class Spawn5to10 {
 			levelTimer--;
 			if (tempCounter < 1) {
 				tempCounter = 0;
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (timer == 0) {
@@ -269,7 +269,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if(timer == 0) {
@@ -293,7 +293,7 @@ public class Spawn5to10 {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if(timer == 0) {
