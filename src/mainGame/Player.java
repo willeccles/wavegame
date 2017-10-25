@@ -108,9 +108,9 @@ public class Player extends GameObject {
 					hud.updateScoreColor(Color.red);
 				}
 			}
-
 		}
 	}
+			
 
 	@Override
 	public void render(Graphics g) {
