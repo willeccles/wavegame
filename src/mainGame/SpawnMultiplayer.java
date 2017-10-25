@@ -59,7 +59,7 @@ public class SpawnMultiplayer {
 	public void spawnEntity(ID type, double x, double y, int option, String side) {
 		switch (type) {
 			case EnemyBasic:
-				handler.addObject(new EnemyBasic(x, y, 9, 9, ID.EnemyBasic, handler));
+				handler.addObject(new EnemyBasic(x, y, 9, 9, type, handler));
 				break;
 			case EnemyFast:
 				break;
