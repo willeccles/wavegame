@@ -126,7 +126,7 @@ public class Instance extends Thread {
 	 * @param clientName The username of the client.
 	 * @param clientSocket The socket the client is connected to.
 	 */
-	public void joinUser(String clientName, Socket clientSocket) {
+	public synchronized void joinUser(String clientName, Socket clientSocket) {
 		try {
 			clients.put(1, new ClientConnection(clientName, 1, clientSocket, this));
 			clients.get(1).start();
