@@ -85,7 +85,7 @@ public class Spawn1to5 {
 			levelTimer--;// keep decrementing the level spawnTimer 60 times a second
 			if (tempCounter < 1) {// called only once, but sets the levelTimer to how long we want this level to
 				// run for
-				levelTimer = 2000;// 2000 / 60 method calls a second = 33.33 seconds long
+				levelTimer = 1200;// 2000 / 60 method calls a second = 33.33 seconds long
 				tempCounter++;// ensures the method is only called once
 			}
 			if (spawnTimer == 0) {// time to spawn another enemy
@@ -110,7 +110,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (spawnTimer == 30) {
@@ -143,7 +143,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 1500;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (spawnTimer == 0) {
@@ -167,7 +167,7 @@ public class Spawn1to5 {
 			levelTimer--;
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 100, r.nextInt(Game.HEIGHT) -100, 100, 100, -20, ID.EnemyShooter, this.handler));
-				levelTimer = 1300;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 
@@ -187,7 +187,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 1400;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (spawnTimer <= 0) {
@@ -211,7 +211,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if(trackerTimer == 999){
@@ -247,7 +247,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if (spawnTimer == 0) {
@@ -271,7 +271,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if(spawnTimer == 0) {
@@ -296,7 +296,7 @@ public class Spawn1to5 {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
-				levelTimer = 2000;
+				levelTimer = 1200;
 				tempCounter++;
 			}
 			if(spawnTimer == 0) {
