@@ -144,9 +144,9 @@ public class Game extends Canvas implements Runnable {
 			if (gameState == STATE.Wave) {// game is running
 				if (!handler.isPaused()) {
 					hud.tick();
-					if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+					if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 5, update them
 						spawner.tick();
-					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 5 thru 10, update them
 						spawner2.tick();
 					}
 				}
