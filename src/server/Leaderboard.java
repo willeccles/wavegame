@@ -41,20 +41,14 @@ public class Leaderboard {
 		scores.sort(null);
 		modified = true; // this way we know to write it to the file when told to
 
-		// binary search the list
-		int rval = binarySearch(scores, newScore);
+		int rval = scores.lastIndexOf(newScore);
+
 		if (rval == -1) {
 			return rval; // score wasn't found
-		}
-
-		// since there could be duplicates, check for those and get the latest value in the list
-		while (scores.get(rval+1).equals(newScore)) {
-			rval++;
 		}
 		
 		// return the position
 		return scores.size() - rval;
-
 	}
 
 	/**
@@ -101,50 +95,6 @@ public class Leaderboard {
 		}
 	}
 
-	/**
-	 * Get the index in the scores list at which the score is located.
-	 * @param a The list to search in.
-	 * @param value The Score to look for.
-	 * @return The index it was found at.
-	 */
-	public static int binarySearch(List<Score> a, Score value) {
-		boolean found = false;
-		int first = 0;
-		int last = (a.size() - 1);
-		int mid = (last-first)/2;
-		
-		while((!a.get(mid).equals(value)) && (mid < a.size() - 1)) {
-			if (!a.get(mid).equals(value)) {
-				mid = (first + last)/2;
-
-				if ((a.get(mid).isGreaterThan(value)) && (mid != a.size() - 1))
-				{
-					found = false;
-					last = (mid - 1);
-				}
-				else if ((a.get(mid).isLessThan(value)) && (mid != a.size() - 1)) {
-					found = false;
-					first = mid + 1;
-				}
-				else if ((!a.get(mid).equals(value)) && (mid == a.get(a.size() - 1).score())) {
-					found = false;
-				}
-				else if (a.get(mid).equals(value)) {
-					found = true;
-				}	
-			}
-		}
-
-		if (a.get(mid).equals(value)) {
-			return mid;
-		}
-
-		if (!found) {
-			return -1;
-		}
-		
-		return mid;
-	}
 }
 
 /**

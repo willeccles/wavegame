@@ -58,7 +58,7 @@ public class Instance extends Thread {
 			
 			// make the game clock
 			long lastTime = System.nanoTime();
-			double amountOfTicks = 0.5; // instead of 60, we want 0.5 so it only ticks once every 2 seconds
+			double amountOfTicks = 0.5; // instead of 60, we want 0.5 so it only ticks once every 2 seconds to send things to the client
 			double ns = 1000000000 / amountOfTicks;
 			double delta = 0;
 			while (running) {
@@ -93,7 +93,7 @@ public class Instance extends Thread {
 		
 		// send to each of the clients
 		// msg: SPAWN:<ID ordinal>,x,y,option,side
-		sendToAll("SPAWN;" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
+		sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
 	}
 
 	/**
