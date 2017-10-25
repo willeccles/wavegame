@@ -32,6 +32,13 @@ public class ClientConnection {
 					// if the input is to spawn an enemy
 					if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom|)")) {
 						// tell the spawner to spawn the thing
+						String parts[] = input.replace("SPAWN:", "").split(",");
+						ID type = ID.values().get(Integer.parseInt(parts[0]));
+						double x = Double.parseDouble(parts[1]);
+						double y = Double.parseDouble(parts[2]);
+						int option = Integer.parseInt(parts[3]);
+						String side = parts[4];
+						spawner.spawnEntity(type, x, y, option, side);
 					}
 				} catch(IOException ioe) {
 					// this means the server closed the connection (or there was some sort of DC problem)
