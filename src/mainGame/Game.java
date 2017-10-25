@@ -46,6 +46,7 @@ public class Game extends Canvas implements Runnable {
 	private boolean isPaused = false;
 
 	/* NOBODY TOUCH THESE VARS, THEY ARE FOR TESTING NETWORKING */
+	private String op;
 	private String addr;
 	private int port;
 	private String room;
@@ -90,21 +91,11 @@ public class Game extends Canvas implements Runnable {
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
 
-		// if the arguments are given, go straight for multiplayer
-		if (!op.equals("none")) {
-			try {
-				ClientConnection cc = new ClientConnection(addr, port, spawnMultiplayer, player);
-				spawnMultiplayer.setClient(cc);
-				if (op.equals("host")) {
-					cc.host(room, pass);
-				} else if (op.equals("join")) {
-					cc.join(room, pass);
-				}
-				gameState = STATE.Multiplayer;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		this.op = op;
+		this.addr = addr;
+		this.port = port;
+		this.room = room;
+		this.pass = pass;
 	}
 
 	/**
@@ -169,6 +160,22 @@ public class Game extends Canvas implements Runnable {
 	 * appearance, etc).
 	 */
 	private void tick() {
+		// if the arguments are given, go straight for multiplayer
+		if (!op.equals("none")) {
+			try {
+				ClientConnection cc = new ClientConnection(addr, port, spawnMultiplayer, player);
+				spawnMultiplayer.setClient(cc);
+				if (op.equals("host")) {
+					cc.host(room, pass);
+				} else if (op.equals("join")) {
+					cc.join(room, pass);
+				}
+				gameState = STATE.Multiplayer;
+				op = "none";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		if (!isPaused()) {
 			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
 			if (gameState == STATE.Wave) {// game is running
