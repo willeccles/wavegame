@@ -5,6 +5,3 @@ bin/
 .DS_Store
 src/mainGame/*.class
 src/server/*.class
-src/Makefile
-src/mainGame/Makefile
-src/server/Makefile
