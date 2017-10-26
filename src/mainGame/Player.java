@@ -134,10 +134,10 @@ public class Player extends GameObject {
 			if (tempPickup.getId() == ID.HealthPickup){
 
 				if(getBounds().intersects(tempPickup.getBounds())) {
-					if(hud.health < 75){
+					if(hud.getHealthMax() - hud.health > 25){
 					hud.health += 25;
 					} else {
-						hud.health = 100;
+						hud.health = hud.getHealthMax();
 					}
 					handler.removePickup(tempPickup);
 				}

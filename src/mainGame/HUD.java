@@ -177,4 +177,7 @@ public class HUD {
 	public void restoreHealth() {
 		this.health = healthMax;
 	}
+	public double getHealthMax(){
+		return healthMax;
+	}
 }
