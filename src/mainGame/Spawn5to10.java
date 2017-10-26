@@ -219,7 +219,7 @@ public class Spawn5to10 {
 			trackerTimer--;
 			if(timer == 0){
 				handler.addObject(
-						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
+						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer, game));
 				timer = 100;
 			} 
 

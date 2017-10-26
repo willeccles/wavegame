@@ -126,7 +126,7 @@ public class SpawnSurvival {
 
 				count = 1;
 				handler.addObject(
-						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
+						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer, game));
 				spawnTimer = 0;
 			} else if (spawnNum == 6){
 				//spawns Expansion enemy

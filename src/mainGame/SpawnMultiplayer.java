@@ -113,7 +113,7 @@ public class SpawnMultiplayer {
 				break;
 			case EnemyTracker:
 				count = 1;
-				handler.addObject(new EnemyTracker(x, y, -5, type, handler, trackerColor, trackerTimer));
+				handler.addObject(new EnemyTracker(x, y, -5, type, handler, trackerColor, trackerTimer, game));
 				break;
 			case EnemyExpand:
 				handler.addObject(new EnemyExpand(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler));

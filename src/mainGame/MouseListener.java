@@ -28,8 +28,12 @@ public class MouseListener extends MouseAdapter {
 	private Player player;
 	private String upgradeText;
 	private Leaderboard leaderboard;
+	private SpawnTest spawnTest;
 	
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses) {
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
+			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
+			Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses,
+			SpawnTest spawnTest) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -41,6 +45,7 @@ public class MouseListener extends MouseAdapter {
 		this.spawnSurvival = spawnSurvival;
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
+		this.spawnTest = spawnTest;
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -70,6 +75,13 @@ public class MouseListener extends MouseAdapter {
 				hud.health=100;
 				hud.setScore((0));
 				spawnBosses.restart();
+			} else if (player.checkGame() == "test"){
+				handler.object.clear();
+				upgrades.resetUpgrades();
+				hud.health = 100;
+				hud.setScore(0);
+				spawnTest.restart();
+				game.gameState = STATE.Menu;
 			}
 			
 		}
@@ -88,6 +100,10 @@ public class MouseListener extends MouseAdapter {
 
 		else if (game.gameState == STATE.Survival) {
 
+		}
+		
+		else if (game.gameState == STATE.Test){
+			
 		}
 
 		else if (game.gameState == STATE.Upgrade) {
@@ -151,7 +167,9 @@ public class MouseListener extends MouseAdapter {
 			// Multiplayer Mode
 			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
 				handler.object.clear();
-				game.gameState = STATE.Connect;
+				game.gameState = STATE.Test;
+				handler.addObject(player);
+				//game.gameState = STATE.Connect;
 				// switch to the multiplayer connection screen, see Game::tick()
 				// the player gets added inside of SpawnMultiplayer at the same time as the opponent
 			}

@@ -82,6 +82,8 @@ public class Player extends GameObject {
 					gameMode = "bosses";
 				} else if(game.gameState == STATE.Multiplayer){
 					gameMode = "multiplayer";
+				} else if (game.gameState == STATE.Test){
+					gameMode = "test";
 				}
 				game.gameState = STATE.GameOver;
 			}

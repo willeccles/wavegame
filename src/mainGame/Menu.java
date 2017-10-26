@@ -111,7 +111,7 @@ public class Menu {
 			g.drawRect(660, 390, 266, 266);
 			g.setFont(font2);
 			g.setColor(Color.orange);
-			g.drawString("Attack", 730, 443);
+			g.drawString("Test", 730, 443);
 
 			g.setColor(Color.orange);
 			g.drawRect(960, 390, 266, 266);
