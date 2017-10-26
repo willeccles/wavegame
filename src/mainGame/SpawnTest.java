@@ -154,12 +154,16 @@ public class SpawnTest {
 				spawnTimer = 10;
 				levelNumber++;// set levelNumber to whatever index was randomly selected
 			}
-		} 
+		}
 	}
 	public void skipLevel() {
 		spawnTimer = 10;
 		tempCounter = 0;
+		if(levelNumber < 5){
 		levelNumber++;// set levelNumber to whatever index was randomly selected
+		} else {
+			levelNumber = 1;
+		}
 	}
 
 	public void restart() {
