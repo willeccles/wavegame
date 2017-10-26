@@ -213,6 +213,11 @@ public class Game extends Canvas implements Runnable {
 			} else if (gameState == STATE.Bosses) {
 				hud.tick();
 				spawnBosses.tick();
+				if (!soundplayer.getSong().equals("sounds/bosses.mp3")) {
+					soundplayer.stop_playing();
+					soundplayer = new SoundPlayer("sounds/bosses.mp3", true);
+					soundplayer.start();
+				}
 			} else if (gameState == STATE.Survival) {
 				hud.tick();
 				spawnSurvival.tick();
