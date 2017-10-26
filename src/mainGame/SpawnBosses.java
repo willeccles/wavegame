@@ -50,12 +50,12 @@ public class SpawnBosses {
 		}
 		else if (levelNumber == 0) {// this is level 1
 				if (tempCounter < 1) {
-					handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
+					handler.addObject(new BossBattle(ID.BossBattle, handler));
 					tempCounter++;
 				} else if (tempCounter >= 1) {
 					for (int i = 0; i < handler.object.size(); i++) {
 						GameObject tempObject = handler.object.get(i);
-						if (tempObject.getId() == ID.EnemyBoss) {
+						if (tempObject.getId() == ID.BossBattle) {
 							if (tempObject.getHealth() <= 0) {
 								handler.removeObject(tempObject);
 								//LEVEL_SET++;
