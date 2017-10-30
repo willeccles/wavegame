@@ -55,6 +55,7 @@ public class MouseListener extends MouseAdapter {
 			if (player.checkGame() == "waves") {
 				handler.object.clear();
 				upgrades.resetUpgrades();
+				upgradeScreen.resetUpgradeScreen();
 				hud.health = 100;
 				hud.setScore(0);
 				hud.setLevel(1);

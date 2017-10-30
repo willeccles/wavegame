@@ -34,15 +34,16 @@ public class UpgradeScreen {
 			"images/levelskipability.png", "images/freezetimeability.png", "images/speedboost.png" };
 	private ArrayList<String> imagePaths = new ArrayList<String>();
 	private Random r = new Random();
-	private int index1, index2, index3, tempCounter;
-
+	private int index1, index2, index3;
+	private int differentUpgrades;
+	
 	public UpgradeScreen(Game game, Handler handler, HUD hud) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
-		tempCounter = 0;
-		addPaths();
+		differentUpgrades = 9;
 		setIndex();
+		addPaths();
 		text = "";
 	}
 
@@ -94,23 +95,6 @@ public class UpgradeScreen {
 	 * Gets 3 indices of pictures, and ensures that they are all different. These 3
 	 * indices will load 3 different upgrade options for the user
 	 */
-	public void setIndex() {
-		index1 = getIndex(9);
-		index2 = getIndex(9);
-		if (index2 == index1) {
-			index2++;
-			if (index2 > 8) {
-				index2 = 1;
-			}
-		}
-		index3 = getIndex(9);
-		if (index3 == index1) {
-			index3--;
-		}
-		if (index3 == index2) {
-			index3--;
-		}
-	}
 
 	public Image getImage(String path) {
 		Image image = null;
@@ -174,5 +158,23 @@ public class UpgradeScreen {
 	public void mouseReleased(MouseEvent e) {
 
 	}
+	
+	
+	public void setIndex(){
+		index1 = (int) (Math.random()*(differentUpgrades));
+		index2 = (int) (Math.random()*(differentUpgrades));
+		while(index1 == index2){
+			index2 = (int) (Math.random()*(differentUpgrades));
+		}
+		index3 = (int) (Math.random()*(differentUpgrades));
+		while(index1 == index3 || index2 == index3){
+			index3 = (int) (Math.random()*(differentUpgrades));
+		}
+	}
 
+	public void resetUpgradeScreen(){
+		this.setIndex();
+		this.resetPaths();
+		this.addPaths();
+	}
 }
