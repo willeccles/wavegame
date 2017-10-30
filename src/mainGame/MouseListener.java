@@ -64,6 +64,7 @@ public class MouseListener extends MouseAdapter {
 				spawner2.addLevels();
 				Spawn1to5.LEVEL_SET = 1;
 				game.gameState = STATE.Menu;
+				player.resetVel();
 			} else if (player.checkGame() == "survival"){
 				handler.object.clear();
 				handler.pickups.clear();
@@ -71,11 +72,13 @@ public class MouseListener extends MouseAdapter {
 				hud.setScore(0);
 				spawnSurvival.restart();
 				game.gameState = STATE.Leaderboard;
+				player.resetVel();
 			} else if (player.checkGame() == "bosses") {
 				handler.object.clear();
 				hud.health=100;
 				hud.setScore((0));
 				spawnBosses.restart();
+				player.resetVel();
 			} else if (player.checkGame() == "test"){
 				handler.object.clear();
 				upgrades.resetUpgrades();
@@ -83,6 +86,7 @@ public class MouseListener extends MouseAdapter {
 				hud.setScore(0);
 				spawnTest.restart();
 				game.gameState = STATE.Menu;
+				player.resetVel();
 			}
 			
 		}

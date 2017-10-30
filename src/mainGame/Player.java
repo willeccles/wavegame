@@ -169,5 +169,25 @@ public class Player extends GameObject {
 		this.playerWidth = size;
 		this.playerHeight = size;
 	}
+	public double getVelX() {
+		return velX;
+	}
+
+	public void setVelX(int velX) {
+		this.velX = velX;
+	}
+
+	public double getVelY() {
+		return velY;
+	}
+
+	public void setVelY(int velY) {
+		this.velY = velY;
+	}
+	
+	public void resetVel(){
+		this.velY = 0;
+		this.velX = 0;
+	}
 
 }
