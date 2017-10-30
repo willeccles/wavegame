@@ -66,6 +66,7 @@ public class MouseListener extends MouseAdapter {
 				game.gameState = STATE.Menu;
 			} else if (player.checkGame() == "survival"){
 				handler.object.clear();
+				handler.pickups.clear();
 				hud.health=100;
 				hud.setScore(0);
 				spawnSurvival.restart();
