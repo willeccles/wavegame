@@ -7,3 +7,4 @@ src/mainGame/*.class
 src/server/*.class
 src/leaderboard.csv
 src/*.txt
+src/runserver
