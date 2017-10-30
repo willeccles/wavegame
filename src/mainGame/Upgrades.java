@@ -30,15 +30,16 @@ public class Upgrades {
 		this.player = player;
 		this.spawner = spawner;
 		this.spawner2 = spawner2;
-		this.ability = "";
+		this.ability = hud.getAbility();
 		this.spawnTest = spawnTest;
 	}
 
 	public void clearScreenAbility() {
 		handler.clearEnemies();
 		hud.setAbilityUses(hud.getAbilityUses() - 1);
-		if (hud.getAbilityUses() >= 0) {
+		if (hud.getAbilityUses() == 0) {
 			ability = "";
+			hud.setAbility(ability);
 		}
 	}
 
@@ -74,6 +75,7 @@ public class Upgrades {
 			hud.setAbilityUses(hud.getAbilityUses() - 1);
 			if (hud.getAbilityUses() == 0) {
 				ability = "";
+				hud.setAbility(ability);
 			}
 		} else if (game.getGameState() == STATE.Survival){
 			handler.clearEnemies();
@@ -89,6 +91,7 @@ public class Upgrades {
 		hud.setAbilityUses(hud.getAbilityUses() - 1);
 		if (hud.getAbilityUses() == 0) {
 			ability = "";
+			hud.setAbility(ability);
 		}
 	}
 
@@ -142,6 +145,8 @@ public class Upgrades {
 		hud.setExtraLives(0);
 		player.setPlayerSize(32);
 		upgradeScreen.resetPaths();
+		hud.setAbilityUses(0);
+		hud.clearUpgrades();
 	}
 
 }

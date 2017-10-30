@@ -180,4 +180,10 @@ public class HUD {
 	public double getHealthMax(){
 		return healthMax;
 	}
+	public void clearUpgrades(){
+		ability = "";
+	}
+	public String getAbility(){
+		return ability;
+	}
 }
