@@ -37,7 +37,7 @@ public class Upgrades {
 	public void clearScreenAbility() {
 		handler.clearEnemies();
 		hud.setAbilityUses(hud.getAbilityUses() - 1);
-		if (hud.getAbilityUses() == 0) {
+		if (hud.getAbilityUses() >= 0) {
 			ability = "";
 		}
 	}
