@@ -34,9 +34,10 @@ public class ClientConnection extends Thread {
 					instance.sendToClient(Math.abs(this.id-1), input);
 				}
 			} catch (IOException ioe) {
-				// TODO
+				break;
 			}
 		}
+		instance.removeClient(id);
 	}
 
 	public synchronized void close() {
@@ -46,7 +47,7 @@ public class ClientConnection extends Thread {
 			socket.close();
 			this.join();
 		} catch (Exception e) {
-			// TODO
+			e.printStackTrace();
 		}
 	}
 
@@ -57,7 +58,7 @@ public class ClientConnection extends Thread {
 		try {
 			out.writeUTF(message);
 		} catch (IOException ioe) {
-			// TODO
+			ioe.printStackTrace();
 		}
 	}
 }

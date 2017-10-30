@@ -13,15 +13,19 @@ public class ClientConnection {
 	private Thread inputThread;
 	private SpawnMultiplayer spawner;
 	private Player opponent;
+	private Game game;
 
-	public ClientConnection(String address, int port, SpawnMultiplayer spawn, Player op) throws UnknownHostException, IOException {
+	public ClientConnection(String address, int port, SpawnMultiplayer spawn, Player op, Game g) throws UnknownHostException, IOException {
 		this.address = address;
 		this.port = port;
 		this.spawner = spawn;
 		this.opponent = op;
+		this.game = g;
 		client = new Socket(address, port);
+		System.out.println("got here?");
 		in = new DataInputStream(client.getInputStream());
 		out = new DataOutputStream(client.getOutputStream());
+		System.out.println("got here 2?");
 
 		// start a thread to listen for input
 		inputThread = new Thread(() -> {
@@ -59,6 +63,11 @@ public class ClientConnection {
 						opponent.setVelX((int)Double.parseDouble(parts[2]));
 						opponent.setVelY((int)Double.parseDouble(parts[3]));
 					}
+					// when the other user leaves
+					else if (input.matches("OTHER_LEFT")) {
+						game.gameState = Game.STATE.Menu;
+						break;
+					}
 
 					// TODO: handle message where room already exists when trying to host
 					// TODO: handle message where room doesn't exist when trying to join
@@ -78,6 +87,9 @@ public class ClientConnection {
 					break;
 				}
 			}
+			System.out.println("got here");
+			// after break, close
+			this.close();
 		});
 
 		inputThread.start();
@@ -100,9 +112,11 @@ public class ClientConnection {
 	 * @param roomname The name of the lobby
 	 * @param password The password on the lobby
 	 */
-	public void host(String roomname, String password) {
+	public void host_game(String roomname, String password) {
 		// send the message to the server that you are starting a new lobby "^[^|]+\\|HOST\\|[^|]+\\|[^|]+"
+		System.out.println("sending HOST");
 		writeOut("HOST|" + roomname + "|" + password);
+		System.out.println("sent HOST");
 	}
 
 	/**
@@ -110,7 +124,8 @@ public class ClientConnection {
 	 * @param roomname The name of the lobby.
 	 * @param password The password for the lobby.
 	 */
-	public void join(String roomname, String password) {
+	public void join_game(String roomname, String password) {
+		System.out.println("sending " + roomname + " " + password);
 		writeOut("JOIN|" + roomname + "|" + password);
 	}
 

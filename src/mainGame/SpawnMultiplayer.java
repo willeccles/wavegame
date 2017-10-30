@@ -78,8 +78,14 @@ public class SpawnMultiplayer {
 		playing = true;
 	}
 
-	public void setClient(ClientConnection cc) {
-		this.client = cc;
+	public void createClient(String addr, int port) {
+		if (this.client == null) {
+			try {
+				this.client = new ClientConnection(addr, port, this, player, game);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public ClientConnection getClient() {

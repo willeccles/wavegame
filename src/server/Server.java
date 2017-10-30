@@ -28,12 +28,12 @@ public class Server extends Thread {
 			// Any other message should be responded to with some sort of "bad message" thing
 			// This tells the client to disconnect and try again
 			try {
-				System.out.println("Listening for clients on port " + serverSocket.getLocalPort() + "...");
 				Socket clientSocket = serverSocket.accept();
 				DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 				String input = in.readUTF();
 
 				if (input.matches("^HOST\\|[^|]+\\|[^|]+")) {
+					System.out.println(input);
 					// make a new instance with the given client as the host
 					String args[] = input.split("\\|");
 					String roomname = args[1];
@@ -41,6 +41,7 @@ public class Server extends Thread {
 					// TODO: handle when a roomname is already used (create new one if it's dead, if it's alive make an error of some sort happen
 					instances.put(roomname, new Instance(roomname, roompass, clientSocket));
 					instances.get(roomname).start();
+					System.out.println("started instance");
 				} else if (input.matches("^JOIN\\|[^|]+\\|[^|]+")) {
 					// join the given instance (if it exists)
 					// if it doesn't exist, send back an error message
@@ -56,15 +57,19 @@ public class Server extends Thread {
 									instances.get(roomname).joinUser(clientSocket);
 								} else {
 									// TODO: room is full
+									System.out.println("room is full");
 								}
 							} else {
 								// TODO: password is wrong
+								System.out.println("pass is wrong");
 							}
 						} else {
 							// TODO: room doesn't exist
+							System.out.println("room doesn't exist");
 						}
 					} else {
 						// TODO: room doesn't exist
+						System.out.println("room doesn't exist 2");
 					}
 				} else if (input.matches("NEWSCORE\\|[a-zA-Z0-9_]+,[0-9]+")) {
 					String username = input.split("\\|")[1].split(",")[0];

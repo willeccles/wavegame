@@ -24,13 +24,15 @@ public class Instance extends Thread {
 	 * @param clientSocket The socket the "host" user is connected through.
 	 */
 	public Instance(String name, String pass, Socket clientSocket) throws IOException {
+		roomname = name;
+		roompass = pass;
 		clients = new HashMap<Integer, ClientConnection>();
 		try {
 			clients.put(0, new ClientConnection(0, clientSocket, this));
-			clients.get(0).start();
 			spawner = new SurvivalSpawner();
-		} catch (IOException ioe) {
+		} catch (Exception ioe) {
 			// TODO
+			ioe.printStackTrace();
 		}
 	}
 
@@ -43,9 +45,10 @@ public class Instance extends Thread {
 			// here we should check if the number hits 0 (aka if the host DC's during this time)
 			if (clients.size() == 0) {
 				try {
+					System.out.println("only one user and they left");
 					this.join();
 				} catch (InterruptedException ie) {
-					// TODO
+					ie.printStackTrace();
 				}
 			}
 		}
@@ -90,6 +93,11 @@ public class Instance extends Thread {
 	 * Run every 2s to handle game stuff.
 	 */
 	private void tick() {
+		// handle if a user has left, kill the game (assuming the other user is connected, i suppose)
+		if (getClientCount() < 2) {
+			sendToAll("OTHER_LEFT"); // this means the other player has left the game
+			close();
+		}
 		// get an entity to spawn
 		Entity e = spawner.getNext();
 		
@@ -104,6 +112,7 @@ public class Instance extends Thread {
 	 * @return True if the password matches, false if not.
 	 */
 	public boolean checkPass(String pass) {
+		System.out.println("comparing " + pass + " with " + roompass);
 		return (pass.equals(roompass));
 	}
 
@@ -120,6 +129,7 @@ public class Instance extends Thread {
 	 * @param id The ID of the client to remove.
 	 */
 	public synchronized void removeClient(int id) {
+		clients.get(id).close();
 		clients.remove(id);
 	}
 
@@ -130,9 +140,8 @@ public class Instance extends Thread {
 	public synchronized void joinUser(Socket clientSocket) {
 		try {
 			clients.put(1, new ClientConnection(1, clientSocket, this));
-			clients.get(1).start();
 		} catch (IOException ioe) {
-			// TODO
+			ioe.printStackTrace();
 		}
 	}
 

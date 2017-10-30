@@ -166,11 +166,11 @@ public class Game extends Canvas implements Runnable {
 		// if the arguments are given, go straight for multiplayer
 		if (!op.equals("none")) {
 			try {
-				spawnMultiplayer.setClient(new ClientConnection(addr, port, spawnMultiplayer, player));
+				spawnMultiplayer.createClient(addr, port);
 				if (op.equals("host")) {
-					spawnMultiplayer.getClient().host(room, pass);
+					spawnMultiplayer.getClient().host_game(room, pass);
 				} else if (op.equals("join")) {
-					spawnMultiplayer.getClient().join(room, pass);
+					spawnMultiplayer.getClient().join_game(room, pass);
 				}
 				gameState = STATE.Multiplayer;
 				op = "none";
