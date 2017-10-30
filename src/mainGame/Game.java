@@ -166,12 +166,11 @@ public class Game extends Canvas implements Runnable {
 		// if the arguments are given, go straight for multiplayer
 		if (!op.equals("none")) {
 			try {
-				ClientConnection cc = new ClientConnection(addr, port, spawnMultiplayer, player);
-				spawnMultiplayer.setClient(cc);
+				spawnMultiplayer.setClient(new ClientConnection(addr, port, spawnMultiplayer, player));
 				if (op.equals("host")) {
-					cc.host(room, pass);
+					spawnMultiplayer.getClient().host(room, pass);
 				} else if (op.equals("join")) {
-					cc.join(room, pass);
+					spawnMultiplayer.getClient().join(room, pass);
 				}
 				gameState = STATE.Multiplayer;
 				op = "none";
@@ -211,7 +210,7 @@ public class Game extends Canvas implements Runnable {
 			} else if (gameState == STATE.Connect) { // entering connection info for MP
 				// TODO: add a connect screen @chieco
 			} else if (gameState == STATE.Multiplayer) {
-				hud.tick();
+				// do not use HUD::tick() here, it's used inside the spawner
 				spawnMultiplayer.tick();
 			} else if (gameState == STATE.Bosses) {
 				hud.tick();
@@ -230,9 +229,8 @@ public class Game extends Canvas implements Runnable {
 					soundplayer.start();
 				}
 			} else if (gameState == STATE.Test) {// game is running
-					hud.tick();
-					spawnTest.tick();
-				
+				hud.tick();
+				spawnTest.tick();
 			}
 		} else {
 			// tick the pause screen

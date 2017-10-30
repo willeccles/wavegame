@@ -5,3 +5,4 @@ bin/
 .DS_Store
 src/mainGame/*.class
 src/server/*.class
+src/leaderboard.csv

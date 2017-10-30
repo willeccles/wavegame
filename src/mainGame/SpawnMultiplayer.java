@@ -43,22 +43,22 @@ public class SpawnMultiplayer {
 		// this means that the other player has not joined yet
 		if (!playing) {
 			// show a piece of text until the player joins
-			while (!playing);
-			// remove the piece of text added above
-		}
+			// remove the piece of text added above after the player joins
+		} else {
+			hud.tick();
+			// updates the trackers color
+			if(trackerTimer == 999) {
+				trackerColor = Color.blue;
+			} else if (trackerTimer == 500) {
+				trackerColor = Color.black;
+			} else if (trackerTimer == 0) {
+				trackerTimer = 1000;
+			}
 
-		// updates the trackers color
-		if(trackerTimer == 999) {
-			trackerColor = Color.blue;
-		} else if (trackerTimer == 500) {
-			trackerColor = Color.black;
-		} else if (trackerTimer == 0) {
-			trackerTimer = 1000;
-		}
-
-		//prevents the trackers from spawning invisible 
-		if(count == 1) {
-			trackerTimer--;
+			//prevents the trackers from spawning invisible 
+			if(count == 1) {
+				trackerTimer--;
+			}
 		}
 	}
 
@@ -70,8 +70,9 @@ public class SpawnMultiplayer {
 	 * @param y2 The Y coordinate of the other player.
 	 */
 	public void startPlaying(double x1, double y1, double x2, double y2) {
-		player = new Player(x1, y1, ID.Player, this.handler, this.hud, this.game);
-		opponent = new Player(x2, y2, ID.Player, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
+		player.setX((int)x1);
+		player.setY((int)y1);
+		opponent = new Player(x2, y2, ID.Player2, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
 		handler.addObject(opponent);
 		handler.addObject(player);
 		playing = true;
@@ -79,6 +80,10 @@ public class SpawnMultiplayer {
 
 	public void setClient(ClientConnection cc) {
 		this.client = cc;
+	}
+
+	public ClientConnection getClient() {
+		return this.client;
 	}
 
 	public void spawnEntity(ID type, double x, double y, int option, String side) {

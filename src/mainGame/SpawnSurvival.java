@@ -47,7 +47,6 @@ public class SpawnSurvival {
 	}
 
 	public void tick() {
-		hud.tick();
 		tempCounter++;
 		// updates the trackers color
 		if(trackerTimer == 999){
