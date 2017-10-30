@@ -189,5 +189,10 @@ public class Player extends GameObject {
 		this.velY = 0;
 		this.velX = 0;
 	}
+	
+	public void resetLoc(){
+		x = Game.WIDTH / 2 - 21;
+		y = Game.HEIGHT / 2 - 21;
+	}
 
 }
