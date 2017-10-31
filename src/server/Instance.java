@@ -109,7 +109,7 @@ public class Instance extends Thread {
 		
 		// send to each of the clients
 		// msg: SPAWN:<ID ordinal>,x,y,option,side
-		//sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
+		sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
 	}
 
 	/**
