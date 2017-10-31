@@ -194,7 +194,7 @@ public class Game extends Canvas implements Runnable {
 						spawner2.tick();
 					} else if (Spawn5to10.LEVEL_SET_2 == 1) {
 						spawner3.tick();
-					} else if (Spawn1to5.LEVEL_SET == 4) {
+					} else if (Spawn10to15.LEVEL_SET_3 == 1) {
 						spawner4.tick();
 					}
 				}

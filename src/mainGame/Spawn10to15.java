@@ -7,8 +7,7 @@ import mainGame.Game.STATE;
 
 
 public class Spawn10to15 {
-
-	public static int LEVEL_SET = 2;
+	public static int LEVEL_SET_3 = 0;
 	private Handler handler;
 	private HUD hud;
 	private Game game;
@@ -326,7 +325,7 @@ public class Spawn10to15 {
 					if (tempObject.getId() == ID.EnemyBoss) {
 						if (tempObject.getHealth() <= 0) {
 							handler.removeObject(tempObject);
-							LEVEL_SET++;
+							LEVEL_SET_3 ++;
 							game.gameState = STATE.Upgrade;
 						}
 					}
