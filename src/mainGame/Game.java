@@ -29,6 +29,8 @@ public class Game extends Canvas implements Runnable {
 	private HUD hud;
 	private Spawn1to5 spawner;
 	private Spawn5to10 spawner2;
+	private Spawn10to15 spawner3;
+	private Spawn15to20 spawner4;
 	private SpawnSurvival spawnSurvival;
 	private Menu menu;
 	private GameOver gameOver;
@@ -74,6 +76,8 @@ public class Game extends Canvas implements Runnable {
 		hud = new HUD(this);
 		spawner = new Spawn1to5(this.handler, this.hud, this);
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
+		spawner3 = new Spawn10to15(this.handler, this.hud, this);
+		spawner4 = new Spawn15to20(this.handler, this.hud, this);
 		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this);
 		spawnBosses = new SpawnBosses(this.handler, this.hud, this);
 		spawnMultiplayer = new SpawnMultiplayer(this.handler, this.hud, this, this.player);
@@ -187,6 +191,10 @@ public class Game extends Canvas implements Runnable {
 						spawner.tick();
 					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 5 thru 10, update them
 						spawner2.tick();
+					} else if (Spawn10to15.LEVEL_SET == 3) {
+						spawner3.tick();
+					} else if (Spawn15to20.LEVEL_SET == 4) {
+						spawner4.tick();
 					}
 				}
 				// switch the sound that's playing if the mode is waves
