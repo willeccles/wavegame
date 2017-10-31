@@ -9,3 +9,8 @@ gameserver:
 all:
 	make maingame
 	make gameserver
+
+clean:
+	rm -f mainGame/*.class
+	rm -f mainGame/*/*.class
+	rm -f server/*.class
