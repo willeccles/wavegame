@@ -15,7 +15,7 @@ import java.util.Random;
  *
  */
 
-public class BossBattle extends GameObject {
+public class BullBoss extends GameObject {
 
 	private Handler handler;
 	private int timer = 80;
@@ -24,7 +24,7 @@ public class BossBattle extends GameObject {
 	private Image img;
 	private int spawn;
 
-	public BossBattle(ID id, Handler handler) {
+	public BullBoss(ID id, Handler handler) {
 		super(Game.WIDTH / 2 - 48, -120, id);
 		this.handler = handler;
 		velX = 0;

@@ -50,7 +50,7 @@ public class SpawnBosses {
 		}
 		else if (levelNumber == 0) {// this is level 1
 				if (tempCounter < 1) {
-					handler.addObject(new BossBattle(ID.BossBattle, handler));
+					handler.addObject(new BullBoss(ID.BossBattle, handler));
 					tempCounter++;
 				} else if (tempCounter >= 1) {
 					for (int i = 0; i < handler.object.size(); i++) {
