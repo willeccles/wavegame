@@ -81,7 +81,7 @@ public class SpawnMultiplayer {
 	public void createClient(String addr, int port) {
 		if (this.client == null) {
 			try {
-				this.client = new ClientConnection(addr, port, this, player, game);
+				this.client = new ClientConnection(addr, port, this, opponent, game);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -90,6 +90,13 @@ public class SpawnMultiplayer {
 
 	public ClientConnection getClient() {
 		return this.client;
+	}
+
+	/**
+	 * Update the player's position on the server.
+	 */
+	public void sendPos() {
+		client.sendPos(player);
 	}
 
 	public void spawnEntity(ID type, double x, double y, int option, String side) {
