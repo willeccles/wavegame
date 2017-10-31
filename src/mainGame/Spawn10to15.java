@@ -325,7 +325,7 @@ public class Spawn10to15 {
 					if (tempObject.getId() == ID.EnemyBoss) {
 						if (tempObject.getHealth() <= 0) {
 							handler.removeObject(tempObject);
-							LEVEL_SET_3 ++;
+							Spawn1to5.LEVEL_SET ++;
 							game.gameState = STATE.Upgrade;
 						}
 					}

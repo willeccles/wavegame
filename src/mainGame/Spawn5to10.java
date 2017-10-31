@@ -333,7 +333,7 @@ public class Spawn5to10 {
 					if (tempObject.getId() == ID.BossEye){
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
-							LEVEL_SET_2++;
+							Spawn1to5.LEVEL_SET ++;
 							game.gameState = STATE.Upgrade;
 						}
 					}

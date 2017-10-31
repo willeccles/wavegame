@@ -192,9 +192,9 @@ public class Game extends Canvas implements Runnable {
 						spawner.tick();
 					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 5 thru 10, update them
 						spawner2.tick();
-					} else if (Spawn5to10.LEVEL_SET_2 == 1) {
+					} else if (Spawn1to5.LEVEL_SET == 3) {
 						spawner3.tick();
-					} else if (Spawn10to15.LEVEL_SET_3 == 1) {
+					} else if (Spawn1to5.LEVEL_SET == 4) {
 						spawner4.tick();
 					}
 				}
