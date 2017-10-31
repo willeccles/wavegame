@@ -47,6 +47,7 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private boolean isPaused = false;
 	private SpawnTest spawnTest;
+	private boolean isMusicPlaying = true;
 
 	/* NOBODY TOUCH THESE VARS, THEY ARE FOR TESTING NETWORKING */
 	private String op;
@@ -74,6 +75,7 @@ public class Game extends Canvas implements Runnable {
 	public Game(String op, String addr, int port, String room, String pass) {
 		handler = new Handler();
 		hud = new HUD(this);
+		player = new Player(WIDTH / 2 - 21, HEIGHT / 2 - 21, ID.Player, handler, this.hud, this);
 		spawner = new Spawn1to5(this.handler, this.hud, this);
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
 		spawner3 = new Spawn10to15(this.handler, this.hud, this);
@@ -84,7 +86,6 @@ public class Game extends Canvas implements Runnable {
 		spawnTest = new SpawnTest(this.handler, this.hud, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
-		player = new Player(WIDTH / 2 - 21, HEIGHT / 2 - 21, ID.Player, handler, this.hud, this);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		leaderboard = new Leaderboard(this, hud);
@@ -243,6 +244,13 @@ public class Game extends Canvas implements Runnable {
 		} else {
 			// tick the pause screen
 		}
+		if(isMusicPlaying) {
+			if (soundplayer.isPaused())
+				soundplayer.play();
+		} else {
+			if (!soundplayer.isPaused())
+				soundplayer.pause();
+		}
 	}
 
 	/**
@@ -356,5 +364,9 @@ public class Game extends Canvas implements Runnable {
 
 	public boolean isPaused() {
 		return isPaused;
+	}
+	
+	public void musicKeyPressed() {
+		isMusicPlaying = !isMusicPlaying;
 	}
 }

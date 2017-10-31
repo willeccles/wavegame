@@ -50,8 +50,7 @@ public class EnemyBoss extends GameObject {
 			this.isMoving = true;
 			spawn = r.nextInt(5);
 			if (spawn == 0) {
-				handler.addObject(
-						new EnemyBossBullet((int) this.x + 48, (int) this.y + 96, ID.EnemyBossBullet, handler));
+				handler.addObject(new EnemyBossBullet((int) this.x + 48, (int) this.y + 96, ID.EnemyBossBullet, handler));
 				this.health -= 3;
 			}
 		}

@@ -20,7 +20,7 @@ public class SpawnBosses {
 	private String[] side = {"left", "right", "top", "bottom"};
 	private int trackerTimer;
 	private Color trackerColor;
-	private int levelNumber = 0;
+	private int levelNumber = 1;
 	private int tempCounter = 0;
 	private int levelTimer;
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS

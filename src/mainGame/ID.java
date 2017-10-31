@@ -26,6 +26,7 @@ public enum ID {
 	EnemyMiniShooter,
 	EnemyMiniShooterBullet,
 	EnemyPorcupine,
-	HealthPickup, 
+	HealthPickup,
+	SpeedPickup,
 	SurvivalText;
 }
