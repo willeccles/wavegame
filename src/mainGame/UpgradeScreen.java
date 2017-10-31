@@ -36,7 +36,7 @@ public class UpgradeScreen {
 	private Random r = new Random();
 	private int index1, index2, index3;
 	private int differentUpgrades;
-	
+
 	public UpgradeScreen(Game game, Handler handler, HUD hud) {
 		this.game = game;
 		this.handler = handler;
@@ -158,18 +158,39 @@ public class UpgradeScreen {
 	public void mouseReleased(MouseEvent e) {
 
 	}
-	
-	
+
+
 	public void setIndex(){
 		index1 = (int) (Math.random()*(differentUpgrades));
+		if(paths[index1] == null){
+			index1 = (int) (Math.random()*(differentUpgrades));
+
+		}
 		index2 = (int) (Math.random()*(differentUpgrades));
+		if(paths[index2] == null){
+			index2 = (int) (Math.random()*(differentUpgrades));
+
+		}
 		while(index1 == index2){
 			index2 = (int) (Math.random()*(differentUpgrades));
+			if(paths[index2] == null){
+				index2 = (int) (Math.random()*(differentUpgrades));
+
+			}
 		}
 		index3 = (int) (Math.random()*(differentUpgrades));
+		if(paths[index3] == null){
+			index3 = (int) (Math.random()*(differentUpgrades));
+
+		}
 		while(index1 == index3 || index2 == index3){
 			index3 = (int) (Math.random()*(differentUpgrades));
+			if(paths[index3] == null){
+				index3 = (int) (Math.random()*(differentUpgrades));
+
+			}
 		}
+
 	}
 
 	public void resetUpgradeScreen(){

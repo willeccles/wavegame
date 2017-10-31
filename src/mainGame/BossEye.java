@@ -41,7 +41,7 @@ public class BossEye extends GameObject {
 		this.handler = handler;
 		this.placement = placement;
 		this.timer = 200;
-		this.health = 1000;
+		this.health = 1500;
 	}
 
 	public void tick() {
