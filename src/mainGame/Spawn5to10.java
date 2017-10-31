@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import mainGame.Game.STATE;
+
 /**
  * This class closely resembles Spawn1to10. Please refer to that class for
  * documentation
@@ -25,7 +27,7 @@ public class Spawn5to10 {
 	private int levelsLeft;
 	private int levelNumber = 0;
 	private int tempCounter = 0;
-	public static int LEVEL_SET_2_RESET = 0;
+	public static int LEVEL_SET_2 = 0;
 	private Color trackerColor;
 	private int trackerTimer;
 	private int differentEnemies;
@@ -325,6 +327,17 @@ public class Spawn5to10 {
 					handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
 					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
 					tempCounter++;
+				} else if (tempCounter >= 1) {
+					for (int i = 0; i < handler.object.size(); i++) {
+						GameObject tempObject = handler.object.get(i);
+						if (tempObject.getId() == ID.EnemyBoss) {
+							if (tempObject.getHealth() <= 0) {
+								handler.removeObject(tempObject);
+								LEVEL_SET_2++;
+								game.gameState = STATE.Upgrade;
+							}
+						}
+					}
 				}
 			
 			}
