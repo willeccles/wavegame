@@ -29,6 +29,7 @@ public class SpawnMultiplayer {
 		this.hud = hud;
 		this.game = game;
 		this.player = p;
+		opponent = new Player(0, 0, ID.Player2, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
 		handler.object.clear();
 		hud.health = 100;
 		hud.setScore(0);
@@ -72,7 +73,8 @@ public class SpawnMultiplayer {
 	public void startPlaying(double x1, double y1, double x2, double y2) {
 		player.setX((int)x1);
 		player.setY((int)y1);
-		opponent = new Player(x2, y2, ID.Player2, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
+		opponent.setX((int)x2);
+		opponent.setY((int)y2);
 		handler.addObject(opponent);
 		handler.addObject(player);
 		playing = true;
