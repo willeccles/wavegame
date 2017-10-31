@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import mainGame.Game.STATE;
+import mainGame.audio.SoundPlayer;
 
 /**
  * Handles key input from the user
@@ -38,6 +39,7 @@ public class KeyInput extends KeyAdapter{
 	private Leaderboard leaderboard;
 	private Object object;
 	private Image pauseMenu;
+	private SoundPlayer soundplayer;
 
 	// uses current handler created in Game as parameter
 	public KeyInput(Handler handler, Game game, HUD hud, Player player, Spawn1to5 spawner, Upgrades upgrades,
@@ -112,6 +114,9 @@ public class KeyInput extends KeyAdapter{
 					}
 					//paint(getImage("images/bosseye.png"));
 
+				}
+				if (key == KeyEvent.VK_M) {
+					game.musicKeyPressed();
 				}
 			}
 		//}

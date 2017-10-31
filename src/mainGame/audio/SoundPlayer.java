@@ -87,4 +87,8 @@ public class SoundPlayer extends Thread {
 			ie.printStackTrace();
 		}
 	}
+	
+	public boolean isPaused() {
+		return (player.getStatus() == MediaPlayer.Status.PAUSED);
+	}
 }
