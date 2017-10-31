@@ -16,7 +16,6 @@ public class SurvivalSpawner {
 		ID.EnemySweep,
 		ID.EnemyShooter,
 		ID.EnemyBasic,
-		ID.EnemyTracker,
 		ID.EnemyExpand,
 		ID.EnemyMiniShooter,
 		ID.EnemyPorcupine

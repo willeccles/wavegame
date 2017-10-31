@@ -16,9 +16,6 @@ public class SpawnMultiplayer {
 	private Handler handler;
 	private HUD hud;
 	private Game game;
-	private int trackerTimer;
-	private Color trackerColor;
-	private int count;
 	private Player opponent;
 	private Player player;
 	private boolean playing = false;
@@ -34,10 +31,6 @@ public class SpawnMultiplayer {
 		hud.health = 100;
 		hud.setScore(0);
 		hud.setLevel(1);
-		//different types of enemies added
-		trackerTimer = 1000;
-		trackerColor = Color.blue;
-		count = 0;
 	}
 
 	public void tick() {
@@ -47,19 +40,6 @@ public class SpawnMultiplayer {
 			// remove the piece of text added above after the player joins
 		} else {
 			hud.tick();
-			// updates the trackers color
-			if(trackerTimer == 999) {
-				trackerColor = Color.blue;
-			} else if (trackerTimer == 500) {
-				trackerColor = Color.black;
-			} else if (trackerTimer == 0) {
-				trackerTimer = 1000;
-			}
-
-			//prevents the trackers from spawning invisible 
-			if(count == 1) {
-				trackerTimer--;
-			}
 		}
 	}
 
@@ -130,10 +110,6 @@ public class SpawnMultiplayer {
 				break;
 			case EnemyShooter:
 				handler.addObject(new EnemyShooter(x, y, 100, 100, -20, type, handler));
-				break;
-			case EnemyTracker:
-				count = 1;
-				handler.addObject(new EnemyTracker(x, y, -5, type, handler, trackerColor, trackerTimer, game));
 				break;
 			case EnemyExpand:
 				handler.addObject(new EnemyExpand(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler));
