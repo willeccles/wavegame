@@ -29,6 +29,7 @@ public class Instance extends Thread {
 		clients = new HashMap<Integer, ClientConnection>();
 		try {
 			clients.put(0, new ClientConnection(0, clientSocket, this));
+			clients.get(0).start();
 			spawner = new SurvivalSpawner();
 		} catch (Exception ioe) {
 			// TODO
@@ -41,7 +42,7 @@ public class Instance extends Thread {
 	 */
 	public void run() {
 		// first we should wait for a second person to join the room
-		while (clients.size() != 2) {
+		while (getClientCount() != 2) {
 			// here we should check if the number hits 0 (aka if the host DC's during this time)
 			if (clients.size() == 0) {
 				try {
@@ -52,8 +53,12 @@ public class Instance extends Thread {
 				}
 			}
 		}
+		// now that there are two players, we can start the game running
+		running = true;
 		
+		System.out.println("got here 1");
 		if (this.isAlive()) {
+			System.out.println("got here 2");
 			// locations for both players (y stays the same for each)
 			double x1 = (1280.0/3.0)-(21.0/2.0);
 			double x2 = (1280.0*2.0/3.0)-(21.0/2.0);
@@ -77,8 +82,8 @@ public class Instance extends Thread {
 			}
 
 			// now that the loop has stopped we can kill things
-			clients.get(0).close();
-			clients.get(1).close();
+			closeAndRemoveClient(0);
+			closeAndRemoveClient(1);
 		}
 	}
 
@@ -95,6 +100,7 @@ public class Instance extends Thread {
 	private void tick() {
 		// handle if a user has left, kill the game (assuming the other user is connected, i suppose)
 		if (getClientCount() < 2) {
+			System.out.println("why is this happening to me");
 			sendToAll("OTHER_LEFT"); // this means the other player has left the game
 			close();
 		}
@@ -103,7 +109,7 @@ public class Instance extends Thread {
 		
 		// send to each of the clients
 		// msg: SPAWN:<ID ordinal>,x,y,option,side
-		sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
+		//sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
 	}
 
 	/**
@@ -112,7 +118,6 @@ public class Instance extends Thread {
 	 * @return True if the password matches, false if not.
 	 */
 	public boolean checkPass(String pass) {
-		System.out.println("comparing " + pass + " with " + roompass);
 		return (pass.equals(roompass));
 	}
 
@@ -125,10 +130,22 @@ public class Instance extends Thread {
 	}
 
 	/**
+	 * Closes a given client.
+	 * @param id The ID of the client to close.
+	 */
+	private synchronized void closeAndRemoveClient(int id) {
+		if (clients.containsKey(id)) {
+			clients.get(id).close();
+			clients.remove(id);
+		}
+	}
+
+	/**
 	 * Removes a client from the list of clients.
 	 * @param id The ID of the client to remove.
 	 */
 	public synchronized void removeClient(int id) {
+		System.out.println("removing client " + id);
 		clients.get(id).close();
 		clients.remove(id);
 	}
@@ -140,6 +157,7 @@ public class Instance extends Thread {
 	public synchronized void joinUser(Socket clientSocket) {
 		try {
 			clients.put(1, new ClientConnection(1, clientSocket, this));
+			clients.get(1).start();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

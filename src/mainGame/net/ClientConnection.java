@@ -22,10 +22,10 @@ public class ClientConnection {
 		this.opponent = op;
 		this.game = g;
 		client = new Socket(address, port);
-		System.out.println("got here?");
+		client.setSoTimeout(0); // a read() call will block forever
+		client.setKeepAlive(true);
 		in = new DataInputStream(client.getInputStream());
 		out = new DataOutputStream(client.getOutputStream());
-		System.out.println("got here 2?");
 
 		// start a thread to listen for input
 		inputThread = new Thread(() -> {
@@ -73,22 +73,21 @@ public class ClientConnection {
 					// TODO: handle message where room doesn't exist when trying to join
 					// TODO: handle wrong password
 					// TODO: handle full lobby
+				} catch (EOFException eof) {
+					// this means that the server closed the connection
+					System.out.println("Sending back to menu, server killed the connection.");
+					game.gameState = Game.STATE.Menu;
 				} catch(IOException ioe) {
-					// this means the server closed the connection (or there was some sort of DC problem)
-					// TODO: this should send the user back to the menu and show an alert box or something
-
 					try {
 						client.close();
 					} catch (IOException e) {
 						// this means there was an issue closing the client socket
 					}
-				} finally {
-					this.close();
-					break;
 				}
 			}
-			System.out.println("got here");
 			// after break, close
+			game.gameState = Game.STATE.Menu;
+			System.out.println("CC got here");
 			this.close();
 		});
 
@@ -113,10 +112,7 @@ public class ClientConnection {
 	 * @param password The password on the lobby
 	 */
 	public void host_game(String roomname, String password) {
-		// send the message to the server that you are starting a new lobby "^[^|]+\\|HOST\\|[^|]+\\|[^|]+"
-		System.out.println("sending HOST");
 		writeOut("HOST|" + roomname + "|" + password);
-		System.out.println("sent HOST");
 	}
 
 	/**
@@ -125,7 +121,6 @@ public class ClientConnection {
 	 * @param password The password for the lobby.
 	 */
 	public void join_game(String roomname, String password) {
-		System.out.println("sending " + roomname + " " + password);
 		writeOut("JOIN|" + roomname + "|" + password);
 	}
 

@@ -72,6 +72,7 @@ public class Game extends Canvas implements Runnable {
 	public Game(String op, String addr, int port, String room, String pass) {
 		handler = new Handler();
 		hud = new HUD(this);
+		player = new Player(WIDTH / 2 - 21, HEIGHT / 2 - 21, ID.Player, handler, this.hud, this);
 		spawner = new Spawn1to5(this.handler, this.hud, this);
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
 		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this);
@@ -80,7 +81,6 @@ public class Game extends Canvas implements Runnable {
 		spawnTest = new SpawnTest(this.handler, this.hud, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
-		player = new Player(WIDTH / 2 - 21, HEIGHT / 2 - 21, ID.Player, handler, this.hud, this);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		leaderboard = new Leaderboard(this, hud);

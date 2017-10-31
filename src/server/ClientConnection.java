@@ -17,8 +17,8 @@ public class ClientConnection extends Thread {
 		this.socket = clientSocket;
 		this.isHost = isHost;
 		this.instance = instance;
-		in = new DataInputStream(clientSocket.getInputStream());
-		out = new DataOutputStream(clientSocket.getOutputStream());
+		in = new DataInputStream(socket.getInputStream());
+		out = new DataOutputStream(socket.getOutputStream());
 	}
 	
 	public void run() {
@@ -28,12 +28,16 @@ public class ClientConnection extends Thread {
 			try {
 				input = in.readUTF();
 				// TODO: deal with input here
+				System.out.println("ClientConnection:31: " + input);
 
 				if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+")) {
 					// send the info about the player to the other client
 					instance.sendToClient(Math.abs(this.id-1), input);
 				}
+			} catch (EOFException eof) {
 			} catch (IOException ioe) {
+				// in this case this means something
+				ioe.printStackTrace();
 				break;
 			}
 		}
@@ -57,7 +61,7 @@ public class ClientConnection extends Thread {
 		// send a message to the client
 		try {
 			out.writeUTF(message);
-		} catch (IOException ioe) {
+		} catch (Exception ioe) {
 			ioe.printStackTrace();
 		}
 	}

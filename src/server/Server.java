@@ -18,22 +18,14 @@ public class Server extends Thread {
 
 	public void run() {
 		while (true) {
-			// server just deals with getting users and putting them where they need to be
-			// the server waits for a client to connect, then waits for it to send a message
-			// the message should be one of two formats:
-			// <username>|HOST|<roomname>|<roompass>
-			// <username>|JOIN|<roomname>|<roompass>
-			// The first one registers a user as <username>, then starts a new game called <roomname> and with pass <roompass>.
-			// Second one registers the user and then joins a room with a given username and password.
-			// Any other message should be responded to with some sort of "bad message" thing
-			// This tells the client to disconnect and try again
 			try {
 				Socket clientSocket = serverSocket.accept();
+				clientSocket.setSoTimeout(0);
+				clientSocket.setKeepAlive(true);
 				DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 				String input = in.readUTF();
 
 				if (input.matches("^HOST\\|[^|]+\\|[^|]+")) {
-					System.out.println(input);
 					// make a new instance with the given client as the host
 					String args[] = input.split("\\|");
 					String roomname = args[1];
@@ -41,7 +33,6 @@ public class Server extends Thread {
 					// TODO: handle when a roomname is already used (create new one if it's dead, if it's alive make an error of some sort happen
 					instances.put(roomname, new Instance(roomname, roompass, clientSocket));
 					instances.get(roomname).start();
-					System.out.println("started instance");
 				} else if (input.matches("^JOIN\\|[^|]+\\|[^|]+")) {
 					// join the given instance (if it exists)
 					// if it doesn't exist, send back an error message
