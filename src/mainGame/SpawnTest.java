@@ -144,7 +144,7 @@ public class SpawnTest {
 			}
 			if(spawnTimer == 0){
 				handler.addPickup(
-						new PickupHealth(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, ID.HealthPickup, "images/ham.png", this.handler));
+						new PickupSpeed(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, ID.SpeedPickup, "images/ham.png", this.handler));
 				spawnTimer = 100;
 			}
 			if (levelTimer == 0) {

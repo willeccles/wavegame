@@ -7,24 +7,24 @@ import java.awt.Toolkit;
 import java.net.URL;
 
 /**
- * Adds health to the player when they move over it
+ * Increases the player's speed when they move over it
  * @author Kyle Gorman
- * 10/25/17
+ * 10/31/17
  *
  */
 
-public class PickupHealth extends Pickup{
+public class PickupSpeed extends Pickup{
 	
 	private Handler handler;
 	private Image img;
 	
-	public PickupHealth(double x, double y, ID id, String path, Handler handler) {
+	public PickupSpeed(double x, double y, ID id, String path, Handler handler) {
 		super(x, y, id, path);
 		this.handler = handler;
 		
 		img = null;
 		try {
-			URL imageURL = Game.class.getResource("images/ham.png");
+			URL imageURL = Game.class.getResource("images/shoesAreForCasuals.png");
 			img = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();

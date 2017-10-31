@@ -45,6 +45,7 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private boolean isPaused = false;
 	private SpawnTest spawnTest;
+	private boolean isMusicPlaying = true;
 
 	/* NOBODY TOUCH THESE VARS, THEY ARE FOR TESTING NETWORKING */
 	private String op;
@@ -235,6 +236,13 @@ public class Game extends Canvas implements Runnable {
 		} else {
 			// tick the pause screen
 		}
+		if(isMusicPlaying) {
+			if (soundplayer.isPaused())
+				soundplayer.play();
+		} else {
+			if (!soundplayer.isPaused())
+				soundplayer.pause();
+		}
 	}
 
 	/**
@@ -348,5 +356,9 @@ public class Game extends Canvas implements Runnable {
 
 	public boolean isPaused() {
 		return isPaused;
+	}
+	
+	public void musicKeyPressed() {
+		isMusicPlaying = !isMusicPlaying;
 	}
 }

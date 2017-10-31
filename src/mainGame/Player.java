@@ -132,15 +132,20 @@ public class Player extends GameObject {
 		//for pickups
 		for (int i = 0; i < handler.pickups.size(); i++) {
 			Pickup tempPickup = handler.pickups.get(i);
-			
+
 			if (tempPickup.getId() == ID.HealthPickup){
 
 				if(getBounds().intersects(tempPickup.getBounds())) {
 					if(hud.getHealthMax() - hud.health > 25){
-					hud.health += 25;
+						hud.health += 25;
 					} else {
 						hud.health = hud.getHealthMax();
 					}
+					handler.removePickup(tempPickup);
+				}
+			} else if (tempPickup.getId() == ID.SpeedPickup){
+				if(getBounds().intersects(tempPickup.getBounds())){
+					playerSpeed += 1;
 					handler.removePickup(tempPickup);
 				}
 			}
@@ -184,15 +189,16 @@ public class Player extends GameObject {
 	public void setVelY(int velY) {
 		this.velY = velY;
 	}
-	
+
 	public void resetVel(){
 		this.velY = 0;
 		this.velX = 0;
 	}
-	
+
 	public void resetLoc(){
 		x = Game.WIDTH / 2 - 21;
 		y = Game.HEIGHT / 2 - 21;
 	}
+
 
 }
