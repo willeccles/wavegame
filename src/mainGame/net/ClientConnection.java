@@ -3,6 +3,7 @@ package mainGame.net;
 import java.net.*;
 import java.io.*;
 import mainGame.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ClientConnection {
 	private String address;
@@ -11,9 +12,11 @@ public class ClientConnection {
 	private DataInputStream in;
 	private DataOutputStream out;
 	private Thread inputThread;
+	private Thread outputThread;
 	private SpawnMultiplayer spawner;
 	private Player opponent;
 	private Game game;
+	private ConcurrentLinkedQueue<String> outputQueue;
 
 	public ClientConnection(String address, int port, SpawnMultiplayer spawn, Player op, Game g) throws UnknownHostException, IOException {
 		this.address = address;
@@ -21,6 +24,7 @@ public class ClientConnection {
 		this.spawner = spawn;
 		this.opponent = op;
 		this.game = g;
+		outputQueue = new ConcurrentLinkedQueue<String>();
 		client = new Socket(address, port);
 		client.setSoTimeout(0); // a read() call will block forever
 		client.setKeepAlive(true);
@@ -90,7 +94,24 @@ public class ClientConnection {
 			this.close();
 		});
 
+		// make a thread that sends output to the server
+		outputThread = new Thread(() -> {
+			String output;
+			while (client.isConnected()) {
+				output = outputQueue.poll();
+				if (output != null) {
+					// send the output to the server
+					try {
+						out.writeUTF(output);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+
 		inputThread.start();
+		outputThread.start();
 	}
 
 	/**
@@ -128,11 +149,7 @@ public class ClientConnection {
 	 * @param msg The message to send to the thing.
 	 */
 	private void writeOut(String msg) {
-		try {
-			out.writeUTF(msg);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		outputQueue.add(msg);
 	}
 
 	/**
