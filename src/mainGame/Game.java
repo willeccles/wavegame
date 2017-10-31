@@ -369,4 +369,13 @@ public class Game extends Canvas implements Runnable {
 	public void musicKeyPressed() {
 		isMusicPlaying = !isMusicPlaying;
 	}
+
+	/**
+	 * Updates the server with the player's position (only in multiplayer).
+	 */
+	public void updatePlayerPosition() {
+		if (gameState == STATE.Multiplayer) {
+			spawnMultiplayer.sendPos();
+		}
+	}
 }

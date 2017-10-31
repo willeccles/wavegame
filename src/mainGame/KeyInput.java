@@ -77,19 +77,22 @@ public class KeyInput extends KeyAdapter{
 				if (key == KeyEvent.VK_UP && handler.getTimer() <= 0) {
 					player.setVelY(-(this.speed));
 					keyDown[0] = true;
-
+					game.updatePlayerPosition();
 				}
 				if (key == KeyEvent.VK_LEFT && handler.getTimer() <= 0) {
 					player.setVelX(-(this.speed));
 					keyDown[1] = true;
+					game.updatePlayerPosition();
 				}
 				if (key == KeyEvent.VK_DOWN && handler.getTimer() <= 0) {
 					player.setVelY(this.speed);
 					keyDown[2] = true;
+					game.updatePlayerPosition();
 				}
 				if (key == KeyEvent.VK_RIGHT && handler.getTimer() <= 0) {
 					player.setVelX(this.speed);
 					keyDown[3] = true;
+					game.updatePlayerPosition();
 				}
 				if (key == KeyEvent.VK_SPACE && handler.getTimer() <= 0) {
 					upgrades.levelSkipAbility();
@@ -263,15 +266,19 @@ public class KeyInput extends KeyAdapter{
 
 			if (tempObject.getId() == ID.Player) {
 				// key events for player 1
-				if (key == KeyEvent.VK_UP)
+				if (key == KeyEvent.VK_UP) {
 					keyDown[0] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_LEFT)
+					game.updatePlayerPosition();
+				} else if (key == KeyEvent.VK_LEFT) {
 					keyDown[1] = false;// tempObject.setVelX(0);
-				if (key == KeyEvent.VK_DOWN)
+					game.updatePlayerPosition();
+				} else if (key == KeyEvent.VK_DOWN) {
 					keyDown[2] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_RIGHT) {
+					game.updatePlayerPosition();
+				} else if (key == KeyEvent.VK_RIGHT) {
 					keyDown[3] = false;// tempObject.setVelX(0);
 					keyDown[4] = false;
+					game.updatePlayerPosition();
 				}
 
 				// vertical movement
