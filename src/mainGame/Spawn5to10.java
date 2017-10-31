@@ -253,7 +253,7 @@ public class Spawn5to10 {
 				timer = 300;
 				levelTimer = 1300;
 			} 
-			
+
 			if (levelTimer == 0) {
 				tempCounter = 0;
 				handler.clearEnemies();
@@ -315,32 +315,32 @@ public class Spawn5to10 {
 				}
 			}
 		}
-			else if (levelNumber == 101) {
-				if (tempCounter < 1) {
-					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
-					handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
-					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
-					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 4));
-					handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 5));
-					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 6));
-					handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
-					handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
-					handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
-					tempCounter++;
-				} else if (tempCounter >= 1) {
-					for (int i = 0; i < handler.object.size(); i++) {
-						GameObject tempObject = handler.object.get(i);
-						if (tempObject.getId() == ID.EnemyBoss) {
-							if (tempObject.getHealth() <= 0) {
-								handler.removeObject(tempObject);
-								LEVEL_SET_2++;
-								game.gameState = STATE.Upgrade;
-							}
+		else if (levelNumber == 101) {
+			if (tempCounter < 1) {
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
+				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 4));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 5));
+				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 6));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
+				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
+				tempCounter++;
+			} else if (tempCounter >= 1) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.BossEye){
+						if (tempObject.getHealth() <= 0) {
+							handler.clearEnemies();
+							LEVEL_SET_2++;
+							game.gameState = STATE.Upgrade;
 						}
 					}
 				}
-			
 			}
+
+		}
 		// WINNER
 		// else if(levelNumber){
 		// levelTimer --;

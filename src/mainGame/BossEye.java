@@ -31,7 +31,6 @@ public class BossEye extends GameObject {
 	private double[] speedTypes = { -5, -6, -7, -8, -9 };
 	private GameObject player;
 	private Handler handler;
-	private float health;
 
 	public BossEye(double x, double y, ID id, Handler handler, int placement) {
 		super(x, y, id);
@@ -42,7 +41,7 @@ public class BossEye extends GameObject {
 		this.handler = handler;
 		this.placement = placement;
 		this.timer = 200;
-		this.health = (float) 1000;
+		this.health = 1000;
 	}
 
 	public void tick() {
@@ -77,7 +76,7 @@ public class BossEye extends GameObject {
 			} else if (this.placement == 9 && this.spawnOrder >= 9) {
 				attackPlayer();
 			} else {
-				this.health -= 0.8;
+				this.health -= 1;
 			}
 		}
 	}
