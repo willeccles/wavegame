@@ -25,7 +25,7 @@ public class SpawnSurvival {
 	private int spawnNum;
 	private int tempCounter;
 	private boolean textThere;
-	
+
 	public SpawnSurvival(Handler handler, HUD hud, Game game){
 		this.handler = handler;
 		this.hud = hud;
@@ -37,7 +37,7 @@ public class SpawnSurvival {
 		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
-		differentEntities = 10;	
+		differentEntities = 11;	
 		trackerTimer = 1000;
 		trackerColor = Color.blue;
 		count = 0;
@@ -62,9 +62,9 @@ public class SpawnSurvival {
 		}
 		if(spawnNum == -1){
 			if(!textThere){
-			handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Good luck!",
-					ID.SurvivalText));
-			textThere = true;
+				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Good luck!",
+						ID.SurvivalText));
+				textThere = true;
 			}
 			if(tempCounter > 120){
 				handler.clearEnemies();
@@ -145,8 +145,13 @@ public class SpawnSurvival {
 				spawnTimer = 0;
 			} else if (spawnNum == 9){
 				//spawns Health pickup
-				
+
 				handler.addPickup(new PickupHealth(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, ID.HealthPickup, "images/ham.png", this.handler));
+				spawnTimer = 0;
+			} else if (spawnNum == 10){
+				//spawns Health pickup
+
+				handler.addPickup(new PickupSpeed(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, ID.SpeedPickup, "images/ham.png", this.handler));
 				spawnTimer = 0;
 			}
 		}
