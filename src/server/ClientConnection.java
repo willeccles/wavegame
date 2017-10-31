@@ -28,7 +28,6 @@ public class ClientConnection extends Thread {
 			try {
 				input = in.readUTF();
 				// TODO: deal with input here
-				System.out.println("ClientConnection:31: " + input);
 
 				if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+")) {
 					// send the info about the player to the other client
