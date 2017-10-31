@@ -35,7 +35,6 @@ public class ClientConnection {
 				try {
 					// this is where we get the input and stuff
 					input = in.readUTF();
-					System.out.println("Received: " + input);
 
 					// the command to start the game
 					if (input.matches("START:[\\d.]+,[\\d.]+,[\\d.]+,[\\d.]+")) {

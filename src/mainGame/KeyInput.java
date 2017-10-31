@@ -267,26 +267,30 @@ public class KeyInput extends KeyAdapter{
 			if (tempObject.getId() == ID.Player) {
 				// key events for player 1
 				if (key == KeyEvent.VK_UP) {
-					keyDown[0] = false;// tempObject.setVelY(0);
+					keyDown[0] = false;
 					game.updatePlayerPosition();
 				} else if (key == KeyEvent.VK_LEFT) {
-					keyDown[1] = false;// tempObject.setVelX(0);
+					keyDown[1] = false;
 					game.updatePlayerPosition();
 				} else if (key == KeyEvent.VK_DOWN) {
-					keyDown[2] = false;// tempObject.setVelY(0);
+					keyDown[2] = false;
 					game.updatePlayerPosition();
 				} else if (key == KeyEvent.VK_RIGHT) {
-					keyDown[3] = false;// tempObject.setVelX(0);
+					keyDown[3] = false;
 					keyDown[4] = false;
 					game.updatePlayerPosition();
 				}
 
 				// vertical movement
-				if (!keyDown[0] && !keyDown[2])
+				if (!keyDown[0] && !keyDown[2]) {
 					tempObject.setVelY(0);
+					game.updatePlayerPosition();
+				}
 				// horizontal movement
-				if (!keyDown[1] && !keyDown[3])
+				if (!keyDown[1] && !keyDown[3]) {
 					tempObject.setVelX(0);
+					game.updatePlayerPosition();
+				}
 			}
 
 		}
