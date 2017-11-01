@@ -41,7 +41,7 @@ public class BossEye extends GameObject {
 		this.handler = handler;
 		this.placement = placement;
 		this.timer = 200;
-		this.health = 1500;
+		this.health = 2000;
 	}
 
 	public void tick() {
@@ -77,6 +77,7 @@ public class BossEye extends GameObject {
 				attackPlayer();
 			} else {
 				this.health -= 1;
+				System.out.println(health);
 			}
 		}
 	}
@@ -117,7 +118,7 @@ public class BossEye extends GameObject {
 		g.setColor(Color.GRAY);
 		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);
 		g.setColor(Color.RED);
-		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, (int) this.health, 50);
+		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, (int) this.health*2, 50);
 		g.setColor(Color.WHITE);
 		g.drawRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);
 	}
