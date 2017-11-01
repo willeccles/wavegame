@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import mainGame.Game.STATE;
+import mainGame.audio.SoundPlayer;
 
 /**
  * Handles key input from the user
@@ -38,6 +39,7 @@ public class KeyInput extends KeyAdapter {
 	private Leaderboard leaderboard;
 	private Object object;
 	private Image pauseMenu;
+	private SoundPlayer soundplayer;
 
 	// uses current handler created in Game as parameter
 	public KeyInput(Handler handler, Game game, HUD hud, Player player, Spawn1to5 spawner, Upgrades upgrades,
@@ -69,44 +71,45 @@ public class KeyInput extends KeyAdapter {
 			GameObject tempObject = handler.object.get(i);
 
 			// using only if's allows multiple keys to be triggered at once
-			if (tempObject.getId() == ID.Player) {// find the player object, as
-				// he is the only one the
-				// user can control
-				// key events for player 1
-				if (key == KeyEvent.VK_UP && handler.getTimer() <= 0) {
-					tempObject.setVelY(-(this.speed));
-					keyDown[0] = true;
-
-				}
-				if (key == KeyEvent.VK_LEFT && handler.getTimer() <= 0) {
-					tempObject.setVelX(-(this.speed));
-					keyDown[1] = true;
-				}
-				if (key == KeyEvent.VK_DOWN && handler.getTimer() <= 0) {
-					tempObject.setVelY(this.speed);
-					keyDown[2] = true;
-				}
-				if (key == KeyEvent.VK_RIGHT && handler.getTimer() <= 0) {
-					tempObject.setVelX(this.speed);
-					keyDown[3] = true;
-				}
-				if (key == KeyEvent.VK_SPACE && handler.getTimer() <= 0) {
-					upgrades.levelSkipAbility();
-				}
-				if (key == KeyEvent.VK_SHIFT && handler.getTimer() <= 0) {
-					ability = upgrades.getAbility();
-					if (ability.equals("clearScreen")) {
-						upgrades.clearScreenAbility();
-					} else if (ability.equals("levelSkip")) {
-						upgrades.levelSkipAbility();
-					} else if (ability.equals("freezeTime")) {
-						upgrades.freezeTimeAbility();
-					} else if (ability.equals("")) {
-
-					}
-				}
-
+			//if (tempObject.getId() == ID.Player) {
+			//find the player object, as he is the only one the
+			//user can control key events for player 1
+			if (key == KeyEvent.VK_UP && handler.getTimer() <= 0) {
+				player.setVelY(-(this.speed));
+				keyDown[0] = true;
+				game.updatePlayerPosition();
 			}
+			if (key == KeyEvent.VK_LEFT && handler.getTimer() <= 0) {
+				player.setVelX(-(this.speed));
+				keyDown[1] = true;
+				game.updatePlayerPosition();
+			}
+			if (key == KeyEvent.VK_DOWN && handler.getTimer() <= 0) {
+				player.setVelY(this.speed);
+				keyDown[2] = true;
+				game.updatePlayerPosition();
+			}
+			if (key == KeyEvent.VK_RIGHT && handler.getTimer() <= 0) {
+				player.setVelX(this.speed);
+				keyDown[3] = true;
+				game.updatePlayerPosition();
+			}
+			if (key == KeyEvent.VK_SPACE && handler.getTimer() <= 0) {
+				upgrades.levelSkipAbility();
+			}
+			if (key == KeyEvent.VK_SHIFT && handler.getTimer() <= 0) {
+				ability = upgrades.getAbility();
+				if (ability.equals("clearScreen")) {
+					upgrades.clearScreenAbility();
+				} else if (ability.equals("levelSkip")) {
+					upgrades.levelSkipAbility();
+				} else if (ability.equals("freezeTime")) {
+					upgrades.freezeTimeAbility();
+				} else if (ability.equals("")) {
+
+				}
+			}
+
 		}
 		if (key == KeyEvent.VK_ESCAPE) {
 			if (game.gameState != STATE.Menu) {
@@ -118,11 +121,15 @@ public class KeyInput extends KeyAdapter {
 					game.gameState = STATE.PauseMenu;
 					game.pause();
 				}
+				if (key == KeyEvent.VK_M) {
+					game.musicKeyPressed();
+				}
 			}
 		}
 
+
 		if (game.getGameState() == STATE.Leaderboard) {
-			if (key == KeyEvent.VK_A)
+			if (key == KeyEvent.VK_A) 
 				System.out.println("test");
 			if (leaderboard.getFull()) {
 				if (key == KeyEvent.VK_BACK_SPACE) {
@@ -261,23 +268,26 @@ public class KeyInput extends KeyAdapter {
 
 			if (tempObject.getId() == ID.Player) {
 				// key events for player 1
-				if (key == KeyEvent.VK_UP)
-					keyDown[0] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_LEFT)
-					keyDown[1] = false;// tempObject.setVelX(0);
-				if (key == KeyEvent.VK_DOWN)
-					keyDown[2] = false;// tempObject.setVelY(0);
-				if (key == KeyEvent.VK_RIGHT) {
-					keyDown[3] = false;// tempObject.setVelX(0);
+				if (key == KeyEvent.VK_UP) {
+					keyDown[0] = false;
+				} else if (key == KeyEvent.VK_LEFT) {
+					keyDown[1] = false;
+				} else if (key == KeyEvent.VK_DOWN) {
+					keyDown[2] = false;
+				} else if (key == KeyEvent.VK_RIGHT) {
+					keyDown[3] = false;
 					keyDown[4] = false;
 				}
 
 				// vertical movement
-				if (!keyDown[0] && !keyDown[2])
+				if (!keyDown[0] && !keyDown[2]) {
 					tempObject.setVelY(0);
+				}
 				// horizontal movement
-				if (!keyDown[1] && !keyDown[3])
+				if (!keyDown[1] && !keyDown[3]) {
 					tempObject.setVelX(0);
+				}
+				game.updatePlayerPosition();
 			}
 
 		}

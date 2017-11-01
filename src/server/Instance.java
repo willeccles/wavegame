@@ -3,6 +3,7 @@ package server;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Iterator;
 
 /**
@@ -20,17 +21,19 @@ public class Instance extends Thread {
 	 * Constructor for Instance.
 	 * @param name The name of the room.
 	 * @param pass The password for the room.
-	 * @param hostName The username of the "host" user, AKA the one creating the room.
 	 * @param clientSocket The socket the "host" user is connected through.
 	 */
-	public Instance(String name, String pass, String hostName, Socket clientSocket) throws IOException {
+	public Instance(String name, String pass, Socket clientSocket) throws IOException {
+		roomname = name;
+		roompass = pass;
 		clients = new HashMap<Integer, ClientConnection>();
 		try {
-			clients.put(0, new ClientConnection(hostName, 0, clientSocket, this));
+			clients.put(0, new ClientConnection(0, clientSocket, this));
 			clients.get(0).start();
 			spawner = new SurvivalSpawner();
-		} catch (IOException ioe) {
+		} catch (Exception ioe) {
 			// TODO
+			ioe.printStackTrace();
 		}
 	}
 
@@ -39,22 +42,29 @@ public class Instance extends Thread {
 	 */
 	public void run() {
 		// first we should wait for a second person to join the room
-		while (clients.size() != 2) {
+		while (getClientCount() != 2) {
 			// here we should check if the number hits 0 (aka if the host DC's during this time)
 			if (clients.size() == 0) {
 				try {
+					System.out.println("only one user and they left");
 					this.join();
 				} catch (InterruptedException ie) {
-					// TODO
+					ie.printStackTrace();
 				}
 			}
 		}
+		// now that there are two players, we can start the game running
+		running = true;
 		
+		System.out.println("got here 1");
 		if (this.isAlive()) {
-			/* TODO: tell clients that the game is starting */
-			sendToAll(""); // also tell them their ID's so they know if they are P1 or P2 (determines their spawn location)
-			/* TODO: every time the velocity (vector) of a client changes, its change should be relayed to the other client through the server (see ClientConnection.java) */
-			/* TODO: at certain intervals, tell client which kinds of enemies (AKA what level) are spawning and where they are (assuming it's not a constant based on the level), everything else (rendering, health, etc.) are all clientside */
+			System.out.println("got here 2");
+			// locations for both players (y stays the same for each)
+			double x1 = (1280.0/3.0)-(21.0/2.0);
+			double x2 = (1280.0*2.0/3.0)-(21.0/2.0);
+			double y = (720.0/2.0)-(21.0/2.0);
+			sendToClient(0, String.format("START:%f,%f,%f,%f", x1, y, x2, y)); // send each player the spawn location of both players
+			sendToClient(1, String.format("START:%f,%f,%f,%f", x2, y, x1, y));
 			
 			// make the game clock
 			long lastTime = System.nanoTime();
@@ -72,8 +82,8 @@ public class Instance extends Thread {
 			}
 
 			// now that the loop has stopped we can kill things
-			clients.get(0).close();
-			clients.get(1).close();
+			closeAndRemoveClient(0);
+			closeAndRemoveClient(1);
 		}
 	}
 
@@ -88,6 +98,12 @@ public class Instance extends Thread {
 	 * Run every 2s to handle game stuff.
 	 */
 	private void tick() {
+		// handle if a user has left, kill the game (assuming the other user is connected, i suppose)
+		if (getClientCount() < 2) {
+			System.out.println("why is this happening to me");
+			sendToAll("OTHER_LEFT"); // this means the other player has left the game
+			close();
+		}
 		// get an entity to spawn
 		Entity e = spawner.getNext();
 		
@@ -114,24 +130,36 @@ public class Instance extends Thread {
 	}
 
 	/**
+	 * Closes a given client.
+	 * @param id The ID of the client to close.
+	 */
+	private synchronized void closeAndRemoveClient(int id) {
+		if (clients.containsKey(id)) {
+			clients.get(id).close();
+			clients.remove(id);
+		}
+	}
+
+	/**
 	 * Removes a client from the list of clients.
 	 * @param id The ID of the client to remove.
 	 */
 	public synchronized void removeClient(int id) {
+		System.out.println("removing client " + id);
+		clients.get(id).close();
 		clients.remove(id);
 	}
 
 	/**
 	 * Join a user to the instance. Should be used by the Server for the most part.
-	 * @param clientName The username of the client.
 	 * @param clientSocket The socket the client is connected to.
 	 */
-	public synchronized void joinUser(String clientName, Socket clientSocket) {
+	public synchronized void joinUser(Socket clientSocket) {
 		try {
-			clients.put(1, new ClientConnection(clientName, 1, clientSocket, this));
+			clients.put(1, new ClientConnection(1, clientSocket, this));
 			clients.get(1).start();
 		} catch (IOException ioe) {
-			// TODO
+			ioe.printStackTrace();
 		}
 	}
 

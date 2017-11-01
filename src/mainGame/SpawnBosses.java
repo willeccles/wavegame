@@ -20,7 +20,7 @@ public class SpawnBosses {
 	private String[] side = {"left", "right", "top", "bottom"};
 	private int trackerTimer;
 	private Color trackerColor;
-	private int levelNumber = 0;
+	private int levelNumber = 1;
 	private int tempCounter = 0;
 	private int levelTimer;
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
@@ -50,12 +50,12 @@ public class SpawnBosses {
 		}
 		else if (levelNumber == 0) {// this is level 1
 				if (tempCounter < 1) {
-					handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
+					handler.addObject(new BullBoss(ID.BossBattle, handler));
 					tempCounter++;
 				} else if (tempCounter >= 1) {
 					for (int i = 0; i < handler.object.size(); i++) {
 						GameObject tempObject = handler.object.get(i);
-						if (tempObject.getId() == ID.EnemyBoss) {
+						if (tempObject.getId() == ID.BossBattle) {
 							if (tempObject.getHealth() <= 0) {
 								handler.removeObject(tempObject);
 								//LEVEL_SET++;

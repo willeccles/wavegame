@@ -2,6 +2,7 @@ package mainGame;
 
 import java.awt.Color;
 import java.util.Random;
+import mainGame.net.ClientConnection;
 
 /**
  * A type of game mode in the game
@@ -15,121 +16,110 @@ public class SpawnMultiplayer {
 	private Handler handler;
 	private HUD hud;
 	private Game game;
-	private int spawnTimer;
-	private int differentEnemies;
-	private Random r;
-	private String[] side = {"left", "right", "top", "bottom"};
-	private int trackerTimer;
-	private Color trackerColor;
-	private int count;
+	private Player opponent;
+	private Player player;
+	private boolean playing = false;
+	private ClientConnection client;
 
-	public SpawnMultiplayer(Handler handler, HUD hud, Game game){
+	public SpawnMultiplayer(Handler handler, HUD hud, Game game, Player p) {
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
+		this.player = p;
+		opponent = new Player(0, 0, ID.Player2, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
 		handler.object.clear();
 		hud.health = 100;
 		hud.setScore(0);
 		hud.setLevel(1);
-		spawnTimer = 0;
-		r = new Random();
-		//different types of enemies added
-		differentEnemies = 9;	
-		trackerTimer = 1000;
-		trackerColor = Color.blue;
-		count = 0;
 	}
 
 	public void tick() {
-		hud.tick();
-		// updates the trackers color
-		if(trackerTimer == 999){
-			trackerColor = Color.blue;
-		} else if (trackerTimer == 500){
-			trackerColor = Color.black;
-		} else if (trackerTimer == 0){
-			trackerTimer = 1000;
+		// this means that the other player has not joined yet
+		if (!playing) {
+			// show a piece of text until the player joins
+			// remove the piece of text added above after the player joins
+		} else {
+			hud.tick();
 		}
-		//prevents the trackers from spawning invisible 
-		if(count == 1){
-		trackerTimer--;
-		}
-		int temp = randInt();
-		//System.out.println(spawnTimer);
-		if(spawnTimer == 100){
-			//spawns Basic enemy
-			if(temp == 0){
-				handler.addObject(
-						new EnemyBasic(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
-				spawnTimer = 0;
+	}
 
-			} else if(temp == 1){
-				//spawns Burst enemy
+	/**
+	 * Used to start gameplay from the client.
+	 * @param x1 The X coordinate of the player.
+	 * @param y1 The Y coordinate of the player.
+	 * @param x2 The X coordinate of the other player.
+	 * @param y2 The Y coordinate of the other player.
+	 */
+	public void startPlaying(double x1, double y1, double x2, double y2) {
+		player.setX((int)x1);
+		player.setY((int)y1);
+		opponent.setX((int)x2);
+		opponent.setY((int)y2);
+		handler.addObject(opponent);
+		handler.addObject(player);
+		playing = true;
+	}
 
-				handler.addObject(
-						new EnemyBurst(-200, 200, 50, 50, 200, side[r.nextInt(4)], ID.EnemyBurst, handler));
-				spawnTimer = 0;
-
-			} else if(temp == 2){
-				//spawns Sweep enemy
-
-				int sweepTemp = (int) (Math.random()*4);
-				if (sweepTemp == 0) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, 1, ID.EnemySweep, handler));
-				} else if (sweepTemp == 1) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, -1, ID.EnemySweep, handler));
-				} else if (sweepTemp == 2) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, 3, ID.EnemySweep, handler));
-				} else if (sweepTemp == 3) {
-					handler.addObject(
-							new EnemySweep(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 15, -3, ID.EnemySweep, handler));
-				}
-				spawnTimer = 0;
-
-			} else if(temp == 3){
-				//spawns Smart enemy
-
-				handler.addObject(
-						new EnemySmart(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemySmart, handler));
-				spawnTimer = 0;
-
-			} else if(temp == 4){
-				//spawns Shooter enemy
-
-				handler.addObject(
-						new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,-20, ID.EnemyShooter, this.handler));
-				spawnTimer = 0;
-			} else if(temp == 5){
-				//spawns Tracker enemy
-				count = 1;
-				handler.addObject(
-						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer));
-				spawnTimer = 0;
-			} else if (temp == 6){
-				//spawns Expansion enemy
-				handler.addObject(new EnemyExpand(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyExpand, this.handler));
-				spawnTimer = 0;
-			} else if (temp == 7){
-				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
-				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
-				spawnTimer = 0;
-			} else if (temp == 8){
-				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
-				spawnTimer = 0;
+	public void createClient(String addr, int port) {
+		if (this.client == null) {
+			try {
+				this.client = new ClientConnection(addr, port, this, opponent, game);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
-		spawnTimer++;
-
 	}
 
-	public int randInt(){
-		return (int) (Math.random()*(differentEnemies));
+	public ClientConnection getClient() {
+		return this.client;
 	}
-	
-	public void restart(){
-		spawnTimer = 0;
+
+	/**
+	 * Update the player's position on the server.
+	 */
+	public void sendPos() {
+		client.sendPos(player);
+	}
+
+	public void spawnEntity(ID type, double x, double y, int option, String side) {
+		switch (type) {
+			case EnemyBasic:
+				handler.addObject(new EnemyBasic(x, y, 9, 9, type, handler));
+				break;
+			case EnemySmart:
+				handler.addObject(new EnemySmart(x, y, -5, type, handler));
+				break;
+			case EnemyBurst:
+				handler.addObject(new EnemyBurst(x, y, 50, 50, 200, side, type, handler, true));
+				break;
+			case EnemySweep:
+				switch (option) {
+					case 0:
+						handler.addObject(new EnemySweep(x, y, 15, 1, type, handler));
+						break;
+					case 1:
+						handler.addObject(new EnemySweep(x, y, 15, -1, type, handler));
+						break;
+					case 2:
+						handler.addObject(new EnemySweep(x, y, 15, 3, type, handler));
+						break;
+					case 3:
+						handler.addObject(new EnemySweep(x, y, 15, -3, type, handler));
+						break;
+				}
+				break;
+			case EnemyShooter:
+				handler.addObject(new EnemyShooter(x, y, 100, 100, -20, type, handler));
+				break;
+			case EnemyExpand:
+				handler.addObject(new EnemyExpand(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler));
+				break;
+			case EnemyMiniShooter:
+				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler));
+				break;
+			case EnemyPorcupine:
+				handler.addObject(new EnemyPorcupine(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler, -1, -2));
+				break;
+		}
 	}
 }

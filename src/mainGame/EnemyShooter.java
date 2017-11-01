@@ -23,7 +23,7 @@ public class EnemyShooter extends GameObject {
 	private int bulletSpeed;
 
 	public EnemyShooter(double x, double y, int sizeX, int sizeY, int bulletSpeed, ID id, Handler handler) {
-		super(x, y, id);
+		super(Game.clampX(x, sizeX + 1), Game.clampY(y, sizeY + 1), id);
 		this.handler = handler;
 		this.velX = 0;
 		this.velY = 0;

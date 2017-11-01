@@ -26,24 +26,17 @@ public class Handler {
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
 			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail
-					|| tempObject.getId() == ID.EnemyBurstWarning) {// we don't
-																	// want
-																	// these to
-																	// ever be
-																	// frozen by
-																	// the
-																	// Screen
-																	// Freeze
-																	// ability
-
+					|| tempObject.getId() == ID.EnemyBurstWarning) {
+				// we don't want these to ever be frozen by the Screen Freeze ability
+				
 				// Every GameObject has a tick method, so this effectively
 				// updates every single object
 				tempObject.tick();
 
 			} else {
 				if (getTimer() <= 0) {// if Screen Freeze power-up is unlocked, enemy
-									// ID's will pause for the length of the
-									// timer, and not update
+					// ID's will pause for the length of the
+					// timer, and not update
 					tempObject.tick();
 				}
 			}
@@ -107,7 +100,7 @@ public class Handler {
 			if (tempObject.getId() != ID.Player) {
 				this.removeObject(tempObject);
 				i--; // Removing shrinks the array by 1, causing the loop to
-						// skip an enemy
+				// skip an enemy
 			}
 		}
 	}
@@ -121,7 +114,7 @@ public class Handler {
 			if (tempObject.getId() == ID.Player) {
 				this.removeObject(tempObject);
 				i--; // Removing shrinks the array by 1, causing the loop to
-						// skip a player (should there be more than one)
+				// skip a player (should there be more than one)
 			}
 		}
 	}

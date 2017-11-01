@@ -29,10 +29,12 @@ public class MouseListener extends MouseAdapter {
 	private Player player;
 	private String upgradeText;
 	private Leaderboard leaderboard;
-
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2,
-			SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades,
-			Leaderboard leaderboard, SpawnBosses spawnBosses) {
+	private SpawnTest spawnTest;
+	
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
+			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
+			Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses,
+			SpawnTest spawnTest) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -44,6 +46,7 @@ public class MouseListener extends MouseAdapter {
 		this.spawnSurvival = spawnSurvival;
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
+		this.spawnTest = spawnTest;
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -53,6 +56,7 @@ public class MouseListener extends MouseAdapter {
 			if (player.checkGame() == "waves") {
 				handler.object.clear();
 				upgrades.resetUpgrades();
+				upgradeScreen.resetUpgradeScreen();
 				hud.health = 100;
 				hud.setScore(0);
 				hud.setLevel(1);
@@ -62,31 +66,51 @@ public class MouseListener extends MouseAdapter {
 				spawner2.addLevels();
 				Spawn1to5.LEVEL_SET = 1;
 				game.gameState = STATE.Menu;
-			} else if (player.checkGame() == "survival") {
+				player.resetVel();
+				player.resetLoc();
+			} else if (player.checkGame() == "survival"){
 				handler.object.clear();
-				hud.health = 100;
+				handler.pickups.clear();
+				hud.health=100;
 				hud.setScore(0);
 				spawnSurvival.restart();
 				game.gameState = STATE.Leaderboard;
+				player.resetVel();
+				player.resetLoc();
 			} else if (player.checkGame() == "bosses") {
 				handler.object.clear();
 				hud.health = 100;
 				hud.setScore((0));
 				spawnBosses.restart();
+				player.resetVel();
+				player.resetLoc();
+			} else if (player.checkGame() == "test"){
+				handler.object.clear();
+				upgrades.resetUpgrades();
+				hud.health = 100;
+				hud.setScore(0);
+				spawnTest.restart();
+				game.gameState = STATE.Menu;
+				player.resetVel();
+				player.resetLoc();
 			}
 
 		}
 
 		else if (game.gameState == STATE.Wave) {
 		}
+		else if (game.gameState == STATE.Multiplayer) {
 
-		else if (game.gameState == STATE.Attack) {
 		}
 
 		else if (game.gameState == STATE.Bosses) {
 		}
 
 		else if (game.gameState == STATE.Survival) {
+		}
+		
+		else if (game.gameState == STATE.Test){
+			
 		}
 
 		else if (game.gameState == STATE.Upgrade) {
@@ -146,11 +170,14 @@ public class MouseListener extends MouseAdapter {
 				System.exit(1);
 			}
 
-			// Attack Mode
+			// Multiplayer Mode
 			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
 				handler.object.clear();
-				game.gameState = STATE.Attack;
+				game.gameState = STATE.Test;
 				handler.addObject(player);
+				//game.gameState = STATE.Connect;
+				// switch to the multiplayer connection screen, see Game::tick()
+				// the player gets added inside of SpawnMultiplayer at the same time as the opponent
 			}
 
 			// Survival Mode

@@ -1,5 +1,7 @@
 package mainGame;
 
+import mainGame.Game.STATE;
+
 /**
  * The upgrades that a user can have (they modify the game for the user)
  * 
@@ -17,9 +19,10 @@ public class Upgrades {
 	private Spawn5to10 spawner2;
 	private UpgradeScreen upgradeScreen;
 	private String ability;
+	private SpawnTest spawnTest;
 
-	public Upgrades(Game game, Handler handler, HUD hud, UpgradeScreen upgradeScreen, Player player, Spawn1to5 spawner,
-			Spawn5to10 spawner2) {
+	public Upgrades(Game game, Handler handler, HUD hud, UpgradeScreen upgradeScreen, 
+			Player player, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnTest spawnTest) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -27,7 +30,8 @@ public class Upgrades {
 		this.player = player;
 		this.spawner = spawner;
 		this.spawner2 = spawner2;
-		this.ability = "";
+		this.ability = hud.getAbility();
+		this.spawnTest = spawnTest;
 	}
 
 	public void clearScreenAbility() {
@@ -35,6 +39,7 @@ public class Upgrades {
 		hud.setAbilityUses(hud.getAbilityUses() - 1);
 		if (hud.getAbilityUses() == 0) {
 			ability = "";
+			hud.setAbility(ability);
 		}
 	}
 
@@ -59,16 +64,24 @@ public class Upgrades {
 	}
 
 	public void levelSkipAbility() {
-		handler.clearEnemies();
-		hud.setLevel(hud.getLevel() + 1);
-		if (Spawn1to5.LEVEL_SET == 1) {
-			spawner.skipLevel();
-		} else if (Spawn1to5.LEVEL_SET == 2) {
-			spawner2.skipLevel();
-		}
-		hud.setAbilityUses(hud.getAbilityUses() - 1);
-		if (hud.getAbilityUses() == 0) {
-			ability = "";
+		if(game.getGameState() == STATE.Wave){
+			handler.clearEnemies();
+			hud.setLevel(hud.getLevel() + 1);
+			if (Spawn1to5.LEVEL_SET == 1) {
+				spawner.skipLevel();
+			} else if (Spawn1to5.LEVEL_SET == 2) {
+				spawner2.skipLevel();
+			}
+			hud.setAbilityUses(hud.getAbilityUses() - 1);
+			if (hud.getAbilityUses() == 0) {
+				ability = "";
+				hud.setAbility(ability);
+			}
+		} else if (game.getGameState() == STATE.Survival){
+			handler.clearEnemies();
+		} else if (game.getGameState() == STATE.Test) {
+			handler.clearEnemies();
+			spawnTest.skipLevel();
 		}
 
 	}
@@ -78,6 +91,7 @@ public class Upgrades {
 		hud.setAbilityUses(hud.getAbilityUses() - 1);
 		if (hud.getAbilityUses() == 0) {
 			ability = "";
+			hud.setAbility(ability);
 		}
 	}
 
@@ -131,6 +145,8 @@ public class Upgrades {
 		hud.setExtraLives(0);
 		player.setPlayerSize(32);
 		upgradeScreen.resetPaths();
+		hud.setAbilityUses(0);
+		hud.clearUpgrades();
 	}
 
 }

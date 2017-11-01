@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
 import mainGame.audio.SoundPlayer;
+import mainGame.net.ClientConnection;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
@@ -28,6 +29,8 @@ public class Game extends Canvas implements Runnable {
 	private HUD hud;
 	private Spawn1to5 spawner;
 	private Spawn5to10 spawner2;
+	private Spawn10to15 spawner3;
+	private Spawn15to20 spawner4;
 	private SpawnSurvival spawnSurvival;
 	private Menu menu;
 	private GameOver gameOver;
@@ -42,32 +45,51 @@ public class Game extends Canvas implements Runnable {
 	private Leaderboard leaderboard;
 	
 	private SpawnBosses spawnBosses;
+	private SpawnMultiplayer spawnMultiplayer;
 	private JFrame frame;
 	private boolean isPaused = false;
 	private STATE currentGame;
+	private SpawnTest spawnTest;
+	private boolean isMusicPlaying = true;
+
+	/* NOBODY TOUCH THESE VARS, THEY ARE FOR TESTING NETWORKING */
+	private String op;
+	private String addr;
+	private int port;
+	private String room;
+	private String pass;
 
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Attack, Leaderboard, PauseMenu
+		Menu, Help, Connect, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, 
+		Leaderboard, Test, PauseMenu
 	};
 
 	/**
 	 * Initialize the core mechanics of the game
+	 * @param op The operation (join/host/none) to use
+	 * @param addr The address to use
+	 * @param port The port
+	 * @param room The roomname
+	 * @param pass The password
 	 */
-	public Game() {
+	public Game(String op, String addr, int port, String room, String pass) {
 		handler = new Handler();
 		hud = new HUD(this);
+		player = new Player(WIDTH / 2 - 21, HEIGHT / 2 - 21, ID.Player, handler, this.hud, this);
 		spawner = new Spawn1to5(this.handler, this.hud, this);
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
+		spawner3 = new Spawn10to15(this.handler, this.hud, this);
+		spawner4 = new Spawn15to20(this.handler, this.hud, this);
 		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this);
 		spawnBosses = new SpawnBosses(this.handler, this.hud, this);
+		spawnMultiplayer = new SpawnMultiplayer(this.handler, this.hud, this, this.player);
+		spawnTest = new SpawnTest(this.handler, this.hud, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
-		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
-		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
-				this.spawner2);
+		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		
 		//
@@ -75,17 +97,21 @@ public class Game extends Canvas implements Runnable {
 		//
 		
 		leaderboard = new Leaderboard(this, hud);
-		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival,
-				this.upgradeScreen, this.player, this.upgrades, leaderboard, this.spawnBosses);
-		this.addKeyListener(
-				new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
+		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades, leaderboard, this.spawnBosses, this.spawnTest);
+		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
 		this.setSize(new Dimension(WIDTH, HEIGHT));
 		JFXPanel jfxp = new JFXPanel(); // trust
 		soundplayer = new SoundPlayer("sounds/main.mp3", true);
 		soundplayer.start();
-		new Window((int) WIDTH, (int) HEIGHT, "Player Known BattleLands", this);
+		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
+
+		this.op = op;
+		this.addr = addr;
+		this.port = port;
+		this.room = room;
+		this.pass = pass;
 	}
 
 	/**
@@ -150,6 +176,21 @@ public class Game extends Canvas implements Runnable {
 	 * health, appearance, etc).
 	 */
 	private void tick() {
+		// if the arguments are given, go straight for multiplayer
+		if (!op.equals("none")) {
+			try {
+				spawnMultiplayer.createClient(addr, port);
+				if (op.equals("host")) {
+					spawnMultiplayer.getClient().host_game(room, pass);
+				} else if (op.equals("join")) {
+					spawnMultiplayer.getClient().join_game(room, pass);
+				}
+				gameState = STATE.Multiplayer;
+				op = "none";
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		if (!isPaused()) {
 			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME
 							// SCREEN
@@ -157,13 +198,14 @@ public class Game extends Canvas implements Runnable {
 				currentGame = STATE.Wave;
 				if (!handler.isPaused()) {
 					hud.tick();
-					if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru
-													// 10, update them
+					if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 5, update them
 						spawner.tick();
-					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels
-															// 10 thru 20,
-															// update them
+					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 5 thru 10, update them
 						spawner2.tick();
+					} else if (Spawn1to5.LEVEL_SET == 3) {
+						spawner3.tick();
+					} else if (Spawn1to5.LEVEL_SET == 4) {
+						spawner4.tick();
 					}
 				}
 				// switch the sound that's playing if the mode is waves
@@ -194,19 +236,20 @@ public class Game extends Canvas implements Runnable {
 			} else if (gameState == STATE.GameOver) {// game is over, update the
 														// game over screen
 				gameOver.tick();
-			} else if (gameState == STATE.Attack) {
-				hud.tick();
-				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10,
-												// update them
-					spawner.tick();
-				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10
-														// thru 20, update them
-					spawner2.tick();
-				}	
+			} else if (gameState == STATE.Connect) { // entering connection info for MP
+				// TODO: add a connect screen @chieco
+			} else if (gameState == STATE.Multiplayer) {
+				// do not use HUD::tick() here, it's used inside the spawner
+				spawnMultiplayer.tick();
 			} else if (gameState == STATE.Bosses) {
 				currentGame = STATE.Wave;
 				hud.tick();
 				spawnBosses.tick();
+				if (!soundplayer.getSong().equals("sounds/bosses.mp3")) {
+					soundplayer.stop_playing();
+					soundplayer = new SoundPlayer("sounds/bosses.mp3", true);
+					soundplayer.start();
+				}
 			} else if (gameState == STATE.Survival) {
 				currentGame = STATE.Wave;
 				hud.tick();
@@ -218,10 +261,18 @@ public class Game extends Canvas implements Runnable {
 				}
 			} else if (gameState == STATE.PauseMenu) {						
 				pauseMenu.tick();
+			} else if (gameState == STATE.Test) {// game is running
+				hud.tick();
+				spawnTest.tick();
 			}
 		}
-		// tick the pause screen
-
+		if(isMusicPlaying) {
+			if (soundplayer.isPaused())
+				soundplayer.play();
+		} else {
+			if (!soundplayer.isPaused())
+				soundplayer.pause();
+		}
 	}
 
 	/**
@@ -250,9 +301,9 @@ public class Game extends Canvas implements Runnable {
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
 							// SCREEN
 
-		if (gameState == STATE.Wave || gameState == STATE.Attack || gameState == STATE.Bosses
-				|| gameState == STATE.Survival) {// user is playing game, draw
-													// game objects
+		if (gameState == STATE.Wave || gameState == STATE.Multiplayer 
+				|| gameState == STATE.Bosses || gameState == STATE.Survival
+				|| gameState == STATE.Test) {// user is playing game, draw game objects
 			hud.render(g);
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user
 																		// is in
@@ -304,8 +355,28 @@ public class Game extends Canvas implements Runnable {
 			return var;
 	}
 
+	public static double clampX(double x, double width) {
+		return clamp(x, 0, Game.WIDTH - width);
+	}
+
+	public static double clampY(double y, double height) {
+		return clamp(y, 0, Game.HEIGHT - height);
+	}
+
 	public static void main(String[] args) {
-		new Game();
+		String op = "none";
+		String address = "none";
+		int port = 0;
+		String room = "";
+		String pass = "";
+		if (args.length == 5) {
+			op = args[0];
+			address = args[1];
+			port = Integer.parseInt(args[2]);
+			room = args[3];
+			pass = args[4];
+		}
+		new Game(op, address, port, room, pass);
 	}
 	
 	public void setFrame(JFrame frame) {
@@ -333,5 +404,19 @@ public class Game extends Canvas implements Runnable {
 
 	public boolean isPaused() {
 		return isPaused;
+	}
+
+	
+	public void musicKeyPressed() {
+		isMusicPlaying = !isMusicPlaying;
+	}
+
+	/**
+	 * Updates the server with the player's position (only in multiplayer).
+	 */
+	public void updatePlayerPosition() {
+		if (gameState == STATE.Multiplayer) {
+			spawnMultiplayer.sendPos();
+		}
 	}
 }
