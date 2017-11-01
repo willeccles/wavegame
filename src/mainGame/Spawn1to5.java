@@ -106,7 +106,8 @@ public class Spawn1to5 {
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
-		} else if (levelNumber == 1) {
+		}
+		else if (levelNumber == 1) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
