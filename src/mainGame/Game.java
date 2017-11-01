@@ -208,14 +208,7 @@ public class Game extends Canvas implements Runnable {
 					soundplayer = new SoundPlayer("sounds/memories.mp3", true);
 					soundplayer.start();
 				}
-			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user
-				// is
-				// on
-				// menu,
-				// update
-				// the
-				// menu
-				// items
+			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
 				menu.tick();
 				// make sure the menu is playing the right song
 				if (!soundplayer.getSong().equals("sounds/main.mp3")) {

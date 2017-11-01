@@ -70,7 +70,10 @@ public class SoundPlayer extends Thread {
 	public void play() {
 		// just in case the thread is not started
 		if (!this.isAlive()) {
-			this.start();
+			try {
+				this.start();
+			} catch (IllegalThreadStateException itse) {
+			}
 		}
 		player.play();
 	}
