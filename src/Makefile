@@ -1,10 +1,17 @@
-game:
-	rm -f mainGame/*.class
-	javac mainGame/Game.java
+MAINCLASSES=$(subst .java,.class,$(wildcard mainGame/*.java))
+AUDIO=$(subst .java,.class,$(wildcard mainGame/audio/*.java))
+NET=$(subst .java,.class,$(widlcard mainGame/net/*.java))
+MAINDIR=mainGame
+NETDIR=$(MAINDIR)/net
+AUDIODIR=$(MAINDIR)/audio
+SERVERCLASSES=$(subst .java,.class,$(wildcard server/*.java))
 
-gameserver:
-	rm -f server/*.class
-	javac server/Server.java
+game: $(MAINCLASSES) $(AUDIO) $(NET)
+
+server: $(SERVERCLASSES)
+
+%.class: %.java
+	javac $<
 
 all:
 	make maingame
