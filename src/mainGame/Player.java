@@ -27,6 +27,7 @@ public class Player extends GameObject {
 	public String gameMode;
 	private Color color;
 	private boolean isOpponent;
+	int count;
 
 	/**
 	 * Use the other constructor unless this is an opponent in multiplayer.
@@ -41,6 +42,7 @@ public class Player extends GameObject {
 		this.isOpponent = isOpponent;
 		playerWidth = 21;
 		playerHeight = 21;
+		count = 0;
 	}
 
 	/**
@@ -103,21 +105,29 @@ public class Player extends GameObject {
 		//for enemies
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
-
+//			if (tempObject.getId() == ID.BossEye) {// tempObject is an enemy
+//				count++;
+//				if(count > 10){
+//					// collision code
+//					if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
+//						hud.health -= damage;
+//						hud.updateScoreColor(Color.red);
+//					}
+//				}
+//			}
 			if (tempObject.getId() == ID.EnemyBasic || tempObject.getId() == ID.EnemyFast
 					|| tempObject.getId() == ID.EnemySmart || tempObject.getId() == ID.EnemyBossBullet
 					|| tempObject.getId() == ID.EnemySweep || tempObject.getId() == ID.EnemyShooterBullet
 					|| tempObject.getId() == ID.EnemyBurst || tempObject.getId() == ID.EnemyShooter
-					|| tempObject.getId() == ID.BossEye || tempObject.getId() == ID.EnemyTracker || tempObject.getId() == ID.EnemyExpand
-					|| tempObject.getId() == ID.EnemyMiniShooter || tempObject.getId() == ID.EnemyMiniShooterBullet 
-					|| tempObject.getId() == ID.EnemyPorcupine) {// tempObject is an enemy
+					||tempObject.getId() == ID.EnemyTracker
+					|| tempObject.getId() == ID.EnemyExpand || tempObject.getId() == ID.EnemyMiniShooter
+					|| tempObject.getId() == ID.EnemyMiniShooterBullet || tempObject.getId() == ID.EnemyPorcupine) {// tempObject is an enemy
 
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
 					hud.health -= damage;
 					hud.updateScoreColor(Color.red);
 				}
-
 			}
 			if (tempObject.getId() == ID.EnemyBoss) {
 				// Allows player time to get out of upper area where they will get hurt once the
