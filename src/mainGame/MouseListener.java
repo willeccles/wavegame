@@ -1,5 +1,6 @@
 package mainGame;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -28,8 +29,10 @@ public class MouseListener extends MouseAdapter {
 	private Player player;
 	private String upgradeText;
 	private Leaderboard leaderboard;
-	
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses) {
+
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2,
+			SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, Player player, Upgrades upgrades,
+			Leaderboard leaderboard, SpawnBosses spawnBosses) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -46,7 +49,7 @@ public class MouseListener extends MouseAdapter {
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
-		if(game.gameState == STATE.GameOver){
+		if (game.gameState == STATE.GameOver) {
 			if (player.checkGame() == "waves") {
 				handler.object.clear();
 				upgrades.resetUpgrades();
@@ -59,35 +62,31 @@ public class MouseListener extends MouseAdapter {
 				spawner2.addLevels();
 				Spawn1to5.LEVEL_SET = 1;
 				game.gameState = STATE.Menu;
-			} else if (player.checkGame() == "survival"){
+			} else if (player.checkGame() == "survival") {
 				handler.object.clear();
-				hud.health=100;
+				hud.health = 100;
 				hud.setScore(0);
 				spawnSurvival.restart();
 				game.gameState = STATE.Leaderboard;
 			} else if (player.checkGame() == "bosses") {
 				handler.object.clear();
-				hud.health=100;
+				hud.health = 100;
 				hud.setScore((0));
 				spawnBosses.restart();
 			}
-			
+
 		}
 
 		else if (game.gameState == STATE.Wave) {
-
 		}
 
 		else if (game.gameState == STATE.Attack) {
-
 		}
 
 		else if (game.gameState == STATE.Bosses) {
-
 		}
 
 		else if (game.gameState == STATE.Survival) {
-
 		}
 
 		else if (game.gameState == STATE.Upgrade) {
@@ -137,8 +136,7 @@ public class MouseListener extends MouseAdapter {
 			// Credits
 			else if (mouseOver(mx, my, 53, 290, 566, 166)) {
 				JOptionPane.showMessageDialog(game,
-						"Made by Team A1"
-								+ " for the Computer Science 225 project in fall 2017."
+						"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
 								+ "\n\nThis game was originally one wave mode but now all of gamemodes"
 								+ " are 100% playable, enjoy!");
 			}
@@ -148,21 +146,22 @@ public class MouseListener extends MouseAdapter {
 				System.exit(1);
 			}
 
-			//Attack Mode
+			// Attack Mode
 			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
 				handler.object.clear();
 				game.gameState = STATE.Attack;
 				handler.addObject(player);
 			}
 
-			//Survival Mode
+			// Survival Mode
 			else if (mouseOver(mx, my, 960, 390, 266, 266)) {
+				game.gameState = game.getCurrentGame();
 				handler.object.clear();
 				game.gameState = STATE.Survival;
 				handler.addObject(player);
 			}
 
-			//Bosses Mode
+			// Bosses Mode
 			else if (mouseOver(mx, my, 960, 90, 266, 266)) {
 				handler.object.clear();
 				game.gameState = STATE.Bosses;
@@ -176,14 +175,39 @@ public class MouseListener extends MouseAdapter {
 				return;
 			}
 		}
-		//Leaderboard screen
-		else if (game.gameState == STATE.Leaderboard){
-			if(mouseOver(mx, my, 353, 490, 566, 166)){
+		// Leaderboard screen
+		else if (game.gameState == STATE.Leaderboard) {
+			if (mouseOver(mx, my, 353, 490, 566, 166)) {
 				leaderboard.nextUser();
 				game.gameState = STATE.Menu;
 				return;
 			}
+		} else if (game.gameState == STATE.Help) {
+			if (mouseOver(mx, my, 566, 200, 133, 42)) {
+				game.gameState = STATE.Menu;
+				return;
+			}
+			// PauseMenu-> Resume
+		} else if (game.gameState == STATE.PauseMenu) {
+		 if (mouseOver(mx, my, 445, 37, 390, 329)) {
+				game.gameState = game.getCurrentGame();
+				game.unPause();
+				return;
+				//PauseMenu-> Main Menu
+			} if (mouseOver(mx, my, 445, 372, 390, 337)) {
+				game.unPause();
+				game.gameState = STATE.Menu;
+				handler.clearEnemies();
+				handler.clearPlayer();
+				hud.setScore(0);
+				hud.updateScoreColor(Color.white);
+				hud.setHealth(100);
+				hud.setLevel(1);
+				hud.setExtraLives(0);
+				return;
+			}
 		}
+
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -191,7 +215,8 @@ public class MouseListener extends MouseAdapter {
 	}
 
 	/**
-	 * Helper method to detect is the mouse is over a "button" drawn via Graphics
+	 * Helper method to detect is the mouse is over a "button" drawn via
+	 * Graphics
 	 * 
 	 * @param mx
 	 *            mouse x position

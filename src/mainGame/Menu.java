@@ -46,8 +46,8 @@ public class Menu {
 		timer = 10;
 		r = new Random();
 		addColors();
-
 		img = null;
+		
 		try {
 			URL imageURL = Game.class.getResource("images/backgroundimage.jpg");
 			img = Toolkit.getDefaultToolkit().getImage(imageURL);
@@ -70,6 +70,7 @@ public class Menu {
 	}
 
 	public void tick() {
+		game.gameState = STATE.Menu;
 		timer--;
 		if (timer <= 0) {
 			handler.object.clear();

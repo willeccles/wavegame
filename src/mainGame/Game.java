@@ -36,18 +36,21 @@ public class Game extends Canvas implements Runnable {
 	private Upgrades upgrades;
 	private Player player;
 	public STATE gameState = STATE.Menu;
+	private PauseMenu pauseMenu;
 	public static int TEMP_COUNTER;
 	private SoundPlayer soundplayer;
 	private Leaderboard leaderboard;
+	
 	private SpawnBosses spawnBosses;
 	private JFrame frame;
 	private boolean isPaused = false;
+	private STATE currentGame;
 
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Attack, Leaderboard
+		Menu, Help, Wave, GameOver, Upgrade, Bosses, Survival, Attack, Leaderboard, PauseMenu
 	};
 
 	/**
@@ -63,11 +66,19 @@ public class Game extends Canvas implements Runnable {
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this.hud, this);
-		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2);
+		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner,
+				this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
+		
+		//
+		pauseMenu = new PauseMenu(this, this.handler, this.hud);
+		//
+		
 		leaderboard = new Leaderboard(this, hud);
-		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades, leaderboard, this.spawnBosses);
-		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
+		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival,
+				this.upgradeScreen, this.player, this.upgrades, leaderboard, this.spawnBosses);
+		this.addKeyListener(
+				new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
 		this.setSize(new Dimension(WIDTH, HEIGHT));
@@ -78,8 +89,8 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	/**
-	 * The thread is simply a programs path of execution. This method ensures that
-	 * this thread starts properly.
+	 * The thread is simply a programs path of execution. This method ensures
+	 * that this thread starts properly.
 	 */
 	public synchronized void start() {
 		thread = new Thread(this);
@@ -123,9 +134,9 @@ public class Game extends Canvas implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				// disabled because i like my battery life
-				//System.out.println("FPS: " + frames);
-				//System.out.println(gameState);
-				//System.out.println(Spawn1to5.LEVEL_SET);
+				// System.out.println("FPS: " + frames);
+				// System.out.println(gameState);
+				// System.out.println(Spawn1to5.LEVEL_SET);
 				frames = 0;
 			}
 		}
@@ -134,19 +145,24 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	/**
-	 * Constantly ticking (60 times per second, used for updating smoothly). Used
-	 * for updating the instance variables (DATA) of each entity (location, health,
-	 * appearance, etc).
+	 * Constantly ticking (60 times per second, used for updating smoothly).
+	 * Used for updating the instance variables (DATA) of each entity (location,
+	 * health, appearance, etc).
 	 */
 	private void tick() {
 		if (!isPaused()) {
-			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME SCREEN
+			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME
+							// SCREEN
 			if (gameState == STATE.Wave) {// game is running
+				currentGame = STATE.Wave;
 				if (!handler.isPaused()) {
 					hud.tick();
-					if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+					if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru
+													// 10, update them
 						spawner.tick();
-					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+					} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels
+															// 10 thru 20,
+															// update them
 						spawner2.tick();
 					}
 				}
@@ -156,7 +172,14 @@ public class Game extends Canvas implements Runnable {
 					soundplayer = new SoundPlayer("sounds/memories.mp3", true);
 					soundplayer.start();
 				}
-			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is on menu, update the menu items
+			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user
+																			// is
+																			// on
+																			// menu,
+																			// update
+																			// the
+																			// menu
+																			// items
 				menu.tick();
 				// make sure the menu is playing the right song
 				if (!soundplayer.getSong().equals("sounds/main.mp3")) {
@@ -164,21 +187,28 @@ public class Game extends Canvas implements Runnable {
 					soundplayer = new SoundPlayer("sounds/main.mp3", true);
 					soundplayer.start();
 				}
-			} else if (gameState == STATE.Upgrade) {// user is on upgrade screen, update the upgrade screen
+			} else if (gameState == STATE.Upgrade) {// user is on upgrade
+													// screen, update the
+													// upgrade screen
 				upgradeScreen.tick();
-			} else if (gameState == STATE.GameOver) {// game is over, update the game over screen
+			} else if (gameState == STATE.GameOver) {// game is over, update the
+														// game over screen
 				gameOver.tick();
 			} else if (gameState == STATE.Attack) {
 				hud.tick();
-				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10, update them
+				if (Spawn1to5.LEVEL_SET == 1) {// user is on levels 1 thru 10,
+												// update them
 					spawner.tick();
-				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10 thru 20, update them
+				} else if (Spawn1to5.LEVEL_SET == 2) {// user is on levels 10
+														// thru 20, update them
 					spawner2.tick();
-				}
+				}	
 			} else if (gameState == STATE.Bosses) {
+				currentGame = STATE.Wave;
 				hud.tick();
 				spawnBosses.tick();
 			} else if (gameState == STATE.Survival) {
+				currentGame = STATE.Wave;
 				hud.tick();
 				spawnSurvival.tick();
 				if (!soundplayer.getSong().equals("sounds/135.mp3")) {
@@ -186,21 +216,24 @@ public class Game extends Canvas implements Runnable {
 					soundplayer = new SoundPlayer("sounds/135.mp3", true);
 					soundplayer.start();
 				}
+			} else if (gameState == STATE.PauseMenu) {						
+				pauseMenu.tick();
 			}
-		} else {
-			// tick the pause screen
 		}
+		// tick the pause screen
+
 	}
 
 	/**
-	 * Constantly drawing to the many buffer screens of each entity requiring the
-	 * Graphics objects (entities, screens, HUD's, etc).
+	 * Constantly drawing to the many buffer screens of each entity requiring
+	 * the Graphics objects (entities, screens, HUD's, etc).
 	 */
 	private void render() {
 
 		/*
-		 * BufferStrategies are used to prevent screen tearing. In other words, this
-		 * allows for all objects to be redrawn at the same time, and not individually
+		 * BufferStrategies are used to prevent screen tearing. In other words,
+		 * this allows for all objects to be redrawn at the same time, and not
+		 * individually
 		 */
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
@@ -214,21 +247,36 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, (int) WIDTH, (int) HEIGHT);
 
-		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME SCREEN
+		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
+							// SCREEN
 
-		if (gameState == STATE.Wave || gameState == STATE.Attack || gameState == STATE.Bosses || gameState == STATE.Survival) {// user is playing game, draw game objects
+		if (gameState == STATE.Wave || gameState == STATE.Attack || gameState == STATE.Bosses
+				|| gameState == STATE.Survival) {// user is playing game, draw
+													// game objects
 			hud.render(g);
-		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user is in help or the menu, draw the menu
+		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user
+																		// is in
+																		// help
+																		// or
+																		// the
+																		// menu,
+																		// draw
+																		// the
+																		// menu
 			// and help objects
 			menu.render(g);
-		} else if (gameState == STATE.Upgrade) {// user is on the upgrade screen, draw the upgrade screen
+		} else if (gameState == STATE.Upgrade) {// user is on the upgrade
+												// screen, draw the upgrade
+												// screen
 			upgradeScreen.render(g);
-		} else if (gameState == STATE.GameOver) {// game is over, draw the game over screen
+		} else if (gameState == STATE.GameOver) {// game is over, draw the game
+													// over screen
 			gameOver.render(g);
 		} else if (gameState == STATE.Leaderboard) {
 			leaderboard.paint(g);
+		}else if (gameState == STATE.PauseMenu) {
+			pauseMenu.render(g);
 		}
-
 		///////// Draw things above this//////////////
 		g.dispose();
 		bs.show();
@@ -236,8 +284,8 @@ public class Game extends Canvas implements Runnable {
 
 	/**
 	 * 
-	 * Constantly checks bounds, makes sure players, enemies, and info doesn't leave
-	 * screen
+	 * Constantly checks bounds, makes sure players, enemies, and info doesn't
+	 * leave screen
 	 * 
 	 * @param var
 	 *            x or y location of entity
@@ -257,15 +305,18 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static void main(String[] args) {
-
 		new Game();
 	}
+	
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
 	public STATE getGameState() {
 		return gameState;
 	}
-
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
+	public STATE getCurrentGame() {
+		return currentGame;
 	}
 
 	public JFrame getFrame() {
