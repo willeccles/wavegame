@@ -112,13 +112,10 @@ public class KeyInput extends KeyAdapter {
 
 		}
 		if (key == KeyEvent.VK_ESCAPE) {
-			if (game.gameState != STATE.Menu) {
+			if (game.gameState == STATE.Wave || game.gameState == STATE.Bosses || game.gameState == STATE.Survival) {
 				if (game.isPaused() == true) {
-					game.gameState = game.getCurrentGame();
 					game.unPause();
-
 				} else {
-					game.gameState = STATE.PauseMenu;
 					game.pause();
 				}
 			}
@@ -128,7 +125,7 @@ public class KeyInput extends KeyAdapter {
 			game.musicKeyPressed();
 		}
 
-		if (game.getGameState() == STATE.Leaderboard) {
+		if (game.gameState == STATE.Leaderboard) {
 			if (key == KeyEvent.VK_A)
 				System.out.println("test");
 			if (leaderboard.getFull()) {

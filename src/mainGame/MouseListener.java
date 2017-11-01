@@ -52,178 +52,179 @@ public class MouseListener extends MouseAdapter {
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
-		if (game.gameState == STATE.GameOver) {
-			if (player.checkGame() == "waves") {
-				handler.object.clear();
-				upgrades.resetUpgrades();
-				upgradeScreen.resetUpgradeScreen();
-				hud.health = 100;
-				hud.setScore(0);
-				hud.setLevel(1);
-				spawner.restart();
-				spawner.addLevels();
-				spawner2.restart();
-				spawner2.addLevels();
-				Spawn1to5.LEVEL_SET = 1;
-				game.gameState = STATE.Menu;
-				player.resetVel();
-				player.resetLoc();
-			} else if (player.checkGame() == "survival") {
-				handler.object.clear();
-				handler.pickups.clear();
-				hud.health=100;
-				hud.setScore(0);
-				spawnSurvival.restart();
-				game.gameState = STATE.Leaderboard;
-				player.resetVel();
-				player.resetLoc();
-			} else if (player.checkGame() == "bosses") {
-				handler.object.clear();
-				hud.health = 100;
-				hud.setScore((0));
-				spawnBosses.restart();
-				player.resetVel();
-				player.resetLoc();
-			} else if (player.checkGame() == "test") {
-				handler.object.clear();
-				upgrades.resetUpgrades();
-				hud.health = 100;
-				hud.setScore(0);
-				spawnTest.restart();
-				game.gameState = STATE.Menu;
-				player.resetVel();
-				player.resetLoc();
+		if (!game.isPaused()) { // game is not paused
+			if (game.gameState == STATE.GameOver) {
+				if (player.checkGame() == "waves") {
+					handler.object.clear();
+					upgrades.resetUpgrades();
+					upgradeScreen.resetUpgradeScreen();
+					hud.health = 100;
+					hud.setScore(0);
+					hud.setLevel(1);
+					spawner.restart();
+					spawner.addLevels();
+					spawner2.restart();
+					spawner2.addLevels();
+					Spawn1to5.LEVEL_SET = 1;
+					game.gameState = STATE.Menu;
+					player.resetVel();
+					player.resetLoc();
+				} else if (player.checkGame() == "survival") {
+					handler.object.clear();
+					handler.pickups.clear();
+					hud.health=100;
+					hud.setScore(0);
+					spawnSurvival.restart();
+					game.gameState = STATE.Leaderboard;
+					player.resetVel();
+					player.resetLoc();
+				} else if (player.checkGame() == "bosses") {
+					handler.object.clear();
+					hud.health = 100;
+					hud.setScore((0));
+					spawnBosses.restart();
+					player.resetVel();
+					player.resetLoc();
+				} else if (player.checkGame() == "test") {
+					handler.object.clear();
+					upgrades.resetUpgrades();
+					hud.health = 100;
+					hud.setScore(0);
+					spawnTest.restart();
+					game.gameState = STATE.Menu;
+					player.resetVel();
+					player.resetLoc();
+				}
+
 			}
 
-		}
+			else if (game.gameState == STATE.Wave) {
+			}
+			else if (game.gameState == STATE.Multiplayer) {
 
-		else if (game.gameState == STATE.Wave) {
-		}
-		else if (game.gameState == STATE.Multiplayer) {
-
-		}
-
-		else if (game.gameState == STATE.Bosses) {
-		}
-
-		else if (game.gameState == STATE.Survival) {
-		}
-
-		else if (game.gameState == STATE.Test) {
-
-		}
-
-		else if (game.gameState == STATE.Upgrade) {
-			if (mouseOver(mx, my, 210, 210, 860, 150)) {
-				upgradeText = upgradeScreen.getPath(1);
-
-				upgrades.activateUpgrade(upgradeText);
-
-				upgradeScreen.removeUpgradeOption(1);
-
-				game.gameState = STATE.Wave;
-			} else if (mouseOver(mx, my, 210, 200 + 150, 860, 150)) {
-				upgradeText = upgradeScreen.getPath(2);
-
-				upgrades.activateUpgrade(upgradeText);
-
-				upgradeScreen.removeUpgradeOption(2);
-
-				game.gameState = STATE.Wave;
-			} else if (mouseOver(mx, my, 100, 200 + 2 * 150, 860, 150)) {
-				upgradeText = upgradeScreen.getPath(3);
-
-				upgrades.activateUpgrade(upgradeText);
-
-				upgradeScreen.removeUpgradeOption(3);
-
-				game.gameState = STATE.Wave;
 			}
 
-		}
-
-		else if (game.gameState == STATE.Menu) {
-			// Waves Button
-			if (mouseOver(mx, my, 660, 90, 266, 266)) {
-				handler.object.clear();
-				game.gameState = STATE.Wave;
-				handler.addObject(player);
-				// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
-				// "images/PickupHealth.png", handler));
+			else if (game.gameState == STATE.Bosses) {
 			}
 
-			// Help Button
-			else if (mouseOver(mx, my, 53, 90, 566, 166)) {
-				game.gameState = STATE.Help;
+			else if (game.gameState == STATE.Survival) {
 			}
 
-			// Credits
-			else if (mouseOver(mx, my, 53, 290, 566, 166)) {
-				JOptionPane.showMessageDialog(game,
-						"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
-						+ "\n\nThis game was originally one wave mode but now all of gamemodes"
-						+ " are 100% playable, enjoy!");
+			else if (game.gameState == STATE.Test) {
+
 			}
 
-			// Quit Button
-			else if (mouseOver(mx, my, 53, 490, 566, 166)) {
-				System.exit(1);
+			else if (game.gameState == STATE.Upgrade) {
+				if (mouseOver(mx, my, 210, 210, 860, 150)) {
+					upgradeText = upgradeScreen.getPath(1);
+
+					upgrades.activateUpgrade(upgradeText);
+
+					upgradeScreen.removeUpgradeOption(1);
+
+					game.gameState = STATE.Wave;
+				} else if (mouseOver(mx, my, 210, 200 + 150, 860, 150)) {
+					upgradeText = upgradeScreen.getPath(2);
+
+					upgrades.activateUpgrade(upgradeText);
+
+					upgradeScreen.removeUpgradeOption(2);
+
+					game.gameState = STATE.Wave;
+				} else if (mouseOver(mx, my, 100, 200 + 2 * 150, 860, 150)) {
+					upgradeText = upgradeScreen.getPath(3);
+
+					upgrades.activateUpgrade(upgradeText);
+
+					upgradeScreen.removeUpgradeOption(3);
+
+					game.gameState = STATE.Wave;
+				}
+
 			}
 
-			// Multiplayer Mode
-			else if (mouseOver(mx, my, 660, 390, 266, 266)) {
-				handler.object.clear();
-				game.gameState = STATE.Test;
-				handler.addObject(player);
-				//game.gameState = STATE.Connect;
-				// switch to the multiplayer connection screen, see Game::tick()
-				// the player gets added inside of SpawnMultiplayer at the same time as the opponent
-			}
+			else if (game.gameState == STATE.Menu) {
+				// Waves Button
+				if (mouseOver(mx, my, 660, 90, 266, 266)) {
+					handler.object.clear();
+					game.gameState = STATE.Wave;
+					handler.addObject(player);
+					// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
+					// "images/PickupHealth.png", handler));
+				}
 
-			// Survival Mode
-			else if (mouseOver(mx, my, 960, 390, 266, 266)) {
-				game.gameState = game.getCurrentGame();
-				handler.object.clear();
-				game.gameState = STATE.Survival;
-				handler.addObject(player);
-			}
+				// Help Button
+				else if (mouseOver(mx, my, 53, 90, 566, 166)) {
+					game.gameState = STATE.Help;
+				}
 
-			// Bosses Mode
-			else if (mouseOver(mx, my, 960, 90, 266, 266)) {
-				handler.object.clear();
-				game.gameState = STATE.Bosses;
-				handler.addObject(player);
+				// Credits
+				else if (mouseOver(mx, my, 53, 290, 566, 166)) {
+					JOptionPane.showMessageDialog(game,
+							"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
+							+ "\n\nThis game was originally one wave mode but now all of gamemodes"
+							+ " are 100% playable, enjoy!");
+				}
+
+				// Quit Button
+				else if (mouseOver(mx, my, 53, 490, 566, 166)) {
+					System.exit(1);
+				}
+
+				// Multiplayer Mode
+				else if (mouseOver(mx, my, 660, 390, 266, 266)) {
+					handler.object.clear();
+					game.gameState = STATE.Test;
+					handler.addObject(player);
+					//game.gameState = STATE.Connect;
+					// switch to the multiplayer connection screen, see Game::tick()
+					// the player gets added inside of SpawnMultiplayer at the same time as the opponent
+				}
+
+				// Survival Mode
+				else if (mouseOver(mx, my, 960, 390, 266, 266)) {
+					handler.object.clear();
+					game.gameState = STATE.Survival;
+					handler.addObject(player);
+				}
+
+				// Bosses Mode
+				else if (mouseOver(mx, my, 960, 90, 266, 266)) {
+					handler.object.clear();
+					game.gameState = STATE.Bosses;
+					handler.addObject(player);
+				}
 			}
-		}
-		// Back Button for Help screen
-		else if (game.gameState == STATE.Help) {
-			if (mouseOver(mx, my, 566, 200, 133, 42)) {
-				game.gameState = STATE.Menu;
-				return;
+			// Back Button for Help screen
+			else if (game.gameState == STATE.Help) {
+				if (mouseOver(mx, my, 566, 200, 133, 42)) {
+					game.gameState = STATE.Menu;
+					return;
+				}
 			}
-		}
-		// Leaderboard screen
-		else if (game.gameState == STATE.Leaderboard) {
-			if (mouseOver(mx, my, 353, 490, 566, 166)) {
-				leaderboard.nextUser();
-				game.gameState = STATE.Menu;
-				return;
+			// Leaderboard screen
+			else if (game.gameState == STATE.Leaderboard) {
+				if (mouseOver(mx, my, 353, 490, 566, 166)) {
+					leaderboard.nextUser();
+					game.gameState = STATE.Menu;
+					return;
+				}
+			} else if (game.gameState == STATE.Help) {
+				if (mouseOver(mx, my, 566, 200, 133, 42)) {
+					game.gameState = STATE.Menu;
+					return;
+				}
 			}
-		} else if (game.gameState == STATE.Help) {
-			if (mouseOver(mx, my, 566, 200, 133, 42)) {
-				game.gameState = STATE.Menu;
-				return;
-			}
+		} else { // game is paused
 			// PauseMenu-> Resume
-		} else if (game.gameState == STATE.PauseMenu) {
 			if (mouseOver(mx, my, 445, 37, 390, 329)) {
-				game.gameState = game.getCurrentGame();
 				game.unPause();
 				return;
 				//PauseMenu-> Main Menu
 			} if (mouseOver(mx, my, 445, 372, 390, 337)) {
 				game.unPause();
 				game.gameState = STATE.Menu;
+				// TODO: make one method in the handler for resetGame() that does all of the following things
 				handler.clearEnemies();
 				handler.clearPlayer();
 				hud.setScore(0);
