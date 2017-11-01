@@ -71,9 +71,9 @@ public class KeyInput extends KeyAdapter {
 			GameObject tempObject = handler.object.get(i);
 
 			// using only if's allows multiple keys to be triggered at once
-			//if (tempObject.getId() == ID.Player) {
-			//find the player object, as he is the only one the
-			//user can control key events for player 1
+			// if (tempObject.getId() == ID.Player) {
+			// find the player object, as he is the only one the
+			// user can control key events for player 1
 			if (key == KeyEvent.VK_UP && handler.getTimer() <= 0) {
 				player.setVelY(-(this.speed));
 				keyDown[0] = true;
@@ -110,7 +110,7 @@ public class KeyInput extends KeyAdapter {
 				}
 			}
 
-			}
+		}
 		if (key == KeyEvent.VK_ESCAPE) {
 			if (game.gameState != STATE.Menu) {
 				if (game.isPaused() == true) {
@@ -121,15 +121,15 @@ public class KeyInput extends KeyAdapter {
 					game.gameState = STATE.PauseMenu;
 					game.pause();
 				}
-				if (key == KeyEvent.VK_M) {
-					game.musicKeyPressed();
-				}
 			}
 		}
 
+		if (key == KeyEvent.VK_M) {
+			game.musicKeyPressed();
+		}
 
 		if (game.getGameState() == STATE.Leaderboard) {
-			if (key == KeyEvent.VK_A) 
+			if (key == KeyEvent.VK_A)
 				System.out.println("test");
 			if (leaderboard.getFull()) {
 				if (key == KeyEvent.VK_BACK_SPACE) {
@@ -258,41 +258,41 @@ public class KeyInput extends KeyAdapter {
 
 			}
 		}
-		}
+	}
 
-		public void keyReleased(KeyEvent e) {
-			int key = e.getKeyCode();
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
 
-			for (int i = 0; i < handler.object.size(); i++) {
-				GameObject tempObject = handler.object.get(i);
+		for (int i = 0; i < handler.object.size(); i++) {
+			GameObject tempObject = handler.object.get(i);
 
-				if (tempObject.getId() == ID.Player) {
-					// key events for player 1
-					if (key == KeyEvent.VK_UP) {
-						keyDown[0] = false;
-					} else if (key == KeyEvent.VK_LEFT) {
-						keyDown[1] = false;
-					} else if (key == KeyEvent.VK_DOWN) {
-						keyDown[2] = false;
-					} else if (key == KeyEvent.VK_RIGHT) {
-						keyDown[3] = false;
-						keyDown[4] = false;
-					}
-
-					// vertical movement
-					if (!keyDown[0] && !keyDown[2]) {
-						tempObject.setVelY(0);
-					}
-					// horizontal movement
-					if (!keyDown[1] && !keyDown[3]) {
-						tempObject.setVelX(0);
-					}
-					game.updatePlayerPosition();
+			if (tempObject.getId() == ID.Player) {
+				// key events for player 1
+				if (key == KeyEvent.VK_UP) {
+					keyDown[0] = false;
+				} else if (key == KeyEvent.VK_LEFT) {
+					keyDown[1] = false;
+				} else if (key == KeyEvent.VK_DOWN) {
+					keyDown[2] = false;
+				} else if (key == KeyEvent.VK_RIGHT) {
+					keyDown[3] = false;
+					keyDown[4] = false;
 				}
 
+				// vertical movement
+				if (!keyDown[0] && !keyDown[2]) {
+					tempObject.setVelY(0);
+				}
+				// horizontal movement
+				if (!keyDown[1] && !keyDown[3]) {
+					tempObject.setVelX(0);
+				}
+				game.updatePlayerPosition();
 			}
 
-			// if (key == KeyEvent.VK_ESCAPE) System.exit(1);
 		}
 
+		// if (key == KeyEvent.VK_ESCAPE) System.exit(1);
 	}
+
+}
