@@ -13,15 +13,15 @@ import java.net.URL;
  *
  */
 
-public class PickupSpeed extends Pickup{
-	
+public class PickupSpeed extends Pickup {
+
 	private Handler handler;
 	private Image img;
-	
+
 	public PickupSpeed(double x, double y, ID id, String path, Handler handler) {
 		super(x, y, id, path);
 		this.handler = handler;
-		
+
 		img = null;
 		try {
 			URL imageURL = Game.class.getResource("images/shoesAreForCasuals.png");
@@ -34,13 +34,13 @@ public class PickupSpeed extends Pickup{
 
 	public void tick() {
 
-		
+
 	}
-	
+
 
 	public void render(Graphics g) {
 		g.drawImage(this.img, (int)this.x, (int)this.y, 32, 32, null);
-		
+
 	}
 
 

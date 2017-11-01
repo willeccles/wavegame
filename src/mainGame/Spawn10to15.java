@@ -61,7 +61,7 @@ public class Spawn10to15 {
 			levelTimer--;
 			if (tempCounter < 1) {// display intro game message ONE time
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Let's start off easy...",
-						ID.Levels1to10Text));
+							ID.Levels1to10Text));
 				tempCounter++;
 			}
 			if (levelTimer <= 0) {// time to play!
@@ -206,22 +206,22 @@ public class Spawn10to15 {
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
-		} else if (levelNumber == 5){
+		} else if (levelNumber == 5) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
 				levelTimer = 1200;
 				tempCounter++;
 			}
-			if(trackerTimer == 999){
+			if(trackerTimer == 999) {
 				trackerColor = Color.blue;
-			} else if (trackerTimer == 500){
+			} else if (trackerTimer == 500) {
 				trackerColor = Color.black;
-			} else if (trackerTimer == 0){
+			} else if (trackerTimer == 0) {
 				trackerTimer = 1000;
 			}
 			trackerTimer--;
-			if(spawnTimer == 0){
+			if(spawnTimer == 0) {
 				handler.addObject(
 						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer, game));
 				spawnTimer = 100;
@@ -302,7 +302,7 @@ public class Spawn10to15 {
 				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
 				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
 			}
-			if (levelTimer == 0){
+			if (levelTimer == 0) {
 				tempCounter = 0;
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
@@ -354,7 +354,7 @@ public class Spawn10to15 {
 		levelTimer = 150;
 		levelsRemaining = 5;
 	}
-	public int rand(){
+	public int rand() {
 		return (int) (Math.random() * differentEnemies);
 	}
 

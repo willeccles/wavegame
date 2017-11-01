@@ -24,7 +24,7 @@ public class Leaderboard extends JPanel {
 	private LBWorker lbworker;
 	private int leaderboardAmount;
 
-	public Leaderboard(Game game, HUD hud){
+	public Leaderboard(Game game, HUD hud) {
 		this.game = game;
 		x = 353;
 		y = 490;
@@ -55,19 +55,19 @@ public class Leaderboard extends JPanel {
 		g.setFont(font);
 		g.drawString(user, strX, y-100);
 
-		if(full){
+		if(full) {
 			g.setFont(font);
 			g.drawString("15 character max", x+213, y-200);
 		}
 	}
 
-	public void updateUser(String temp){
+	public void updateUser(String temp) {
 		System.out.println(user);
-		if(charLoc == 15){
+		if(charLoc == 15) {
 			full = true;
 		} else {
 			full = false;
-			if(temp.equals("back")){
+			if(temp.equals("back")) {
 				user = user.substring(0, charLoc);
 				if(charLoc%2 == 0)
 					strX = strX + 20;
@@ -82,25 +82,25 @@ public class Leaderboard extends JPanel {
 		}
 		repaint();
 	}
-	public String getUser(){
+	public String getUser() {
 		return user;
 	}
-	public void updateLoc(int temp){
-		if(!full || temp <= 0){
-			if(temp == 0){
+	public void updateLoc(int temp) {
+		if(!full || temp <= 0) {
+			if(temp == 0) {
 				charLoc = 0;
 			} else {
 				charLoc = charLoc + temp;
 			}
 		}
 	}
-	public int getLoc(){
+	public int getLoc() {
 		return charLoc;
 	}
-	public Boolean getFull(){
+	public Boolean getFull() {
 		return full;
 	}
-	public void nextUser(){
+	public void nextUser() {
 		int temp = 0;
 		leaderboard[temp][0] = user;
 		leaderboard[temp][1] = Integer.toString(hud.getScore()); 

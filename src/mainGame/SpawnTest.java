@@ -55,22 +55,22 @@ public class SpawnTest {
 	 */
 	public void tick() {
 		hud.tick();
-		if(levelNumber == 1){
+		if(levelNumber == 1) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
 				levelTimer = 1200;
 				tempCounter++;
 			}
-			if(trackerTimer == 299){
+			if(trackerTimer == 299) {
 				trackerColor = Color.blue;
-			} else if (trackerTimer == 150){
+			} else if (trackerTimer == 150) {
 				trackerColor = Color.black;
-			} else if (trackerTimer == 0){
+			} else if (trackerTimer == 0) {
 				trackerTimer = 300;
 			}
 			trackerTimer--;
-			if(spawnTimer == 0){
+			if(spawnTimer == 0) {
 				handler.addObject(
 						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer, game));
 				spawnTimer = 100;
@@ -84,7 +84,7 @@ public class SpawnTest {
 				trackerTimer = 300;
 				levelNumber++;// set levelNumber to whatever index was randomly selected
 			}
-		} else if(levelNumber == 2){
+		} else if(levelNumber == 2) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
@@ -129,20 +129,20 @@ public class SpawnTest {
 			if(spawnTimer == 0) {
 				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
 			}
-			if (levelTimer == 0){
+			if (levelTimer == 0) {
 				tempCounter = 0;
 				handler.clearEnemies();
 				spawnTimer = 10;
 				levelNumber++;// set levelNumber to whatever index was randomly selected
 			}
-		} else if(levelNumber == 5){
+		} else if(levelNumber == 5) {
 			spawnTimer--;
 			levelTimer--;
 			if (tempCounter < 1) {
 				levelTimer = 1200;
 				tempCounter++;
 			}
-			if(spawnTimer == 0){
+			if(spawnTimer == 0) {
 				handler.addPickup(
 						new PickupSpeed(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, ID.SpeedPickup, "images/ham.png", this.handler));
 				spawnTimer = 100;
@@ -158,8 +158,8 @@ public class SpawnTest {
 	public void skipLevel() {
 		spawnTimer = 10;
 		tempCounter = 0;
-		if(levelNumber < 5){
-		levelNumber++;// set levelNumber to whatever index was randomly selected
+		if(levelNumber < 5) {
+			levelNumber++;// set levelNumber to whatever index was randomly selected
 		} else {
 			levelNumber = 1;
 		}

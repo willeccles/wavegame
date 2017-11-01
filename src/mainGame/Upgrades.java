@@ -64,7 +64,7 @@ public class Upgrades {
 	}
 
 	public void levelSkipAbility() {
-		if(game.getGameState() == STATE.Wave){
+		if(game.getGameState() == STATE.Wave) {
 			handler.clearEnemies();
 			hud.setLevel(hud.getLevel() + 1);
 			if (Spawn1to5.LEVEL_SET == 1) {
@@ -77,7 +77,7 @@ public class Upgrades {
 				ability = "";
 				hud.setAbility(ability);
 			}
-		} else if (game.getGameState() == STATE.Survival){
+		} else if (game.getGameState() == STATE.Survival) {
 			handler.clearEnemies();
 		} else if (game.getGameState() == STATE.Test) {
 			handler.clearEnemies();

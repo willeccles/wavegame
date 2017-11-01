@@ -42,14 +42,14 @@ public class GameOver {
 	public void render(Graphics g) {
 		Font font = new Font("Amoebic", 1, 100);
 		Font font2 = new Font("Amoebic", 1, 60);
-		
+
 		g.setFont(font);
 		g.setColor(this.retryColor);
 
 		text = "Game Over";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, Game.HEIGHT / 2 - 150);
 		g.setFont(font2);
-		if(!(player.checkGame().equals("survival"))){
+		if(!(player.checkGame().equals("survival"))) {
 			text = "Level: " + hud.getLevel();
 			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
 			text = "Score: " + hud.getScore();

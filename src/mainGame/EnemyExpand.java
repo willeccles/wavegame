@@ -58,7 +58,7 @@ public class EnemyExpand extends GameObject {
 		this.sizeY+=6;
 		this.x-=3;
 		this.y-=3;
-		
+
 		if (sizeX > 350) {
 			this.handler.removeObject(this);
 		}

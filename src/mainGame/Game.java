@@ -43,7 +43,7 @@ public class Game extends Canvas implements Runnable {
 	public static int TEMP_COUNTER;
 	private SoundPlayer soundplayer;
 	private Leaderboard leaderboard;
-	
+
 	private SpawnBosses spawnBosses;
 	private SpawnMultiplayer spawnMultiplayer;
 	private JFrame frame;
@@ -91,11 +91,11 @@ public class Game extends Canvas implements Runnable {
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
-		
+
 		//
 		pauseMenu = new PauseMenu(this, this.handler, this.hud);
 		//
-		
+
 		leaderboard = new Leaderboard(this, hud);
 		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades, leaderboard, this.spawnBosses, this.spawnTest);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
@@ -193,7 +193,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		if (!isPaused()) {
 			handler.tick();// ALWAYS TICK HANDLER, NO MATTER IF MENU OR GAME
-							// SCREEN
+			// SCREEN
 			if (gameState == STATE.Wave) {// game is running
 				currentGame = STATE.Wave;
 				if (!handler.isPaused()) {
@@ -215,13 +215,13 @@ public class Game extends Canvas implements Runnable {
 					soundplayer.start();
 				}
 			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user
-																			// is
-																			// on
-																			// menu,
-																			// update
-																			// the
-																			// menu
-																			// items
+				// is
+				// on
+				// menu,
+				// update
+				// the
+				// menu
+				// items
 				menu.tick();
 				// make sure the menu is playing the right song
 				if (!soundplayer.getSong().equals("sounds/main.mp3")) {
@@ -230,11 +230,11 @@ public class Game extends Canvas implements Runnable {
 					soundplayer.start();
 				}
 			} else if (gameState == STATE.Upgrade) {// user is on upgrade
-													// screen, update the
-													// upgrade screen
+				// screen, update the
+				// upgrade screen
 				upgradeScreen.tick();
 			} else if (gameState == STATE.GameOver) {// game is over, update the
-														// game over screen
+				// game over screen
 				gameOver.tick();
 			} else if (gameState == STATE.Connect) { // entering connection info for MP
 				// TODO: add a connect screen @chieco
@@ -259,7 +259,7 @@ public class Game extends Canvas implements Runnable {
 					soundplayer = new SoundPlayer("sounds/135.mp3", true);
 					soundplayer.start();
 				}
-			} else if (gameState == STATE.PauseMenu) {						
+			} else if (gameState == STATE.PauseMenu) {
 				pauseMenu.tick();
 			} else if (gameState == STATE.Test) {// game is running
 				hud.tick();
@@ -299,29 +299,29 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, (int) WIDTH, (int) HEIGHT);
 
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
-							// SCREEN
+		// SCREEN
 
 		if (gameState == STATE.Wave || gameState == STATE.Multiplayer 
 				|| gameState == STATE.Bosses || gameState == STATE.Survival
 				|| gameState == STATE.Test) {// user is playing game, draw game objects
 			hud.render(g);
 		} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user
-																		// is in
-																		// help
-																		// or
-																		// the
-																		// menu,
-																		// draw
-																		// the
-																		// menu
+			// is in
+			// help
+			// or
+			// the
+			// menu,
+			// draw
+			// the
+			// menu
 			// and help objects
 			menu.render(g);
 		} else if (gameState == STATE.Upgrade) {// user is on the upgrade
-												// screen, draw the upgrade
-												// screen
+			// screen, draw the upgrade
+			// screen
 			upgradeScreen.render(g);
 		} else if (gameState == STATE.GameOver) {// game is over, draw the game
-													// over screen
+			// over screen
 			gameOver.render(g);
 		} else if (gameState == STATE.Leaderboard) {
 			leaderboard.paint(g);
@@ -378,7 +378,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		new Game(op, address, port, room, pass);
 	}
-	
+
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
@@ -406,7 +406,7 @@ public class Game extends Canvas implements Runnable {
 		return isPaused;
 	}
 
-	
+
 	public void musicKeyPressed() {
 		isMusicPlaying = !isMusicPlaying;
 	}

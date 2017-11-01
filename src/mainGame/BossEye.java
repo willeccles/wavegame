@@ -113,7 +113,7 @@ public class BossEye extends GameObject {
 		g2d.setComposite(makeTransparent(alpha));
 		g.drawImage(img, (int) this.x, (int) this.y, null);
 		g2d.setComposite(makeTransparent(1));
-		
+
 		// HEALTH BAR
 		g.setColor(Color.GRAY);
 		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);

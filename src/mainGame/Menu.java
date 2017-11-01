@@ -47,7 +47,7 @@ public class Menu {
 		r = new Random();
 		addColors();
 		img = null;
-		
+
 		try {
 			URL imageURL = Game.class.getResource("images/backgroundimage.jpg");
 			img = Toolkit.getDefaultToolkit().getImage(imageURL);
@@ -56,7 +56,7 @@ public class Menu {
 		}
 
 		handler.addObject(new MenuFireworks((r.nextInt(Game.WIDTH) - 25), 500, 50, 50, 0, -2,
-				colorPick.get(r.nextInt(6)), ID.Firework, this.handler));
+					colorPick.get(r.nextInt(6)), ID.Firework, this.handler));
 	}
 
 	public void addColors() {
