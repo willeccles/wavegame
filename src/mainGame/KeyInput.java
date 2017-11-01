@@ -74,22 +74,22 @@ public class KeyInput extends KeyAdapter {
 			// if (tempObject.getId() == ID.Player) {
 			// find the player object, as he is the only one the
 			// user can control key events for player 1
-			if (key == KeyEvent.VK_UP && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && handler.getTimer() <= 0) {
 				player.setVelY(-(this.speed));
 				keyDown[0] = true;
 				game.updatePlayerPosition();
 			}
-			if (key == KeyEvent.VK_LEFT && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) && handler.getTimer() <= 0) {
 				player.setVelX(-(this.speed));
 				keyDown[1] = true;
 				game.updatePlayerPosition();
 			}
-			if (key == KeyEvent.VK_DOWN && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) && handler.getTimer() <= 0) {
 				player.setVelY(this.speed);
 				keyDown[2] = true;
 				game.updatePlayerPosition();
 			}
-			if (key == KeyEvent.VK_RIGHT && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) && handler.getTimer() <= 0) {
 				player.setVelX(this.speed);
 				keyDown[3] = true;
 				game.updatePlayerPosition();
