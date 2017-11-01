@@ -110,13 +110,13 @@ public class KeyInput extends KeyAdapter {
 				}
 			}
 
-		}
+			}
 		if (key == KeyEvent.VK_ESCAPE) {
 			if (game.gameState != STATE.Menu) {
 				if (game.isPaused() == true) {
 					game.gameState = game.getCurrentGame();
 					game.unPause();
-					
+
 				} else {
 					game.gameState = STATE.PauseMenu;
 					game.pause();
@@ -258,41 +258,41 @@ public class KeyInput extends KeyAdapter {
 
 			}
 		}
-	}
-
-	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
-
-		for (int i = 0; i < handler.object.size(); i++) {
-			GameObject tempObject = handler.object.get(i);
-
-			if (tempObject.getId() == ID.Player) {
-				// key events for player 1
-				if (key == KeyEvent.VK_UP) {
-					keyDown[0] = false;
-				} else if (key == KeyEvent.VK_LEFT) {
-					keyDown[1] = false;
-				} else if (key == KeyEvent.VK_DOWN) {
-					keyDown[2] = false;
-				} else if (key == KeyEvent.VK_RIGHT) {
-					keyDown[3] = false;
-					keyDown[4] = false;
-				}
-
-				// vertical movement
-				if (!keyDown[0] && !keyDown[2]) {
-					tempObject.setVelY(0);
-				}
-				// horizontal movement
-				if (!keyDown[1] && !keyDown[3]) {
-					tempObject.setVelX(0);
-				}
-				game.updatePlayerPosition();
-			}
-
 		}
 
-		// if (key == KeyEvent.VK_ESCAPE) System.exit(1);
-	}
+		public void keyReleased(KeyEvent e) {
+			int key = e.getKeyCode();
 
-}
+			for (int i = 0; i < handler.object.size(); i++) {
+				GameObject tempObject = handler.object.get(i);
+
+				if (tempObject.getId() == ID.Player) {
+					// key events for player 1
+					if (key == KeyEvent.VK_UP) {
+						keyDown[0] = false;
+					} else if (key == KeyEvent.VK_LEFT) {
+						keyDown[1] = false;
+					} else if (key == KeyEvent.VK_DOWN) {
+						keyDown[2] = false;
+					} else if (key == KeyEvent.VK_RIGHT) {
+						keyDown[3] = false;
+						keyDown[4] = false;
+					}
+
+					// vertical movement
+					if (!keyDown[0] && !keyDown[2]) {
+						tempObject.setVelY(0);
+					}
+					// horizontal movement
+					if (!keyDown[1] && !keyDown[3]) {
+						tempObject.setVelX(0);
+					}
+					game.updatePlayerPosition();
+				}
+
+			}
+
+			// if (key == KeyEvent.VK_ESCAPE) System.exit(1);
+		}
+
+	}

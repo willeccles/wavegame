@@ -39,7 +39,7 @@ public class EnemyPorcupine extends GameObject {
 		this.speed = speed;
 		this.size = sizeX;
 		this.bulletSpeed = bulletSpeed;
-		
+
 		for (int i = 0; i < handler.object.size(); i++) {
 			if (handler.object.get(i).getId() == ID.Player)
 				player = handler.object.get(i);
@@ -56,7 +56,7 @@ public class EnemyPorcupine extends GameObject {
 			velX *= -1;
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.orange, this.sizeX, this.sizeY, 0.025, this.handler));
-		
+
 		this.x += velX;
 		this.y += velY;
 		////////////////////////////// pythagorean theorem
@@ -67,7 +67,7 @@ public class EnemyPorcupine extends GameObject {
 				+ ((this.y - player.getY()) * (this.y - player.getY())));
 		////////////////////////////// pythagorean theorem
 		////////////////////////////// above//////////////////////////////////////////////////
-		
+
 		move();
 
 		timer--;
@@ -81,7 +81,7 @@ public class EnemyPorcupine extends GameObject {
 
 	private void move() {
 		// TODO Auto-generated method stub
-		
+
 		velX = ((this.speed / distance) * diffX); // numerator affects speed of enemy
 		velY = ((this.speed / distance) * diffY);// numerator affects speed of enemy
 	}
@@ -92,11 +92,11 @@ public class EnemyPorcupine extends GameObject {
 
 		handler.addObject(
 				new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.orange));
-		
+
 	}
 
 	public void updateEnemy() {
-		
+
 	}
 	public void render(Graphics g) {
 		g.setColor(Color.orange);

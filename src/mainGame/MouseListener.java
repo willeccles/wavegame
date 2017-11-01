@@ -30,7 +30,7 @@ public class MouseListener extends MouseAdapter {
 	private String upgradeText;
 	private Leaderboard leaderboard;
 	private SpawnTest spawnTest;
-	
+
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
 			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
 			Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses,
@@ -68,7 +68,7 @@ public class MouseListener extends MouseAdapter {
 				game.gameState = STATE.Menu;
 				player.resetVel();
 				player.resetLoc();
-			} else if (player.checkGame() == "survival"){
+			} else if (player.checkGame() == "survival") {
 				handler.object.clear();
 				handler.pickups.clear();
 				hud.health=100;
@@ -84,7 +84,7 @@ public class MouseListener extends MouseAdapter {
 				spawnBosses.restart();
 				player.resetVel();
 				player.resetLoc();
-			} else if (player.checkGame() == "test"){
+			} else if (player.checkGame() == "test") {
 				handler.object.clear();
 				upgrades.resetUpgrades();
 				hud.health = 100;
@@ -108,9 +108,9 @@ public class MouseListener extends MouseAdapter {
 
 		else if (game.gameState == STATE.Survival) {
 		}
-		
-		else if (game.gameState == STATE.Test){
-			
+
+		else if (game.gameState == STATE.Test) {
+
 		}
 
 		else if (game.gameState == STATE.Upgrade) {
@@ -161,8 +161,8 @@ public class MouseListener extends MouseAdapter {
 			else if (mouseOver(mx, my, 53, 290, 566, 166)) {
 				JOptionPane.showMessageDialog(game,
 						"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
-								+ "\n\nThis game was originally one wave mode but now all of gamemodes"
-								+ " are 100% playable, enjoy!");
+						+ "\n\nThis game was originally one wave mode but now all of gamemodes"
+						+ " are 100% playable, enjoy!");
 			}
 
 			// Quit Button
@@ -216,7 +216,7 @@ public class MouseListener extends MouseAdapter {
 			}
 			// PauseMenu-> Resume
 		} else if (game.gameState == STATE.PauseMenu) {
-		 if (mouseOver(mx, my, 445, 37, 390, 329)) {
+			if (mouseOver(mx, my, 445, 37, 390, 329)) {
 				game.gameState = game.getCurrentGame();
 				game.unPause();
 				return;

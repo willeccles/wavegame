@@ -53,7 +53,7 @@ public class EnemyBurst extends GameObject {
 			setVel();
 		}
 	}
-	
+
 	public EnemyBurst(double x, double y, double velX, double velY, int size, String side, ID id, Handler handler) {
 		this(x, y, velX, velY, size, side, id, handler, false);
 	}

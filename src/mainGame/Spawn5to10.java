@@ -57,7 +57,7 @@ public class Spawn5to10 {
 	}
 
 	public void tick() {
-		// if(LEVEL_SET_2_RESET < 1){
+		// if(LEVEL_SET_2_RESET < 1) {
 		// restart();
 		// LEVEL_SET_2_RESET ++;
 		// }
@@ -65,9 +65,9 @@ public class Spawn5to10 {
 			levelTimer--;
 			if (tempCounter < 1) {
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Same levels...",
-						ID.Levels1to10Text));
+							ID.Levels1to10Text));
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2, "...but a little harder now",
-						ID.Levels1to10Text));
+							ID.Levels1to10Text));
 				tempCounter++;
 			}
 			if (levelTimer <= 0) {
@@ -163,7 +163,7 @@ public class Spawn5to10 {
 			levelTimer--;
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100,
-						-30, ID.EnemyShooter, this.handler));
+							-30, ID.EnemyShooter, this.handler));
 				levelTimer = 1200;
 				tempCounter++;
 			}
@@ -204,22 +204,22 @@ public class Spawn5to10 {
 					levelNumber = levels.get(this.rand());
 				}
 			}
-		} else if (levelNumber == 5){
+		} else if (levelNumber == 5) {
 			timer--;
 			levelTimer--;
 			if (tempCounter < 1) {
 				levelTimer = 1200;
 				tempCounter++;
 			}
-			if(trackerTimer == 999){
+			if(trackerTimer == 999) {
 				trackerColor = Color.blue;
-			} else if (trackerTimer == 500){
+			} else if (trackerTimer == 500) {
 				trackerColor = Color.black;
-			} else if (trackerTimer == 0){
+			} else if (trackerTimer == 0) {
 				trackerTimer = 1000;
 			}
 			trackerTimer--;
-			if(timer == 0){
+			if(timer == 0) {
 				handler.addObject(
 						new EnemyTracker(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), -5, ID.EnemyTracker, handler, trackerColor, trackerTimer, game));
 				timer = 100;
@@ -302,7 +302,7 @@ public class Spawn5to10 {
 				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
 				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
 			}
-			if (levelTimer == 0){
+			if (levelTimer == 0) {
 				tempCounter = 0;
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
@@ -330,7 +330,7 @@ public class Spawn5to10 {
 			} else if (tempCounter >= 1) {
 				for (int i = 0; i < handler.object.size(); i++) {
 					GameObject tempObject = handler.object.get(i);
-					if (tempObject.getId() == ID.BossEye){
+					if (tempObject.getId() == ID.BossEye) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
 							Spawn1to5.LEVEL_SET ++;
@@ -342,16 +342,16 @@ public class Spawn5to10 {
 
 		}
 		// WINNER
-		// else if(levelNumber){
+		// else if(levelNumber) {
 		// levelTimer --;
-		// if(tempCounter < 1){
+		// if(tempCounter < 1) {
 		// handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200,
 		// "Same levels...", ID.Levels1to10Text));
 		// handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2,
 		// "...but a little harder now", ID.Levels1to10Text));
 		// tempCounter++;
 		// }
-		// if(levelTimer <= 0){
+		// if(levelTimer <= 0) {
 		// handler.clearEnemies();
 		// tempCounter = 0;
 		// levelNumber = levels.get(index);
@@ -381,7 +381,7 @@ public class Spawn5to10 {
 		levelsLeft = 10;
 
 	}
-	public int rand(){
+	public int rand() {
 		return (int) (Math.random() * differentEnemies);
 	}
 

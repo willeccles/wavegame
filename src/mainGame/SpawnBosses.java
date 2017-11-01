@@ -26,7 +26,7 @@ public class SpawnBosses {
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
 	private int count;
 
-	public SpawnBosses(Handler handler, HUD hud, Game game){
+	public SpawnBosses(Handler handler, HUD hud, Game game) {
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
@@ -49,37 +49,37 @@ public class SpawnBosses {
 
 		}
 		else if (levelNumber == 0) {// this is level 1
-				if (tempCounter < 1) {
-					handler.addObject(new BullBoss(ID.BossBattle, handler));
-					tempCounter++;
-				} else if (tempCounter >= 1) {
-					for (int i = 0; i < handler.object.size(); i++) {
-						GameObject tempObject = handler.object.get(i);
-						if (tempObject.getId() == ID.BossBattle) {
-							if (tempObject.getHealth() <= 0) {
-								handler.removeObject(tempObject);
-								//LEVEL_SET++;
-								levelNumber++;
+			if (tempCounter < 1) {
+				handler.addObject(new BullBoss(ID.BossBattle, handler));
+				tempCounter++;
+			} else if (tempCounter >= 1) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.BossBattle) {
+						if (tempObject.getHealth() <= 0) {
+							handler.removeObject(tempObject);
+							//LEVEL_SET++;
+							levelNumber++;
 
-							}
 						}
 					}
 				}
+			}
 		}
 		else if (levelNumber == 1) {
-		if (tempCounter < 1) {
-			handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
-			handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
-			handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
-			handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 4));
-			handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 5));
-			handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 6));
-			handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
-			handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
-			handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
-			tempCounter++;
+			if (tempCounter < 1) {
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
+				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 4));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 5));
+				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 50, ID.BossEye, handler, 6));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
+				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
+				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
+				tempCounter++;
+			}
 		}
-	}
 	}
 
 	public void restart() {
@@ -89,9 +89,9 @@ public class SpawnBosses {
 		levelsRemaining = 5;
 	}
 
-	public int randInt(){
+	public int randInt() {
 		return (int) (Math.random()*(differentEnemies));
 	}
-	
+
 }
 

@@ -37,7 +37,7 @@ public class HUD {
 
 	public Game game;
 
-	public HUD(Game game){
+	public HUD(Game game) {
 		this.game = game;
 		health = 100;
 		healthMax = 100;
@@ -90,7 +90,7 @@ public class HUD {
 		g.setFont(font);
 
 		g.drawString("Score: " + score, 15, 115);
-		if(!(game.getGameState() == STATE.Survival)){
+		if(!(game.getGameState() == STATE.Survival)) {
 			g.drawString("Level: " + level, 15, 150);
 			g.drawString("Extra Lives: " + extraLives, 15, 185);
 		} else {
@@ -177,13 +177,13 @@ public class HUD {
 	public void restoreHealth() {
 		this.health = healthMax;
 	}
-	public double getHealthMax(){
+	public double getHealthMax() {
 		return healthMax;
 	}
-	public void clearUpgrades(){
+	public void clearUpgrades() {
 		ability = "";
 	}
-	public String getAbility(){
+	public String getAbility() {
 		return ability;
 	}
 }

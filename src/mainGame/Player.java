@@ -67,22 +67,22 @@ public class Player extends GameObject {
 		}
 
 	}
-	public String checkGame(){
+	public String checkGame() {
 		return gameMode;
 	}
 	public void checkIfDead() {
 		if (hud.health <= 0) {// player is dead, game over!
 
 			if (hud.getExtraLives() == 0) {
-				if(game.gameState == STATE.Survival){
+				if(game.gameState == STATE.Survival) {
 					gameMode = "survival";
-				} else if(game.gameState == STATE.Wave){
+				} else if(game.gameState == STATE.Wave) {
 					gameMode = "waves";
-				} else if(game.gameState == STATE.Bosses){
+				} else if(game.gameState == STATE.Bosses) {
 					gameMode = "bosses";
-				} else if(game.gameState == STATE.Multiplayer){
+				} else if(game.gameState == STATE.Multiplayer) {
 					gameMode = "multiplayer";
-				} else if (game.gameState == STATE.Test){
+				} else if (game.gameState == STATE.Test) {
 					gameMode = "test";
 				}
 				game.gameState = STATE.GameOver;
@@ -118,7 +118,7 @@ public class Player extends GameObject {
 					hud.updateScoreColor(Color.red);
 				}
 
-			}
+					}
 			if (tempObject.getId() == ID.EnemyBoss) {
 				// Allows player time to get out of upper area where they will get hurt once the
 				// boss starts moving
@@ -133,18 +133,18 @@ public class Player extends GameObject {
 		for (int i = 0; i < handler.pickups.size(); i++) {
 			Pickup tempPickup = handler.pickups.get(i);
 
-			if (tempPickup.getId() == ID.HealthPickup){
+			if (tempPickup.getId() == ID.HealthPickup) {
 
 				if(getBounds().intersects(tempPickup.getBounds())) {
-					if(hud.getHealthMax() - hud.health > 25){
+					if(hud.getHealthMax() - hud.health > 25) {
 						hud.health += 25;
 					} else {
 						hud.health = hud.getHealthMax();
 					}
 					handler.removePickup(tempPickup);
 				}
-			} else if (tempPickup.getId() == ID.SpeedPickup){
-				if(getBounds().intersects(tempPickup.getBounds())){
+			} else if (tempPickup.getId() == ID.SpeedPickup) {
+				if(getBounds().intersects(tempPickup.getBounds())) {
 					playerSpeed += 1;
 					handler.removePickup(tempPickup);
 				}
@@ -190,12 +190,12 @@ public class Player extends GameObject {
 		this.velY = velY;
 	}
 
-	public void resetVel(){
+	public void resetVel() {
 		this.velY = 0;
 		this.velX = 0;
 	}
 
-	public void resetLoc(){
+	public void resetLoc() {
 		x = Game.WIDTH / 2 - 21;
 		y = Game.HEIGHT / 2 - 21;
 	}

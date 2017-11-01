@@ -28,7 +28,7 @@ public class Handler {
 			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Trail
 					|| tempObject.getId() == ID.EnemyBurstWarning) {
 				// we don't want these to ever be frozen by the Screen Freeze ability
-				
+
 				// Every GameObject has a tick method, so this effectively
 				// updates every single object
 				tempObject.tick();

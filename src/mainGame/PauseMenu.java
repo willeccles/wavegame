@@ -39,7 +39,7 @@ public class PauseMenu {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
-	
+
 		img = null;
 		try {
 			URL imageURL = Game.class.getResource("images/PauseMenu.png");
@@ -60,7 +60,7 @@ public class PauseMenu {
 	public void render(Graphics g) {
 		if (game.gameState == STATE.PauseMenu) {
 			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-		//	handler.render(g);
+			//	handler.render(g);
 		}
 	}
 }

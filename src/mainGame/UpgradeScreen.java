@@ -30,8 +30,8 @@ public class UpgradeScreen {
 	private HUD hud;
 	private String text;
 	private String[] paths = { "images/clearscreenability.png", "images/decreaseplayersize.png", "images/extralife.png",
-			"images/healthincrease.png", "images/healthregeneration.png", "images/improveddamageresistance.png",
-			"images/levelskipability.png", "images/freezetimeability.png", "images/speedboost.png" };
+		"images/healthincrease.png", "images/healthregeneration.png", "images/improveddamageresistance.png",
+		"images/levelskipability.png", "images/freezetimeability.png", "images/speedboost.png" };
 	private ArrayList<String> imagePaths = new ArrayList<String>();
 	private Random r = new Random();
 	private int index1, index2, index3;
@@ -160,32 +160,32 @@ public class UpgradeScreen {
 	}
 
 
-	public void setIndex(){
+	public void setIndex() {
 		index1 = (int) (Math.random()*(differentUpgrades));
-		if(paths[index1] == null){
+		if(paths[index1] == null) {
 			index1 = (int) (Math.random()*(differentUpgrades));
 
 		}
 		index2 = (int) (Math.random()*(differentUpgrades));
-		if(paths[index2] == null){
+		if(paths[index2] == null) {
 			index2 = (int) (Math.random()*(differentUpgrades));
 
 		}
-		while(index1 == index2){
+		while(index1 == index2) {
 			index2 = (int) (Math.random()*(differentUpgrades));
-			if(paths[index2] == null){
+			if(paths[index2] == null) {
 				index2 = (int) (Math.random()*(differentUpgrades));
 
 			}
 		}
 		index3 = (int) (Math.random()*(differentUpgrades));
-		if(paths[index3] == null){
+		if(paths[index3] == null) {
 			index3 = (int) (Math.random()*(differentUpgrades));
 
 		}
-		while(index1 == index3 || index2 == index3){
+		while(index1 == index3 || index2 == index3) {
 			index3 = (int) (Math.random()*(differentUpgrades));
-			if(paths[index3] == null){
+			if(paths[index3] == null) {
 				index3 = (int) (Math.random()*(differentUpgrades));
 
 			}
@@ -193,7 +193,7 @@ public class UpgradeScreen {
 
 	}
 
-	public void resetUpgradeScreen(){
+	public void resetUpgradeScreen() {
 		this.setIndex();
 		this.resetPaths();
 		this.addPaths();

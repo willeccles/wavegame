@@ -20,7 +20,7 @@ public class LevelText extends GameObject {
 	private String text;
 	private int timer;
 	private Color[] color = { Color.WHITE, Color.RED, Color.BLUE, Color.CYAN, Color.GREEN, Color.MAGENTA, Color.ORANGE,
-			Color.PINK, Color.YELLOW };
+		Color.PINK, Color.YELLOW };
 	private Random r = new Random();
 	private int index;
 
