@@ -149,6 +149,11 @@ public class Player extends GameObject {
 					playerSpeed += 1;
 					handler.removePickup(tempPickup);
 				}
+			} else if (tempPickup.getId() == ID.ScorePickup) {
+				if(getBounds().intersects(tempPickup.getBounds())) {
+					hud.setScore(hud.getScore()+1000);
+					handler.removePickup(tempPickup);
+				}
 			}
 		}
 	}

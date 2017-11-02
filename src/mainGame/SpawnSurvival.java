@@ -37,7 +37,7 @@ public class SpawnSurvival {
 		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
-		differentEntities = 11;	
+		differentEntities = 12;	
 		trackerTimer = 1000;
 		trackerColor = Color.blue;
 		count = 0;
@@ -152,6 +152,11 @@ public class SpawnSurvival {
 				//spawns Health pickup
 
 				handler.addPickup(new PickupSpeed(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, ID.SpeedPickup, "images/ham.png", this.handler));
+				spawnTimer = 0;
+			} else if (spawnNum == 11) {
+				//spawns Health pickup
+
+				handler.addPickup(new PickupScore(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, ID.ScorePickup, "images/coin.png", this.handler));
 				spawnTimer = 0;
 			}
 		}
