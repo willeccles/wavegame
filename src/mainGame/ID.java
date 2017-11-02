@@ -5,7 +5,7 @@ public enum ID {
 	Player2, // used for the other player in multiplayer
 	Trail,
 	BossEye,
-	BossBattle,
+	BullBoss,
 	EnemyFast,
 	EnemySmart,
 	EnemyBoss,

@@ -50,12 +50,12 @@ public class SpawnBosses {
 		}
 		else if (levelNumber == 0) {// this is level 1
 			if (tempCounter < 1) {
-				handler.addObject(new BullBoss(ID.BossBattle, handler));
+				handler.addObject(new BullBoss(ID.BullBoss, handler));
 				tempCounter++;
 			} else if (tempCounter >= 1) {
 				for (int i = 0; i < handler.object.size(); i++) {
 					GameObject tempObject = handler.object.get(i);
-					if (tempObject.getId() == ID.BossBattle) {
+					if (tempObject.getId() == ID.BullBoss) {
 						if (tempObject.getHealth() <= 0) {
 							handler.removeObject(tempObject);
 							//LEVEL_SET++;
