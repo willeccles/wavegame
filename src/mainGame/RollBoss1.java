@@ -24,7 +24,7 @@ public class RollBoss1 extends GameObject {
 		this.handler = handler;
 		this.velX = velX;
 		this.velY = velY;
-		img = getImage("images/Roll-Ball1.png");
+		img = getImage("images/Angry-Balls1.png");
 	}
 
 	public void tick() {
