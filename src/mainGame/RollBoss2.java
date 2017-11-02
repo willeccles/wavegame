@@ -14,17 +14,17 @@ import java.net.URL;
  *
  */
 
-public class RollBoss1 extends GameObject {
+public class RollBoss2 extends GameObject {
 
 	private Handler handler;
 	private Image img;
 
-	public RollBoss1(double x, double y, int velX, int velY, ID id, Handler handler) {
+	public RollBoss2(double x, double y, int velX, int velY, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		this.velX = velX;
 		this.velY = velY;
-		img = getImage("images/Angry-Balls1.png");
+		img = getImage("images/Angry-Balls2.png");
 	}
 
 	public void tick() {
@@ -38,7 +38,7 @@ public class RollBoss1 extends GameObject {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(img, (int) this.x, (int) this.y, 400, 400, null);
+		g.drawImage(img, (int) this.x, (int) this.y, 96, 96, null);
 	}
 
 	@Override

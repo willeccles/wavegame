@@ -84,6 +84,7 @@ public class SpawnBosses {
 			if (tempCounter < 1) {
 				tempCounter++;
 				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
+				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
 			}
 		}
 	}

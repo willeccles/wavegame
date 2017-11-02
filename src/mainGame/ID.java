@@ -29,5 +29,7 @@ public enum ID {
 	HealthPickup,
 	SpeedPickup,
 	ScorePickup,
-	SurvivalText;
+	SurvivalText,
+	RollBoss1,
+	RollBoss2;
 }
