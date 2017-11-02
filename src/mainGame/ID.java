@@ -28,5 +28,8 @@ public enum ID {
 	EnemyPorcupine,
 	HealthPickup,
 	SpeedPickup,
-	SurvivalText;
+	ScorePickup,
+	SurvivalText,
+	RollBoss1,
+	RollBoss2;
 }

@@ -28,17 +28,9 @@ import mainGame.Game.STATE;
 
 public class PauseMenu {
 
-	private Game game;
-	private Handler handler;
-	private HUD hud;
 	private Image img;
-	private int timer;
-	private ArrayList<Color> colorPick = new ArrayList<Color>();
 
-	public PauseMenu(Game game, Handler handler, HUD hud) {
-		this.game = game;
-		this.handler = handler;
-		this.hud = hud;
+	public PauseMenu() {
 
 		img = null;
 		try {
@@ -49,18 +41,7 @@ public class PauseMenu {
 		}
 	}
 
-	public void tick() {
-		timer--;
-		if (timer <= 0) {
-			timer = 300;
-		}
-		handler.tick();
-	}
-
 	public void render(Graphics g) {
-		if (game.gameState == STATE.PauseMenu) {
-			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-			//	handler.render(g);
-		}
+		g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 	}
 }

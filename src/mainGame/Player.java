@@ -111,7 +111,8 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.EnemyBurst || tempObject.getId() == ID.EnemyShooter
 					||tempObject.getId() == ID.EnemyTracker || tempObject.getId() == ID.BossEye
 					|| tempObject.getId() == ID.EnemyExpand || tempObject.getId() == ID.EnemyMiniShooter
-					|| tempObject.getId() == ID.EnemyMiniShooterBullet || tempObject.getId() == ID.EnemyPorcupine) {// tempObject is an enemy
+					|| tempObject.getId() == ID.EnemyMiniShooterBullet || tempObject.getId() == ID.EnemyPorcupine
+					|| tempObject.getId() == ID.RollBoss1 || tempObject.getId() == ID.RollBoss2) {// tempObject is an enemy
 
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
@@ -147,6 +148,11 @@ public class Player extends GameObject {
 			} else if (tempPickup.getId() == ID.SpeedPickup) {
 				if(getBounds().intersects(tempPickup.getBounds())) {
 					playerSpeed += 1;
+					handler.removePickup(tempPickup);
+				}
+			} else if (tempPickup.getId() == ID.ScorePickup) {
+				if(getBounds().intersects(tempPickup.getBounds())) {
+					hud.setScore(hud.getScore()+1000);
 					handler.removePickup(tempPickup);
 				}
 			}

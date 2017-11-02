@@ -20,7 +20,7 @@ public class SpawnBosses {
 	private String[] side = {"left", "right", "top", "bottom"};
 	private int trackerTimer;
 	private Color trackerColor;
-	private int levelNumber = 1;
+	private int levelNumber = 2;
 	private int tempCounter = 0;
 	private int levelTimer;
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
@@ -78,6 +78,13 @@ public class SpawnBosses {
 				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
 				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
 				tempCounter++;
+			}
+		}
+		else if (levelNumber == 2) {
+			if (tempCounter < 1) {
+				tempCounter++;
+				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
+				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
 			}
 		}
 	}
