@@ -1,6 +1,8 @@
 package mainGame;
 
+import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Robot;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -30,6 +32,7 @@ public class MouseListener extends MouseAdapter {
 	private String upgradeText;
 	private Leaderboard leaderboard;
 	private SpawnTest spawnTest;
+	private Robot robot;
 
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
 			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
@@ -47,6 +50,12 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.spawnTest = spawnTest;
+		try {
+			robot = new Robot();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -95,7 +104,6 @@ public class MouseListener extends MouseAdapter {
 					player.resetVel();
 					player.resetLoc();
 				}
-
 			}
 
 			else if (game.gameState == STATE.Wave) {
@@ -162,8 +170,8 @@ public class MouseListener extends MouseAdapter {
 				else if (mouseOver(mx, my, 53, 290, 566, 166)) {
 					JOptionPane.showMessageDialog(game,
 							"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
-							+ "\n\nThis game was originally one wave mode but now all of gamemodes"
-							+ " are 100% playable, enjoy!");
+									+ "\n\nThis game was originally one wave mode but now all of gamemodes"
+									+ " are 100% playable, enjoy!");
 				}
 
 				// Quit Button
@@ -173,9 +181,11 @@ public class MouseListener extends MouseAdapter {
 
 				// Multiplayer Mode
 				else if (mouseOver(mx, my, 660, 390, 266, 266)) {
+					//handler.object.clear();
+					//game.gameState = STATE.Test;
+					//handler.addObject(player);
 					handler.object.clear();
-					game.gameState = STATE.Test;
-					handler.addObject(player);
+					game.gameState = STATE.Color;
 					//game.gameState = STATE.Connect;
 					// switch to the multiplayer connection screen, see Game::tick()
 					// the player gets added inside of SpawnMultiplayer at the same time as the opponent
@@ -215,6 +225,11 @@ public class MouseListener extends MouseAdapter {
 					return;
 				}
 			}
+		} else if(game.gameState == STATE.Color) {
+			//if(mouseOver(mx, my, x, y, width, height)) {
+				Color color = robot.getPixelColor(mx,my);
+				System.out.println(color);
+			//}
 		} else { // game is paused
 			// PauseMenu-> Resume
 			if (mouseOver(mx, my, 445, 37, 390, 329)) {
