@@ -78,7 +78,7 @@ public class BossEye extends GameObject {
 			} else if (this.placement == 9 && this.spawnOrder >= 9) {
 				attackPlayer();
 			} else {
-		
+
 			}
 		}
 	}
