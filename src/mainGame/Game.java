@@ -57,12 +57,14 @@ public class Game extends Canvas implements Runnable {
 	private int port;
 	private String room;
 	private String pass;
-
+	private ColorPickerScreen colorScreen;
+	
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Connect, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, Leaderboard, Test
+		Menu, Help, Connect, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, 
+		Leaderboard, Test, Color
 	};
 
 	/**
@@ -100,6 +102,7 @@ public class Game extends Canvas implements Runnable {
 		soundplayer = new SoundPlayer("sounds/main.mp3", true);
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
+		colorScreen = new ColorPickerScreen(player, this);
 
 		this.op = op;
 		this.addr = addr;
