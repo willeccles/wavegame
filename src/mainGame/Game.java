@@ -312,6 +312,8 @@ public class Game extends Canvas implements Runnable {
 				gameOver.render(g);
 			} else if (gameState == STATE.Leaderboard) {
 				leaderboard.paint(g);
+			} else if (gameState == STATE.Color) {
+				colorScreen.render(g);
 			}
 		} else {
 			pauseMenu.render(g);

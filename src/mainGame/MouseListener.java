@@ -186,6 +186,7 @@ public class MouseListener extends MouseAdapter {
 					//handler.addObject(player);
 					handler.object.clear();
 					game.gameState = STATE.Color;
+					handler.addObject(player);
 					//game.gameState = STATE.Connect;
 					// switch to the multiplayer connection screen, see Game::tick()
 					// the player gets added inside of SpawnMultiplayer at the same time as the opponent
@@ -224,12 +225,14 @@ public class MouseListener extends MouseAdapter {
 					game.gameState = STATE.Menu;
 					return;
 				}
-			}
-		} else if(game.gameState == STATE.Color) {
-			//if(mouseOver(mx, my, x, y, width, height)) {
+			} else if(game.gameState == STATE.Color) {
+				//if(mouseOver(mx, my, x, y, width, height)) {
+				System.out.println("click");
 				Color color = robot.getPixelColor(mx,my);
+				player.updateColor(color);
 				System.out.println(color);
-			//}
+				//}
+			}
 		} else { // game is paused
 			// PauseMenu-> Resume
 			if (mouseOver(mx, my, 445, 37, 390, 329)) {
@@ -242,6 +245,7 @@ public class MouseListener extends MouseAdapter {
 				// TODO: make one method in the handler for resetGame() that does all of the following things
 				handler.clearEnemies();
 				handler.clearPlayer();
+				handler.pickups.clear();
 				hud.setScore(0);
 				hud.updateScoreColor(Color.white);
 				hud.setHealth(100);
