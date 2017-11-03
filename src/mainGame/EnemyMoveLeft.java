@@ -11,7 +11,7 @@ import java.awt.Rectangle;
  *
  */
 
-public class EnemyMove extends GameObject {
+public class EnemyMoveLeft extends GameObject {
 
 	private Handler handler;
 	private int sizeX;
@@ -19,7 +19,7 @@ public class EnemyMove extends GameObject {
 	private int timer;
 	private GameObject player;
 
-	public EnemyMove(double x, double y, int sizeX, int sizeY, ID id, Handler handler) {
+	public EnemyMoveLeft(double x, double y, int sizeX, int sizeY, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		this.velX = 0;
@@ -43,13 +43,14 @@ public class EnemyMove extends GameObject {
 		if (this.x <= 0 || this.x >= Game.WIDTH - 16)
 			velX *= -1;
 
-		handler.addObject(new Trail(x, y, ID.Trail, Color.blue, this.sizeX, this.sizeY, 0.025, this.handler));
+		handler.addObject(new Trail(x, y, ID.Trail, Color.yellow, this.sizeX, this.sizeY, 0.09, this.handler));
 		
-		x += 10;
+		
+		x -= 10;
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.blue);
+		g.setColor(Color.yellow);
 		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);
 	}
 
