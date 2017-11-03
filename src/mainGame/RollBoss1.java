@@ -25,12 +25,14 @@ public class RollBoss1 extends GameObject {
 		this.velX = velX;
 		this.velY = velY;
 		img = getImage("images/Angry-Balls1.png");
+		this.health = 2000;
 	}
 
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
-
+		this.health -= 1;
+		
 		if (this.y <= 0 || this.y >= Game.HEIGHT - 11)
 			velY *= -1;
 		if (this.x <= 0 || this.x >= Game.WIDTH - 11)
@@ -38,14 +40,22 @@ public class RollBoss1 extends GameObject {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(img, (int) this.x, (int) this.y, 400, 400, null);
+		g.drawImage(img, (int) this.x, (int) this.y, 300, 300, null);
+		
+		// HEALTH BAR
+				g.setColor(Color.GRAY);
+				g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);
+				g.setColor(Color.RED);
+				g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, (int) this.health/2, 50);
+				g.setColor(Color.WHITE);
+				g.drawRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, 11, 11);
+		return new Rectangle((int) this.x, (int) this.y, 300, 300);
 	}
-	
+
 	public Image getImage(String path) {
 		Image image = null;
 		try {

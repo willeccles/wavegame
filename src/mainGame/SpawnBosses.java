@@ -46,8 +46,8 @@ public class SpawnBosses {
 	public void tick() {
 		if (levelNumber < 0) {
 
-
 		}
+
 		else if (levelNumber == 0) {// this is level 1
 			if (tempCounter < 1) {
 				handler.addObject(new BullBoss(ID.BullBoss, handler));
@@ -83,8 +83,8 @@ public class SpawnBosses {
 		else if (levelNumber == 2) {
 			if (tempCounter < 1) {
 				tempCounter++;
-				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
-				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
+				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.EnemyBasic, handler));
+				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.EnemyBasic, handler));
 			}
 		}
 	}
