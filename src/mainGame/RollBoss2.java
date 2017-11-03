@@ -33,9 +33,9 @@ public class RollBoss2 extends GameObject {
 		this.y += velY;
 		this.health -= 1;
 
-		if (this.y <= 0 || this.y >= Game.HEIGHT - 11)
+		if (this.y <= 0 || this.y >= Game.HEIGHT - 235)
 			velY *= -1;
-		if (this.x <= 0 || this.x >= Game.WIDTH - 11)
+		if (this.x <= 0 || this.x >= Game.WIDTH - 190)
 			velX *= -1;
 	}
 
