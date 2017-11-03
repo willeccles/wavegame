@@ -3,9 +3,14 @@ package mainGame;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import mainGame.Game.STATE;
@@ -32,7 +37,6 @@ public class MouseListener extends MouseAdapter {
 	private String upgradeText;
 	private Leaderboard leaderboard;
 	private SpawnTest spawnTest;
-	private Robot robot;
 
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
 			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
@@ -50,12 +54,7 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.spawnTest = spawnTest;
-		try {
-			robot = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -226,12 +225,7 @@ public class MouseListener extends MouseAdapter {
 					return;
 				}
 			} else if(game.gameState == STATE.Color) {
-				//if(mouseOver(mx, my, x, y, width, height)) {
-				System.out.println("click");
-				Color color = robot.getPixelColor(mx,my);
-				player.updateColor(color);
-				System.out.println(color);
-				//}
+				
 			}
 		} else { // game is paused
 			// PauseMenu-> Resume

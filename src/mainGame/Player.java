@@ -28,7 +28,6 @@ public class Player extends GameObject {
 	private Color color;
 	private boolean isOpponent;
 	int count;
-	private static Color playerColor;
 
 	/**
 	 * Use the other constructor unless this is an opponent in multiplayer.
@@ -44,14 +43,13 @@ public class Player extends GameObject {
 		playerWidth = 21;
 		playerHeight = 21;
 		count = 0;
-		playerColor = Color.white;
 	}
 
 	/**
 	 * Old constructor doesn't take a color.
 	 */
 	public Player(double x, double y, ID id, Handler handler, HUD hud, Game game) {
-		this(x, y, id, handler, hud, game, playerColor, false);
+		this(x, y, id, handler, hud, game, Color.white, false);
 	}
 
 	@Override
@@ -210,7 +208,7 @@ public class Player extends GameObject {
 	}
 	
 	public void updateColor(Color temp) {
-		this.playerColor = temp;
+		this.color = temp;
 	}
 
 }
