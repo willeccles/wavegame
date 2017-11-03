@@ -31,5 +31,6 @@ public enum ID {
 	ScorePickup,
 	SurvivalText,
 	RollBoss1,
-	RollBoss2;
+	RollBoss2,
+	EnemyMove;
 }

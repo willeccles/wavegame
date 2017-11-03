@@ -68,7 +68,7 @@ public class Spawn1to5 {
 			if (levelTimer <= 0) {// time to play!
 				handler.clearEnemies();
 				tempCounter = 0;
-				levelNumber = this.rand();
+				levelNumber = 9;//this.rand();
 			}
 
 		}
@@ -317,6 +317,31 @@ public class Spawn1to5 {
 				}
 			}
 		}
+		else if (levelNumber == 9) {
+			spawnTimer--;
+			levelTimer--;
+			if (tempCounter < 1) {
+				levelTimer = 1200;
+				tempCounter++;
+			}
+			if (spawnTimer == 0) {
+				handler.addObject(new EnemyMove(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, ID.EnemyMove, this.handler));
+				spawnTimer = 100;
+			}
+			if (levelTimer == 0) {
+				tempCounter = 0;
+				handler.clearEnemies();
+				hud.setLevel(hud.getLevel() + 1);
+				spawnTimer = 100;
+				if (levelsRemaining == 1) {
+					levelNumber = 101;
+				} else {// not time for the boss, just go to the next level
+					levelsRemaining--;
+					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
+				}
+			}
+		}
+		
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
 				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
