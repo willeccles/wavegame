@@ -68,7 +68,7 @@ public class Spawn1to5 {
 			if (levelTimer <= 0) {// time to play!
 				handler.clearEnemies();
 				tempCounter = 0;
-				levelNumber = 9;//this.rand();
+				levelNumber = this.rand();
 			}
 
 		}
