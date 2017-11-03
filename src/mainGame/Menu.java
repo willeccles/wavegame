@@ -70,7 +70,6 @@ public class Menu {
 	}
 
 	public void tick() {
-		game.gameState = STATE.Menu;
 		timer--;
 		if (timer <= 0) {
 			handler.object.clear();

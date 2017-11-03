@@ -208,6 +208,9 @@ public class Player extends GameObject {
 		x = Game.WIDTH / 2 - 21;
 		y = Game.HEIGHT / 2 - 21;
 	}
-
+	
+	public void updateColor(Color temp) {
+		this.color = temp;
+	}
 
 }

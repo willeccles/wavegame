@@ -3,9 +3,14 @@ package mainGame;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import mainGame.Game.STATE;
@@ -32,7 +37,6 @@ public class MouseListener extends MouseAdapter {
 	private String upgradeText;
 	private Leaderboard leaderboard;
 	private SpawnTest spawnTest;
-	private Robot robot;
 
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
 			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
@@ -50,12 +54,7 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.spawnTest = spawnTest;
-		try {
-			robot = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -186,6 +185,7 @@ public class MouseListener extends MouseAdapter {
 					//handler.addObject(player);
 					handler.object.clear();
 					game.gameState = STATE.Color;
+					handler.addObject(player);
 					//game.gameState = STATE.Connect;
 					// switch to the multiplayer connection screen, see Game::tick()
 					// the player gets added inside of SpawnMultiplayer at the same time as the opponent
@@ -224,12 +224,34 @@ public class MouseListener extends MouseAdapter {
 					game.gameState = STATE.Menu;
 					return;
 				}
+			} else if(game.gameState == STATE.Color) {
+				int x = 0;
+				int y = 0;
+				if(mouseOver(mx, my, x, y, 100, 100)) {
+					player.updateColor(Color.white);
+				} else if(mouseOver(mx, my, x+100, y, 100, 100)) {
+					player.updateColor(Color.blue);
+				} else if(mouseOver(mx, my, x+200, y, 100, 100)) {
+					player.updateColor(Color.yellow);
+				} else if(mouseOver(mx, my, x+300, y, 100, 100)) {
+					player.updateColor(Color.cyan);
+				} else if(mouseOver(mx, my, x+400, y, 100, 100)) {
+					player.updateColor(Color.gray);
+				} else if(mouseOver(mx, my, x, y+100, 100, 100)) {
+					player.updateColor(Color.green);
+				} else if(mouseOver(mx, my, x+100, y+100, 100, 100)) {
+					player.updateColor(Color.magenta);
+				} else if(mouseOver(mx, my, x+200, y+100, 100, 100)) {
+					player.updateColor(Color.orange);
+				} else if(mouseOver(mx, my, x+300, y+100, 100, 100)) {
+					player.updateColor(Color.pink);
+				} else if(mouseOver(mx, my, x+400, y+100, 100, 100)) {
+					player.updateColor(Color.red);
+				} else if (mouseOver(mx, my, 53, 490, 566, 166)){
+					game.gameState = STATE.Menu;
+					handler.clearPlayer();
+				}
 			}
-		} else if(game.gameState == STATE.Color) {
-			//if(mouseOver(mx, my, x, y, width, height)) {
-				Color color = robot.getPixelColor(mx,my);
-				System.out.println(color);
-			//}
 		} else { // game is paused
 			// PauseMenu-> Resume
 			if (mouseOver(mx, my, 445, 37, 390, 329)) {
@@ -242,6 +264,7 @@ public class MouseListener extends MouseAdapter {
 				// TODO: make one method in the handler for resetGame() that does all of the following things
 				handler.clearEnemies();
 				handler.clearPlayer();
+				handler.pickups.clear();
 				hud.setScore(0);
 				hud.updateScoreColor(Color.white);
 				hud.setHealth(100);

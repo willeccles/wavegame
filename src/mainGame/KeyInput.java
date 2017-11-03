@@ -112,7 +112,8 @@ public class KeyInput extends KeyAdapter {
 
 		}
 		if (key == KeyEvent.VK_ESCAPE) {
-			if (game.gameState == STATE.Wave || game.gameState == STATE.Bosses || game.gameState == STATE.Survival) {
+			if (game.gameState == STATE.Wave || game.gameState == STATE.Bosses 
+					|| game.gameState == STATE.Survival || game.gameState == STATE.Color) {
 				if (game.isPaused() == true) {
 					game.unPause();
 				} else {
