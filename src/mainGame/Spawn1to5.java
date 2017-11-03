@@ -326,13 +326,13 @@ public class Spawn1to5 {
 			}
 			if (spawnTimer == 0) {
 				handler.addObject(new EnemyMove(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, ID.EnemyMove, this.handler));
-				spawnTimer = 100;
+				spawnTimer = 30;
 			}
 			if (levelTimer == 0) {
 				tempCounter = 0;
 				handler.clearEnemies();
 				hud.setLevel(hud.getLevel() + 1);
-				spawnTimer = 100;
+				spawnTimer = 30;
 				if (levelsRemaining == 1) {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level

@@ -45,11 +45,7 @@ public class EnemyMove extends GameObject {
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.blue, this.sizeX, this.sizeY, 0.025, this.handler));
 		
-		this.setLocation(15,0);
-		System.out.println(x);
-		System.out.println(y);
-
-		
+		x += 10;
 	}
 
 	public void render(Graphics g) {

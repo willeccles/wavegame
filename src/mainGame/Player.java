@@ -122,7 +122,8 @@ public class Player extends GameObject {
 				}
 
 					}
-			if (tempObject.getId() == ID.EnemyBoss) {
+			if (tempObject.getId() == ID.EnemyBoss || tempObject.getId() == ID.BossEye || tempObject.getId() == ID.RollBoss1 
+					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss) {
 				// Allows player time to get out of upper area where they will get hurt once the
 				// boss starts moving
 				if (this.y <= 138 && tempObject.isMoving) {
