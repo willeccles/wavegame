@@ -225,7 +225,32 @@ public class MouseListener extends MouseAdapter {
 					return;
 				}
 			} else if(game.gameState == STATE.Color) {
-				
+				int x = 0;
+				int y = 0;
+				if(mouseOver(mx, my, x, y, 100, 100)) {
+					player.updateColor(Color.white);
+				} else if(mouseOver(mx, my, x+100, y, 100, 100)) {
+					player.updateColor(Color.blue);
+				} else if(mouseOver(mx, my, x+200, y, 100, 100)) {
+					player.updateColor(Color.yellow);
+				} else if(mouseOver(mx, my, x+300, y, 100, 100)) {
+					player.updateColor(Color.cyan);
+				} else if(mouseOver(mx, my, x+400, y, 100, 100)) {
+					player.updateColor(Color.gray);
+				} else if(mouseOver(mx, my, x, y+100, 100, 100)) {
+					player.updateColor(Color.green);
+				} else if(mouseOver(mx, my, x+100, y+100, 100, 100)) {
+					player.updateColor(Color.magenta);
+				} else if(mouseOver(mx, my, x+200, y+100, 100, 100)) {
+					player.updateColor(Color.orange);
+				} else if(mouseOver(mx, my, x+300, y+100, 100, 100)) {
+					player.updateColor(Color.pink);
+				} else if(mouseOver(mx, my, x+400, y+100, 100, 100)) {
+					player.updateColor(Color.red);
+				} else if (mouseOver(mx, my, 53, 490, 566, 166)){
+					game.gameState = STATE.Menu;
+					handler.clearPlayer();
+				}
 			}
 		} else { // game is paused
 			// PauseMenu-> Resume

@@ -29,25 +29,56 @@ import mainGame.Game.STATE;
 public class ColorPickerScreen {
 
 	private Player player;
-	private Image img;
 	private Game game;
-
+	private int x,y;
+	
 	public ColorPickerScreen(Player player, Game game) {
 		this.player = player;
 		this.game = game;
-		img = null;
-
-		try {
-			URL imageURL = Game.class.getResource("images/colorPicker.jpg");
-			img = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		x = 0;
+		y = 0;
 	}
 	
 	public void render(Graphics g) {
 		if(game.gameState == STATE.Color) {
-			g.drawImage(img, 0, 0, 1000, 720, null);
+			g.setColor(Color.white);
+			g.drawRect(x, y, 100, 100);
+			g.fillRect(x, y, 100, 100);
+			g.setColor(Color.blue);
+			g.drawRect(x+100, y, 100, 100);
+			g.fillRect(x+100, y, 100, 100);
+			g.setColor(Color.yellow);
+			g.drawRect(x+200, y, 100, 100);
+			g.fillRect(x+200, y, 100, 100);
+			g.setColor(Color.cyan);
+			g.drawRect(x+300, y, 100, 100);
+			g.fillRect(x+300, y, 100, 100);
+			g.setColor(Color.gray);
+			g.drawRect(x+400, y, 100, 100);
+			g.fillRect(x+400, y, 100, 100);
+			g.setColor(Color.green);
+			g.drawRect(x, y+100, 100, 100);
+			g.fillRect(x, y+100, 100, 100);
+			g.setColor(Color.magenta);
+			g.drawRect(x+100, y+100, 100, 100);
+			g.fillRect(x+100, y+100, 100, 100);
+			g.setColor(Color.orange);
+			g.drawRect(x+200, y+100, 100, 100);
+			g.fillRect(x+200, y+100, 100, 100);
+			g.setColor(Color.pink);
+			g.drawRect(x+300, y+100, 100, 100);
+			g.fillRect(x+300, y+100, 100, 100);
+			g.setColor(Color.red);
+			g.drawRect(x+400, y+100, 100, 100);
+			g.fillRect(x+400, y+100, 100, 100);
+			
+			
+			Font font = new Font("Amoebic", 1, 50);
+			g.setColor(Color.white);
+			g.drawRect(53, 490, 566, 166);
+			g.setFont(font);
+			g.setColor(Color.white);
+			g.drawString("Menu", 266, 600);
 		}
 	}
 	public void tick() {
