@@ -165,27 +165,27 @@ public class Menu {
 			g.drawString("Waves:", 100, 160);
 			g.setFont(font2);
 			g.drawString(
-					" Within Waves, your goal is to avoid enemies until the player is transported to the new level. After beating 5 levels, the next level will",
+					" Within Waves, your goal is to avoid enemies until the player is transported to the new level. After beating 5 levels,",
 					100, 190);
-			g.drawString(" be a boss fight that rewards you with a single use Upgrade if you manage to defete one.",
+			g.drawString(" the next level will be a boss fight that rewards you with a single use Upgrade if you manage to defete one.",
 					100, 220);
 			g.setFont(font);
 			g.drawString("Bosses:", 100, 290);
 			g.setFont(font2);
 			g.drawString(
-					"Bosses: Within Bosses, your goal is to take on endless amount of bosses from the Wavese game mode and survive as long as possible to",
+					"Bosses: Within Bosses, your goal is to take on endless amount of bosses from the Wavese game mode and survive.",
 					100, 320);
-			g.drawString("get first place on the leaderbaord!", 100, 350);
+			g.drawString(" as long as possible to get first place on the leaderbaord!", 100, 350);
 			g.setFont(font);
 			g.drawString("Survival:", 100, 420);
 			g.setFont(font2);
 			g.drawString(
-					" Within Survial, your goal is to survive as long as possible while enemies spawn and try to kill you. Pick ups are availble to help",
+					" Within Survial, your goal is to survive as long as possible while enemies spawn and try to kill you. Pick ups are availble",
 					100, 450);
 			g.drawString(
-					"you stay alive. If you pick up ham, you regain health, if you pick up shoes, you earn a light speed boost and if you pick up a coin, you earn add 1000 points to your score.",
+					" to help you stay alive. If you pick up ham, you regain health, if you pick up shoes, you earn a light speed boost and if you ",
 					100, 480);
-
+			g.drawString("pick up a coin, you earn add 1000 points to your score. if you pick up a coin, you earn add 1000 points to your score.", 100, 510);
 			g.setFont(font2);
 			g.setColor(Color.white);
 			g.drawRect(566, 560, 133, 42);
