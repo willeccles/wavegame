@@ -1,6 +1,6 @@
 MAINCLASSES=$(subst .java,.class,$(wildcard mainGame/*.java))
 AUDIO=$(subst .java,.class,$(wildcard mainGame/audio/*.java))
-NET=$(subst .java,.class,$(widlcard mainGame/net/*.java))
+NET=$(subst .java,.class,$(wildcard mainGame/net/*.java))
 MAINDIR=mainGame
 NETDIR=$(MAINDIR)/net
 AUDIODIR=$(MAINDIR)/audio
