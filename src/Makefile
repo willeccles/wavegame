@@ -13,9 +13,7 @@ server: $(SERVERCLASSES)
 %.class: %.java
 	javac $<
 
-all:
-	make maingame
-	make gameserver
+all: game server
 
 clean:
 	rm -f mainGame/*.class
