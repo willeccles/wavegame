@@ -37,12 +37,14 @@ public class Menu {
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
 	private int colorIndex;
 	private Spawn1to5 spawner;
+	private PauseMenu pauseMenu;
 
-	public Menu(Game game, Handler handler, HUD hud, Spawn1to5 spawner) {
+	public Menu(Game game, Handler handler, HUD hud, Spawn1to5 spawner, PauseMenu pauseMenu) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
 		this.spawner = spawner;
+		this.pauseMenu = pauseMenu;
 		timer = 10;
 		r = new Random();
 		addColors();
@@ -56,7 +58,7 @@ public class Menu {
 		}
 
 		handler.addObject(new MenuFireworks((r.nextInt(Game.WIDTH) - 25), 500, 50, 50, 0, -2,
-					colorPick.get(r.nextInt(6)), ID.Firework, this.handler));
+				colorPick.get(r.nextInt(6)), ID.Firework, this.handler));
 	}
 
 	public void addColors() {
@@ -74,7 +76,8 @@ public class Menu {
 		if (timer <= 0) {
 			handler.object.clear();
 			colorIndex = r.nextInt(6);
-			handler.addObject(new MenuFireworks((r.nextInt(Game.WIDTH) - 25), 720, 100, 100, 0, -4, colorPick.get(colorIndex), ID.Firework, this.handler));
+			handler.addObject(new MenuFireworks((r.nextInt(Game.WIDTH) - 25), 720, 100, 100, 0, -4,
+					colorPick.get(colorIndex), ID.Firework, this.handler));
 			timer = 300;
 		}
 		handler.tick();
@@ -84,6 +87,7 @@ public class Menu {
 		if (game.gameState == STATE.Menu) {
 			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 			handler.render(g);
+
 			Font font = new Font("Amoebic", 1, 50);
 			Font font2 = new Font("Amoebic", 1, 40);
 
@@ -136,25 +140,58 @@ public class Menu {
 			g.setFont(font);
 			g.setColor(Color.orange);
 			g.drawString("Quit", 266, 600);
+		} else if (game.gameState == STATE.Help) {// if the user clicks on
+			// "help"
 
-		} else if (game.gameState == STATE.Help) {// if the user clicks on "help"
+			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+			handler.render(g);
+
+			img = null;
+
+			try {
+				URL imageURL = Game.class.getResource("images/backgroundimage.jpg");
+				img = Toolkit.getDefaultToolkit().getImage(imageURL);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			Font font = new Font("impact", 1, 33);
 			Font font2 = new Font("impact", 1, 20);
 
 			g.setFont(font);
-			g.setColor(Color.white);
+			g.setColor(Color.orange);
 			g.drawString("Help", 600, 46);
 
+			g.drawString("Use arrow keys to move the player.", 400, 100);
+			g.setFont(font);
+			g.drawString("Waves:", 100, 160);
 			g.setFont(font2);
-
-			g.drawString("Waves: Use arrow keys to move player. Within Waves your goal is to, avoid enemies until the player is teleported to a new level." 
-					, 26, 133);
-			g.drawString("After beating 4 levels on level 5, there will be a boss fight that rewards you with a single use Power Up.", 53, 166);
+			g.drawString(
+					" Within Waves, your goal is to avoid enemies until the player is transported to the new level. After beating 5 levels, the next level will",
+					100, 190);
+			g.drawString(" be a boss fight that rewards you with a single use Upgrade if you manage to defete one.",
+					100, 220);
+			g.setFont(font);
+			g.drawString("Bosses:", 100, 290);
+			g.setFont(font2);
+			g.drawString(
+					"Bosses: Within Bosses, your goal is to take on endless amount of bosses from the Wavese game mode and survive as long as possible to",
+					100, 320);
+			g.drawString("get first place on the leaderbaord!", 100, 350);
+			g.setFont(font);
+			g.drawString("Survival:", 100, 420);
+			g.setFont(font2);
+			g.drawString(
+					" Within Survial, your goal is to survive as long as possible while enemies spawn and try to kill you. Pick ups are availble to help",
+					100, 450);
+			g.drawString(
+					"you stay alive. If you pick up ham, you regain health, if you pick up shoes, you earn a light speed boost and if you pick up a coin, you earn add 1000 points to your score.",
+					100, 480);
 
 			g.setFont(font2);
 			g.setColor(Color.white);
-			g.drawRect(566, 200, 133, 42);
-			g.drawString("Back", 613, 226);
+			g.drawRect(566, 560, 133, 42);
+			g.drawString("Back", 613, 590);
 		}
 	}
 }
