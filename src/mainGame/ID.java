@@ -32,5 +32,6 @@ public enum ID {
 	SurvivalText,
 	RollBoss1,
 	RollBoss2,
-	EnemyMove;
+	EnemyMove, 
+	BossKyle;
 }

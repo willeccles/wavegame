@@ -17,16 +17,14 @@ public class SpawnBosses {
 	private int differentEnemies;
 	private Random r;
 	private int levelsRemaining;
-	private String[] side = {"left", "right", "top", "bottom"};
-	private int trackerTimer;
-	private Color trackerColor;
-	private int levelNumber = 2;
+	private int levelNumber = 3;
 	private int tempCounter = 0;
 	private int levelTimer;
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
 	private int count;
-
-	public SpawnBosses(Handler handler, HUD hud, Game game) {
+	private Player player;
+	
+	public SpawnBosses(Handler handler, HUD hud, Game game, Player player) {
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
@@ -37,10 +35,9 @@ public class SpawnBosses {
 		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
-		differentEnemies = 9;	
-		trackerTimer = 1000;
-		trackerColor = Color.blue;
+		differentEnemies = 4;
 		count = 0;
+		this.player = player;
 	}
 
 	public void tick() {
@@ -78,13 +75,29 @@ public class SpawnBosses {
 				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
 				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
 				tempCounter++;
+			}  else if (tempCounter >= 1) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.BossEye) {
+						if (tempObject.getHealth() <= 0) {
+							handler.clearEnemies();
+							levelNumber++;
+						}
+					}
+				}
 			}
 		}
 		else if (levelNumber == 2) {
 			if (tempCounter < 1) {
 				tempCounter++;
-				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.EnemyBasic, handler));
-				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.EnemyBasic, handler));
+				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss1, handler));
+				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss2, handler));
+			}
+		}
+		else if (levelNumber == 3) {
+			if(tempCounter < 1) {
+				tempCounter++;
+				handler.addObject(new BossKyle(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BossKyle, handler, player));
 			}
 		}
 	}
