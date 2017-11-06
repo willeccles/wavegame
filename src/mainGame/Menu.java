@@ -37,14 +37,12 @@ public class Menu {
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
 	private int colorIndex;
 	private Spawn1to5 spawner;
-	private PauseMenu pauseMenu;
 
-	public Menu(Game game, Handler handler, HUD hud, Spawn1to5 spawner, PauseMenu pauseMenu) {
+	public Menu(Game game, Handler handler, HUD hud, Spawn1to5 spawner) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
 		this.spawner = spawner;
-		this.pauseMenu = pauseMenu;
 		timer = 10;
 		r = new Random();
 		addColors();

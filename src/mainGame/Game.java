@@ -87,7 +87,7 @@ public class Game extends Canvas implements Runnable {
 		spawnBosses = new SpawnBosses(this.handler, this.hud, this);
 		spawnMultiplayer = new SpawnMultiplayer(this.handler, this.hud, this, this.player);
 		spawnTest = new SpawnTest(this.handler, this.hud, this);
-		menu = new Menu(this, this.handler, this.hud, this.spawner, pauseMenu);
+		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
