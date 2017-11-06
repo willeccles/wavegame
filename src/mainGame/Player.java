@@ -60,7 +60,8 @@ public class Player extends GameObject {
 		y = Game.clampY(y, playerHeight);
 
 		// add the trail that follows it
-		handler.addObject(new Trail(x, y, ID.Trail, this.color, playerWidth, playerHeight, 0.05, this.handler));
+		if (!isOpponent) // we only want the trail for the local player, not the opponent (lag makes it look funny)
+			handler.addObject(new Trail(x, y, ID.Trail, this.color, playerWidth, playerHeight, 0.05, this.handler));
 
 		// these things will be done by the other player's client, so if it's the opponent player we don't care.
 		if (!isOpponent) {
@@ -130,7 +131,7 @@ public class Player extends GameObject {
 					hud.health -= 2;
 					hud.updateScoreColor(Color.red);
 				}
-			}
+					}
 
 		}
 		//for pickups
@@ -208,7 +209,7 @@ public class Player extends GameObject {
 		x = Game.WIDTH / 2 - 21;
 		y = Game.HEIGHT / 2 - 21;
 	}
-	
+
 	public void updateColor(Color temp) {
 		this.color = temp;
 	}
