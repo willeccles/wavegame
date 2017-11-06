@@ -19,13 +19,12 @@ public class EnemyBurst extends GameObject {
 	private int size;
 	private String side;
 	private Random r = new Random();
-	private boolean isMultiplayer = false;
+	private boolean isMultiplayer;
 
 	/**
 	 * Constructor.
-	 * @param mult ONLY set this to true if you're using this in multiplayer.
 	 */
-	public EnemyBurst(double x, double y, double velX, double velY, int size, String side, ID id, Handler handler, boolean mult) {
+	public EnemyBurst(double x, double y, double velX, double velY, int size, String side, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		this.velX = velX;
@@ -33,7 +32,7 @@ public class EnemyBurst extends GameObject {
 		this.timer = 60;
 		this.side = side;
 		this.size = size;
-		isMultiplayer = mult;
+		isMultiplayer = handler.isMulti();
 
 		if (this.side.equals("left")) {
 			handler.object.add(new EnemyBurstWarning(0, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
@@ -52,10 +51,6 @@ public class EnemyBurst extends GameObject {
 			setPos();
 			setVel();
 		}
-	}
-
-	public EnemyBurst(double x, double y, double velX, double velY, int size, String side, ID id, Handler handler) {
-		this(x, y, velX, velY, size, side, id, handler, false);
 	}
 
 	public void tick() {

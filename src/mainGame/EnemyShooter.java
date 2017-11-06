@@ -18,6 +18,7 @@ public class EnemyShooter extends GameObject {
 	private int sizeY;
 	private int timer;
 	private GameObject player;
+	private GameObject opponent;
 	private double bulletVelX;
 	private double bulletVelY;
 	private int bulletSpeed;
@@ -35,21 +36,13 @@ public class EnemyShooter extends GameObject {
 		for (int i = 0; i < handler.object.size(); i++) {
 			if (handler.object.get(i).getId() == ID.Player)
 				player = handler.object.get(i);
+			if (handler.object.get(i).getId() == ID.Player2)
+				opponent = handler.object.get(i);
 		}
 
 	}
 
 	public void tick() {
-		this.x += velX;
-		this.y += velY;
-
-		if (this.y <= 0 || this.y >= Game.HEIGHT - 40)
-			velY *= -1;
-		if (this.x <= 0 || this.x >= Game.WIDTH - 16)
-			velX *= -1;
-
-		handler.addObject(new Trail(x, y, ID.Trail, Color.yellow, this.sizeX, this.sizeY, 0.025, this.handler));
-
 		timer--;
 		if (timer <= 0) {
 			shoot();
@@ -69,8 +62,20 @@ public class EnemyShooter extends GameObject {
 		bulletVelX = ((this.bulletSpeed / distance) * diffX); // numerator affects speed of enemy
 		bulletVelY = ((this.bulletSpeed / distance) * diffY);// numerator affects speed of enemy
 
-		handler.addObject(
-				new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.yellow));
+		handler.addObject(new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.yellow));
+
+		if (handler.isMulti()) {
+			diffX = this.x - opponent.getX() - 16;
+			diffY = this.y - opponent.getY() - 16;
+			distance = Math.sqrt(((this.x - opponent.getX()) * (this.x - opponent.getX()))
+					+ ((this.y - opponent.getY()) * (this.y - opponent.getY())));
+			////////////////////////////// pythagorean theorem
+			////////////////////////////// above//////////////////////////////////////////////////
+			bulletVelX = ((this.bulletSpeed / distance) * diffX); // numerator affects speed of enemy
+			bulletVelY = ((this.bulletSpeed / distance) * diffY);// numerator affects speed of enemy
+
+			handler.addObject(new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.yellow));
+		}
 	}
 
 	public void updateEnemy() {

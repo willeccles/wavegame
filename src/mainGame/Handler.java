@@ -14,6 +14,7 @@ public class Handler {
 	ArrayList<GameObject> object = new ArrayList<GameObject>();
 	ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 	private static int timer = 0;
+	private static boolean isMP = false;
 
 	/**
 	 * Updates each entity in the game by looping through each ArrayList and
@@ -117,6 +118,14 @@ public class Handler {
 				// skip a player (should there be more than one)
 			}
 		}
+	}
+
+	public boolean isMulti() {
+		return isMP;
+	}
+
+	public void setMulti(boolean b) {
+		isMP = b;
 	}
 
 	/**
