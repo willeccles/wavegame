@@ -45,7 +45,7 @@ public class EnemyMiniShooter extends GameObject {
 		timer--;
 		if (timer <= 0) {
 			shoot();
-			//updateEnemy();
+			updateEnemy();
 			timer = 50;
 		}
 

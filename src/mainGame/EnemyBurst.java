@@ -78,13 +78,17 @@ public class EnemyBurst extends GameObject {
 
 	public void setPos() {
 		if (this.side.equals("left")) {
-			if (isMultiplayer)
+			if (isMultiplayer) {
 				this.y = Game.clampY(this.y, 200);
+				this.x = -(size);
+			}
 			else
 				this.y = r.nextInt(((Game.HEIGHT - size) - 0) + 1) + 0;
 		} else if (this.side.equals("right")) {
-			if (isMultiplayer)
+			if (isMultiplayer) {
 				this.y = Game.clampY(this.y, 200);
+				this.x = Game.WIDTH;
+			}
 			else
 				this.y = r.nextInt(((Game.HEIGHT - size) - 0) + 1) + 0;
 			this.x = Game.WIDTH + 200;
@@ -95,7 +99,7 @@ public class EnemyBurst extends GameObject {
 			else
 				this.x = r.nextInt(((Game.WIDTH - size) - 0) + 1) + 0;
 		} else if (this.side.equals("bottom")) {
-			this.y = Game.HEIGHT + 200;
+			this.y = Game.HEIGHT;
 			if (isMultiplayer)
 				this.x = Game.clampX(this.x, 200);
 			else
