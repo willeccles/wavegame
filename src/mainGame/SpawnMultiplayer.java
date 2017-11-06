@@ -86,9 +86,6 @@ public class SpawnMultiplayer {
 			case EnemyBasic:
 				handler.addObject(new EnemyBasic(x, y, 9, 9, type, handler));
 				break;
-			case EnemySmart:
-				handler.addObject(new EnemySmart(x, y, -5, type, handler));
-				break;
 			case EnemyBurst:
 				handler.addObject(new EnemyBurst(x, y, 50, 50, 200, side, type, handler, true));
 				break;

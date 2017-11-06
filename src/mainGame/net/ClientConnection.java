@@ -48,7 +48,7 @@ public class ClientConnection {
 						spawn.startPlaying(Double.parseDouble(parts[0]), Double.parseDouble(parts[1]), Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
 					}
 					// if the input is to spawn an enemy
-					else if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom|)")) {
+					else if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom)")) {
 						// tell the spawner to spawn the thing
 						String parts[] = input.replace("SPAWN:", "").split(",");
 						ID type = ID.values()[Integer.parseInt(parts[0])];
@@ -59,7 +59,7 @@ public class ClientConnection {
 						spawner.spawnEntity(type, x, y, option, side);
 					}
 					// when the input is giving info about the other player
-					else if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+")) {
+					else if (input.matches("[0-9.]+,[0-9.]+,[-0-9.]+,[-0-9.]+")) {
 						String parts[] = input.split(",");
 						opponent.setX((int)Double.parseDouble(parts[0]));
 						opponent.setY((int)Double.parseDouble(parts[1]));
@@ -80,7 +80,9 @@ public class ClientConnection {
 					// this means that the server closed the connection
 					System.out.println("Sending back to menu, server killed the connection.");
 					game.gameState = Game.STATE.Menu;
+					break;
 				} catch(IOException ioe) {
+					ioe.printStackTrace();
 					try {
 						client.close();
 					} catch (IOException e) {
@@ -90,12 +92,11 @@ public class ClientConnection {
 			}
 			// after break, close
 			game.gameState = Game.STATE.Menu;
-			System.out.println("CC got here");
 			this.close();
 		});
 
 		// make a thread that sends output to the server
-		outputThread = new Thread(() -> {
+		/*outputThread = new Thread(() -> {
 			String output;
 			while (client.isConnected()) {
 				output = outputQueue.poll();
@@ -108,10 +109,10 @@ public class ClientConnection {
 					}
 				}
 			}
-		});
+		});*/
 
 		inputThread.start();
-		outputThread.start();
+		//outputThread.start();
 	}
 
 	/**
@@ -149,7 +150,13 @@ public class ClientConnection {
 	 * @param msg The message to send to the thing.
 	 */
 	private void writeOut(String msg) {
-		outputQueue.add(msg);
+		//outputQueue.add(msg);
+		// send the output to the server
+		try {
+			out.writeUTF(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
