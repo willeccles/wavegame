@@ -68,29 +68,29 @@ public class MenuFireworks extends GameObject {
 
 	public void sparks(GameObject tempObject) {// when the big circle breaks into a bunch of smaller ones
 		for (int ii = 0; ii < 3; ii++) {
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -5,
+			handler.addObject(new MenuFireworks(this.x+40, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -5,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -4,
+			handler.addObject(new MenuFireworks(this.x+40, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -4,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -3,
+			handler.addObject(new MenuFireworks(this.x+40, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -3,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -2,
+			handler.addObject(new MenuFireworks(this.x+40, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -2,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -1,
+			handler.addObject(new MenuFireworks(this.x+40, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), -1,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt(4) + 1), 0, this.color,
+			handler.addObject(new MenuFireworks(this.x+40, this.y, 20, 20, (r.nextInt(4) + 1), 0, this.color,
 						ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, -(r.nextInt(4) + 1), 0, this.color,
+			handler.addObject(new MenuFireworks(this.x+40, this.y, 20, 20, -(r.nextInt(4) + 1), 0, this.color,
 						ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), 1,
+			handler.addObject(new MenuFireworks(this.x+40, this.y+1, 20, 20, (r.nextInt((max - min) + 1) + min), 1,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), 2,
+			handler.addObject(new MenuFireworks(this.x+40, this.y+1, 20, 20, (r.nextInt((max - min) + 1) + min), 2,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), 3,
+			handler.addObject(new MenuFireworks(this.x+40, this.y+1, 20, 20, (r.nextInt((max - min) + 1) + min), 3,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), 4,
+			handler.addObject(new MenuFireworks(this.x+40, this.y+1, 20, 20, (r.nextInt((max - min) + 1) + min), 4,
 						this.color, ID.FireworkSpark, handler));
-			handler.addObject(new MenuFireworks(this.x, this.y, 20, 20, (r.nextInt((max - min) + 1) + min), 5,
+			handler.addObject(new MenuFireworks(this.x+40, this.y+1, 20, 20, (r.nextInt((max - min) + 1) + min), 5,
 						this.color, ID.FireworkSpark, handler));
 
 		}
