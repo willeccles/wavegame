@@ -27,13 +27,14 @@ public class ClientConnection extends Thread {
 		while (socket.isConnected()) {
 			try {
 				input = in.readUTF();
-				// TODO: deal with input here
-
+				// deal with input here
 				if (input.matches("[0-9.]+,[0-9.]+,[-0-9.]+,[-0-9.]+")) {
 					// send the info about the player to the other client
 					instance.sendToClient(Math.abs(this.id-1), input);
 				}
 			} catch (EOFException eof) {
+				// this is where a client has closed the connection on its end.
+				break;
 			} catch (IOException ioe) {
 				// in this case this means something
 				ioe.printStackTrace();
@@ -55,7 +56,6 @@ public class ClientConnection extends Thread {
 	}
 
 	// sends a message to this client using the socket
-	// TODO: determine whether or not this should be synchronized
 	public void sendMessage(String message) {
 		// send a message to the client
 		try {

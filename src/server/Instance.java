@@ -109,7 +109,7 @@ public class Instance extends Thread {
 		
 		// send to each of the clients
 		// msg: SPAWN:<ID ordinal>,x,y,option,side
-		//sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
+		sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
 	}
 
 	/**
@@ -145,7 +145,8 @@ public class Instance extends Thread {
 	 * @param id The ID of the client to remove.
 	 */
 	public synchronized void removeClient(int id) {
-		System.out.println("removing client " + id);
+		if (clients.get(id) == null)
+			return;
 		clients.get(id).close();
 		clients.remove(id);
 	}
@@ -170,7 +171,8 @@ public class Instance extends Thread {
 	 */
 	public void sendToClient(int id, String message) {
 		// get the client for the given ID and send the message to it
-		clients.get(id).sendMessage(message);
+		if (clients.get(id) != null)
+			clients.get(id).sendMessage(message);
 	}
 
 	/**

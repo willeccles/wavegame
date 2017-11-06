@@ -68,7 +68,6 @@ public class ClientConnection {
 					}
 					// when the other user leaves
 					else if (input.matches("OTHER_LEFT")) {
-						game.gameState = Game.STATE.Menu;
 						break;
 					}
 
@@ -88,6 +87,8 @@ public class ClientConnection {
 					} catch (IOException e) {
 						// this means there was an issue closing the client socket
 					}
+				} catch (Exception e) {
+					e.printStackTrace(); // catch any error that isn't caught above
 				}
 			}
 			// after break, close
@@ -96,7 +97,7 @@ public class ClientConnection {
 		});
 
 		// make a thread that sends output to the server
-		/*outputThread = new Thread(() -> {
+		outputThread = new Thread(() -> {
 			String output;
 			while (client.isConnected()) {
 				output = outputQueue.poll();
@@ -109,10 +110,10 @@ public class ClientConnection {
 					}
 				}
 			}
-		});*/
+		});
 
 		inputThread.start();
-		//outputThread.start();
+		outputThread.start();
 	}
 
 	/**
@@ -150,13 +151,7 @@ public class ClientConnection {
 	 * @param msg The message to send to the thing.
 	 */
 	private void writeOut(String msg) {
-		//outputQueue.add(msg);
-		// send the output to the server
-		try {
-			out.writeUTF(msg);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		outputQueue.add(msg);
 	}
 
 	/**

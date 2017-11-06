@@ -14,7 +14,6 @@ import mainGame.Game.STATE;
  * @author Brandon Loehle 5/30/16
  *
  */
-
 public class Player extends GameObject {
 
 	Random r = new Random();
@@ -60,14 +59,14 @@ public class Player extends GameObject {
 		y = Game.clampY(y, playerHeight);
 
 		// add the trail that follows it
-		handler.addObject(new Trail(x, y, ID.Trail, this.color, playerWidth, playerHeight, 0.05, this.handler));
+		if (velX != 0 || velY != 0)
+			handler.addObject(new Trail(x, y, ID.Trail, this.color, playerWidth, playerHeight, 0.05, this.handler));
 
 		// these things will be done by the other player's client, so if it's the opponent player we don't care.
 		if (!isOpponent) {
 			collision();
 			checkIfDead();
 		}
-
 	}
 	public String checkGame() {
 		return gameMode;
