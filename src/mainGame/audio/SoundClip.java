@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import mainGame.Game;
+import javafx.util.Duration;
 
 /**
  * A sound clip that is played asynchronously.
@@ -29,7 +30,8 @@ public class SoundClip {
 			File f = new File(Game.class.getResource(filesource).toURI().toString());
 			media = new Media(f.toString().replaceAll("\\\\", "/"));
 			player = new MediaPlayer(media);
-			player.setOnStopped(() -> {
+			player.setOnEndOfMedia(() -> {
+				player.stop();
 				isPlaying = false;
 			});
 		} catch (Exception e) {
