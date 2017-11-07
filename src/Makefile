@@ -30,3 +30,4 @@ clean:
 	rm -f mainGame/*.class
 	rm -f mainGame/*/*.class
 	rm -f server/*.class
+	rm -f *.jar
