@@ -50,6 +50,10 @@ public class Game extends Canvas implements Runnable {
 	private boolean isPaused = false;
 	private SpawnTest spawnTest;
 	private boolean isMusicPlaying = true;
+	private ColorPickerScreen colorScreen;
+	private LeaderboardDisplay leaderboardDisplay;
+	public String [][] leaderboardList;
+
 
 	/* NOBODY TOUCH THESE VARS, THEY ARE FOR TESTING NETWORKING */
 	private String op;
@@ -57,14 +61,13 @@ public class Game extends Canvas implements Runnable {
 	private int port;
 	private String room;
 	private String pass;
-	private ColorPickerScreen colorScreen;
 	
 	/**
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
 		Menu, Help, Connect, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, 
-		Leaderboard, Test, Color
+		Leaderboard, Test, Color, LeaderboardDisplay
 	};
 
 	/**
@@ -92,8 +95,12 @@ public class Game extends Canvas implements Runnable {
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		pauseMenu = new PauseMenu();
-		leaderboard = new Leaderboard(this, hud);
-		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, this.upgrades, leaderboard, this.spawnBosses, this.spawnTest);
+		leaderboardList = new String[5][2];
+		leaderboard = new Leaderboard(this, hud, leaderboardList);
+		leaderboardDisplay = new LeaderboardDisplay(this.leaderboard, this);
+		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, 
+				this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, 
+				this.upgrades, leaderboard, this.spawnBosses, this.spawnTest, this.leaderboardDisplay);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
@@ -292,16 +299,8 @@ public class Game extends Canvas implements Runnable {
 					|| gameState == STATE.Bosses || gameState == STATE.Survival
 					|| gameState == STATE.Test) {// user is playing game, draw game objects
 				hud.render(g);
-			} else if (gameState == STATE.Menu || gameState == STATE.Help) {// user
-				// is in
-				// help
-				// or
-				// the
-				// menu,
-				// draw
-				// the
-				// menu
-				// and help objects
+			} else if (gameState == STATE.Menu || gameState == STATE.Help) {
+				// user is in help or the menu, draw the menu and help objects
 				menu.render(g);
 			} else if (gameState == STATE.Upgrade) {// user is on the upgrade
 				// screen, draw the upgrade
@@ -314,6 +313,8 @@ public class Game extends Canvas implements Runnable {
 				leaderboard.paint(g);
 			} else if (gameState == STATE.Color) {
 				colorScreen.render(g);
+			} else if (gameState == STATE.LeaderboardDisplay) {
+				leaderboardDisplay.paint(g);
 			}
 		} else {
 			pauseMenu.render(g);

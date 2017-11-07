@@ -37,11 +37,12 @@ public class MouseListener extends MouseAdapter {
 	private String upgradeText;
 	private Leaderboard leaderboard;
 	private SpawnTest spawnTest;
+	private LeaderboardDisplay leaderboardDisplay;
 
 	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
 			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
 			Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses,
-			SpawnTest spawnTest) {
+			SpawnTest spawnTest, LeaderboardDisplay leaderboardDisplay) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -54,7 +55,8 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.spawnTest = spawnTest;
-	
+		this.leaderboardDisplay = leaderboardDisplay;
+
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -81,7 +83,6 @@ public class MouseListener extends MouseAdapter {
 					handler.object.clear();
 					handler.pickups.clear();
 					hud.health=100;
-					hud.setScore(0);
 					spawnSurvival.restart();
 					game.gameState = STATE.Leaderboard;
 					player.resetVel();
@@ -193,6 +194,7 @@ public class MouseListener extends MouseAdapter {
 
 				// Survival Mode
 				else if (mouseOver(mx, my, 960, 390, 266, 266)) {
+					hud.setScore(0);
 					handler.object.clear();
 					game.gameState = STATE.Survival;
 					handler.addObject(player);
@@ -216,7 +218,8 @@ public class MouseListener extends MouseAdapter {
 			else if (game.gameState == STATE.Leaderboard) {
 				if (mouseOver(mx, my, 353, 490, 566, 166)) {
 					leaderboard.nextUser();
-					game.gameState = STATE.Menu;
+					leaderboardDisplay.refresh();
+					game.gameState = STATE.LeaderboardDisplay;
 					return;
 				}
 			} else if (game.gameState == STATE.Help) {
@@ -250,6 +253,11 @@ public class MouseListener extends MouseAdapter {
 				} else if (mouseOver(mx, my, 53, 490, 566, 166)){
 					game.gameState = STATE.Menu;
 					handler.clearPlayer();
+				}
+			} else if(game.gameState == STATE.LeaderboardDisplay) {
+				if(mouseOver(mx,my,0,0,Game.WIDTH,Game.HEIGHT)) {
+					
+					game.gameState = STATE.Menu;
 				}
 			}
 		} else { // game is paused
