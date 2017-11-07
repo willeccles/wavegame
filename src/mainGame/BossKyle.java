@@ -20,82 +20,27 @@ import java.util.Random;
 public class BossKyle extends GameObject {
 
 	private Handler handler;
-	private int timer = 80;
-	private int timer2 = 50;
 	Random r = new Random();
 	private Image img;
-	private int speed;
-	private int bulletSpeed;
-	private double diffX;
-	private double diffY;
-	private double distance;
 	private Player player;
-	private double bulletVelX;
-	private double bulletVelY;
+	private int size;
 	
-	public BossKyle(double x, double y, ID id, Handler handler, Player player) {
+	public BossKyle(double x, double y, ID id, Handler handler, Player player, int size, int health, int velX, int velY) {
 		super(x, y, id);
 		this.handler = handler;
-		this.velX = 0;
-		this.velY = 0;
-		this.speed = -3;
-		this.bulletSpeed = -6;
+		this.velX = velX;
+		this.velY = velY;
 		this.player = player;
 		img = getImage("images/EnemyBoss.png");
-		this.health = 2000;
+		this.health = health;
+		this.size = size;
 	}
 
 	public void tick() {
-		this.health -= 1;
-		this.x += velX;
-		this.y += velY;
-
-		if (this.y <= 0 || this.y >= Game.HEIGHT - 40)
-			velY *= -1;
-		if (this.x <= 0 || this.x >= Game.WIDTH - 16)
-			velX *= -1;
-
-		this.x += velX;
-		this.y += velY;
-		////////////////////////////// pythagorean theorem
-		////////////////////////////// below//////////////////////////////////////////////////
-		diffX = this.x - player.getX() - 16;
-		diffY = this.y - player.getY() - 16;
-		distance = Math.sqrt(((this.x - player.getX()) * (this.x - player.getX()))
-				+ ((this.y - player.getY()) * (this.y - player.getY())));
-		////////////////////////////// pythagorean theorem
-		////////////////////////////// above//////////////////////////////////////////////////
-
-		move();
-
-		timer--;
-		if (timer <= 0) {
-			shoot();
-			updateEnemy();
-			timer = 100;
-		}
-
-	}
-	private void move() {
-		// TODO Auto-generated method stub
-
-		velX = ((this.speed / distance) * diffX); // numerator affects speed of enemy
-		velY = ((this.speed / distance) * diffY);// numerator affects speed of enemy
+		this.health -= 5;
+		attackPlayer();
 	}
 
-	private void shoot() {
-		//bulletVelX = ((this.bulletSpeed / distance) * diffX); // numerator affects speed of enemy
-		//bulletVelY = ((this.bulletSpeed / distance) * diffY);// numerator affects speed of enemy
-
-		//handler.addObject(
-				//new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.orange));
-		handler.addObject(new EnemyBurst(x, y, 50, 50, 200, "left", ID.EnemyBurst, handler));
-	}
-	
-	private void updateEnemy() {
-		
-	}
-	
 	public Image getImage(String path) {
 		Image image = null;
 		try {
@@ -109,8 +54,7 @@ public class BossKyle extends GameObject {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(img, (int) this.x, (int) this.y, 96, 96, null);
-
+			g.drawImage(img, (int) this.x, (int) this.y, size, size, null);
 		// HEALTH BAR
 		g.setColor(Color.GRAY);
 		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);
@@ -123,13 +67,15 @@ public class BossKyle extends GameObject {
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, 96, 96);
+		return new Rectangle((int) this.x, (int) this.y, size, size);
 	}
 
-	// allows for grey line to be drawn, as well as first bullet shot
-	public void drawFirstBullet() {
-		if (timer2 == 1)
-			handler.addObject(new EnemyBossBullet((int) this.x + 48, (int) this.y + 96, ID.EnemyBossBullet, handler));
+	public void attackPlayer() {
+		this.x += velX;
+		this.y += velY;
+		if (this.y <= 0 || this.y >= Game.HEIGHT - this.size)
+			velY *= -1;
+		if (this.x <= 0 || this.x >= Game.WIDTH - this.size)
+			velX *= -1;
 	}
-
 }

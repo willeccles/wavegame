@@ -23,7 +23,7 @@ public class SpawnBosses {
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
 	private int count;
 	private Player player;
-	
+
 	public SpawnBosses(Handler handler, HUD hud, Game game, Player player) {
 		this.handler = handler;
 		this.hud = hud;
@@ -57,7 +57,7 @@ public class SpawnBosses {
 							handler.removeObject(tempObject);
 							//LEVEL_SET++;
 							levelNumber++;
-
+							tempCounter = 0;
 						}
 					}
 				}
@@ -82,6 +82,7 @@ public class SpawnBosses {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
 							levelNumber++;
+							tempCounter = 0;
 						}
 					}
 				}
@@ -92,15 +93,80 @@ public class SpawnBosses {
 				tempCounter++;
 				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss1, handler));
 				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss2, handler));
+			} else if (tempCounter >= 1) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.RollBoss1) {
+						if (tempObject.getHealth() <= 0) {
+							handler.removeObject(tempObject);
+							//LEVEL_SET++;
+							levelNumber++;
+							tempCounter = 0;
+						}
+					}
+					if (tempObject.getId() == ID.RollBoss2) {
+						if (tempObject.getHealth() <= 0) {
+							handler.removeObject(tempObject);
+							//LEVEL_SET++;
+							levelNumber++;
+							tempCounter = 0;
+						}
+					}
+				}
 			}
 		}
 		else if (levelNumber == 3) {
-			if(tempCounter < 1) {
+			if(tempCounter == 0) {
+				handler.addObject(new BossKyle(r.nextInt(Game.WIDTH-400), r.nextInt(Game.HEIGHT-400), ID.BossKyle, handler, player, 400, 2000, -4, -4));
 				tempCounter++;
-				handler.addObject(new BossKyle(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BossKyle, handler, player));
+			} else if (tempCounter == 1) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.BossKyle) {
+						if (tempObject.getHealth() == 1000) {
+							double x = tempObject.getX();
+							double y = tempObject.getY();
+							handler.removeObject(tempObject);
+							handler.addObject(new BossKyle(x, y, ID.BossKyle2, handler, player, 200, 1000, -3, -5));
+							handler.addObject(new BossKyle(x, y+200, ID.BossKyle2, handler, player, 200, 1000, -4, 3));
+							handler.addObject(new BossKyle(x+200, y+200, ID.BossKyle2, handler, player, 200, 1000, 3, 4));
+							handler.addObject(new BossKyle(x+200, y, ID.BossKyle2, handler, player, 200, 1000, 3, -3));
+							tempCounter++;
+						} 
+					}
+				}
+			} else if(tempCounter < 6) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.BossKyle2) {
+						if (tempObject.getHealth() < 500) {
+							double x = tempObject.getX();
+							double y = tempObject.getY();
+							handler.removeObject(tempObject);
+							handler.addObject(new BossKyle(x, y, ID.BossKyle3, handler, player, 100, 500, -3, -5));
+							handler.addObject(new BossKyle(x, y+100, ID.BossKyle3, handler, player, 100, 500, -4, 3));
+							handler.addObject(new BossKyle(x+100, y+100, ID.BossKyle3, handler, player, 100, 500, 3, 4));
+							handler.addObject(new BossKyle(x+100, y, ID.BossKyle3, handler, player, 100, 500, 3, -3));
+							tempCounter++;
+							break;
+						} 
+					}
+				}
+			} else if (tempCounter >= 6) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.BossKyle3) {
+						if (tempObject.getHealth() <= 0) {
+							handler.removeObject(tempObject);
+						}
+					}
+				}
+				levelNumber++;
+				tempCounter = 0;
 			}
 		}
 	}
+
 
 	public void restart() {
 		spawnTimer = 10;
