@@ -95,7 +95,7 @@ public class Game extends Canvas implements Runnable {
 		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		pauseMenu = new PauseMenu();
-		leaderboardList = new String[5][2];
+		leaderboardList = new String[6][2];
 		leaderboard = new Leaderboard(this, hud, leaderboardList);
 		leaderboardDisplay = new LeaderboardDisplay(this.leaderboard, this);
 		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, 

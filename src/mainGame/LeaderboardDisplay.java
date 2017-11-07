@@ -25,7 +25,7 @@ public class LeaderboardDisplay extends JPanel {
 		g.setColor(Color.white);
 		g.setFont(font);
 		g.drawString("Leaderboard", 600, 50);
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 6; i++) {
 			if(leaderboard.getLeaderboard(i, 0) != null) {
 				g.drawString(leaderboard.getLeaderboard(i, 0), x, y + 100*i);
 				g.drawString(leaderboard.getLeaderboard(i, 1), x+500, y + 100*i);
