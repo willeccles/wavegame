@@ -93,6 +93,7 @@ public class ClientConnection {
 			}
 			// after break, close
 			game.gameState = Game.STATE.Menu;
+			System.out.println("line 96");
 			this.close();
 		});
 

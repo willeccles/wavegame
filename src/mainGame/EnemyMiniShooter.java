@@ -43,6 +43,7 @@ public class EnemyMiniShooter extends GameObject {
 
 	public void tick() {
 		timer--;
+		handler.addObject(new Trail(x, y, ID.Trail, Color.magenta, this.sizeX, this.sizeY, 0.025, this.handler));
 		if (timer <= 0) {
 			shoot();
 			if (handler.isMulti())
@@ -80,8 +81,8 @@ public class EnemyMiniShooter extends GameObject {
 	}
 
 	public void updateEnemy() {
-		this.sizeX--;
-		this.sizeY--;
+		this.sizeX -= 5;
+		this.sizeY -= 5;
 
 		if (sizeX <= 0) {
 			handler.removeObject(this);

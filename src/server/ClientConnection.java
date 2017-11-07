@@ -39,8 +39,11 @@ public class ClientConnection extends Thread {
 				// in this case this means something
 				ioe.printStackTrace();
 				break;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
+		System.out.println(id + " disconnected");
 		instance.removeClient(id);
 	}
 

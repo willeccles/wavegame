@@ -44,12 +44,12 @@ public class EnemyShooter extends GameObject {
 
 	public void tick() {
 		timer--;
+		handler.addObject(new Trail(x, y, ID.Trail, Color.yellow, this.sizeX, this.sizeY, 0.025, this.handler));
 		if (timer <= 0) {
 			shoot();
 			updateEnemy();
 			timer = 10;
 		}
-
 	}
 
 	public void shoot() {
