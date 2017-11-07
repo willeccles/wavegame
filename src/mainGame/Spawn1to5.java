@@ -393,7 +393,7 @@ public class Spawn1to5 {
 		levelsRemaining = 5;
 	}
 	public int rand() {
-		return (int) (Math.random() * levels.size());
+		return (int) (Math.random() * (levels.size()-1));
 	}
 
 }
