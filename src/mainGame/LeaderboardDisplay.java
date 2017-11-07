@@ -25,10 +25,22 @@ public class LeaderboardDisplay extends JPanel {
 		g.setColor(Color.white);
 		g.setFont(font);
 		g.drawString("Leaderboard", 600, 50);
-		for(int i = 0; i < 6; i++) {
-			if(leaderboard.getLeaderboard(i, 0) != null) {
-				g.drawString(leaderboard.getLeaderboard(i, 0), x, y + 100*i);
-				g.drawString(leaderboard.getLeaderboard(i, 1), x+500, y + 100*i);
+		if (leaderboard.isLoading()) {
+			g.drawString("Loading...", 100, 100);
+		} else {
+			if (leaderboard.getUserPosition().equals("-1")) {
+				g.drawString("Failed to load.", 100, 100);
+				g.drawString(leaderboard.getLeaderboard(5, 0), x, 600);
+				g.drawString(leaderboard.getLeaderboard(5, 1), x+515, 600);
+			} else {
+				for(int i = 4; i >= 0; i--) {
+					if(leaderboard.getLeaderboard(i, 0) != null) {
+						g.drawString(5-i + ". " + leaderboard.getLeaderboard(i, 0), x, y + (400-(100*i)));
+						g.drawString(leaderboard.getLeaderboard(i, 1), x+515, y + (400-(100*i)));
+					}
+				}
+				g.drawString(leaderboard.getUserPosition() + ". " + leaderboard.getLeaderboard(5, 0), x, y + 500);
+				g.drawString(leaderboard.getLeaderboard(5, 1), x+515, y+500);
 			}
 		}
 	}

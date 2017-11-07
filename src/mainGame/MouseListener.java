@@ -217,7 +217,7 @@ public class MouseListener extends MouseAdapter {
 			// Leaderboard screen
 			else if (game.gameState == STATE.Leaderboard) {
 				if (mouseOver(mx, my, 353, 490, 566, 166)) {
-					leaderboard.nextUser();
+					leaderboard.loadLeaderboard();
 					leaderboardDisplay.refresh();
 					game.gameState = STATE.LeaderboardDisplay;
 					return;

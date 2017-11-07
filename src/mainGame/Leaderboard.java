@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.lang.reflect.Array;
 import javax.swing.JPanel;
 import mainGame.net.LBWorker;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Leaderboard inpupt screen in the game
@@ -23,6 +25,9 @@ public class Leaderboard extends JPanel {
 	private LBWorker lbworker;
 	public String [][] leaderboard;
 	private int loc;
+	private int userpos = -1;
+	private LinkedHashMap<String, Integer> scorelist = null;
+	private boolean loading = true;
 
 	public Leaderboard(Game game, HUD hud, String[][] leaderboard) {
 		this.game = game;
@@ -111,4 +116,44 @@ public class Leaderboard extends JPanel {
 		return leaderboard[i][x];
 	}
 
+	public String getUserPosition() {
+		if (userpos != -1)
+			return Integer.toString(userpos);
+		else
+			return "  ";
+	}
+
+	public boolean isLoading() {
+		return loading;
+	}
+
+	public void loadLeaderboard() {
+		try {
+			lbworker.exchangeInfo(user, hud.getScore());
+			userpos = lbworker.getUserPosition();
+			scorelist = lbworker.getScoreList();
+			if (scorelist == null) {
+				for (int i = 0; i < 5; i++) {
+					leaderboard[i][0] = "";
+					leaderboard[i][1] = "";
+				}
+			} else {
+				int pos = 0;
+				for (Map.Entry<String, Integer> entry : scorelist.entrySet()) {
+					leaderboard[pos][0] = entry.getKey().toString();
+					leaderboard[pos][1] = scorelist.get(entry.getKey()).toString();
+					pos++;
+				}
+				leaderboard[5][0] = user;
+				leaderboard[5][1] = Integer.toString(hud.getScore());
+			}
+			loading = false;
+		} catch(Exception ioe) {
+			for (int i = 0; i < 5; i++) {
+				leaderboard[i][0] = "";
+				leaderboard[i][1] = "";
+			}
+			loading = false;
+		}
+	}
 }
