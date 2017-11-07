@@ -57,7 +57,11 @@ public class ClientConnection extends Thread {
 					instance.gameOver(Math.abs(this.id-1));
 				}
 			} catch (EOFException eof) {
-				// this is where a client has closed the connection on its end.
+				// when the socket reaches EOF before it finishes reading
+				// if this happens, it's likely an error with code, rather than a runtime-specific error
+				break;
+			} catch (SocketException se) {
+				// the socket is closed by the client
 				break;
 			} catch (IOException ioe) {
 				// in this case this means something
