@@ -147,6 +147,10 @@ public class ClientConnection {
 		writeOut("JOIN|" + roomname + "|" + password);
 	}
 
+	public void dead() {
+		writeOut("DEAD");
+	}
+
 	/**
 	 * Helper method for out.writeUTF() that just keeps me from having to put a try/catch on everything I do.
 	 * @param msg The message to send to the thing.

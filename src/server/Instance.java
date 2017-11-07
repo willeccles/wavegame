@@ -149,6 +149,11 @@ public class Instance extends Thread {
 		clients.remove(id);
 	}
 
+
+	public synchronized void gameOver(int winnerID) {
+		
+	}
+
 	/**
 	 * Join a user to the instance. Should be used by the Server for the most part.
 	 * @param clientSocket The socket the client is connected to.

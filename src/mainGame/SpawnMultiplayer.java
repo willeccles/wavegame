@@ -40,7 +40,9 @@ public class SpawnMultiplayer {
 			// remove the piece of text added above after the player joins
 		} else {
 			hud.tick();
-			if (player.get
+			if (hud.health <= 0) {
+				client.dead();
+			}
 		}
 	}
 

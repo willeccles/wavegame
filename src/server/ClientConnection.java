@@ -32,6 +32,10 @@ public class ClientConnection extends Thread {
 					// send the info about the player to the other client
 					instance.sendToClient(Math.abs(this.id-1), input);
 				}
+				// this means the player has died
+				else if (input.matches("DEAD")) {
+					// tell the instance to stop the game and stuff
+				}
 			} catch (EOFException eof) {
 				// this is where a client has closed the connection on its end.
 				break;

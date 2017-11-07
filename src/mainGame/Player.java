@@ -22,7 +22,7 @@ public class Player extends GameObject {
 	private Game game;
 	private int damage;
 	private int playerWidth, playerHeight;
-	public int playerSpeed = 10;
+	public static int playerSpeed = 10;
 	public String gameMode;
 	private Color color;
 	private boolean isOpponent;
