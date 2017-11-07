@@ -19,12 +19,12 @@ public class Leaderboard extends JPanel {
 	private int x, y, charLoc, strX;
 	private String user;
 	private Boolean full;
-	public String [][] leaderboard;
 	private HUD hud;
 	private LBWorker lbworker;
-	private int leaderboardAmount;
+	public String [][] leaderboard;
+	private int loc;
 
-	public Leaderboard(Game game, HUD hud) {
+	public Leaderboard(Game game, HUD hud, String[][] leaderboard) {
 		this.game = game;
 		x = 353;
 		y = 490;
@@ -32,10 +32,10 @@ public class Leaderboard extends JPanel {
 		user = "";
 		charLoc = 0;
 		full = false;
-		leaderboardAmount = 5;
-		leaderboard = new String[leaderboardAmount][2];
+		this.leaderboard = leaderboard;
 		this.hud = hud;
 		lbworker = new LBWorker("will.eccles.net", 25565);
+		loc = 0;
 	}
 
 	public void paint (Graphics g) {
@@ -62,7 +62,6 @@ public class Leaderboard extends JPanel {
 	}
 
 	public void updateUser(String temp) {
-		System.out.println(user);
 		if(charLoc == 15) {
 			full = true;
 		} else {
@@ -101,12 +100,15 @@ public class Leaderboard extends JPanel {
 		return full;
 	}
 	public void nextUser() {
-		int temp = 0;
-		leaderboard[temp][0] = user;
-		leaderboard[temp][1] = Integer.toString(hud.getScore()); 
+		leaderboard[loc][0] = user;
+		leaderboard[loc][1] = Integer.toString(hud.getScore()); 
 		user = "";
 		charLoc = 0;
 		strX = x +213;
+		loc++;
+	}
+	public String getLeaderboard(int i, int x) {
+		return leaderboard[i][x];
 	}
 
 }
