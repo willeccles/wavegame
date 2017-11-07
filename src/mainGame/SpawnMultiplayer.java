@@ -85,6 +85,14 @@ public class SpawnMultiplayer {
 		client.sendPos(player);
 	}
 
+	/**
+	 * Spawns an entity.
+	 * @param type The ID of the thing to spawn.
+	 * @param x The X position to spawn it at.
+	 * @param y The Y position to spawn it at.
+	 * @param option An option digit, 0-4, used for one type of enemy.
+	 * @param side The side to spawn from, used for certain enemies.
+	 */
 	public void spawnEntity(ID type, double x, double y, int option, String side) {
 		switch (type) {
 			case EnemyBasic:
@@ -119,5 +127,14 @@ public class SpawnMultiplayer {
 				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler));
 				break;
 		}
+	}
+
+	/**
+	 * Resets the class.
+	 */
+	public void reset() {
+		opponent = null;
+		client = null;
+		handler.setMulti(false);
 	}
 }

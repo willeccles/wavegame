@@ -86,7 +86,9 @@ public class Player extends GameObject {
 				} else if (game.gameState == STATE.Test) {
 					gameMode = "test";
 				}
-				game.gameState = STATE.GameOver;
+				if (game.gameState != STATE.Multiplayer) {
+					game.gameState = STATE.GameOver;
+				}
 			}
 
 			else if (hud.getExtraLives() > 0) {// has an extra life, game continues

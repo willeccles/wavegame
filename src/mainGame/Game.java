@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable {
 	private Spawn15to20 spawner4;
 	private SpawnSurvival spawnSurvival;
 	private Menu menu;
-	private GameOver gameOver;
+	public GameOver gameOver;
 	private UpgradeScreen upgradeScreen;
 	private MouseListener mouseListener;
 	private Upgrades upgrades;
@@ -99,7 +99,7 @@ public class Game extends Canvas implements Runnable {
 		leaderboard = new Leaderboard(this, hud, leaderboardList);
 		leaderboardDisplay = new LeaderboardDisplay(this.leaderboard, this);
 		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, 
-				this.spawner2, this.spawnSurvival, this.upgradeScreen, this.player, 
+				this.spawner2, this.spawnSurvival, this.upgradeScreen, this.spawnMultiplayer, this.player, 
 				this.upgrades, leaderboard, this.spawnBosses, this.spawnTest, this.leaderboardDisplay);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
 		this.addMouseListener(mouseListener);
