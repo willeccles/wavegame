@@ -2,6 +2,7 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ClientConnection extends Thread {
 	private Socket socket;
@@ -11,17 +12,35 @@ public class ClientConnection extends Thread {
 	private Instance instance;
 	private DataInputStream in;
 	private DataOutputStream out;
+	private Thread outputThread;
+	private ConcurrentLinkedQueue<String> outputQueue;
 
 	public ClientConnection(int id, Socket clientSocket, Instance instance) throws IOException {
 		this.id = id;
 		this.socket = clientSocket;
 		this.isHost = isHost;
 		this.instance = instance;
+		outputQueue = new ConcurrentLinkedQueue<String>();
 		in = new DataInputStream(socket.getInputStream());
 		out = new DataOutputStream(socket.getOutputStream());
+		outputThread = new Thread(() -> {
+			String output;
+			while (socket.isConnected()) {
+				output = outputQueue.poll();
+				if (output != null) {
+					// send the output to the server
+					try {
+						out.writeUTF(output);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 	}
 	
 	public void run() {
+		if (!outputThread.isAlive()) outputThread.start();
 		// here we should wait for things to come from the client and then send them to the instance the client is in
 		String input = "";
 		while (socket.isConnected()) {
@@ -35,6 +54,7 @@ public class ClientConnection extends Thread {
 				// this means the player has died
 				else if (input.matches("DEAD")) {
 					// tell the instance to stop the game and stuff
+					instance.gameOver(Math.abs(this.id-1));
 				}
 			} catch (EOFException eof) {
 				// this is where a client has closed the connection on its end.
@@ -47,7 +67,6 @@ public class ClientConnection extends Thread {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(id + " disconnected");
 		instance.removeClient(id);
 	}
 
@@ -56,6 +75,7 @@ public class ClientConnection extends Thread {
 			in.close();
 			out.close();
 			socket.close();
+			outputThread.join();
 			this.join();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,7 +86,7 @@ public class ClientConnection extends Thread {
 	public void sendMessage(String message) {
 		// send a message to the client
 		try {
-			out.writeUTF(message);
+			outputQueue.add(message);
 		} catch (Exception ioe) {
 			ioe.printStackTrace();
 		}

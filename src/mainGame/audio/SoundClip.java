@@ -15,6 +15,7 @@ import mainGame.Game;
 public class SoundClip {
 	private double volume; // double from 0.0-1.0 representing the relative volume to play the file at. Will be clamped at playback, so even 123.123 just = 1.0
 	private Media media; // the media that will be played
+	private MediaPlayer player;
 
 	/**
 	 * Constructor.
@@ -26,6 +27,7 @@ public class SoundClip {
 		try {
 			File f = new File(Game.class.getResource(filesource).toURI().toString());
 			media = new Media(f.toString().replaceAll("\\\\", "/"));
+			player = new MediaPlayer(media);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,15 +45,16 @@ public class SoundClip {
 	 * Play the sound clip one time.
 	 */
 	public void play() {
-		Thread t = new Thread(() -> {
-			try {
-				MediaPlayer player = new MediaPlayer(media);
-				player.setVolume(volume);
-				player.play();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-		t.start();
+		if (player.getStatus() != MediaPlayer.Status.PLAYING) {
+			Thread t = new Thread(() -> {
+				try {
+					player.setVolume(volume);
+					player.play();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+			t.start();
+		}
 	}
 }
