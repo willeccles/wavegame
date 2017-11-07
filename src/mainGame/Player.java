@@ -59,7 +59,7 @@ public class Player extends GameObject {
 		y = Game.clampY(y, playerHeight);
 
 		// add the trail that follows it
-		if (velX != 0 || velY != 0)
+		if ((velX != 0 || velY != 0) && !isOpponent)
 			handler.addObject(new Trail(x, y, ID.Trail, this.color, playerWidth, playerHeight, 0.05, this.handler));
 
 		// these things will be done by the other player's client, so if it's the opponent player we don't care.
