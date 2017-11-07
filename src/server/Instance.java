@@ -98,7 +98,6 @@ public class Instance extends Thread {
 	private void tick() {
 		// handle if a user has left, kill the game (assuming the other user is connected, i suppose)
 		if (getClientCount() < 2) {
-			System.out.println("why is this happening to me");
 			sendToAll("OTHER_LEFT"); // this means the other player has left the game
 			close();
 		}
@@ -107,7 +106,7 @@ public class Instance extends Thread {
 		
 		// send to each of the clients
 		// msg: SPAWN:<ID ordinal>,x,y,option,side
-		//sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
+		sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
 	}
 
 	/**
@@ -149,9 +148,14 @@ public class Instance extends Thread {
 		clients.remove(id);
 	}
 
-
+	/**
+	 * Ends the game, declaring the given ID as the winner.
+	 * @param winnerID the ID of the winning player
+	 */
 	public synchronized void gameOver(int winnerID) {
-		
+		sendToClient(winnerID, "WIN");
+		sendToClient(Math.abs(winnerID-1), "LOSE");
+		running = false;
 	}
 
 	/**
@@ -183,13 +187,10 @@ public class Instance extends Thread {
 	 * @param message Message to send to all clients.
 	 */
 	public void sendToAll(String message) {
-		Iterator it = clients.entrySet().iterator();
-		while (it.hasNext()) {
-			HashMap.Entry pair = (HashMap.Entry) it.next();
+		for (HashMap.Entry<Integer, ClientConnection> pair : clients.entrySet()) {
 			if (clients.get(pair.getKey()).isAlive()) {
 				sendToClient((Integer)pair.getKey(), message);
 			}
-			it.remove(); // avoids ConcurrentModificationException, which a for each doesn't
 		}
 	}
 }

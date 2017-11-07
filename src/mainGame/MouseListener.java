@@ -31,6 +31,7 @@ public class MouseListener extends MouseAdapter {
 	private Spawn5to10 spawner2;
 	private SpawnSurvival spawnSurvival;
 	private SpawnBosses spawnBosses;
+	private SpawnMultiplayer spawnMulti;
 	private UpgradeScreen upgradeScreen;
 	private Upgrades upgrades;
 	private Player player;
@@ -39,10 +40,7 @@ public class MouseListener extends MouseAdapter {
 	private SpawnTest spawnTest;
 	private LeaderboardDisplay leaderboardDisplay;
 
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
-			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
-			Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses,
-			SpawnTest spawnTest, LeaderboardDisplay leaderboardDisplay) {
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, SpawnMultiplayer spawnM, Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses, SpawnTest spawnTest, LeaderboardDisplay leaderboardDisplay) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -52,6 +50,7 @@ public class MouseListener extends MouseAdapter {
 		this.player = player;
 		this.upgrades = upgrades;
 		this.spawnSurvival = spawnSurvival;
+		this.spawnMulti = spawnM;
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.spawnTest = spawnTest;
@@ -100,6 +99,15 @@ public class MouseListener extends MouseAdapter {
 					hud.health = 100;
 					hud.setScore(0);
 					spawnTest.restart();
+					game.gameState = STATE.Menu;
+					player.resetVel();
+					player.resetLoc();
+				} else if (player.checkGame() == "multiplayer") {
+					handler.object.clear();
+					upgrades.resetUpgrades();
+					hud.health = 100;
+					hud.setScore(0);
+					spawnMulti.reset();
 					game.gameState = STATE.Menu;
 					player.resetVel();
 					player.resetLoc();

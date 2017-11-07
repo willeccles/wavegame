@@ -17,6 +17,7 @@ public class ClientConnection {
 	private Player opponent;
 	private Game game;
 	private ConcurrentLinkedQueue<String> outputQueue;
+	private String lastSent = ""; // this way we don't send the same message 14 bazillion times
 
 	public ClientConnection(String address, int port, SpawnMultiplayer spawn, Player op, Game g) throws UnknownHostException, IOException {
 		this.address = address;
@@ -39,7 +40,6 @@ public class ClientConnection {
 				try {
 					// this is where we get the input and stuff
 					input = in.readUTF();
-
 					// the command to start the game
 					if (input.matches("START:[\\d.]+,[\\d.]+,[\\d.]+,[\\d.]+")) {
 						// the first pair of doubles is the local player's starting location
@@ -66,8 +66,19 @@ public class ClientConnection {
 						opponent.setVelX((int)Double.parseDouble(parts[2]));
 						opponent.setVelY((int)Double.parseDouble(parts[3]));
 					}
+					// When this player wins
+					else if (input.matches("WIN")) {
+						game.gameOver.setMessage("You win!");
+						break;
+					}
+					// when this player loses
+					else if (input.matches("LOSE")) {
+						game.gameOver.setMessage("You lose :(");
+						break;
+					}
 					// when the other user leaves
 					else if (input.matches("OTHER_LEFT")) {
+						game.gameOver.setMessage("The other player left :(");
 						break;
 					}
 
@@ -77,8 +88,7 @@ public class ClientConnection {
 					// TODO: handle full lobby
 				} catch (EOFException eof) {
 					// this means that the server closed the connection
-					System.out.println("Sending back to menu, server killed the connection.");
-					game.gameState = Game.STATE.Menu;
+					game.gameState = Game.STATE.GameOver;
 					break;
 				} catch(IOException ioe) {
 					ioe.printStackTrace();
@@ -92,8 +102,7 @@ public class ClientConnection {
 				}
 			}
 			// after break, close
-			game.gameState = Game.STATE.Menu;
-			System.out.println("line 96");
+			game.gameState = Game.STATE.GameOver;
 			this.close();
 		});
 
@@ -106,6 +115,7 @@ public class ClientConnection {
 					// send the output to the server
 					try {
 						out.writeUTF(output);
+						out.flush();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -156,7 +166,10 @@ public class ClientConnection {
 	 * @param msg The message to send to the thing.
 	 */
 	private void writeOut(String msg) {
-		outputQueue.add(msg);
+		if (!lastSent.equals(msg)) {
+			outputQueue.add(msg);
+			lastSent = msg;
+		}
 	}
 
 	/**
@@ -165,6 +178,7 @@ public class ClientConnection {
 	public void close() {
 		try {
 			in.close();
+			out.flush();
 			out.close();
 			client.close();
 			if (inputThread.isAlive()) {

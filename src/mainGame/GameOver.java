@@ -25,6 +25,8 @@ public class GameOver {
 	private Color retryColor;
 	private String text;
 	private Player player;
+	private String backText;
+	private String message;
 
 	public GameOver(Game game, Handler handler, HUD hud, Player player) {
 		this.game = game;
@@ -32,11 +34,12 @@ public class GameOver {
 		this.player = player;
 		this.hud = hud;
 		this.retryColor = Color.white;
+		text = "Game Over";
+		backText = "Click anywhere to return to the menu";
 	}
 
 	public void tick() {
 		handler.clearPlayer();
-
 	}
 
 	public void render(Graphics g) {
@@ -49,7 +52,7 @@ public class GameOver {
 		text = "Game Over";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, Game.HEIGHT / 2 - 150);
 		g.setFont(font2);
-		if(!(player.checkGame().equals("survival"))) {
+		if(!(player.checkGame().equals("survival")) && !player.checkGame().equals("multiplayer")) {
 			text = "Level: " + hud.getLevel();
 			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
 			text = "Score: " + hud.getScore();
@@ -58,10 +61,20 @@ public class GameOver {
 			text = "Score: " + hud.getScore();
 			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
 		}
+		if (handler.isMulti()) {
+			g.drawString(message, Game.WIDTH / 2 - getTextWidth(font2, message) / 2, Game.HEIGHT / 2 + 50);
+		}
 		g.setFont(font2);
-		text = "Click anywhere to play again";
-		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 + 150);
+		g.drawString(backText, Game.WIDTH / 2 - getTextWidth(font2, backText) / 2, Game.HEIGHT / 2 + 150);
 
+	}
+
+	public void setMessage(String msg) {
+		message = msg;
+	}
+
+	public void setBackText(String msg) {
+		backText = msg;
 	}
 
 	/**
@@ -73,7 +86,7 @@ public class GameOver {
 	 *            the String of text
 	 * @return width in pixels of text
 	 */
-	public int getTextWidth(Font font, String text) {
+	public static int getTextWidth(Font font, String text) {
 		AffineTransform at = new AffineTransform();
 		FontRenderContext frc = new FontRenderContext(at, true, true);
 		int textWidth = (int) (font.getStringBounds(text, frc).getWidth());
