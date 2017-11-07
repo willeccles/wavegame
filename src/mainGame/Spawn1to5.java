@@ -40,7 +40,7 @@ public class Spawn1to5 {
 		levelNumber = -1;
 		trackerColor = Color.blue;
 		trackerTimer = 1000;
-		differentEnemies = 9;
+		differentEnemies = 10;
 		addLevels();
 
 	}
