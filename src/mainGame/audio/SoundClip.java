@@ -29,6 +29,9 @@ public class SoundClip {
 			File f = new File(Game.class.getResource(filesource).toURI().toString());
 			media = new Media(f.toString().replaceAll("\\\\", "/"));
 			player = new MediaPlayer(media);
+			player.setOnStopped(() -> {
+				isPlaying = false;
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,7 +55,6 @@ public class SoundClip {
 					player.setVolume(volume);
 					isPlaying = true;
 					player.play();
-					isPlaying = false;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
