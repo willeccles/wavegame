@@ -48,7 +48,7 @@ public class ClientConnection {
 						spawn.startPlaying(Double.parseDouble(parts[0]), Double.parseDouble(parts[1]), Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
 					}
 					// if the input is to spawn an enemy
-					else if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom|)")) {
+					else if (input.matches("SPAWN:[\\d]+,[\\d.]+,[\\d.]+,\\d,(left|right|top|bottom)")) {
 						// tell the spawner to spawn the thing
 						String parts[] = input.replace("SPAWN:", "").split(",");
 						ID type = ID.values()[Integer.parseInt(parts[0])];
@@ -59,7 +59,7 @@ public class ClientConnection {
 						spawner.spawnEntity(type, x, y, option, side);
 					}
 					// when the input is giving info about the other player
-					else if (input.matches("[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+")) {
+					else if (input.matches("[0-9.]+,[0-9.]+,[-0-9.]+,[-0-9.]+")) {
 						String parts[] = input.split(",");
 						opponent.setX((int)Double.parseDouble(parts[0]));
 						opponent.setY((int)Double.parseDouble(parts[1]));
@@ -68,7 +68,6 @@ public class ClientConnection {
 					}
 					// when the other user leaves
 					else if (input.matches("OTHER_LEFT")) {
-						game.gameState = Game.STATE.Menu;
 						break;
 					}
 
@@ -80,17 +79,21 @@ public class ClientConnection {
 					// this means that the server closed the connection
 					System.out.println("Sending back to menu, server killed the connection.");
 					game.gameState = Game.STATE.Menu;
+					break;
 				} catch(IOException ioe) {
+					ioe.printStackTrace();
 					try {
 						client.close();
 					} catch (IOException e) {
 						// this means there was an issue closing the client socket
 					}
+				} catch (Exception e) {
+					e.printStackTrace(); // catch any error that isn't caught above
 				}
 			}
 			// after break, close
 			game.gameState = Game.STATE.Menu;
-			System.out.println("CC got here");
+			System.out.println("line 96");
 			this.close();
 		});
 

@@ -231,11 +231,13 @@ public class Game extends Canvas implements Runnable {
 				// upgrade screen
 				upgradeScreen.tick();
 			} else if (gameState == STATE.GameOver) {// game is over, update the
+				handler.setMulti(false);
 				// game over screen
 				gameOver.tick();
 			} else if (gameState == STATE.Connect) { // entering connection info for MP
 				// TODO: add a connect screen @chieco
 			} else if (gameState == STATE.Multiplayer) {
+				if (!handler.isMulti()) handler.setMulti(true);
 				// do not use HUD::tick() here, it's used inside the spawner
 				spawnMultiplayer.tick();
 			} else if (gameState == STATE.Bosses) {

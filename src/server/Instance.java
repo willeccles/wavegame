@@ -56,9 +56,7 @@ public class Instance extends Thread {
 		// now that there are two players, we can start the game running
 		running = true;
 		
-		System.out.println("got here 1");
 		if (this.isAlive()) {
-			System.out.println("got here 2");
 			// locations for both players (y stays the same for each)
 			double x1 = (1280.0/3.0)-(21.0/2.0);
 			double x2 = (1280.0*2.0/3.0)-(21.0/2.0);
@@ -109,7 +107,7 @@ public class Instance extends Thread {
 		
 		// send to each of the clients
 		// msg: SPAWN:<ID ordinal>,x,y,option,side
-		sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
+		//sendToAll("SPAWN:" + e.getType().ordinal() + ',' + e.getX() + ',' + e.getY() + ',' + e.getOption() + ',' + e.getSide());
 	}
 
 	/**
@@ -145,7 +143,8 @@ public class Instance extends Thread {
 	 * @param id The ID of the client to remove.
 	 */
 	public synchronized void removeClient(int id) {
-		System.out.println("removing client " + id);
+		if (clients.get(id) == null)
+			return;
 		clients.get(id).close();
 		clients.remove(id);
 	}
@@ -170,7 +169,8 @@ public class Instance extends Thread {
 	 */
 	public void sendToClient(int id, String message) {
 		// get the client for the given ID and send the message to it
-		clients.get(id).sendMessage(message);
+		if (clients.get(id) != null)
+			clients.get(id).sendMessage(message);
 	}
 
 	/**

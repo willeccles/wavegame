@@ -88,7 +88,7 @@ public class BossKyle extends GameObject {
 		//handler.addObject(
 				//new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.orange));
 		handler.addObject(
-				new EnemyBurst(x, y, bulletVelX, bulletVelY, 200, "left", ID.EnemyBurst, handler, false));
+				new EnemyBurst(x, y, bulletVelX, bulletVelY, 200, "left", ID.EnemyBurst, handler));
 	}
 	
 	private void updateEnemy() {

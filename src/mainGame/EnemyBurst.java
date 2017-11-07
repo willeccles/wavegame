@@ -19,13 +19,12 @@ public class EnemyBurst extends GameObject {
 	private int size;
 	private String side;
 	private Random r = new Random();
-	private boolean isMultiplayer = false;
+	private boolean isMultiplayer;
 
 	/**
 	 * Constructor.
-	 * @param mult ONLY set this to true if you're using this in multiplayer.
 	 */
-	public EnemyBurst(double x, double y, double velX, double velY, int size, String side, ID id, Handler handler, boolean mult) {
+	public EnemyBurst(double x, double y, double velX, double velY, int size, String side, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		this.velX = velX;
@@ -33,7 +32,7 @@ public class EnemyBurst extends GameObject {
 		this.timer = 60;
 		this.side = side;
 		this.size = size;
-		isMultiplayer = mult;
+		isMultiplayer = handler.isMulti();
 
 		if (this.side.equals("left")) {
 			handler.object.add(new EnemyBurstWarning(0, 0, 25, Game.HEIGHT, ID.EnemyBurstWarning, handler));
@@ -52,10 +51,6 @@ public class EnemyBurst extends GameObject {
 			setPos();
 			setVel();
 		}
-	}
-
-	public EnemyBurst(double x, double y, double velX, double velY, int size, String side, ID id, Handler handler) {
-		this(x, y, velX, velY, size, side, id, handler, false);
 	}
 
 	public void tick() {
@@ -83,13 +78,17 @@ public class EnemyBurst extends GameObject {
 
 	public void setPos() {
 		if (this.side.equals("left")) {
-			if (isMultiplayer)
+			if (isMultiplayer) {
 				this.y = Game.clampY(this.y, 200);
+				this.x = -(size);
+			}
 			else
 				this.y = r.nextInt(((Game.HEIGHT - size) - 0) + 1) + 0;
 		} else if (this.side.equals("right")) {
-			if (isMultiplayer)
+			if (isMultiplayer) {
 				this.y = Game.clampY(this.y, 200);
+				this.x = Game.WIDTH;
+			}
 			else
 				this.y = r.nextInt(((Game.HEIGHT - size) - 0) + 1) + 0;
 			this.x = Game.WIDTH + 200;
@@ -100,7 +99,7 @@ public class EnemyBurst extends GameObject {
 			else
 				this.x = r.nextInt(((Game.WIDTH - size) - 0) + 1) + 0;
 		} else if (this.side.equals("bottom")) {
-			this.y = Game.HEIGHT + 200;
+			this.y = Game.HEIGHT;
 			if (isMultiplayer)
 				this.x = Game.clampX(this.x, 200);
 			else

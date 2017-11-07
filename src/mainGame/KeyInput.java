@@ -266,13 +266,13 @@ public class KeyInput extends KeyAdapter {
 
 			if (tempObject.getId() == ID.Player) {
 				// key events for player 1
-				if (key == KeyEvent.VK_UP) {
+				if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
 					keyDown[0] = false;
-				} else if (key == KeyEvent.VK_LEFT) {
+				} else if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 					keyDown[1] = false;
-				} else if (key == KeyEvent.VK_DOWN) {
+				} else if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
 					keyDown[2] = false;
-				} else if (key == KeyEvent.VK_RIGHT) {
+				} else if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
 					keyDown[3] = false;
 					keyDown[4] = false;
 				}

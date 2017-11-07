@@ -57,6 +57,7 @@ public class SpawnMultiplayer {
 		opponent.setY((int)y2);
 		handler.addObject(opponent);
 		handler.addObject(player);
+		handler.setMulti(true);
 		playing = true;
 	}
 
@@ -86,11 +87,8 @@ public class SpawnMultiplayer {
 			case EnemyBasic:
 				handler.addObject(new EnemyBasic(x, y, 9, 9, type, handler));
 				break;
-			case EnemySmart:
-				handler.addObject(new EnemySmart(x, y, -5, type, handler));
-				break;
 			case EnemyBurst:
-				handler.addObject(new EnemyBurst(x, y, 50, 50, 200, side, type, handler, true));
+				handler.addObject(new EnemyBurst(x, y, 50, 50, 200, side, type, handler));
 				break;
 			case EnemySweep:
 				switch (option) {
@@ -116,9 +114,6 @@ public class SpawnMultiplayer {
 				break;
 			case EnemyMiniShooter:
 				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler));
-				break;
-			case EnemyPorcupine:
-				handler.addObject(new EnemyPorcupine(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler, -1, -2));
 				break;
 		}
 	}

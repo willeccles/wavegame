@@ -18,6 +18,7 @@ public class EnemyMiniShooter extends GameObject {
 	private int sizeY;
 	private int timer;
 	private GameObject player;
+	private GameObject opponent; // used in multiplayer
 	private double bulletVelX;
 	private double bulletVelY;
 	private int bulletSpeed;
@@ -35,24 +36,18 @@ public class EnemyMiniShooter extends GameObject {
 		for (int i = 0; i < handler.object.size(); i++) {
 			if (handler.object.get(i).getId() == ID.Player)
 				player = handler.object.get(i);
+			if (handler.object.get(i).getId() == ID.Player2)
+				opponent = handler.object.get(i);
 		}
 	}
 
 	public void tick() {
-		this.x += velX;
-		this.y += velY;
-
-		if (this.y <= 0 || this.y >= Game.HEIGHT - 40)
-			velY *= -1;
-		if (this.x <= 0 || this.x >= Game.WIDTH - 16)
-			velX *= -1;
-
-		handler.addObject(new Trail(x, y, ID.Trail, Color.magenta, this.sizeX, this.sizeY, 0.025, this.handler));
-
 		timer--;
+		handler.addObject(new Trail(x, y, ID.Trail, Color.magenta, this.sizeX, this.sizeY, 0.025, this.handler));
 		if (timer <= 0) {
 			shoot();
-			//updateEnemy();
+			if (handler.isMulti())
+				updateEnemy();
 			timer = 50;
 		}
 
@@ -68,13 +63,26 @@ public class EnemyMiniShooter extends GameObject {
 		bulletVelX = ((this.bulletSpeed / distance) * diffX); // numerator affects speed of enemy
 		bulletVelY = ((this.bulletSpeed / distance) * diffY);// numerator affects speed of enemy
 
-		handler.addObject(
-				new EnemyMiniShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyMiniShooterBullet, this.handler));
+		handler.addObject(new EnemyMiniShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyMiniShooterBullet, this.handler));
+		
+		// if we are playing multiplayer, just go ahead and make another bullet to fire at the other player. This is going to be quite resource-intensive, so we need to make sure enemies aren't TOO cluttered on the screen.
+		if (handler.isMulti()) {
+			diffX = this.x - opponent.getX() - 16;
+			diffY = this.y - opponent.getY() - 16;
+			distance = Math.sqrt(((this.x - opponent.getX()) * (this.x - opponent.getX()))
+					+ ((this.y - opponent.getY()) * (this.y - opponent.getY())));
+			////////////////////////////// pythagorean theorem
+			////////////////////////////// above//////////////////////////////////////////////////
+			bulletVelX = ((this.bulletSpeed / distance) * diffX); // numerator affects speed of enemy
+			bulletVelY = ((this.bulletSpeed / distance) * diffY);// numerator affects speed of enemy
+
+			handler.addObject(new EnemyMiniShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyMiniShooterBullet, this.handler));
+		}
 	}
 
 	public void updateEnemy() {
-		this.sizeX--;
-		this.sizeY--;
+		this.sizeX -= 5;
+		this.sizeY -= 5;
 
 		if (sizeX <= 0) {
 			handler.removeObject(this);

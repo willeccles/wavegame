@@ -11,14 +11,12 @@ public class SurvivalSpawner {
 	private Random rand;
 	// Valid usable IDs for things to spawn (does not include health pickups, that's different)
 	private static final ID[] validIDs = {
-		ID.EnemySmart,
 		ID.EnemyBurst,
 		ID.EnemySweep,
 		ID.EnemyShooter,
 		ID.EnemyBasic,
 		ID.EnemyExpand,
 		ID.EnemyMiniShooter,
-		ID.EnemyPorcupine
 	};
 	private static final String[] sides = {"left", "right", "top", "bottom"};
 	private ID lastEnemy = ID.PickupHealth; // since 0 is an invalid ordinal (it's ID.Player) it's a good dummy value
