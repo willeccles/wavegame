@@ -11,6 +11,8 @@ import java.util.Random;
 /**
  * Boss made by a retard
  * 
+ * Kid can't even code... like honestly get good
+ * 
  * @author Kyle Gorman 11/3/17
  *
  */
