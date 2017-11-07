@@ -28,7 +28,7 @@ public class LeaderboardDisplay extends JPanel {
 		for(int i = 0; i < 5; i++) {
 			if(leaderboard.getLeaderboard(i, 0) != null) {
 				g.drawString(leaderboard.getLeaderboard(i, 0), x, y + 100*i);
-				g.drawString(leaderboard.getLeaderboard(i, 1), x+150, y + 100*i);
+				g.drawString(leaderboard.getLeaderboard(i, 1), x+500, y + 100*i);
 			}
 		}
 	}
