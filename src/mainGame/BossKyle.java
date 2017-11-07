@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.Random;
 
 /**
- * Boss
+ * Boss made by a retard
  * 
  * @author Kyle Gorman 11/3/17
  *
