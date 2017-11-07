@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
 import mainGame.audio.SoundPlayer;
+import mainGame.audio.SoundClip;
 import mainGame.net.ClientConnection;
 
 /**
@@ -42,6 +43,7 @@ public class Game extends Canvas implements Runnable {
 	private PauseMenu pauseMenu;
 	public static int TEMP_COUNTER;
 	private SoundPlayer soundplayer;
+	public SoundClip soundClip;
 	private Leaderboard leaderboard;
 
 	private SpawnBosses spawnBosses;
@@ -107,6 +109,7 @@ public class Game extends Canvas implements Runnable {
 		this.setSize(new Dimension(WIDTH, HEIGHT));
 		JFXPanel jfxp = new JFXPanel(); // trust
 		soundplayer = new SoundPlayer("sounds/main.mp3", true);
+		soundClip = new SoundClip("sounds/damage.mp3", 1.0);
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
 		colorScreen = new ColorPickerScreen(player, this);
