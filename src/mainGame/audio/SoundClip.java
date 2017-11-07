@@ -16,6 +16,7 @@ public class SoundClip {
 	private double volume; // double from 0.0-1.0 representing the relative volume to play the file at. Will be clamped at playback, so even 123.123 just = 1.0
 	private Media media; // the media that will be played
 	private MediaPlayer player;
+	private boolean isPlaying = false;
 
 	/**
 	 * Constructor.
@@ -45,11 +46,13 @@ public class SoundClip {
 	 * Play the sound clip one time.
 	 */
 	public void play() {
-		if (player.getStatus() != MediaPlayer.Status.PLAYING) {
+		if (!isPlaying) {
 			Thread t = new Thread(() -> {
 				try {
 					player.setVolume(volume);
+					isPlaying = true;
 					player.play();
+					isPlaying = false;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
