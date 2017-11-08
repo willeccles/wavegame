@@ -157,12 +157,12 @@ public class SpawnBosses {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.BossKyle3) {
 						if (tempObject.getHealth() <= 0) {
-							handler.removeObject(tempObject);
+							handler.clearEnemies();
+							levelNumber++;
+							tempCounter = 0;
 						}
 					}
 				}
-				levelNumber++;
-				tempCounter = 0;
 			}
 		}
 	}
