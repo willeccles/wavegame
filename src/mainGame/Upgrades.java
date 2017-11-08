@@ -44,7 +44,7 @@ public class Upgrades {
 	}
 
 	public void decreasePlayerSize() {
-		player.setPlayerSize(24);
+		player.setPlayerSize(17);
 	}
 
 	public void extraLife() {
@@ -143,7 +143,7 @@ public class Upgrades {
 		hud.resetHealth();
 		hud.resetRegen();
 		hud.setExtraLives(0);
-		player.setPlayerSize(32);
+		player.setPlayerSize(21);
 		upgradeScreen.resetPaths();
 		hud.setAbilityUses(0);
 		hud.clearUpgrades();

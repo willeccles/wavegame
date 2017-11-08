@@ -165,7 +165,6 @@ public class MouseListener extends MouseAdapter {
 					handler.object.clear();
 					game.gameState = STATE.Wave;
 					handler.addObject(player);
-					player.setPlayerSize(21);
 					// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 					// "images/PickupHealth.png", handler));
 				}
@@ -207,7 +206,6 @@ public class MouseListener extends MouseAdapter {
 					handler.object.clear();
 					game.gameState = STATE.Survival;
 					handler.addObject(player);
-					player.setPlayerSize(21);
 				}
 
 				// Bosses Mode
@@ -215,7 +213,6 @@ public class MouseListener extends MouseAdapter {
 					handler.object.clear();
 					game.gameState = STATE.Bosses;
 					handler.addObject(player);
-					player.setPlayerSize(21);
 				}
 			}
 			// Back Button for Help screen
