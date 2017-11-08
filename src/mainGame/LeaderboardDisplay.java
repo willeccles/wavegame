@@ -3,6 +3,9 @@ package mainGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 import javax.swing.JPanel;
 
@@ -10,6 +13,7 @@ public class LeaderboardDisplay extends JPanel {
 	private Leaderboard leaderboard;
 	private Game game;
 	private int x,y;
+	private Image img;
 	
 	public LeaderboardDisplay(Leaderboard leaderboard, Game game) {
 		this.leaderboard = leaderboard;

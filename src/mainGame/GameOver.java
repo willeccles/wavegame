@@ -16,7 +16,6 @@ import mainGame.Game.STATE;
  * @author Brandon Loehle 5/30/16
  *
  */
-
 public class GameOver {
 
 	private Game game;

@@ -110,6 +110,7 @@ public class Player extends GameObject {
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
 					hud.health -= damage;
+					game.soundClip.play();
 					hud.updateScoreColor(Color.red);
 				}
 
@@ -119,6 +120,7 @@ public class Player extends GameObject {
 				// boss starts moving
 				if (this.y <= 138 && tempObject.isMoving) {
 					hud.health -= 2;
+					game.soundClip.play();
 					hud.updateScoreColor(Color.red);
 				}
 			}

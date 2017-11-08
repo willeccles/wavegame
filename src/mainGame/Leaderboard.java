@@ -3,7 +3,11 @@ package mainGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.lang.reflect.Array;
+import java.net.URL;
+
 import javax.swing.JPanel;
 import mainGame.net.LBWorker;
 import java.util.LinkedHashMap;
@@ -28,6 +32,7 @@ public class Leaderboard extends JPanel {
 	private int userpos = -1;
 	private LinkedHashMap<String, Integer> scorelist = null;
 	private boolean loading = true;
+	private Image img;
 
 	public Leaderboard(Game game, HUD hud, String[][] leaderboard) {
 		this.game = game;
@@ -37,6 +42,13 @@ public class Leaderboard extends JPanel {
 		user = "";
 		charLoc = 0;
 		full = false;
+		img = null;
+		try {
+			URL imageURL = Game.class.getResource("images/backgroundimage.jpg");
+			img = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		this.leaderboard = leaderboard;
 		this.hud = hud;
 		lbworker = new LBWorker("will.eccles.net", 25565);
@@ -46,6 +58,7 @@ public class Leaderboard extends JPanel {
 	public void paint (Graphics g) {
 		// TODO Auto-generated method stub
 		//1280x720
+		g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 		Font font = new Font("Comic Sans MS", 1 , 50);
 		g.setColor(Color.orange);
 		g.drawRect(x, y, 566, 166);
