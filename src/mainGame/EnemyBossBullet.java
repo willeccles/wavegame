@@ -24,6 +24,7 @@ public class EnemyBossBullet extends GameObject {
 		this.handler = handler;
 		velX = (r.nextInt((max - min) + 1) + min);// OFFICIAL WAY TO GET A RANGE FOR randInt()
 		velY = 30;
+		this.y -= velY; // this ensures that the bullet spawns where it needs to
 	}
 
 	public void tick() {
