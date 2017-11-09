@@ -370,7 +370,6 @@ public class Spawn1to5 {
 			spawnTimer = 10;
 			levelsRemaining--;
 			tempCounter = 0;
-			levels.remove(levelNumber);
 			levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 		}
 	}
@@ -383,7 +382,7 @@ public class Spawn1to5 {
 		levelsRemaining = 5;
 	}
 	public int rand() {
-		return (int) (Math.random() * levels.size());
+		return r.nextInt(differentEnemies);
 	}
 
 }
