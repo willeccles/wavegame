@@ -17,7 +17,7 @@ public class SpawnBosses {
 	private int differentEnemies;
 	private Random r;
 	private int levelsRemaining;
-	private int levelNumber = 2;
+	private int levelNumber = 3;
 	private int tempCounter = 0;
 	private int levelTimer;
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
@@ -98,15 +98,7 @@ public class SpawnBosses {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.RollBoss1) {
 						if (tempObject.getHealth() <= 0) {
-							handler.removeObject(tempObject);
-							//LEVEL_SET++;
-							levelNumber++;
-							tempCounter = 0;
-						}
-					}
-					if (tempObject.getId() == ID.RollBoss2) {
-						if (tempObject.getHealth() <= 0) {
-							handler.removeObject(tempObject);
+							handler.clearEnemies();
 							//LEVEL_SET++;
 							levelNumber++;
 							tempCounter = 0;
