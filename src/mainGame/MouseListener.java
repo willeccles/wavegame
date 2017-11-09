@@ -275,9 +275,9 @@ public class MouseListener extends MouseAdapter {
 				return;
 				//PauseMenu-> Main Menu
 			} if (mouseOver(mx, my, 445, 372, 390, 337)) {
+				// TODO: make one method in the handler for resetGame() that does all of the following things
 				game.unPause();
 				game.gameState = STATE.Menu;
-				// TODO: make one method in the handler for resetGame() that does all of the following things
 				handler.clearEnemies();
 				handler.clearPlayer();
 				handler.pickups.clear();
