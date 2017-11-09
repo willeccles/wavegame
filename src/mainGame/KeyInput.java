@@ -127,8 +127,6 @@ public class KeyInput extends KeyAdapter {
 		}
 
 		if (game.gameState == STATE.Leaderboard) {
-			if (key == KeyEvent.VK_A)
-				System.out.println("test");
 			if (leaderboard.getFull()) {
 				if (key == KeyEvent.VK_BACK_SPACE) {
 					if (leaderboard.getLoc() >= 0) {

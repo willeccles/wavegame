@@ -57,7 +57,6 @@ public class BossEye extends GameObject {
 			}
 		} else if (tempCounter == 1) {
 			this.health -= 1;
-			System.out.println(health);
 			spawn();
 			if (this.placement == 1 && this.spawnOrder >= 1) {
 				attackPlayer();
