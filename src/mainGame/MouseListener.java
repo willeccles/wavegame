@@ -217,7 +217,7 @@ public class MouseListener extends MouseAdapter {
 			}
 			// Back Button for Help screen
 			else if (game.gameState == STATE.Help) {
-				if (mouseOver(mx, my, 566, 560, 133, 42)) {
+				if (mouseOver(mx, my, 566, 590, 133, 42)) {
 					game.gameState = STATE.Menu;
 					return;
 				}
@@ -275,9 +275,9 @@ public class MouseListener extends MouseAdapter {
 				return;
 				//PauseMenu-> Main Menu
 			} if (mouseOver(mx, my, 445, 372, 390, 337)) {
+				// TODO: make one method in the handler for resetGame() that does all of the following things
 				game.unPause();
 				game.gameState = STATE.Menu;
-				// TODO: make one method in the handler for resetGame() that does all of the following things
 				handler.clearEnemies();
 				handler.clearPlayer();
 				handler.pickups.clear();

@@ -166,10 +166,6 @@ public class Game extends Canvas implements Runnable {
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				// disabled because i like my battery life
-				// System.out.println("FPS: " + frames);
-				// System.out.println(gameState);
-				// System.out.println(Spawn1to5.LEVEL_SET);
 				frames = 0;
 			}
 		}
