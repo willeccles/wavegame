@@ -17,13 +17,13 @@ import java.util.Random;
  *
  */
 
-public class BossKyle extends GameObject {
+public class BossSeparates extends GameObject {
 
 	Random r = new Random();
 	private Image img;
 	private int size;
 	
-	public BossKyle(double x, double y, ID id, Handler handler, Player player, int size, int health, int velX, int velY) {
+	public BossSeparates(double x, double y, ID id, Handler handler, Player player, int size, int health, int velX, int velY) {
 		super(x, y, id);
 		this.velX = velX;
 		this.velY = velY;
