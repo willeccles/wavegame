@@ -27,7 +27,7 @@ public class BossKyle extends GameObject {
 		super(x, y, id);
 		this.velX = velX;
 		this.velY = velY;
-		img = getImage("images/EnemyBoss.png");
+		img = getImage("images/jelloboss.png");
 		this.health = health;
 		this.size = size;
 	}
