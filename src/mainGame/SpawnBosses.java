@@ -17,7 +17,7 @@ public class SpawnBosses {
 	private int differentEnemies;
 	private Random r;
 	private int levelsRemaining;
-	private int levelNumber = 3;
+	private int levelNumber = 2;
 	private int tempCounter = 0;
 	private int levelTimer;
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
