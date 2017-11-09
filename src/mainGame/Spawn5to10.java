@@ -41,7 +41,6 @@ public class Spawn5to10 {
 		timer = 10;
 		levelTimer = 150;
 		levelsLeft = 5;
-		hud.setLevel(1);
 		tempCounter = 0;
 		levelNumber = -1;
 		trackerColor = Color.blue;
@@ -317,6 +316,7 @@ public class Spawn5to10 {
 		}
 		else if (levelNumber == 101) {
 			if (tempCounter < 1) {
+				hud.setLevel(101);
 				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 1));
 				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 2));
 				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 - 150, ID.BossEye, handler, 3));
@@ -332,6 +332,7 @@ public class Spawn5to10 {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.BossEye) {
 						if (tempObject.getHealth() <= 0) {
+							this.hud.setLevel(11);
 							handler.clearEnemies();
 							Spawn1to5.LEVEL_SET ++;
 							game.gameState = STATE.Upgrade;

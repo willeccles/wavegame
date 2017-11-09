@@ -30,7 +30,6 @@ public class Spawn10to15 {
 		handler.object.clear();
 		hud.health = 100;
 		hud.setScore(0);
-		hud.setLevel(1);
 		spawnTimer = 10;
 		levelTimer = 150;
 		levelsRemaining = 5;
@@ -360,6 +359,7 @@ public class Spawn10to15 {
 		}
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
+				this.hud.setLevel(101);
 				handler.addObject(new BullBoss(ID.BullBoss, handler));
 				tempCounter++;
 			} else if (tempCounter >= 1) {
@@ -367,6 +367,7 @@ public class Spawn10to15 {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.BullBoss) {
 						if (tempObject.getHealth() <= 0) {
+							this.hud.setLevel(16);
 							handler.removeObject(tempObject);
 							Spawn1to5.LEVEL_SET ++;
 							game.gameState = STATE.Upgrade;

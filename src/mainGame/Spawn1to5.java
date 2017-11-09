@@ -355,6 +355,7 @@ public class Spawn1to5 {
 		
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
+				hud.setLevel(101);
 				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
 				tempCounter++;
 			} else if (tempCounter >= 1) {
@@ -362,6 +363,7 @@ public class Spawn1to5 {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.EnemyBoss) {
 						if (tempObject.getHealth() <= 0) {
+							this.hud.setLevel(6);
 							handler.removeObject(tempObject);
 							LEVEL_SET++;
 							game.gameState = STATE.Upgrade;
