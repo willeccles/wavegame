@@ -169,7 +169,7 @@ public class Menu {
 					100, 190);
 			g.drawString(" the next level will be a boss fight that rewards you with a single use Upgrade if you manage to defete one.",
 					100, 220);
-			 g.drawString("You can trigger the your upgrades by pressing enter", 100, 250);
+			 g.drawString("You can trigger the your upgrades by pressing shift", 100, 250);
 			g.setFont(font);
 			g.drawString("Bosses:", 100, 320);
 			g.setFont(font2);
