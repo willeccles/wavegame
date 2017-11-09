@@ -30,19 +30,14 @@ public class HUD {
 	private Color scoreColor;
 	private int extraLives;
 	public Game game;
-	private int previousLevel;
 	
 	public HUD(Game game) {
 		this.game = game;
 		health = 100;
 		healthMax = 100;
-
 		greenValue = 255;
-
 		score = 00000000000;
 		level = 0;
-		previousLevel = 0;
-
 		regen = false;
 		timer = 60;
 		healthBarWidth = 200;
@@ -50,9 +45,7 @@ public class HUD {
 		doubleHealth = false;
 		ability = "";
 		abilityUses = 0;
-
 		scoreColor = Color.white;
-
 		extraLives = 0;
 	}
 	public void tick() {
