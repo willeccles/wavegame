@@ -33,7 +33,7 @@ public enum ID {
 	RollBoss1,
 	RollBoss2,
 	EnemyMove, 
-	BossKyle, 
-	BossKyle2,
-	BossKyle3;
+	SeparateBoss, 
+	SeparateBoss2,
+	SeparateBoss3;
 }
