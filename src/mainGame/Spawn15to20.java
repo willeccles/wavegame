@@ -34,7 +34,7 @@ public class Spawn15to20 {
 		spawnTimer = 10;
 		levelTimer = 150;
 		levelsRemaining = 5;
-		hud.setLevel(1);
+		this.hud.setLevel(16);
 		tempCounter = 0;
 		levelNumber = -1;
 		trackerColor = Color.blue;
@@ -317,6 +317,7 @@ public class Spawn15to20 {
 		}
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
+				this.hud.setLevel(101);
 				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
 				tempCounter++;
 			} else if (tempCounter >= 1) {
@@ -324,6 +325,7 @@ public class Spawn15to20 {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.EnemyBoss) {
 						if (tempObject.getHealth() <= 0) {
+							this.hud.setLevel(21);
 							handler.removeObject(tempObject);
 							Spawn1to5.LEVEL_SET++;
 							game.gameState = STATE.Upgrade;

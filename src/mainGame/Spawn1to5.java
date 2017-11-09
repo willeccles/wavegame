@@ -42,7 +42,6 @@ public class Spawn1to5 {
 		trackerTimer = 1000;
 		differentEnemies = 10;
 		addLevels();
-
 	}
 
 	/**
@@ -69,7 +68,6 @@ public class Spawn1to5 {
 				handler.clearEnemies();
 				tempCounter = 0;
 				levelNumber = this.rand();
-				levels.remove(levelNumber);
 			}
 
 		}
@@ -105,7 +103,6 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		}
@@ -140,7 +137,6 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		} else if (levelNumber == 2) {
@@ -185,7 +181,6 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		} else if (levelNumber == 4) {
@@ -245,7 +240,6 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		}
@@ -270,7 +264,6 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		}
@@ -296,7 +289,6 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		}
@@ -321,7 +313,6 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		}
@@ -347,13 +338,13 @@ public class Spawn1to5 {
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-					levels.remove(levelNumber);
 				}
 			}
 		}
 		
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter < 1) {
+				hud.setLevel(101);
 				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
 				tempCounter++;
 			} else if (tempCounter >= 1) {
@@ -361,6 +352,7 @@ public class Spawn1to5 {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.EnemyBoss) {
 						if (tempObject.getHealth() <= 0) {
+							this.hud.setLevel(6);
 							handler.removeObject(tempObject);
 							LEVEL_SET++;
 							game.gameState = STATE.Upgrade;
@@ -381,7 +373,6 @@ public class Spawn1to5 {
 			levelsRemaining--;
 			tempCounter = 0;
 			levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
-			levels.remove(levelNumber);
 		}
 	}
 
@@ -393,7 +384,7 @@ public class Spawn1to5 {
 		levelsRemaining = 5;
 	}
 	public int rand() {
-		return (int) (Math.random() * (levels.size()-1));
+		return r.nextInt(differentEnemies);
 	}
 
 }

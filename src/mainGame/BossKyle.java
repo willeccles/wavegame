@@ -19,25 +19,21 @@ import java.util.Random;
 
 public class BossKyle extends GameObject {
 
-	private Handler handler;
 	Random r = new Random();
 	private Image img;
-	private Player player;
 	private int size;
 	
 	public BossKyle(double x, double y, ID id, Handler handler, Player player, int size, int health, int velX, int velY) {
 		super(x, y, id);
-		this.handler = handler;
 		this.velX = velX;
 		this.velY = velY;
-		this.player = player;
 		img = getImage("images/EnemyBoss.png");
 		this.health = health;
 		this.size = size;
 	}
 
 	public void tick() {
-		this.health -= 5;
+		this.health -= 1;
 		attackPlayer();
 	}
 

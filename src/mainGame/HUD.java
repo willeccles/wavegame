@@ -14,15 +14,12 @@ import mainGame.Game.STATE;
  */
 
 public class HUD {
-
+	
 	public double health;
 	private double healthMax;
-
 	private double greenValue;
-
 	private int score;
 	private int level;
-
 	private boolean regen;
 	private int timer;
 	private int healthBarWidth;
@@ -30,13 +27,11 @@ public class HUD {
 	private boolean doubleHealth;
 	private String ability;
 	private int abilityUses;
-
 	private Color scoreColor;
-
 	private int extraLives;
-
 	public Game game;
-
+	private int previousLevel;
+	
 	public HUD(Game game) {
 		this.game = game;
 		health = 100;
@@ -46,6 +41,7 @@ public class HUD {
 
 		score = 00000000000;
 		level = 0;
+		previousLevel = 0;
 
 		regen = false;
 		timer = 60;
@@ -91,7 +87,11 @@ public class HUD {
 
 		g.drawString("Score: " + score, 15, 115);
 		if(!(game.getGameState() == STATE.Survival)) {
+			if(level != 101) {
 			g.drawString("Level: " + level, 15, 150);
+			} else if (level == 101) { 
+				g.drawString("Level: Boss", 15, 150);
+			}
 			g.drawString("Extra Lives: " + extraLives, 15, 185);
 		} else {
 			g.drawString("Extra Lives: " + extraLives, 15, 150);
