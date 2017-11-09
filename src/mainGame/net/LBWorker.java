@@ -13,6 +13,7 @@ public class LBWorker {
 	private int _port;
 	private LinkedHashMap<String, Integer> scores = null;
 	private int userpos = -1;
+	private Socket client;
 
 	public LBWorker(String address, int port) {
 		_address = address;
@@ -26,7 +27,8 @@ public class LBWorker {
 	 * @throws IOException
 	 */
 	public void exchangeInfo(String username, int score) throws IOException {
-		Socket client = new Socket(_address, _port);
+		client.setSoTimeout(2000);
+		client = new Socket(_address, _port);
 
 		// IO streams
 		DataOutputStream out = new DataOutputStream(client.getOutputStream());
@@ -38,13 +40,12 @@ public class LBWorker {
 		String input = "";
 		if (client.isConnected()) {
 			input = in.readUTF();
-			System.out.println(input);
 		}
 
 		in.close();
 		out.close();
 		client.close();
-		
+
 		// check input
 		if (input.matches("POSITION:[0-9]+\\|SCORESLIST:([a-zA-Z0-9]{1,15},[0-9]+\\|)+")) {
 			// so this means that the input is usable

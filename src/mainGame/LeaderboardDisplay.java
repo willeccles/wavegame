@@ -32,7 +32,7 @@ public class LeaderboardDisplay extends JPanel {
 		if (leaderboard.isLoading()) {
 			g.drawString("Loading...", 100, 100);
 		} else {
-			if (leaderboard.getUserPosition().equals("-1")) {
+			if (leaderboard.getUserPosition() == -1) {
 				g.drawString("Failed to load.", 100, 100);
 				g.drawString(leaderboard.getLeaderboard(5, 0), x, 600);
 				g.drawString(leaderboard.getLeaderboard(5, 1), x+515, 600);

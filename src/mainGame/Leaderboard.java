@@ -32,6 +32,7 @@ public class Leaderboard extends JPanel {
 	private int userpos = -1;
 	private LinkedHashMap<String, Integer> scorelist = null;
 	private boolean loading = true;
+	private boolean error = false;
 	private Image img;
 
 	public Leaderboard(Game game, HUD hud, String[][] leaderboard) {
@@ -129,11 +130,8 @@ public class Leaderboard extends JPanel {
 		return leaderboard[i][x];
 	}
 
-	public String getUserPosition() {
-		if (userpos != -1)
-			return Integer.toString(userpos);
-		else
-			return "  ";
+	public int getUserPosition() {
+		return userpos;
 	}
 
 	public boolean isLoading() {
@@ -157,8 +155,6 @@ public class Leaderboard extends JPanel {
 					leaderboard[pos][1] = scorelist.get(entry.getKey()).toString();
 					pos++;
 				}
-				leaderboard[5][0] = user;
-				leaderboard[5][1] = Integer.toString(hud.getScore());
 			}
 			loading = false;
 		} catch(Exception ioe) {
@@ -168,5 +164,7 @@ public class Leaderboard extends JPanel {
 			}
 			loading = false;
 		}
+		leaderboard[5][0] = user;
+		leaderboard[5][1] = Integer.toString(hud.getScore());
 	}
 }
