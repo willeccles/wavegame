@@ -42,7 +42,6 @@ public class Spawn1to5 {
 		trackerTimer = 1000;
 		differentEnemies = 10;
 		addLevels();
-
 	}
 
 	/**
@@ -103,7 +102,6 @@ public class Spawn1to5 {
 					levelNumber = 101;// arbitrary number for the boss level
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -138,7 +136,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -163,7 +160,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -184,7 +180,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber+1);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -209,7 +204,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -245,7 +239,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -270,7 +263,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -296,7 +288,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -321,7 +312,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -347,7 +337,6 @@ public class Spawn1to5 {
 					levelNumber = 101;
 				} else {// not time for the boss, just go to the next level
 					levelsRemaining--;
-					levels.remove(levelNumber);
 					levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 				}
 			}
@@ -383,7 +372,6 @@ public class Spawn1to5 {
 			spawnTimer = 10;
 			levelsRemaining--;
 			tempCounter = 0;
-			levels.remove(levelNumber);
 			levelNumber = levels.get(this.rand());// set levelNumber to whatever index was randomly selected
 		}
 	}
