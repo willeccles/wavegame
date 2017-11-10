@@ -86,9 +86,10 @@ public class Menu {
 			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 			handler.render(g);
 
-			Font font = new Font("Amoebic", 1, 50);
-			Font font2 = new Font("Amoebic", 1, 40);
-
+			Font font = new Font("Amoebic", 1, 100);
+			Font font2 = new Font("Amoebic", 1, 60);
+			Font font3 = new Font("Amoebic", 1, 50);
+/**
 			g.setFont(font);
 			g.setColor(Color.orange);
 			g.drawString("Game Modes", 792, 66);
@@ -96,48 +97,49 @@ public class Menu {
 			g.setFont(font);
 			g.setColor(Color.orange);
 			g.drawString("Player Known BattleLands", 20, 66);
-
+**/
 			g.setColor(Color.orange);
-			g.drawRect(660, 90, 266, 266);
-			g.setFont(font2);
-			g.setColor(Color.orange);
-			g.drawString("Waves", 740, 143);
-
-			g.setColor(Color.orange);
-			g.drawRect(960, 90, 266, 266);
-			g.setFont(font2);
-			g.setColor(Color.orange);
-			g.drawString("Bosses", 1033, 143);
-
-			g.setColor(Color.orange);
-			g.drawRect(660, 390, 266, 266);
-			g.setFont(font2);
-			g.setColor(Color.orange);
-			g.drawString("Test Color", 730, 443);
-
-			g.setColor(Color.orange);
-			g.drawRect(960, 390, 266, 266);
-			g.setFont(font2);
-			g.setColor(Color.orange);
-			g.drawString("Survival", 1033, 443);
-
-			g.setColor(Color.orange);
-			g.drawRect(53, 90, 566, 166);
+			g.drawRect(30, 60, 1220, 120);
 			g.setFont(font);
 			g.setColor(Color.orange);
-			g.drawString("Help", 266, 186);
+			g.drawString("Waves", 500, 155);
 
 			g.setColor(Color.orange);
-			g.drawRect(53, 290, 566, 166);
+			g.drawRect(30, 240, 1220, 120);
 			g.setFont(font);
 			g.setColor(Color.orange);
-			g.drawString("Credits", 226, 400);
+			g.drawString("Multiplayer", 390, 330);
 
 			g.setColor(Color.orange);
-			g.drawRect(53, 490, 566, 166);
-			g.setFont(font);
+			g.drawRect(70, 420, 450, 110);
+			g.setFont(font2);
 			g.setColor(Color.orange);
-			g.drawString("Quit", 266, 600);
+			g.drawString("Bosses", 200, 490);
+
+			g.setColor(Color.orange);
+			g.drawRect(760, 420, 450, 110);
+			g.setFont(font2);
+			g.setColor(Color.orange);
+			g.drawString("Survival", 880, 490);
+
+			g.setColor(Color.orange);
+			g.drawRect(40, 600, 380, 90);
+			g.setFont(font3);
+			g.setColor(Color.orange);
+			g.drawString("Color Picker", 90, 660);
+
+			g.setColor(Color.orange);
+			g.drawRect(440, 600, 380, 90);
+			g.setFont(font3);
+			g.setColor(Color.orange);
+			g.drawString("Help", 580, 660);
+
+			g.setColor(Color.orange);
+			g.drawRect(840, 600, 390, 90);
+			g.setFont(font3);
+			g.setColor(Color.orange);
+			g.drawString("Quit", 1000, 660);
+
 		} else if (game.gameState == STATE.Help) {// if the user clicks on
 			// "help"
 
