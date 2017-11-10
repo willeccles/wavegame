@@ -175,12 +175,12 @@ public class MouseListener extends MouseAdapter {
 				}
 
 				// Credits
-				else if (mouseOver(mx, my, 53, 290, 566, 166)) {
+				/* else if (mouseOver(mx, my, 53, 290, 566, 166)) {
 					JOptionPane.showMessageDialog(game,
 							"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
 									+ "\n\nThis game was originally one wave mode but now all of gamemodes"
 									+ " are 100% playable, enjoy!");
-				}
+				} */
 
 				// Quit Button
 				else if (mouseOver(mx, my, 840, 600, 390, 90)) {
