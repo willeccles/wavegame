@@ -2,6 +2,8 @@ package mainGame;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import mainGame.gfx.*;
+import mainGame.pickup.*;
 
 /**
  * Class used for containing every instance of GameObject. These include all
@@ -11,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Handler {
 
-	ArrayList<GameObject> object = new ArrayList<GameObject>();
-	ArrayList<Pickup> pickups = new ArrayList<Pickup>();
+	public ArrayList<GameObject> object = new ArrayList<GameObject>();
+	public ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 	private static int timer = 0;
 	private static boolean isMP = false;
 

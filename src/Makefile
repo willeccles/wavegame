@@ -1,6 +1,12 @@
 MAINCLASSES=$(subst .java,.class,$(wildcard mainGame/*.java))
 AUDIO=$(subst .java,.class,$(wildcard mainGame/audio/*.java))
 NET=$(subst .java,.class,$(wildcard mainGame/net/*.java))
+ENEMY=$(subst .java,.class,$(wildcard mainGame/enemy/*.java))
+SPAWN=$(subst .java,.class,$(wildcard mainGame/spawn/*.java))
+GUI=$(subst .java,.class,$(wildcard mainGame/gui/*.java))
+INPUT=$(subst .java,.class,$(wildcard mainGame/input/*.java))
+PICKUP=$(subst .java,.class,$(wildcard mainGame/pickup/*.java))
+GFX=$(subst .java,.class,$(wildcard mainGame/gfx/*.java))
 MAINDIR=mainGame
 NETDIR=$(MAINDIR)/net
 AUDIODIR=$(MAINDIR)/audio
@@ -8,7 +14,7 @@ IMGDIR=$(MAINDIR)/images
 SOUNDDIR=$(MAINDIR)/sounds
 SERVERCLASSES=$(subst .java,.class,$(wildcard server/*.java))
 
-game: $(MAINCLASSES) $(AUDIO) $(NET)
+game: $(MAINCLASSES) $(AUDIO) $(NET) $(ENEMY) $(SPAWN) $(GUI) $(INPUT) $(PICKUP)
 
 server: $(SERVERCLASSES)
 

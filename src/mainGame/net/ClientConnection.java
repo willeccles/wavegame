@@ -4,6 +4,7 @@ import java.net.*;
 import java.io.*;
 import mainGame.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import mainGame.spawn.*;
 
 public class ClientConnection {
 	private String address;

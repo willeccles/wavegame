@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import mainGame.net.LBWorker;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import mainGame.gui.*;
+import mainGame.*;
 
 /**
  * Leaderboard inpupt screen in the game

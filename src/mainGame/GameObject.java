@@ -15,11 +15,11 @@ public abstract class GameObject {
 
 	// protected means that variables can only be accessed by things that extends
 	// GameObject
-	protected double x, y;
-	protected ID id;
-	protected double velX, velY;
-	protected boolean isMoving;
-	protected int health;
+	public double x, y;
+	public ID id;
+	public double velX, velY;
+	public boolean isMoving;
+	public int health;
 	public GameObject(double x, double y, ID id) {
 		this.x = x;
 		this.y = y;

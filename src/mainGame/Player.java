@@ -7,6 +7,9 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import mainGame.Game.STATE;
+import mainGame.gui.*;
+import mainGame.gfx.*;
+import mainGame.pickup.*;
 
 /**
  * The main player in the game

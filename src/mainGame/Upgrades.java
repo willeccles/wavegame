@@ -1,6 +1,8 @@
 package mainGame;
 
 import mainGame.Game.STATE;
+import mainGame.spawn.*;
+import mainGame.gui.*;
 
 /**
  * The upgrades that a user can have (they modify the game for the user)

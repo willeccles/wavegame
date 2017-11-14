@@ -10,6 +10,11 @@ import javax.swing.JFrame;
 import mainGame.audio.SoundPlayer;
 import mainGame.audio.SoundClip;
 import mainGame.net.ClientConnection;
+import mainGame.spawn.*;
+import mainGame.enemy.*;
+import mainGame.gui.*;
+import mainGame.input.*;
+import mainGame.gfx.*;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
