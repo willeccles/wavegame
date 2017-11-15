@@ -92,6 +92,7 @@ public class SoundPlayer extends Thread {
 	}
 	
 	public boolean isPaused() {
+		if (player == null) return false;
 		return (player.getStatus() == MediaPlayer.Status.PAUSED);
 	}
 }
