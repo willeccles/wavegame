@@ -35,6 +35,7 @@ public class Menu {
 	private Handler handler;
 	private HUD hud;
 	private Image img;
+	private Image img2;
 	private int timer;
 	private Random r;
 	private ArrayList<Color> colorPick = new ArrayList<Color>();
@@ -50,10 +51,17 @@ public class Menu {
 		r = new Random();
 		addColors();
 		img = null;
+		img2 = null;
 
 		try {
 			URL imageURL = Game.class.getResource("images/backgroundimage.jpg");
 			img = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			URL imageURL = Game.class.getResource("images/paintbucket.png");
+			img2 = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,49 +95,47 @@ public class Menu {
 	public void render(Graphics g) {
 		if (game.gameState == STATE.Menu) {
 			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+			g.drawImage(img2, 555, 395, 175, 175, null);
 			handler.render(g);
 
 			Font font = new Font("Amoebic", 1, 100);
-			Font font2 = new Font("Amoebic", 1, 60);
+			Font font2 = new Font("Amoebic", 1, 70);
 			Font font3 = new Font("Amoebic", 1, 50);
-/**
-			g.setFont(font);
-			g.setColor(Color.orange);
-			g.drawString("Game Modes", 792, 66);
+			Font font4 = new Font("Amoebic", 1, 80);
 
+			g.setFont(font4);
+			g.setColor(Color.orange);
+			g.drawString("Player Known BattleLands", 140, 70);
+
+			g.setColor(Color.orange);
+			g.drawRect(30, 90, 1220, 120);
 			g.setFont(font);
 			g.setColor(Color.orange);
-			g.drawString("Player Known BattleLands", 20, 66);
-**/
-			g.setColor(Color.orange);
-			g.drawRect(30, 60, 1220, 120);
-			g.setFont(font);
-			g.setColor(Color.orange);
-			g.drawString("Waves", 500, 155);
+			g.drawString("Waves", 475, 185);
 
 			g.setColor(Color.orange);
 			g.drawRect(30, 240, 1220, 120);
 			g.setFont(font);
 			g.setColor(Color.orange);
-			g.drawString("Multiplayer", 390, 330);
+			g.drawString("Multiplayer", 365, 330);
 
 			g.setColor(Color.orange);
-			g.drawRect(70, 420, 450, 110);
+			g.drawRect(70, 390, 450, 180);
 			g.setFont(font2);
 			g.setColor(Color.orange);
-			g.drawString("Bosses", 200, 490);
+			g.drawString("Bosses", 180, 500);
 
 			g.setColor(Color.orange);
-			g.drawRect(760, 420, 450, 110);
+			g.drawRect(760, 390, 450, 180);
 			g.setFont(font2);
 			g.setColor(Color.orange);
-			g.drawString("Survival", 880, 490);
+			g.drawString("Survival", 860, 500);
 
 			g.setColor(Color.orange);
 			g.drawRect(40, 600, 380, 90);
 			g.setFont(font3);
 			g.setColor(Color.orange);
-			g.drawString("Color Picker", 90, 660);
+			g.drawString("LeaderBoards", 65, 660);
 
 			g.setColor(Color.orange);
 			g.drawRect(440, 600, 380, 90);
@@ -141,7 +147,7 @@ public class Menu {
 			g.drawRect(840, 600, 390, 90);
 			g.setFont(font3);
 			g.setColor(Color.orange);
-			g.drawString("Quit", 1000, 660);
+			g.drawString("Quit", 980, 660);
 
 		} else if (game.gameState == STATE.Help) {// if the user clicks on
 			// "help"

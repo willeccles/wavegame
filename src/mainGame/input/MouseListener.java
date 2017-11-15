@@ -164,7 +164,7 @@ public class MouseListener extends MouseAdapter {
 
 			else if (game.gameState == STATE.Menu) {
 				// Waves Button
-				if (mouseOver(mx, my, 30, 60, 1220, 120)) {
+				if (mouseOver(mx, my, 30, 90, 1220, 120)) {
 					handler.object.clear();
 					game.gameState = STATE.Wave;
 					handler.addObject(player);
@@ -191,7 +191,7 @@ public class MouseListener extends MouseAdapter {
 				}
 
 				// Color Picker Mode
-				else if (mouseOver(mx, my, 40, 600, 380, 90)) {
+				else if (mouseOver(mx, my, 555, 395, 175, 175)) {
 					//handler.object.clear();
 					//game.gameState = STATE.Test;
 					//handler.addObject(player);
@@ -204,7 +204,7 @@ public class MouseListener extends MouseAdapter {
 				}
 
 				// Survival Mode
-				else if (mouseOver(mx, my, 760, 420, 450, 110)) {
+				else if (mouseOver(mx, my, 760, 390, 450, 180)) {
 					hud.setScore(0);
 					handler.object.clear();
 					game.gameState = STATE.Survival;
@@ -212,7 +212,7 @@ public class MouseListener extends MouseAdapter {
 				}
 
 				// Bosses Mode
-				else if (mouseOver(mx, my, 70, 420, 450, 110)) {
+				else if (mouseOver(mx, my, 70, 390, 450, 180)) {
 					handler.object.clear();
 					game.gameState = STATE.Bosses;
 					handler.addObject(player);
