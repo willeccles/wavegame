@@ -35,21 +35,9 @@ public class EnemyShooterBullet extends GameObject {
 
 		handler.addObject(new Trail(x, y, ID.Trail, color, 4, 4, 0.025, this.handler));
 
-		removeBullets();
-	}
-
-	public void removeBullets() {
-
-		for (int i = 0; i < handler.object.size(); i++) {
-			GameObject tempObject = handler.object.get(i);
-			if (tempObject.getId() == ID.EnemyShooterBullet) {
-				if (tempObject.getX() >= Game.WIDTH || tempObject.getY() >= Game.HEIGHT || tempObject.getX() < 0 || tempObject.getY() < 0) {
-					handler.removeObject(tempObject);
-				}
-			}
-
-		}
-
+		// remove the bullet if it's off the screen
+		if (this.x <= -4 || this.x >= 1280 || this.y <= -4 || this.y >= 720)
+			handler.removeObject(this);
 	}
 
 	public void render(Graphics g) {

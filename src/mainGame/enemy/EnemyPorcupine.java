@@ -92,8 +92,7 @@ public class EnemyPorcupine extends GameObject {
 		bulletVelX = ((this.bulletSpeed / distance) * diffX); // numerator affects speed of enemy
 		bulletVelY = ((this.bulletSpeed / distance) * diffY);// numerator affects speed of enemy
 
-		handler.addObject(
-				new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.orange));
+		handler.addObject(new EnemyShooterBullet(this.x, this.y, bulletVelX, bulletVelY, ID.EnemyShooterBullet, this.handler, Color.orange));
 
 	}
 
