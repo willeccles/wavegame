@@ -72,7 +72,7 @@ public class Game extends Canvas implements Runnable {
 	 * Used to switch between each of the screens shown to the user
 	 */
 	public enum STATE {
-		Menu, Help, Connect, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, 
+		Menu, Help, Join, Host, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, 
 		Leaderboard, Color, LeaderboardDisplay
 	};
 
@@ -236,7 +236,9 @@ public class Game extends Canvas implements Runnable {
 				handler.setMulti(false);
 				// game over screen
 				gameOver.tick();
-			} else if (gameState == STATE.Connect) { // entering connection info for MP
+			} else if (gameState == STATE.Join) { // entering connection info for MP
+				// TODO: add a connect screen @chieco
+			} else if (gameState == STATE.Host) { // entering connection info for MP
 				// TODO: add a connect screen @chieco
 			} else if (gameState == STATE.Multiplayer) {
 				if (!handler.isMulti()) handler.setMulti(true);

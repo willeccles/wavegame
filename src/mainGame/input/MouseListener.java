@@ -122,13 +122,22 @@ public class MouseListener extends MouseAdapter {
 					// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 					// "images/PickupHealth.png", handler));
 				}
+			
+				//Multiplayer Join Button
+				else if (mouseOver(mx, my, 30, 240, 600, 120)) {
+					game.gameState = STATE.Join;
+				}
+				//Multiplayer Host Button
+				else if (mouseOver(mx, my, 640, 240, 610, 120)) {
+					game.gameState = STATE.Host;
+				}
 
 				// Help Button
 				else if (mouseOver(mx, my, 440, 600, 380, 90)) {
 					game.gameState = STATE.Help;
 				}
 
-				// LeaderBoards
+				// LeaderBoards Button
 				 else if (mouseOver(mx, my, 40, 600, 380, 90)) {
 					 
 				} 
