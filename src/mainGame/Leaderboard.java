@@ -186,4 +186,12 @@ public class Leaderboard extends JPanel {
 	public void loadLeaderboard() {
 		loadLeaderboard(false);
 	}
+	public void reset() {
+		user = "";
+		charLoc = 0;
+		x = 353;
+		strX = x + 250;
+		y = 490;
+		full = false;
+	}
 }

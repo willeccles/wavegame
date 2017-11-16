@@ -213,7 +213,8 @@ public class MouseListener extends MouseAdapter {
 					handler.clearPlayer();
 				}
 			} else if(game.gameState == STATE.LeaderboardDisplay) {
-				if(mouseOver(mx,my,0,0,Game.WIDTH,Game.HEIGHT)) {	
+				if(mouseOver(mx,my,0,0,Game.WIDTH,Game.HEIGHT)) {
+					leaderboard.reset();
 					game.gameState = STATE.Menu;
 				}
 			}
