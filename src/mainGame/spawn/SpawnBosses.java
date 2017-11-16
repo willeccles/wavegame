@@ -171,10 +171,15 @@ public class SpawnBosses {
 
 
 	public void restart() {
+		handler.object.clear();
+		hud.health = 100;
+		hud.setScore(0);
 		hud.setLevel(1);
 		levelNumber = this.randLevel();
 		tempCounter = 0;
 		levelTimer = 150;
+		player.resetLoc();
+		player.resetVel();
 	}
 
 	public int randLevel() {

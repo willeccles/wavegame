@@ -55,23 +55,6 @@ public class EnemyTracker extends GameObject {
 
 		// if (this.y <= 0 || this.y >= Game.HEIGHT - 40) velY *= -1;
 		// if (this.x <= 0 || this.x >= Game.WIDTH - 16) velX *= -1;
-		if(game.getGameState() != STATE.Test) {
-			if(timer == 999) {
-				enemyColor = Color.blue;
-			} else if (timer == 500) {
-				enemyColor = Color.black;
-			} else if (timer == 0) {
-				timer = 1000;
-			}
-		} else if (game.getGameState() == STATE.Test) {
-			if(timer == 299) {
-				enemyColor = Color.blue;
-			} else if (timer == 150) {
-				enemyColor = Color.black;
-			} else if (timer == 0) {
-				timer = 300;
-			}
-		}
 		timer--;
 		handler.addObject(new Trail(x, y, ID.Trail, enemyColor, 16, 16, 0.025, this.handler));
 	}

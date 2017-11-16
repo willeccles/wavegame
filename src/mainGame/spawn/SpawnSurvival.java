@@ -29,11 +29,13 @@ public class SpawnSurvival {
 	private int spawnNum;
 	private int tempCounter;
 	private boolean textThere;
-
-	public SpawnSurvival(Handler handler, HUD hud, Game game) {
+	private Player player;
+	
+	public SpawnSurvival(Handler handler, HUD hud, Game game, Player player) {
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
+		this.player = player;
 		handler.object.clear();
 		hud.health = 100;
 		hud.setScore(0);
@@ -180,5 +182,10 @@ public class SpawnSurvival {
 
 	public void restart() {
 		spawnTimer = 0;
+		handler.object.clear();
+		handler.pickups.clear();
+		hud.health=100;
+		player.resetVel();
+		player.resetLoc();
 	}
 }
