@@ -1,29 +1,13 @@
 package mainGame.input;
 
-import java.awt.AWTException;
 import java.awt.Color;
-import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-
 import mainGame.Game.STATE;
 import mainGame.spawn.*;
 import mainGame.*;
 import mainGame.gui.*;
 
-/**
- * Handles all mouse input
- * 
- * @author Brandon Loehle 5/30/16
- *
- */
 
 public class MouseListener extends MouseAdapter {
 
@@ -100,17 +84,14 @@ public class MouseListener extends MouseAdapter {
 				if (mouseOver(mx, my, 210, 210, 860, 150)) {
 					upgrades.activateUpgrade(upgradeScreen.getPath(1));
 					upgradeScreen.removeUpgradeOption(1);
-					game.gameState = STATE.Wave;
 				} else if (mouseOver(mx, my, 210, 200 + 150, 860, 150)) {
 					upgrades.activateUpgrade(upgradeScreen.getPath(2));
 					upgradeScreen.removeUpgradeOption(2);
-					game.gameState = STATE.Wave;
 				} else if (mouseOver(mx, my, 100, 200 + 2 * 150, 860, 150)) {
 					upgrades.activateUpgrade(upgradeScreen.getPath(3));
 					upgradeScreen.removeUpgradeOption(3);
-					game.gameState = STATE.Wave;
 				}
-
+				game.gameState = STATE.Wave;
 			}
 
 			else if (game.gameState == STATE.Menu) {
@@ -129,8 +110,7 @@ public class MouseListener extends MouseAdapter {
 				}
 
 				// LeaderBoards
-				 else if (mouseOver(mx, my, 40, 600, 380, 90)) {
-					 
+				 else if (mouseOver(mx, my, 40, 600, 380, 90)) {	 
 				} 
 				// Quit Button
 				else if (mouseOver(mx, my, 840, 600, 390, 90)) {
@@ -139,9 +119,6 @@ public class MouseListener extends MouseAdapter {
 
 				// Color Picker Mode
 				else if (mouseOver(mx, my, 555, 395, 175, 175)) {
-					//handler.object.clear();
-					//game.gameState = STATE.Test;
-					//handler.addObject(player);
 					handler.object.clear();
 					game.gameState = STATE.Color;
 					handler.addObject(player);
