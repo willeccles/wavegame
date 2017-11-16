@@ -28,6 +28,7 @@ public class Handler {
 		}
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
+			if (tempObject == null) return;
 			if (tempObject.getId() == ID.Player || tempObject.getId() == ID.Player2 || tempObject.getId() == ID.Trail
 					|| tempObject.getId() == ID.EnemyBurstWarning) {
 				// we don't want these to ever be frozen by the Screen Freeze ability
@@ -61,6 +62,7 @@ public class Handler {
 	public void render(Graphics g) {
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
+			if (tempObject == null) return;
 			tempObject.render(g);
 		}
 		for (int i = 0; i < pickups.size(); i++) {
