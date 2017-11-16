@@ -33,14 +33,11 @@ public class EnemyBossBullet extends GameObject {
 		this.x += velX;
 		this.y += velY;
 
-		// if (this.y <= 0 || this.y >= Game.HEIGHT - 40) velY *= -1;
-		// if (this.x <= 0 || this.x >= Game.WIDTH - 16) velX *= -1;
-
-		if (this.y >= Game.HEIGHT)
-			handler.removeObject(this);
-
 		handler.addObject(new Trail(x, y, ID.Trail, Color.red, 11, 11, 0.025, this.handler));
-
+		
+		// remove the bullet if it's off the screen
+		if (this.x <= -4 || this.x >= 1280 || this.y <= -4 || this.y >= 720)
+			handler.removeObject(this);
 	}
 
 	public void render(Graphics g) {
