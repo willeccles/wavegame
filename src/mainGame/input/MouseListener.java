@@ -179,13 +179,10 @@ public class MouseListener extends MouseAdapter {
 					game.gameState = STATE.Help;
 				}
 
-				// Credits
-				/* else if (mouseOver(mx, my, 53, 290, 566, 166)) {
-					JOptionPane.showMessageDialog(game,
-							"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
-									+ "\n\nThis game was originally one wave mode but now all of gamemodes"
-									+ " are 100% playable, enjoy!");
-				} */
+				// LeaderBoards
+				 else if (mouseOver(mx, my, 40, 600, 380, 90)) {
+					 
+				} 
 
 				// Quit Button
 				else if (mouseOver(mx, my, 840, 600, 390, 90)) {
