@@ -100,8 +100,8 @@ public class SpawnBosses {
 		else if (levelNumber == 2) {
 			if (tempCounter < 1) {
 				tempCounter++;
-				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss1, handler));
-				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss2, handler));
+				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss1, handler));
+				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss2, handler));
 			} else if (tempCounter >= 1) {
 				for (int i = 0; i < handler.object.size(); i++) {
 					GameObject tempObject = handler.object.get(i);
