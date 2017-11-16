@@ -44,8 +44,10 @@ public class LeaderboardDisplay extends JPanel {
 						g.drawString(leaderboard.getLeaderboard(i, 1), x+515, y + (400-(100*i)));
 					}
 				}
-				g.drawString(leaderboard.getUserPosition() + ". " + leaderboard.getLeaderboard(5, 0), x, y + 500);
-				g.drawString(leaderboard.getLeaderboard(5, 1), x+515, y+500);
+				if (getUserPosition() != -2) {
+					g.drawString(leaderboard.getUserPosition() + ". " + leaderboard.getLeaderboard(5, 0), x, y + 500);
+					g.drawString(leaderboard.getLeaderboard(5, 1), x+515, y+500);
+				}
 			}
 		}
 	}

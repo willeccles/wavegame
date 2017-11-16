@@ -140,7 +140,11 @@ public class Leaderboard extends JPanel {
 		return loading;
 	}
 
-	public void loadLeaderboard() {
+	/**
+	 * Loads the leaderboard for use in the display.
+	 * @param isMenu If the leaderboard is displayed from the main menu, don't show a local score.
+	 */
+	public void loadLeaderboard(boolean isMenu) {
 		try {
 			lbworker.exchangeInfo(user, hud.getScore());
 			userpos = lbworker.getUserPosition();
@@ -166,7 +170,20 @@ public class Leaderboard extends JPanel {
 			}
 			loading = false;
 		}
-		leaderboard[5][0] = user;
-		leaderboard[5][1] = Integer.toString(hud.getScore());
+		if (!isMenu) {
+			leaderboard[5][0] = user;
+			leaderboard[5][1] = Integer.toString(hud.getScore());
+		} else {
+			leaderboard[5][0] = "";
+			leaderboard[5][1] = "";
+			userpos = -1;
+		}
+	}
+
+	/**
+	 * If the leaderboard is not being loaded from the menu, the boolean is not required.
+	 */
+	public void loadLeaderboard() {
+		loadLeaderboard(false);
 	}
 }
