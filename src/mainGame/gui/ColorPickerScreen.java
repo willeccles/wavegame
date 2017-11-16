@@ -32,46 +32,55 @@ public class ColorPickerScreen {
 	private Player player;
 	private Game game;
 	private int x,y;
+	private Image img;
 	
 	public ColorPickerScreen(Player player, Game game) {
 		this.player = player;
 		this.game = game;
 		x = 0;
 		y = 0;
+		img = null;
+		try {
+			URL imageURL = Game.class.getResource("images/colorpickerbackground.jpg");
+			img = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void render(Graphics g) {
 		if(game.gameState == STATE.Color) {
+			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 			g.setColor(Color.white);
-			g.drawRect(x, y, 100, 100);
-			g.fillRect(x, y, 100, 100);
+			g.drawOval(x+70, y+75, 150, 150);
+			g.fillOval(x+70, y+75, 150, 150);
 			g.setColor(Color.blue);
-			g.drawRect(x+100, y, 100, 100);
-			g.fillRect(x+100, y, 100, 100);
+			g.drawOval(x+320, y+75, 150, 150);
+			g.fillOval(x+320, y+75, 150, 150);
 			g.setColor(Color.yellow);
-			g.drawRect(x+200, y, 100, 100);
-			g.fillRect(x+200, y, 100, 100);
+			g.drawOval(x+570, y+75, 150, 150);
+			g.fillOval(x+570, y+75, 150, 150);
 			g.setColor(Color.cyan);
-			g.drawRect(x+300, y, 100, 100);
-			g.fillRect(x+300, y, 100, 100);
+			g.drawOval(x+820, y+75, 150, 150);
+			g.fillOval(x+820, y+75, 150, 150);
 			g.setColor(Color.gray);
-			g.drawRect(x+400, y, 100, 100);
-			g.fillRect(x+400, y, 100, 100);
+			g.drawOval(x+1070, y+75, 150, 150);
+			g.fillOval(x+1070, y+75, 150, 150);
 			g.setColor(Color.green);
-			g.drawRect(x, y+100, 100, 100);
-			g.fillRect(x, y+100, 100, 100);
+			g.drawOval(x+70, y+250, 150, 150);
+			g.fillOval(x+70, y+250, 150, 150);
 			g.setColor(Color.magenta);
-			g.drawRect(x+100, y+100, 100, 100);
-			g.fillRect(x+100, y+100, 100, 100);
+			g.drawOval(x+320, y+250, 150, 150);
+			g.fillOval(x+320, y+250, 150, 150);
 			g.setColor(Color.orange);
-			g.drawRect(x+200, y+100, 100, 100);
-			g.fillRect(x+200, y+100, 100, 100);
+			g.drawOval(x+570, y+250, 150, 150);
+			g.fillOval(x+570, y+250, 150, 150);
 			g.setColor(Color.pink);
-			g.drawRect(x+300, y+100, 100, 100);
-			g.fillRect(x+300, y+100, 100, 100);
+			g.drawOval(x+820, y+250, 150, 150);
+			g.fillOval(x+820, y+250, 150, 150);
 			g.setColor(Color.red);
-			g.drawRect(x+400, y+100, 100, 100);
-			g.fillRect(x+400, y+100, 100, 100);
+			g.drawOval(x+1070, y+250, 150, 150);
+			g.fillOval(x+1070, y+250, 150, 150);
 			
 			
 			Font font = new Font("Amoebic", 1, 50);
