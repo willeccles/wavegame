@@ -128,6 +128,10 @@ public class MouseListener extends MouseAdapter {
 					game.gameState = STATE.Help;
 				}
 
+				// LeaderBoards
+				 else if (mouseOver(mx, my, 40, 600, 380, 90)) {
+					 
+				} 
 				// Quit Button
 				else if (mouseOver(mx, my, 840, 600, 390, 90)) {
 					System.exit(1);

@@ -43,7 +43,7 @@ public class SpawnBosses {
 		if (levelNumber < 0) {
 			levelTimer--;
 			if (tempCounter < 1) {// display intro game message ONE time
-				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Let's start off easy...",
+				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Are you ready to RUMBLE!",
 						ID.Levels1to10Text));
 				tempCounter++;
 			}
@@ -56,12 +56,12 @@ public class SpawnBosses {
 
 		else if (levelNumber == 0) {// this is level 1
 			if (tempCounter < 1) {
-				handler.addObject(new BullBoss(ID.BullBoss, handler));
+				handler.addObject(new EnemyBoss(ID.EnemyBoss, handler));
 				tempCounter++;
 			} else if (tempCounter >= 1) {
 				for (int i = 0; i < handler.object.size(); i++) {
 					GameObject tempObject = handler.object.get(i);
-					if (tempObject.getId() == ID.BullBoss) {
+					if (tempObject.getId() == ID.EnemyBoss) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
 							levelNumber = this.randLevel();
@@ -100,8 +100,8 @@ public class SpawnBosses {
 		else if (levelNumber == 2) {
 			if (tempCounter < 1) {
 				tempCounter++;
-				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss1, handler));
-				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 11, 11, ID.RollBoss2, handler));
+				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss1, handler));
+				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss2, handler));
 			} else if (tempCounter >= 1) {
 				for (int i = 0; i < handler.object.size(); i++) {
 					GameObject tempObject = handler.object.get(i);

@@ -42,6 +42,7 @@ public class Menu {
 	private int colorIndex;
 	private Spawn1to5 spawner;
 
+
 	public Menu(Game game, Handler handler, HUD hud, Spawn1to5 spawner) {
 		this.game = game;
 		this.handler = handler;
@@ -73,11 +74,10 @@ public class Menu {
 	public void addColors() {
 		colorPick.add(Color.white);
 		colorPick.add(Color.white);
-		colorPick.add(Color.white);
-		colorPick.add(Color.white);
-		colorPick.add(Color.white);
-		colorPick.add(Color.white);
-		colorPick.add(Color.white);
+		colorPick.add(Color.yellow);
+		colorPick.add(Color.yellow);
+		colorPick.add(Color.orange);
+		colorPick.add(Color.orange);
 	}
 
 	public void tick() {
