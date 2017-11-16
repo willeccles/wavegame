@@ -92,10 +92,11 @@ public class MouseListener extends MouseAdapter {
 				} else if (player.checkGame() == "bosses") {
 					handler.object.clear();
 					hud.health = 100;
-					hud.setScore((0));
+					hud.setScore(0);
 					spawnBosses.restart();
-					player.resetVel();
+					game.gameState = STATE.Menu;
 					player.resetLoc();
+					player.resetVel();
 				} else if (player.checkGame() == "test") {
 					handler.object.clear();
 					upgrades.resetUpgrades();
@@ -124,6 +125,7 @@ public class MouseListener extends MouseAdapter {
 			}
 
 			else if (game.gameState == STATE.Bosses) {
+				
 			}
 
 			else if (game.gameState == STATE.Survival) {

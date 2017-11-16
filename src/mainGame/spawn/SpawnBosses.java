@@ -16,16 +16,13 @@ public class SpawnBosses {
 	private HUD hud;
 	private Game game;
 	public static int LEVEL_SET = 1;
-	private int spawnTimer;
 	private int differentEnemies;
 	private Random r;
-	private int levelsRemaining;
-	private int levelNumber = 3;
+	private int levelNumber = -1;
 	private int tempCounter = 0;
-	private int levelTimer;
 	ArrayList<Integer> levels = new ArrayList<Integer>(); // MAKE THIS AN ARRAY LIST SO I CAN REMOVE OBJECTS
-	private int count;
 	private Player player;
+	private int levelTimer;
 
 	public SpawnBosses(Handler handler, HUD hud, Game game, Player player) {
 		this.handler = handler;
@@ -35,17 +32,26 @@ public class SpawnBosses {
 		hud.health = 100;
 		hud.setScore(0);
 		hud.setLevel(1);
-		spawnTimer = 0;
 		r = new Random();
 		//different types of enemies added
 		differentEnemies = 4;
-		count = 0;
 		this.player = player;
+		levelTimer = 150;
 	}
 
 	public void tick() {
 		if (levelNumber < 0) {
-
+			levelTimer--;
+			if (tempCounter < 1) {// display intro game message ONE time
+				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Let's start off easy...",
+						ID.Levels1to10Text));
+				tempCounter++;
+			}
+			if (levelTimer <= 0) {// time to play!
+				handler.clearEnemies();
+				tempCounter = 0;
+				levelNumber = this.randLevel();
+			}
 		}
 
 		else if (levelNumber == 0) {// this is level 1
@@ -57,9 +63,8 @@ public class SpawnBosses {
 					GameObject tempObject = handler.object.get(i);
 					if (tempObject.getId() == ID.BullBoss) {
 						if (tempObject.getHealth() <= 0) {
-							handler.removeObject(tempObject);
-							//LEVEL_SET++;
-							levelNumber++;
+							handler.clearEnemies();
+							levelNumber = this.randLevel();
 							tempCounter = 0;
 						}
 					}
@@ -84,8 +89,9 @@ public class SpawnBosses {
 					if (tempObject.getId() == ID.BossEye) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
-							levelNumber++;
+							levelNumber = this.randLevel();
 							tempCounter = 0;
+							hud.setLevel(hud.getLevel()+1);
 						}
 					}
 				}
@@ -102,9 +108,9 @@ public class SpawnBosses {
 					if (tempObject.getId() == ID.RollBoss1) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
-							//LEVEL_SET++;
-							levelNumber++;
+							levelNumber = this.randLevel();
 							tempCounter = 0;
+							hud.setLevel(hud.getLevel()+1);
 						}
 					}
 				}
@@ -153,8 +159,9 @@ public class SpawnBosses {
 					if (tempObject.getId() == ID.SeparateBoss3) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
-							levelNumber++;
+							levelNumber = this.randLevel();
 							tempCounter = 0;
+							hud.setLevel(hud.getLevel()+1);
 						}
 					}
 				}
@@ -164,13 +171,13 @@ public class SpawnBosses {
 
 
 	public void restart() {
-		spawnTimer = 10;
+		hud.setLevel(1);
+		levelNumber = this.randLevel();
 		tempCounter = 0;
 		levelTimer = 150;
-		levelsRemaining = 5;
 	}
 
-	public int randInt() {
+	public int randLevel() {
 		return (int) (Math.random()*(differentEnemies));
 	}
 
