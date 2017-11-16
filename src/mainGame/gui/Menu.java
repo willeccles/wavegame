@@ -102,6 +102,7 @@ public class Menu {
 			Font font2 = new Font("Amoebic", 1, 70);
 			Font font3 = new Font("Amoebic", 1, 50);
 			Font font4 = new Font("Amoebic", 1, 80);
+			Font font5 = new Font("Amoebic", 1, 60);
 
 			g.setFont(font4);
 			g.setColor(Color.orange);
@@ -114,10 +115,20 @@ public class Menu {
 			g.drawString("Waves", 475, 185);
 
 			g.setColor(Color.orange);
-			g.drawRect(30, 240, 1220, 120);
-			g.setFont(font);
+			g.drawRect(30, 240, 600, 120);
+			g.setFont(font3);
 			g.setColor(Color.orange);
-			g.drawString("Multiplayer", 365, 330);
+			g.drawString("Join", 275, 350);
+			g.setFont(font5);
+			g.drawString("Multiplayer:", 170, 290);
+			g.drawString("Multiplayer:", 790, 290);
+			
+			
+			g.setColor(Color.orange);
+			g.drawRect(640, 240, 610, 120);
+			g.setFont(font3);
+			g.setColor(Color.orange);
+			g.drawString("Host", 900, 350);
 
 			g.setColor(Color.orange);
 			g.drawRect(70, 390, 450, 180);
