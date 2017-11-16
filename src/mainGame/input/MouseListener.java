@@ -40,10 +40,13 @@ public class MouseListener extends MouseAdapter {
 	private Player player;
 	private String upgradeText;
 	private Leaderboard leaderboard;
-	private SpawnTest spawnTest;
 	private LeaderboardDisplay leaderboardDisplay;
 
-	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, SpawnMultiplayer spawnM, Player player, Upgrades upgrades, Leaderboard leaderboard, SpawnBosses spawnBosses, SpawnTest spawnTest, LeaderboardDisplay leaderboardDisplay) {
+	public MouseListener(Game game, Handler handler, HUD hud, Spawn1to5 spawner, 
+			Spawn5to10 spawner2, SpawnSurvival spawnSurvival, UpgradeScreen upgradeScreen, 
+			SpawnMultiplayer spawnM, Player player, Upgrades upgrades, 
+			Leaderboard leaderboard, SpawnBosses spawnBosses, 
+			LeaderboardDisplay leaderboardDisplay) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -56,7 +59,6 @@ public class MouseListener extends MouseAdapter {
 		this.spawnMulti = spawnM;
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
-		this.spawnTest = spawnTest;
 		this.leaderboardDisplay = leaderboardDisplay;
 
 	}
@@ -82,83 +84,41 @@ public class MouseListener extends MouseAdapter {
 					player.resetVel();
 					player.resetLoc();
 				} else if (player.checkGame() == "survival") {
-					handler.object.clear();
-					handler.pickups.clear();
-					hud.health=100;
 					spawnSurvival.restart();
 					game.gameState = STATE.Leaderboard;
-					player.resetVel();
-					player.resetLoc();
 				} else if (player.checkGame() == "bosses") {
-					handler.object.clear();
-					hud.health = 100;
-					hud.setScore(0);
 					spawnBosses.restart();
 					game.gameState = STATE.Menu;
-					player.resetLoc();
-					player.resetVel();
-				} else if (player.checkGame() == "test") {
-					handler.object.clear();
-					upgrades.resetUpgrades();
-					hud.health = 100;
-					hud.setScore(0);
-					spawnTest.restart();
-					game.gameState = STATE.Menu;
-					player.resetVel();
-					player.resetLoc();
 				} else if (player.checkGame() == "multiplayer") {
-					handler.object.clear();
-					upgrades.resetUpgrades();
-					hud.health = 100;
-					hud.setScore(0);
 					spawnMulti.reset();
 					game.gameState = STATE.Menu;
-					player.resetVel();
-					player.resetLoc();
 				}
 			}
 
 			else if (game.gameState == STATE.Wave) {
 			}
 			else if (game.gameState == STATE.Multiplayer) {
-
 			}
-
-			else if (game.gameState == STATE.Bosses) {
-				
+			else if (game.gameState == STATE.Bosses) {			
 			}
-
 			else if (game.gameState == STATE.Survival) {
-			}
-
-			else if (game.gameState == STATE.Test) {
-
 			}
 
 			else if (game.gameState == STATE.Upgrade) {
 				if (mouseOver(mx, my, 210, 210, 860, 150)) {
 					upgradeText = upgradeScreen.getPath(1);
-
 					upgrades.activateUpgrade(upgradeText);
-
 					upgradeScreen.removeUpgradeOption(1);
-
 					game.gameState = STATE.Wave;
 				} else if (mouseOver(mx, my, 210, 200 + 150, 860, 150)) {
 					upgradeText = upgradeScreen.getPath(2);
-
 					upgrades.activateUpgrade(upgradeText);
-
 					upgradeScreen.removeUpgradeOption(2);
-
 					game.gameState = STATE.Wave;
 				} else if (mouseOver(mx, my, 100, 200 + 2 * 150, 860, 150)) {
 					upgradeText = upgradeScreen.getPath(3);
-
 					upgrades.activateUpgrade(upgradeText);
-
 					upgradeScreen.removeUpgradeOption(3);
-
 					game.gameState = STATE.Wave;
 				}
 

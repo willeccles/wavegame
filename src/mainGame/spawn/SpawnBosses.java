@@ -43,7 +43,7 @@ public class SpawnBosses {
 		if (levelNumber < 0) {
 			levelTimer--;
 			if (tempCounter < 1) {// display intro game message ONE time
-				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Let's start off easy...",
+				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Are you ready to RUMBLE!",
 						ID.Levels1to10Text));
 				tempCounter++;
 			}
@@ -171,10 +171,15 @@ public class SpawnBosses {
 
 
 	public void restart() {
+		handler.object.clear();
+		hud.health = 100;
+		hud.setScore(0);
 		hud.setLevel(1);
 		levelNumber = this.randLevel();
 		tempCounter = 0;
 		levelTimer = 150;
+		player.resetLoc();
+		player.resetVel();
 	}
 
 	public int randLevel() {

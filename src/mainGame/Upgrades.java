@@ -21,10 +21,9 @@ public class Upgrades {
 	private Spawn5to10 spawner2;
 	private UpgradeScreen upgradeScreen;
 	private String ability;
-	private SpawnTest spawnTest;
 
 	public Upgrades(Game game, Handler handler, HUD hud, UpgradeScreen upgradeScreen, 
-			Player player, Spawn1to5 spawner, Spawn5to10 spawner2, SpawnTest spawnTest) {
+			Player player, Spawn1to5 spawner, Spawn5to10 spawner2) {
 		this.game = game;
 		this.handler = handler;
 		this.hud = hud;
@@ -33,7 +32,6 @@ public class Upgrades {
 		this.spawner = spawner;
 		this.spawner2 = spawner2;
 		this.ability = hud.getAbility();
-		this.spawnTest = spawnTest;
 	}
 
 	public void clearScreenAbility() {
@@ -81,9 +79,6 @@ public class Upgrades {
 			}
 		} else if (game.getGameState() == STATE.Survival) {
 			handler.clearEnemies();
-		} else if (game.getGameState() == STATE.Test) {
-			handler.clearEnemies();
-			spawnTest.skipLevel();
 		}
 
 	}

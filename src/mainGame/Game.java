@@ -55,7 +55,6 @@ public class Game extends Canvas implements Runnable {
 	private SpawnMultiplayer spawnMultiplayer;
 	private JFrame frame;
 	private boolean isPaused = false;
-	private SpawnTest spawnTest;
 	private boolean isMusicPlaying = true;
 	private ColorPickerScreen colorScreen;
 	private LeaderboardDisplay leaderboardDisplay;
@@ -74,7 +73,7 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public enum STATE {
 		Menu, Help, Connect, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, 
-		Leaderboard, Test, Color, LeaderboardDisplay
+		Leaderboard, Color, LeaderboardDisplay
 	};
 
 	/**
@@ -93,13 +92,12 @@ public class Game extends Canvas implements Runnable {
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this);
 		spawner3 = new Spawn10to15(this.handler, this.hud, this);
 		spawner4 = new Spawn15to20(this.handler, this.hud, this);
-		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this);
+		spawnSurvival = new SpawnSurvival(this.handler, this.hud, this, player);
 		spawnBosses = new SpawnBosses(this.handler, this.hud, this, this.player);
 		spawnMultiplayer = new SpawnMultiplayer(this.handler, this.hud, this, this.player);
-		spawnTest = new SpawnTest(this.handler, this.hud, this);
 		menu = new Menu(this, this.handler, this.hud, this.spawner);
 		upgradeScreen = new UpgradeScreen(this, this.handler, this.hud);
-		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2, this.spawnTest);
+		upgrades = new Upgrades(this, this.handler, this.hud, this.upgradeScreen, this.player, this.spawner, this.spawner2);
 		gameOver = new GameOver(this, this.handler, this.hud, player);
 		pauseMenu = new PauseMenu();
 		leaderboardList = new String[6][2];
@@ -107,7 +105,7 @@ public class Game extends Canvas implements Runnable {
 		leaderboardDisplay = new LeaderboardDisplay(this.leaderboard, this);
 		mouseListener = new MouseListener(this, this.handler, this.hud, this.spawner, 
 				this.spawner2, this.spawnSurvival, this.upgradeScreen, this.spawnMultiplayer, this.player, 
-				this.upgrades, leaderboard, this.spawnBosses, this.spawnTest, this.leaderboardDisplay);
+				this.upgrades, leaderboard, this.spawnBosses, this.leaderboardDisplay);
 		this.addKeyListener(new KeyInput(this.handler, this, this.hud, this.player, this.spawner, this.upgrades, this.leaderboard));
 		this.addMouseListener(mouseListener);
 		// technically, this is bad practice but I don't care right now
@@ -260,9 +258,6 @@ public class Game extends Canvas implements Runnable {
 					soundplayer = new SoundPlayer("sounds/135.mp3", true);
 					soundplayer.start();
 				}
-			} else if (gameState == STATE.Test) {// game is running
-				hud.tick();
-				spawnTest.tick();
 			}
 		}
 
@@ -302,8 +297,8 @@ public class Game extends Canvas implements Runnable {
 		// SCREEN
 		if (!isPaused()) {
 			if (gameState == STATE.Wave || gameState == STATE.Multiplayer 
-					|| gameState == STATE.Bosses || gameState == STATE.Survival
-					|| gameState == STATE.Test) {// user is playing game, draw game objects
+					|| gameState == STATE.Bosses || gameState == STATE.Survival) {
+				// user is playing game, draw game objects
 				hud.render(g);
 			} else if (gameState == STATE.Menu || gameState == STATE.Help) {
 				// user is in help or the menu, draw the menu and help objects

@@ -139,5 +139,10 @@ public class SpawnMultiplayer {
 		opponent = null;
 		client = null;
 		handler.setMulti(false);
+		handler.object.clear();
+		hud.health = 100;
+		hud.setScore(0);
+		player.resetVel();
+		player.resetLoc();
 	}
 }
