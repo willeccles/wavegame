@@ -26,11 +26,13 @@ public class Spawn1to5 {
 	private Color trackerColor;
 	private int trackerTimer;
 	private int differentEnemies;
-
-	public Spawn1to5(Handler handler, HUD hud, Game game) {
+	private Player player;
+	
+	public Spawn1to5(Handler handler, HUD hud, Game game, Player player) {
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
+		this.player = player;
 		handler.object.clear();
 		hud.health = 100;
 		hud.setScore(0);
@@ -380,11 +382,17 @@ public class Spawn1to5 {
 	}
 
 	public void restart() {
+		handler.object.clear();
+		hud.health = 100;
+		hud.setScore(0);
+		hud.setLevel(1);
 		spawnTimer = 10;
 		levelNumber = -5;
 		tempCounter = 0;
 		levelTimer = 150;
 		levelsRemaining = 5;
+		player.resetVel();
+		player.resetLoc();
 	}
 	public int rand() {
 		return r.nextInt(differentEnemies);

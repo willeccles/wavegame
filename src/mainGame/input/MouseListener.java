@@ -38,7 +38,6 @@ public class MouseListener extends MouseAdapter {
 	private UpgradeScreen upgradeScreen;
 	private Upgrades upgrades;
 	private Player player;
-	private String upgradeText;
 	private Leaderboard leaderboard;
 	private LeaderboardDisplay leaderboardDisplay;
 
@@ -69,20 +68,13 @@ public class MouseListener extends MouseAdapter {
 		if (!game.isPaused()) { // game is not paused
 			if (game.gameState == STATE.GameOver) {
 				if (player.checkGame() == "waves") {
-					handler.object.clear();
 					upgrades.resetUpgrades();
-					upgradeScreen.resetUpgradeScreen();
-					hud.health = 100;
-					hud.setScore(0);
-					hud.setLevel(1);
 					spawner.restart();
 					spawner.addLevels();
 					spawner2.restart();
 					spawner2.addLevels();
 					Spawn1to5.LEVEL_SET = 1;
 					game.gameState = STATE.Menu;
-					player.resetVel();
-					player.resetLoc();
 				} else if (player.checkGame() == "survival") {
 					spawnSurvival.restart();
 					game.gameState = STATE.Leaderboard;
@@ -106,18 +98,15 @@ public class MouseListener extends MouseAdapter {
 
 			else if (game.gameState == STATE.Upgrade) {
 				if (mouseOver(mx, my, 210, 210, 860, 150)) {
-					upgradeText = upgradeScreen.getPath(1);
-					upgrades.activateUpgrade(upgradeText);
+					upgrades.activateUpgrade(upgradeScreen.getPath(1));
 					upgradeScreen.removeUpgradeOption(1);
 					game.gameState = STATE.Wave;
 				} else if (mouseOver(mx, my, 210, 200 + 150, 860, 150)) {
-					upgradeText = upgradeScreen.getPath(2);
-					upgrades.activateUpgrade(upgradeText);
+					upgrades.activateUpgrade(upgradeScreen.getPath(2));
 					upgradeScreen.removeUpgradeOption(2);
 					game.gameState = STATE.Wave;
 				} else if (mouseOver(mx, my, 100, 200 + 2 * 150, 860, 150)) {
-					upgradeText = upgradeScreen.getPath(3);
-					upgrades.activateUpgrade(upgradeText);
+					upgrades.activateUpgrade(upgradeScreen.getPath(3));
 					upgradeScreen.removeUpgradeOption(3);
 					game.gameState = STATE.Wave;
 				}
@@ -138,14 +127,6 @@ public class MouseListener extends MouseAdapter {
 				else if (mouseOver(mx, my, 440, 600, 380, 90)) {
 					game.gameState = STATE.Help;
 				}
-
-				// Credits
-				/* else if (mouseOver(mx, my, 53, 290, 566, 166)) {
-					JOptionPane.showMessageDialog(game,
-							"Made by Team A1" + " for the Computer Science 225 project in fall 2017."
-									+ "\n\nThis game was originally one wave mode but now all of gamemodes"
-									+ " are 100% playable, enjoy!");
-				} */
 
 				// Quit Button
 				else if (mouseOver(mx, my, 840, 600, 390, 90)) {
@@ -228,8 +209,7 @@ public class MouseListener extends MouseAdapter {
 					handler.clearPlayer();
 				}
 			} else if(game.gameState == STATE.LeaderboardDisplay) {
-				if(mouseOver(mx,my,0,0,Game.WIDTH,Game.HEIGHT)) {
-					
+				if(mouseOver(mx,my,0,0,Game.WIDTH,Game.HEIGHT)) {	
 					game.gameState = STATE.Menu;
 				}
 			}
@@ -264,7 +244,6 @@ public class MouseListener extends MouseAdapter {
 	/**
 	 * Helper method to detect is the mouse is over a "button" drawn via
 	 * Graphics
-	 * 
 	 * @param mx
 	 *            mouse x position
 	 * @param my

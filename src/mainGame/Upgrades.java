@@ -142,6 +142,7 @@ public class Upgrades {
 		hud.setExtraLives(0);
 		player.setPlayerSize(21);
 		upgradeScreen.resetPaths();
+		upgradeScreen.resetUpgradeScreen();
 		hud.setAbilityUses(0);
 		hud.clearUpgrades();
 	}
