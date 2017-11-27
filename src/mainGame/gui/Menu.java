@@ -189,21 +189,21 @@ public class Menu {
 			g.drawString(
 					" Within Waves, your goal is to avoid enemies until the player is transported to the new level. After beating 5 levels,",
 					100, 190);
-			g.drawString(" the next level will be a boss fight that rewards you with a single use Upgrade if you manage to defete one.",
+			g.drawString(" the next level will be a boss fight that rewards you with a single use Upgrade if you manage to defeate one.",
 					100, 220);
-			 g.drawString("You can trigger the your upgrades by pressing shift", 100, 250);
+			 g.drawString("You can trigger your upgrades by pressing shift", 100, 250);
 			g.setFont(font);
 			g.drawString("Bosses:", 100, 320);
 			g.setFont(font2);
 			g.drawString(
-					"Within Bosses, your goal is to take on endless amount of bosses from the Wavese game mode and survive. As long",
+					"Within Bosses, your goal is to take an endless amount of bosses from the Waves game mode and survive. As long",
 					100, 350);
-			g.drawString(" as possible to get first place on the leaderbaord!", 100, 380);
+			g.drawString(" as possible to get first place on the leaderboard!", 100, 380);
 			g.setFont(font);
 			g.drawString("Survival:", 100, 450);
 			g.setFont(font2);
 			g.drawString(
-					" Within Survial, your goal is to survive as long as possible while enemies spawn and try to kill you. Pick ups are availble",
+					" Within Survival, your goal is to survive as long as possible while enemies spawn and try to kill you. Pickups are available",
 					100, 480);
 			g.drawString(
 					" to help you stay alive. If you pick up ham, you regain health, if you pick up shoes, you earn a light speed boost and if you ",
