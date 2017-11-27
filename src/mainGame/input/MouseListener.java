@@ -43,7 +43,7 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.leaderboardDisplay = leaderboardDisplay;
-
+		
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -176,27 +176,47 @@ public class MouseListener extends MouseAdapter {
 			} else if(game.gameState == STATE.Color) {
 				int x = 0;
 				int y = 0;
-				if(mouseOver(mx, my, x, y, 100, 100)) {
-					player.updateColor(Color.white);
-				} else if(mouseOver(mx, my, x+100, y, 100, 100)) {
-					player.updateColor(Color.blue);
-				} else if(mouseOver(mx, my, x+200, y, 100, 100)) {
-					player.updateColor(Color.yellow);
-				} else if(mouseOver(mx, my, x+300, y, 100, 100)) {
-					player.updateColor(Color.cyan);
-				} else if(mouseOver(mx, my, x+400, y, 100, 100)) {
-					player.updateColor(Color.gray);
-				} else if(mouseOver(mx, my, x, y+100, 100, 100)) {
-					player.updateColor(Color.green);
-				} else if(mouseOver(mx, my, x+100, y+100, 100, 100)) {
-					player.updateColor(Color.magenta);
-				} else if(mouseOver(mx, my, x+200, y+100, 100, 100)) {
-					player.updateColor(Color.orange);
-				} else if(mouseOver(mx, my, x+300, y+100, 100, 100)) {
-					player.updateColor(Color.pink);
-				} else if(mouseOver(mx, my, x+400, y+100, 100, 100)) {
-					player.updateColor(Color.red);
-				} else if (mouseOver(mx, my, 53, 490, 566, 166)){
+				if(mouseOver(mx, my,x+70, y+75, 125, 125)) {
+					player.updateColors(Color.white, null);
+				} else if(mouseOver(mx, my, x+320, y+75, 125, 125)) {
+					player.updateColors(Color.blue, null);
+				} else if(mouseOver(mx, my, x+570, y+75, 125, 125)) {
+					player.updateColors(Color.yellow, null);
+				} else if(mouseOver(mx, my,x+820, y+75, 125, 125)) {
+					player.updateColors(Color.cyan, null);
+				} else if(mouseOver(mx, my,x+1070, y+75, 125, 125)) {
+					player.updateColors(Color.gray, null);
+				} else if(mouseOver(mx, my,x+70, y+215, 125, 125)) {
+					player.updateColors(Color.green, null);
+				} else if(mouseOver(mx, my,x+320, y+215, 125, 125)) {
+					player.updateColors(Color.magenta, null);
+				} else if(mouseOver(mx, my,x+570, y+215, 125, 125)) {
+					player.updateColors(Color.orange, null);
+				} else if(mouseOver(mx, my,x+820, y+215, 125, 125)) {
+					player.updateColors(Color.pink, null);
+				} else if(mouseOver(mx, my,x+1070, y+215, 125, 125)) {
+					player.updateColors(Color.red, null);
+				} else if(mouseOver(mx, my,x+70, y+440, 125, 125)) {
+					player.updateColors(null, Color.white);
+				} else if(mouseOver(mx, my, x+320, y+440, 125, 125)) {
+					player.updateColors(null, Color.blue);
+				} else if(mouseOver(mx, my, x+570, y+440, 125, 125)) {
+					player.updateColors(null, Color.yellow);
+				} else if(mouseOver(mx, my,x+820, y+440, 125, 125)) {
+					player.updateColors(null, Color.cyan);
+				} else if(mouseOver(mx, my,x+1070, y+440, 125, 125)) {
+					player.updateColors(null, Color.gray);
+				} else if(mouseOver(mx, my,x+70, y+585, 125, 125)) {
+					player.updateColors(null, Color.green);
+				} else if(mouseOver(mx, my,x+320, y+585, 125, 125)) {
+					player.updateColors(null, Color.magenta);
+				} else if(mouseOver(mx, my,x+570, y+585, 125, 125)) {
+					player.updateColors(null, Color.orange);
+				} else if(mouseOver(mx, my,x+820, y+585, 125, 125)) {
+					player.updateColors(null, Color.pink);
+				} else if(mouseOver(mx, my,x+1070, y+585, 125, 125)) {
+					player.updateColors(null, Color.red);
+				} else if (mouseOver(mx, my,1000, 10, 250, 60)){
 					game.gameState = STATE.Menu;
 					handler.clearPlayer();
 				}

@@ -58,14 +58,14 @@ public class Player extends GameObject {
 
 	@Override
 	public void tick() {
+		// add the trail that follows it
+		if ((velX != 0 || velY != 0))
+			handler.addObject(new Trail(x, y, ID.Trail, this.tailcolor, playerWidth, playerHeight, 0.05, this.handler));
+
 		this.x += velX;
 		this.y += velY;
 		x = Game.clampX(x, playerWidth);
 		y = Game.clampY(y, playerHeight);
-
-		// add the trail that follows it
-		if ((velX != 0 || velY != 0))
-			handler.addObject(new Trail(x, y, ID.Trail, this.tailcolor, playerWidth, playerHeight, 0.05, this.handler));
 
 		// these things will be done by the other player's client, so if it's the opponent player we don't care.
 		if (!isOpponent) {
