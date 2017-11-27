@@ -28,6 +28,7 @@ public class Player extends GameObject {
 	public static int playerSpeed = 10;
 	public String gameMode;
 	private Color color;
+	private Color tailcolor;
 	private boolean isOpponent;
 	int count;
 
@@ -41,6 +42,7 @@ public class Player extends GameObject {
 		this.game = game;
 		this.damage = 2;
 		this.color = c;
+		this.tailcolor = c;
 		this.isOpponent = isOpponent;
 		playerWidth = 21;
 		playerHeight = 21;
@@ -63,7 +65,7 @@ public class Player extends GameObject {
 
 		// add the trail that follows it
 		if ((velX != 0 || velY != 0))
-			handler.addObject(new Trail(x, y, ID.Trail, this.color, playerWidth, playerHeight, 0.05, this.handler));
+			handler.addObject(new Trail(x, y, ID.Trail, this.tailcolor, playerWidth, playerHeight, 0.05, this.handler));
 
 		// these things will be done by the other player's client, so if it's the opponent player we don't care.
 		if (!isOpponent) {
@@ -203,9 +205,10 @@ public class Player extends GameObject {
 		y = Game.HEIGHT / 2 - 21;
 	}
 
-	public void updateColor(Color temp) {
+	public void updateColors(Color head, Color tail) {
 		if (!isOpponent) {
 			this.color = temp;
+			this.tailcolor = tail;
 		}
 	}
 
