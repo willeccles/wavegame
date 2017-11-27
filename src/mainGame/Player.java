@@ -207,8 +207,10 @@ public class Player extends GameObject {
 
 	public void updateColors(Color head, Color tail) {
 		if (!isOpponent) {
-			this.color = temp;
-			this.tailcolor = tail;
+			if (head != null)
+				this.color = head;
+			if (tail != null)
+				this.tailcolor = tail;
 		}
 	}
 
