@@ -322,7 +322,7 @@ public class Game extends Canvas implements Runnable {
 		} else {
 			pauseMenu.render(g);
 		}
-		if(!isPaused){
+		if(!isPaused()== true){
 			handler.render(g);} // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
 		///////// Draw things above this//////////////
 		g.dispose();
