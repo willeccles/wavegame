@@ -57,6 +57,7 @@ public class Game extends Canvas implements Runnable {
 	private boolean isPaused = false;
 	private boolean isMusicPlaying = true;
 	private ColorPickerScreen colorScreen;
+	private ConnectScreen connectScreen;
 	private LeaderboardDisplay leaderboardDisplay;
 	public String [][] leaderboardList;
 
@@ -116,6 +117,8 @@ public class Game extends Canvas implements Runnable {
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
 		colorScreen = new ColorPickerScreen(player, this);
+		connectScreen = new ConnectScreen(this);
+		
 
 		this.op = op;
 		this.addr = addr;
@@ -298,6 +301,11 @@ public class Game extends Canvas implements Runnable {
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
 		// SCREEN
 		if (!isPaused()) {
+			// don't worry about this it's magic
+			if (gameState != STATE.Join && gameState != STATE.Host) {
+				this.setEnabled(true);
+			}
+			
 			if (gameState == STATE.Wave || gameState == STATE.Multiplayer 
 					|| gameState == STATE.Bosses || gameState == STATE.Survival) {
 				// user is playing game, draw game objects
@@ -316,6 +324,9 @@ public class Game extends Canvas implements Runnable {
 				leaderboard.paint(g);
 			} else if (gameState == STATE.Color) {
 				colorScreen.render(g);
+			} else if (gameState == STATE.Join || gameState == STATE.Host) {
+				this.setEnabled(false);
+				connectScreen.render(g);
 			} else if (gameState == STATE.LeaderboardDisplay) {
 				leaderboardDisplay.paint(g);
 			}

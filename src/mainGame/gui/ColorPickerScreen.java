@@ -128,8 +128,5 @@ public class ColorPickerScreen {
 			g.setColor(Color.gray);
 			g.drawString("Menu", 1065, 55);
 		}
-	}
-	public void tick() {
-		game.gameState = STATE.Color;
 	}	
 }
