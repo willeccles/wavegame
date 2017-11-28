@@ -72,7 +72,9 @@ public class SpawnMultiplayer {
 			try {
 				this.client = new ClientConnection(addr, port, this, opponent, game);
 			} catch (Exception e) {
-				e.printStackTrace();
+				// there was an error connecting...
+				game.gameState = Game.STATE.Menu;
+				game.popup("There was an error connecting to the server.");
 			}
 		}
 	}

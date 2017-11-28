@@ -27,7 +27,11 @@ public class ClientConnection {
 		this.opponent = op;
 		this.game = g;
 		outputQueue = new ConcurrentLinkedQueue<String>();
-		client = new Socket(address, port);
+		try {
+			client = new Socket(address, port);
+		} catch (Exception e) {
+			throw e;
+		}
 		client.setSoTimeout(0); // a read() call will block forever
 		client.setKeepAlive(true);
 		in = new DataInputStream(client.getInputStream());
