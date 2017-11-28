@@ -17,6 +17,9 @@ public class ConnectScreen extends JPanel{
 	private boolean rendered = false;
 	private Game game;
 	private JTextField ip;
+	private JTextField name;
+	private JTextField password;
+	private JTextField port;
 	private JButton backButton;
 	private JButton connectButton;
 	
@@ -27,15 +30,33 @@ public class ConnectScreen extends JPanel{
 		this.game = game;
 		game.getFrame().add(this);
 		this.setFocusable(true);
-        ip = new JTextField(25);
+        ip = new JTextField();
 		ip.setFocusable(true);
         ip.setBounds(200, 100, 300, 50);
         ip.setFont(ip.getFont().deriveFont(25f));
         this.add(ip);
+        name = new JTextField();
+		name.setFocusable(true);
+        name.setBounds(200, 200, 300, 50);
+        name.setFont(name.getFont().deriveFont(25f));
+        this.add(name);
+        password = new JTextField();
+		password.setFocusable(true);
+        password.setBounds(200, 300, 300, 50);
+        password.setFont(password.getFont().deriveFont(25f));
+        this.add(password);
+        port = new JTextField();
+		port.setFocusable(true);
+        port.setBounds(550, 100, 100, 50);
+        port.setFont(port.getFont().deriveFont(25f));
+        this.add(port);
         backButton = new JButton();
         backButton.setText("Menu");
         backButton.setLocation(400, 400);
-        backButton.setSize(100, 50);
+        backButton.setSize(200, 50);
+        backButton.addActionListener((ae) -> {
+        	game.gameState = STATE.Menu;
+        });
         this.add(backButton);
         
         
@@ -43,13 +64,13 @@ public class ConnectScreen extends JPanel{
 	}
 	
 	public void render(Graphics g) {
-		super.paintComponent(g);
-		this.paintComponents(g);
 		if(game.gameState == STATE.Join) {
 			
 		}
 		else if(game.gameState == STATE.Host) {
 			
 		}
+		super.paintComponent(g);
+		this.paintComponents(g);
 	}
 }
