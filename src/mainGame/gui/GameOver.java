@@ -52,7 +52,10 @@ public class GameOver {
 		text = "Game Over";
 		g.drawString(text, Game.WIDTH / 2 - getTextWidth(font, text) / 2, Game.HEIGHT / 2 - 150);
 		g.setFont(font2);
-		if(!(player.checkGame().equals("survival")) && !player.checkGame().equals("multiplayer")) {
+		if (handler.isMulti()) {
+			g.drawString(message, Game.WIDTH / 2 - getTextWidth(font2, message) / 2, Game.HEIGHT / 2 + 50);
+		}
+		else if(!(player.checkGame().equals("survival")) && !player.checkGame().equals("multiplayer")) {
 			text = "Level: " + hud.getLevel();
 			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
 			text = "Score: " + hud.getScore();
@@ -60,9 +63,6 @@ public class GameOver {
 		} else {
 			text = "Score: " + hud.getScore();
 			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
-		}
-		if (handler.isMulti()) {
-			g.drawString(message, Game.WIDTH / 2 - getTextWidth(font2, message) / 2, Game.HEIGHT / 2 + 50);
 		}
 		g.setFont(font2);
 		g.drawString(backText, Game.WIDTH / 2 - getTextWidth(font2, backText) / 2, Game.HEIGHT / 2 + 150);

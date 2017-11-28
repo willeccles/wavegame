@@ -15,6 +15,7 @@ import mainGame.enemy.*;
 import mainGame.gui.*;
 import mainGame.input.*;
 import mainGame.gfx.*;
+import javax.swing.JOptionPane;
 
 /**
  * Main game class. This class is the driver class and it follows the Holder
@@ -197,7 +198,8 @@ public class Game extends Canvas implements Runnable {
 				gameState = STATE.Multiplayer;
 				op = "none";
 			} catch (Exception e) {
-				e.printStackTrace();
+				gameState = STATE.Menu;
+				op = "none";
 			}
 		}
 
@@ -236,7 +238,6 @@ public class Game extends Canvas implements Runnable {
 				// upgrade screen
 				upgradeScreen.tick();
 			} else if (gameState == STATE.GameOver) {// game is over, update the
-				handler.setMulti(false);
 				// game over screen
 				gameOver.tick();
 			} else if (gameState == STATE.Join) { // entering connection info for MP
@@ -422,5 +423,9 @@ public class Game extends Canvas implements Runnable {
 		if (gameState == STATE.Multiplayer) {
 			spawnMultiplayer.sendPos();
 		}
+	}
+
+	public void popup(String text) {
+		JOptionPane.showMessageDialog(this, text);
 	}
 }
