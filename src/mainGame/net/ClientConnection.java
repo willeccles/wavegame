@@ -74,23 +74,45 @@ public class ClientConnection {
 					// When this player wins
 					else if (input.matches("WIN")) {
 						game.gameOver.setMessage("You win!");
+						game.gameState = Game.STATE.GameOver;
 						break;
 					}
 					// when this player loses
 					else if (input.matches("LOSE")) {
 						game.gameOver.setMessage("You lose :(");
+						game.gameState = Game.STATE.GameOver;
 						break;
 					}
 					// when the other user leaves
 					else if (input.matches("OTHER_LEFT")) {
 						game.gameOver.setMessage("The other player left :(");
+						game.gameState = Game.STATE.GameOver;
 						break;
 					}
-
-					// TODO: handle message where room already exists when trying to host
-					// TODO: handle message where room doesn't exist when trying to join
-					// TODO: handle wrong password
-					// TODO: handle full lobby
+					// when the room doesn't exist and you're trying to join it
+					else if (input.matches("BAD_ROOM_NAME")) {
+						game.popup("That room does not exist.");
+						game.gameState = Game.STATE.Join;
+						break;
+					}
+					// when the room exists and you're trying to host it
+					else if (input.matches("ROOM_EXISTS")) {
+						game.popup("That room already exists.");
+						game.gameState = Game.STATE.Host;
+						break;
+					}
+					// when the password is incorrect
+					else if (input.matches("BAD_PASS")) {
+						game.popup("Incorrect password.");
+						game.gameState = Game.STATE.Join;
+						break;
+					}
+					// when the lobby is full
+					else if (input.matches("ROOM_FULL")) {
+						game.popup("Room is full.");
+						game.gameState = Game.STATE.Join;
+						break;
+					}
 				} catch (EOFException eof) {
 					// this means that the server closed the connection
 					game.gameState = Game.STATE.GameOver;
@@ -107,7 +129,6 @@ public class ClientConnection {
 				}
 			}
 			// after break, close
-			game.gameState = Game.STATE.GameOver;
 			this.close();
 		});
 
@@ -143,7 +164,7 @@ public class ClientConnection {
 		double velY = p.getVelY();
 		writeOut(x + "," + y + "," + velX + "," + velY);
 	}
-	
+
 	/**
 	 * Used to host a new lobby.
 	 * @param roomname The name of the lobby

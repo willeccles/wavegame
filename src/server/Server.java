@@ -30,9 +30,21 @@ public class Server extends Thread {
 					String args[] = input.split("\\|");
 					String roomname = args[1];
 					String roompass = args[2];
-					// TODO: handle when a roomname is already used (create new one if it's dead, if it's alive make an error of some sort happen
-					instances.put(roomname, new Instance(roomname, roompass, clientSocket));
-					instances.get(roomname).start();
+					if (instances.containsKey(roomname)) {
+						if (instances.get(roomname).isAlive()) {
+							// room is in use
+							DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+							out.writeUTF("ROOM_EXISTS");
+							out.close();
+						} else {
+							// room is not in use
+							instances.put(roomname, new Instance(roomname, roompass, clientSocket));
+							instances.get(roomname).start();
+						}
+					} else {
+						instances.put(roomname, new Instance(roomname, roompass, clientSocket));
+						instances.get(roomname).start();
+					}
 				} else if (input.matches("^JOIN\\|[^|]+\\|[^|]+")) {
 					// join the given instance (if it exists)
 					// if it doesn't exist, send back an error message
@@ -47,20 +59,28 @@ public class Server extends Thread {
 									//user can join
 									instances.get(roomname).joinUser(clientSocket);
 								} else {
-									// TODO: room is full
 									System.out.println("room is full");
+									DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+									out.writeUTF("ROOM_FULL");
+									out.close();
 								}
 							} else {
-								// TODO: password is wrong
 								System.out.println("pass is wrong");
+								DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+								out.writeUTF("BAD_PASS");
+								out.close();
 							}
 						} else {
-							// TODO: room doesn't exist
 							System.out.println("room doesn't exist");
+							DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+							out.writeUTF("BAD_ROOM_NAME");
+							out.close();
 						}
 					} else {
-						// TODO: room doesn't exist
 						System.out.println("room doesn't exist 2");
+						DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+						out.writeUTF("BAD_ROOM_NAME");
+						out.close();
 					}
 				} else if (input.matches("NEWSCORE\\|[a-zA-Z0-9_]+,[0-9]+")) {
 					String username = input.split("\\|")[1].split(",")[0];
