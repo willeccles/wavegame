@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import mainGame.*;
+import mainGame.Game.STATE;
 import mainGame.gfx.*;
 
 /**
@@ -24,8 +25,10 @@ public class EnemyMiniShooter extends GameObject {
 	private double bulletVelX;
 	private double bulletVelY;
 	private int bulletSpeed;
+	private Game game;
 
-	public EnemyMiniShooter(double x, double y, int sizeX, int sizeY, int bulletSpeed, ID id, Handler handler) {
+	public EnemyMiniShooter(double x, double y, int sizeX, int sizeY, 
+			int bulletSpeed, ID id, Handler handler, Game game) {
 		super(x, y, id);
 		this.handler = handler;
 		this.velX = 0;
@@ -34,6 +37,7 @@ public class EnemyMiniShooter extends GameObject {
 		this.sizeY = sizeY;
 		this.timer = 60;
 		this.bulletSpeed = bulletSpeed;
+		this.game = game;
 
 		for (int i = 0; i < handler.object.size(); i++) {
 			if (handler.object.get(i).getId() == ID.Player)
@@ -48,7 +52,7 @@ public class EnemyMiniShooter extends GameObject {
 		handler.addObject(new Trail(x, y, ID.Trail, Color.magenta, this.sizeX, this.sizeY, 0.025, this.handler));
 		if (timer <= 0) {
 			shoot();
-			if (handler.isMulti())
+			if (handler.isMulti() || game.gameState == STATE.Survival)
 				updateEnemy();
 			timer = 50;
 		}

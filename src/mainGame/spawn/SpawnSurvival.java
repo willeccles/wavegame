@@ -82,7 +82,7 @@ public class SpawnSurvival {
 			//spawnNum = 9;
 			if(spawnNum == 0) {
 				//spawns Basic enemy
-
+				
 				handler.addObject(
 						new EnemyBasic(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), 9, 9, ID.EnemyBasic, handler));
 				spawnTimer = 0;
@@ -141,13 +141,13 @@ public class SpawnSurvival {
 			} else if (spawnNum == 7) {
 				//spawns Minishooter enemy
 
-				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
-				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler));
+				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler, this.game));
+				handler.addObject(new EnemyMiniShooter(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 75, 75, -10, ID.EnemyMiniShooter, this.handler, this.game));
 				spawnTimer = 0;
 			} else if (spawnNum == 8) {
 				//spawns Porcupine enemy
-
-				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2));
+				
+				handler.addObject(new EnemyPorcupine(r.nextInt(Game.WIDTH) - 35, r.nextInt(Game.HEIGHT) - 75, 100, 100, ID.EnemyPorcupine, this.handler, -1, -2, this.game));
 				spawnTimer = 0;
 			} else if (spawnNum == 9) {
 				//spawns Health pickup

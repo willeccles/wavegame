@@ -127,7 +127,7 @@ public class SpawnMultiplayer {
 				handler.addObject(new EnemyExpand(Game.clampX(x, 100), Game.clampY(y, 100), 100, 100, type, handler));
 				break;
 			case EnemyMiniShooter:
-				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler));
+				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler, this.game));
 				break;
 		}
 	}

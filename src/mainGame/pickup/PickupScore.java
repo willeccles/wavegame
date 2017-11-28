@@ -40,14 +40,14 @@ public class PickupScore extends Pickup {
 
 
 	public void render(Graphics g) {
-		g.drawImage(this.img, (int)this.x, (int)this.y, 32, 32, null);
+		g.drawImage(this.img, (int)this.x, (int)this.y, 48, 48, null);
 
 	}
 
 
 	public Rectangle getBounds() {
 
-		return new Rectangle((int) this.x, (int) this.y, 32, 32);
+		return new Rectangle((int) this.x, (int) this.y, 48, 48);
 
 	}
 

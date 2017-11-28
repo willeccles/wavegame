@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
 import mainGame.*;
+import mainGame.Game.STATE;
 import mainGame.gfx.*;
 /**
  * A type of enemy in the game
@@ -28,9 +29,10 @@ public class EnemyPorcupine extends GameObject {
 	private double distance;
 	private double diffX;
 	private double diffY;
+	private Game game;
 
-
-	public EnemyPorcupine(double x, double y, int sizeX, int sizeY, ID id, Handler handler, int speed, int bulletSpeed) {
+	public EnemyPorcupine(double x, double y, int sizeX, int sizeY, ID id, 
+			Handler handler, int speed, int bulletSpeed, Game game) {
 		super(x, y, id);
 		this.handler = handler;
 		this.velX = 0;
@@ -41,6 +43,7 @@ public class EnemyPorcupine extends GameObject {
 		this.speed = speed;
 		this.size = sizeX;
 		this.bulletSpeed = bulletSpeed;
+		this.game = game;
 
 		for (int i = 0; i < handler.object.size(); i++) {
 			if (handler.object.get(i).getId() == ID.Player)
@@ -75,7 +78,9 @@ public class EnemyPorcupine extends GameObject {
 		timer--;
 		if (timer <= 0) {
 			shoot();
-			updateEnemy();
+			if(this.game.gameState == STATE.Survival) {
+				updateEnemy();
+			}
 			timer = 10;
 		}
 
@@ -97,7 +102,12 @@ public class EnemyPorcupine extends GameObject {
 	}
 
 	public void updateEnemy() {
+		this.sizeX--;
+		this.sizeY--;
 
+		if(sizeX <= 0) {
+			handler.removeObject(this);
+		}
 	}
 	public void render(Graphics g) {
 		g.setColor(Color.orange);
