@@ -2,6 +2,8 @@ package mainGame;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import mainGame.Game.STATE;
 import mainGame.gfx.*;
 import mainGame.pickup.*;
 
@@ -17,6 +19,11 @@ public class Handler {
 	public ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 	private static int timer = 0;
 	private static boolean isMP = false;
+	private Game game;
+	
+	public Handler(Game game) {
+		this.game = game;
+	}
 
 	/**
 	 * Updates each entity in the game by looping through each ArrayList and
@@ -63,7 +70,10 @@ public class Handler {
 		for (int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
 			if (tempObject == null) return;
-			tempObject.render(g);
+			if (tempObject.getId() == ID.Firework || tempObject.getId() == ID.FireworkSpark) {
+				if(game.gameState == STATE.Menu)
+					tempObject.render(g);
+			} else tempObject.render(g);
 		}
 		for (int i = 0; i < pickups.size(); i++) {
 			Pickup tempObject = pickups.get(i);

@@ -121,9 +121,9 @@ public class MouseListener extends MouseAdapter {
 				}
 
 
-				// LeaderBoards Button
+				// Credits Button
 				else if (mouseOver(mx, my, 40, 600, 380, 90)) {
-
+					game.gameState = STATE.Credits;
 				} 
 				// Quit Button
 				else if (mouseOver(mx, my, 840, 600, 390, 90)) {
@@ -170,7 +170,7 @@ public class MouseListener extends MouseAdapter {
 					game.gameState = STATE.LeaderboardDisplay;
 					return;
 				}
-			} else if (game.gameState == STATE.Help) {
+			} else if (game.gameState == STATE.Credits) {
 				if (mouseOver(mx, my, 566, 560, 133, 42)) {
 					game.gameState = STATE.Menu;
 					return;
