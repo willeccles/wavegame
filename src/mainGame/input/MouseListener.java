@@ -43,7 +43,7 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.leaderboardDisplay = leaderboardDisplay;
-		
+
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -67,7 +67,7 @@ public class MouseListener extends MouseAdapter {
 				} else if (player.checkGame() == "bosses") {
 					spawnBosses.restart();
 					game.gameState = STATE.Menu;
-				} else if (player.checkGame() == "multiplayer") {
+				} else if (handler.isMulti()) {
 					spawnMulti.reset();
 					game.gameState = STATE.Menu;
 				}
@@ -105,7 +105,7 @@ public class MouseListener extends MouseAdapter {
 					// handler.addPickup(new PickupHealth(100, 100, ID.PickupHealth,
 					// "images/PickupHealth.png", handler));
 				}
-			
+
 				//Multiplayer Join Button
 				else if (mouseOver(mx, my, 30, 240, 600, 120)) {
 					game.gameState = STATE.Join;
@@ -122,8 +122,8 @@ public class MouseListener extends MouseAdapter {
 
 
 				// LeaderBoards Button
-				 else if (mouseOver(mx, my, 40, 600, 380, 90)) {
-					 
+				else if (mouseOver(mx, my, 40, 600, 380, 90)) {
+
 				} 
 				// Quit Button
 				else if (mouseOver(mx, my, 840, 600, 390, 90)) {
@@ -218,7 +218,7 @@ public class MouseListener extends MouseAdapter {
 					player.updateColors(null, Color.pink);
 				} else if(mouseOver(mx, my,x+1070, y+585, 125, 125)) {
 					player.updateColors(null, Color.red);
-				} else if (mouseOver(mx, my,1000, 10, 250, 60)){
+				} else if (mouseOver(mx, my,1000, 10, 250, 60)) {
 					game.gameState = STATE.Menu;
 					handler.clearPlayer();
 				}

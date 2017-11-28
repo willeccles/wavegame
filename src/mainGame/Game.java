@@ -236,7 +236,6 @@ public class Game extends Canvas implements Runnable {
 				// upgrade screen
 				upgradeScreen.tick();
 			} else if (gameState == STATE.GameOver) {// game is over, update the
-				handler.setMulti(false);
 				// game over screen
 				gameOver.tick();
 			} else if (gameState == STATE.Join) { // entering connection info for MP
