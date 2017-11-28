@@ -117,7 +117,7 @@ public class Game extends Canvas implements Runnable {
 		soundplayer.start();
 		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
 		colorScreen = new ColorPickerScreen(player, this);
-		connectScreen = new ConnectScreen(this);
+		connectScreen = new ConnectScreen(this,this.spawnMultiplayer);
 		
 
 		this.op = op;

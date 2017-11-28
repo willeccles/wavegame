@@ -65,8 +65,6 @@ public class KeyInput extends KeyAdapter {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (game.gameState == STATE.Host || game.gameState == STATE.Join)
-			return;
 		int key = e.getKeyCode();
 
 		this.speed = Player.playerSpeed;

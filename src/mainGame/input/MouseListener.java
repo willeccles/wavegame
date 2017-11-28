@@ -47,8 +47,6 @@ public class MouseListener extends MouseAdapter {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (game.gameState == STATE.Host || game.gameState == STATE.Join)
-			return;
 		int mx = e.getX();
 		int my = e.getY();
 		if (!game.isPaused()) { // game is not paused
