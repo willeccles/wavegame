@@ -75,7 +75,7 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public enum STATE {
 		Menu, Help, Join, Host, Wave, GameOver, Upgrade, Bosses, Survival, Multiplayer, 
-		Leaderboard, Color, LeaderboardDisplay
+		Leaderboard, Color, LeaderboardDisplay, Credits
 	};
 
 	/**
@@ -87,7 +87,7 @@ public class Game extends Canvas implements Runnable {
 	 * @param pass The password
 	 */
 	public Game(String op, String addr, int port, String room, String pass) {
-		handler = new Handler();
+		handler = new Handler(this);
 		hud = new HUD(this);
 		player = new Player(WIDTH / 2 - 21, HEIGHT / 2 - 21, ID.Player, handler, this.hud, this);
 		spawner = new Spawn1to5(this.handler, this.hud, this, player);
@@ -311,8 +311,8 @@ public class Game extends Canvas implements Runnable {
 					|| gameState == STATE.Bosses || gameState == STATE.Survival) {
 				// user is playing game, draw game objects
 				hud.render(g);
-			} else if (gameState == STATE.Menu || gameState == STATE.Help) {
-				// user is in help or the menu, draw the menu and help objects
+			} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.Credits) {
+				// user is in help or the menu or the credits, draw the menu and help objects
 				menu.render(g);
 			} else if (gameState == STATE.Upgrade) {// user is on the upgrade
 				// screen, draw the upgrade

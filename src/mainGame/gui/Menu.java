@@ -146,7 +146,7 @@ public class Menu {
 			g.drawRect(40, 600, 380, 90);
 			g.setFont(font3);
 			g.setColor(Color.orange);
-			g.drawString("LeaderBoards", 65, 660);
+			g.drawString("Credits", 145, 660);
 
 			g.setColor(Color.orange);
 			g.drawRect(440, 600, 380, 90);
@@ -158,7 +158,7 @@ public class Menu {
 			g.drawRect(840, 600, 390, 90);
 			g.setFont(font3);
 			g.setColor(Color.orange);
-			g.drawString("Quit", 980, 660);
+			g.drawString("Quit", 985, 660);
 
 		} else if (game.gameState == STATE.Help) {// if the user clicks on
 			// "help"
@@ -175,6 +175,60 @@ public class Menu {
 				e.printStackTrace();
 			}
 
+			Font font = new Font("impact", 1, 33);
+			Font font2 = new Font("impact", 1, 20);
+
+			g.setFont(font);
+			g.setColor(Color.orange);
+			g.drawString("Help", 600, 46);
+
+			g.drawString("Use arrow keys to move the player.", 400, 100);
+			g.setFont(font);
+			g.drawString("Waves:", 100, 160);
+			g.setFont(font2);
+			g.drawString(
+					" Within Waves, your goal is to avoid enemies until the player is transported to the new level. After beating 5 levels,",
+					100, 190);
+			g.drawString(" the next level will be a boss fight that rewards you with a single use Upgrade if you manage to defeate one.",
+					100, 220);
+			 g.drawString("You can trigger your upgrades by pressing shift", 100, 250);
+			g.setFont(font);
+			g.drawString("Bosses:", 100, 320);
+			g.setFont(font2);
+			g.drawString(
+					"Within Bosses, your goal is to take an endless amount of bosses from the Waves game mode and survive. As long",
+					100, 350);
+			g.drawString(" as possible to get first place on the leaderboard!", 100, 380);
+			g.setFont(font);
+			g.drawString("Survival:", 100, 450);
+			g.setFont(font2);
+			g.drawString(
+					" Within Survival, your goal is to survive as long as possible while enemies spawn and try to kill you. Pickups are available",
+					100, 480);
+			g.drawString(
+					" to help you stay alive. If you pick up ham, you regain health, if you pick up shoes, you earn a light speed boost and if you ",
+					100, 510);
+			g.drawString("pick up a coin, you earn add 1000 points to your score. If you pick up a coin, you earn add 1000 points to your score.", 100, 540);
+			g.drawString("Press the m key to mute the music." , 100, 590);
+			g.setFont(font2);
+			g.setColor(Color.white);
+			g.drawRect(566, 590, 133, 42);
+			g.drawString("Back", 613, 620);
+		}
+		else if (game.gameState == STATE.Credits) {
+			
+			g.drawImage(img, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+			handler.render(g);
+
+			img = null;
+
+			try {
+				URL imageURL = Game.class.getResource("images/backgroundgif.gif");
+				img = Toolkit.getDefaultToolkit().getImage(imageURL);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			Font font = new Font("impact", 1, 33);
 			Font font2 = new Font("impact", 1, 20);
 
