@@ -103,7 +103,7 @@ public class ClientConnection {
 					}
 					// when the password is incorrect
 					else if (input.matches("BAD_PASS")) {
-						game.popup("Incorrect password.");
+						game.popup("Wrong password.");
 						game.gameState = Game.STATE.Join;
 						break;
 					}
