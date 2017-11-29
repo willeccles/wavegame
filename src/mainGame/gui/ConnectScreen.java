@@ -105,7 +105,7 @@ public class ConnectScreen extends JPanel {
 				return;
 			}
 			// check the port
-			if (!port.getText().matches("^\\d {1,5}$")) {
+			if (!port.getText().matches("^\\d{1,5}$")) {
 				game.popup("Invalid port.");
 				return;
 			}

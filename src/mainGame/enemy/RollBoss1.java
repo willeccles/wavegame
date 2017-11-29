@@ -56,7 +56,7 @@ public class RollBoss1 extends GameObject {
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, 300, 300);
+		return new Rectangle((int) this.x, (int) this.y, 250, 250);
 	}
 
 	public Image getImage(String path) {
