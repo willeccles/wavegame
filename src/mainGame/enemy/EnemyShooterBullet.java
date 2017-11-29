@@ -26,6 +26,7 @@ public class EnemyShooterBullet extends GameObject {
 		this.color = color;
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -40,6 +41,7 @@ public class EnemyShooterBullet extends GameObject {
 			handler.removeObject(this);
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(color);
 		g.fillRect((int) x, (int) y, 4, 4);

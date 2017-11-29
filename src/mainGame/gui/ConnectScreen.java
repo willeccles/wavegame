@@ -2,19 +2,13 @@ package mainGame.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.net.URL;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import mainGame.Game;
 import mainGame.Game.STATE;
-import mainGame.Player;
 import mainGame.spawn.SpawnMultiplayer;
 
 public class ConnectScreen extends JPanel {
@@ -35,8 +29,8 @@ public class ConnectScreen extends JPanel {
 	public ConnectScreen(Game game, SpawnMultiplayer mp) {
 		super();
 		this.setBackground(Color.black);
-		this.setPreferredSize(new java.awt.Dimension(game.WIDTH, game.HEIGHT));
-		this.setSize(new java.awt.Dimension(game.WIDTH, game.HEIGHT));
+		this.setPreferredSize(new java.awt.Dimension(Game.WIDTH, Game.HEIGHT));
+		this.setSize(new java.awt.Dimension(Game.WIDTH, Game.HEIGHT));
 		this.game = game;
 		this.mpSpawn = mp;
 		game.getFrame().add(this);

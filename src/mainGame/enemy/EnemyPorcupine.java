@@ -3,7 +3,6 @@ package mainGame.enemy;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Random;
 import mainGame.*;
 import mainGame.Game.STATE;
 import mainGame.gfx.*;
@@ -51,6 +50,7 @@ public class EnemyPorcupine extends GameObject {
 		}
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -109,6 +109,7 @@ public class EnemyPorcupine extends GameObject {
 			handler.removeObject(this);
 		}
 	}
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.orange);
 		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);

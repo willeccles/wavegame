@@ -16,6 +16,7 @@ public class Server extends Thread {
 		lb = new Leaderboard("leaderboard.csv");
 	}
 
+	@Override
 	public void run() {
 		while (true) {
 			try {

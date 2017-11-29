@@ -46,6 +46,7 @@ public class MouseListener extends MouseAdapter {
 
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 		if (game.gameState == STATE.Host || game.gameState == STATE.Join)
 			return;
@@ -252,12 +253,14 @@ public class MouseListener extends MouseAdapter {
 				spawner2.restart();
 				spawner2.addLevels();
 				Spawn1to5.LEVEL_SET = 1;
+				spawnBosses.restart();
 				return;
 			}
 		}
 
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 
 	}

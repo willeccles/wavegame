@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.net.URL;
-
 import javax.swing.JPanel;
 import mainGame.*;
 
@@ -23,6 +20,7 @@ public class LeaderboardDisplay extends JPanel {
 		y = 100;
 	}
 
+	@Override
 	public void paint (Graphics g) {
 		Font font = new Font("Amoebic", 1, 50);
 		Font font2 = new Font("Amoebic", 1, 40);

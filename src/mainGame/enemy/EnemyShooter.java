@@ -44,6 +44,7 @@ public class EnemyShooter extends GameObject {
 
 	}
 
+	@Override
 	public void tick() {
 		timer--;
 		handler.addObject(new Trail(x, y, ID.Trail, Color.yellow, this.sizeX, this.sizeY, 0.025, this.handler));
@@ -89,6 +90,7 @@ public class EnemyShooter extends GameObject {
 		}
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.yellow);
 		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);

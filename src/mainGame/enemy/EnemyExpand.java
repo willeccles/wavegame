@@ -36,6 +36,7 @@ public class EnemyExpand extends GameObject {
 		}
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -66,6 +67,7 @@ public class EnemyExpand extends GameObject {
 		}
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.pink);
 		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);

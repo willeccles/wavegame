@@ -31,6 +31,7 @@ public class EnemySmart extends GameObject {
 
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -52,6 +53,7 @@ public class EnemySmart extends GameObject {
 
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.green);
 		g.fillRect((int) x, (int) y, 16, 16);

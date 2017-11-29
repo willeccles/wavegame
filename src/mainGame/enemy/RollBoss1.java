@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.net.URL;
 import mainGame.*;
-import mainGame.gfx.*;
 
 /**
  * A type of enemy in the game
@@ -30,6 +29,7 @@ public class RollBoss1 extends GameObject {
 		this.health = 2000;
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -41,6 +41,7 @@ public class RollBoss1 extends GameObject {
 			velX *= -1;
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.drawImage(img, (int) this.x, (int) this.y, 300, 300, null);
 		
@@ -48,14 +49,14 @@ public class RollBoss1 extends GameObject {
 				g.setColor(Color.GRAY);
 				g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 800, 50);
 				g.setColor(Color.RED);
-				g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, (int) this.health/2, 50);
+				g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, this.health/2, 50);
 				g.setColor(Color.WHITE);
 				g.drawRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 800, 50);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, 300, 300);
+		return new Rectangle((int) this.x, (int) this.y, 250, 250);
 	}
 
 	public Image getImage(String path) {

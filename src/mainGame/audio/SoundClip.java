@@ -1,12 +1,9 @@
 package mainGame.audio;
 
 import java.io.File;
-import java.net.URI;
-import java.awt.Toolkit;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import mainGame.Game;
-import javafx.util.Duration;
 
 /**
  * A sound clip that is played asynchronously.

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import mainGame.Game.STATE;
-import mainGame.gfx.*;
 import mainGame.pickup.*;
 
 /**

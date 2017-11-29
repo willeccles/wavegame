@@ -47,6 +47,7 @@ public class EnemyMiniShooter extends GameObject {
 		}
 	}
 
+	@Override
 	public void tick() {
 		timer--;
 		handler.addObject(new Trail(x, y, ID.Trail, Color.magenta, this.sizeX, this.sizeY, 0.025, this.handler));
@@ -95,6 +96,7 @@ public class EnemyMiniShooter extends GameObject {
 		}
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.magenta);
 		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);

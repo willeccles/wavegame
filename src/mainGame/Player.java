@@ -1,7 +1,6 @@
 package mainGame;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -138,7 +137,7 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss || tempObject.getId() == ID.SeparateBoss 
 					|| tempObject.getId() == ID.SeparateBoss2 || tempObject.getId() == ID.SeparateBoss3) {
 				//player invulnerability
-				//if (tempObject)
+				
 			}
 
 		}
@@ -192,18 +191,22 @@ public class Player extends GameObject {
 		this.playerWidth = size;
 		this.playerHeight = size;
 	}
+	@Override
 	public double getVelX() {
 		return velX;
 	}
 
+	@Override
 	public void setVelX(int velX) {
 		this.velX = velX;
 	}
 
+	@Override
 	public double getVelY() {
 		return velY;
 	}
 
+	@Override
 	public void setVelY(int velY) {
 		this.velY = velY;
 	}

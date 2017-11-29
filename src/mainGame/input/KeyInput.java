@@ -1,20 +1,8 @@
 package mainGame.input;
 
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import mainGame.Game.STATE;
 import mainGame.audio.SoundPlayer;
 import mainGame.spawn.*;
@@ -64,6 +52,7 @@ public class KeyInput extends KeyAdapter {
 
 	}
 
+	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 
@@ -77,30 +66,30 @@ public class KeyInput extends KeyAdapter {
 			// if (tempObject.getId() == ID.Player) {
 			// find the player object, as he is the only one the
 			// user can control key events for player 1
-			if ((key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_UP || key == KeyEvent.VK_W) && Handler.getTimer() <= 0) {
 				player.setVelY(-(this.speed));
 				keyDown[0] = true;
 				game.updatePlayerPosition();
 			}
-			if ((key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) && Handler.getTimer() <= 0) {
 				player.setVelX(-(this.speed));
 				keyDown[1] = true;
 				game.updatePlayerPosition();
 			}
-			if ((key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) && Handler.getTimer() <= 0) {
 				player.setVelY(this.speed);
 				keyDown[2] = true;
 				game.updatePlayerPosition();
 			}
-			if ((key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) && handler.getTimer() <= 0) {
+			if ((key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) && Handler.getTimer() <= 0) {
 				player.setVelX(this.speed);
 				keyDown[3] = true;
 				game.updatePlayerPosition();
 			}
-			if (key == KeyEvent.VK_SPACE && handler.getTimer() <= 0) {
+			if (key == KeyEvent.VK_SPACE && Handler.getTimer() <= 0) {
 				upgrades.levelSkipAbility();
 			}
-			if (key == KeyEvent.VK_SHIFT && handler.getTimer() <= 0) {
+			if (key == KeyEvent.VK_SHIFT && Handler.getTimer() <= 0) {
 				ability = upgrades.getAbility();
 				if (ability.equals("clearScreen")) {
 					upgrades.clearScreenAbility();
@@ -298,6 +287,7 @@ public class KeyInput extends KeyAdapter {
 		}
 	}
 
+	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 

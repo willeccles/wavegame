@@ -55,6 +55,7 @@ public class EnemyBurst extends GameObject {
 		}
 	}
 
+	@Override
 	public void tick() {
 
 		handler.addObject(new Trail(x, y, ID.Trail, Color.orange, this.size, this.size, 0.025, this.handler));
@@ -125,6 +126,7 @@ public class EnemyBurst extends GameObject {
 		}
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.orange);
 		g.fillRect((int) x, (int) y, this.size, this.size);

@@ -6,9 +6,6 @@ import java.awt.Graphics;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 
-import com.sun.glass.ui.EventLoop.State;
-
-import mainGame.Game.STATE;
 import mainGame.*;
 
 /**

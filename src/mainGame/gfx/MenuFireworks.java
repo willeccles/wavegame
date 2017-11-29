@@ -42,11 +42,13 @@ public class MenuFireworks extends GameObject {
 
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(this.color);
 		g.fillOval((int) this.x, (int) this.y, sizeX, sizeY);
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;

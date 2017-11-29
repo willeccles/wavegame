@@ -10,7 +10,6 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.util.Random;
 import mainGame.*;
-import mainGame.gfx.*;
 
 /**
  * The last boss in the game, shown in a 3x3 grid of 9 instances of BossEye
@@ -46,6 +45,7 @@ public class BossEye extends GameObject {
 		this.health = 2000;
 	}
 
+	@Override
 	public void tick() {
 		if (tempCounter == 0) {
 			if (alpha < 0.995) {// this handles each eye fading in to the game
@@ -105,6 +105,7 @@ public class BossEye extends GameObject {
 		}
 	}
 
+	@Override
 	public void render(Graphics g) {
 		if (g.getColor() == Color.BLACK) {
 			// prevent black text from showing "Game Over" if the player dies here, or
@@ -120,7 +121,7 @@ public class BossEye extends GameObject {
 		g.setColor(Color.GRAY);
 		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);
 		g.setColor(Color.RED);
-		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, (int) this.health/2, 50);
+		g.fillRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, this.health/2, 50);
 		g.setColor(Color.WHITE);
 		g.drawRect(Game.WIDTH / 2 - 500, Game.HEIGHT - 150, 1000, 50);
 	}
@@ -131,8 +132,9 @@ public class BossEye extends GameObject {
 
 	}
 
+	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.x, (int) this.y, (int) this.img.getWidth(null), (int) this.img.getHeight(null));
+		return new Rectangle((int) this.x, (int) this.y, this.img.getWidth(null), this.img.getHeight(null));
 	}
 
 	public Image getImage(String path) {

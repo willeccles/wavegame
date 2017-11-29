@@ -3,8 +3,6 @@ package server;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
-import java.util.Random;
-import java.util.Iterator;
 
 /**
  * Instance of a game. Manages clients and manages the game between them.
@@ -40,6 +38,7 @@ public class Instance extends Thread {
 	/**
 	 * Overridden run method from Thread.
 	 */
+	@Override
 	public void run() {
 		// first we should wait for a second person to join the room
 		while (getClientCount() != 2) {
@@ -191,7 +190,7 @@ public class Instance extends Thread {
 	public void sendToAll(String message) {
 		for (HashMap.Entry<Integer, ClientConnection> pair : clients.entrySet()) {
 			if (clients.get(pair.getKey()).isAlive()) {
-				sendToClient((Integer)pair.getKey(), message);
+				sendToClient(pair.getKey(), message);
 			}
 		}
 	}

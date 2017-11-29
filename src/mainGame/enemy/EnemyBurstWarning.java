@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import mainGame.*;
-import mainGame.gfx.*;
 
 /**
  * A warning that is displayed before EnemyBurst comes across the screen
@@ -33,6 +32,7 @@ public class EnemyBurstWarning extends GameObject {
 
 	}
 
+	@Override
 	public void tick() {
 		flash();
 		checkFlash();
@@ -63,6 +63,7 @@ public class EnemyBurstWarning extends GameObject {
 		}
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(this.color);
 		g.fillRect((int) x, (int) y, this.width, this.height);

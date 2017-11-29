@@ -1,7 +1,6 @@
 package mainGame.spawn;
 
 import java.awt.Color;
-import java.util.Random;
 import mainGame.net.ClientConnection;
 import mainGame.enemy.*;
 import mainGame.*;

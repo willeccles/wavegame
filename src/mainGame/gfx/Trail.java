@@ -40,6 +40,7 @@ public class Trail extends GameObject {
 	}
 
 
+	@Override
 	public void tick() {//slowly fades each square
 		if (alpha > life) {
 			alpha -= life - 0.001;
@@ -49,6 +50,7 @@ public class Trail extends GameObject {
 	}
 
 
+	@Override
 	public void render(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setComposite(makeTransparent(alpha));
@@ -69,6 +71,7 @@ public class Trail extends GameObject {
 	}
 
 
+	@Override
 	public Rectangle getBounds() {
 		return null;
 	}
