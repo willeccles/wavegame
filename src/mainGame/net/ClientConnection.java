@@ -119,7 +119,11 @@ public class ClientConnection {
 					break;
 				} catch (SocketException se) {
 					// this means the server shut down
+					try {
 					client.close();
+					} catch (IOException ioeioeioeioe) {
+						client = null;
+					}
 					game.popup("Server died. Good luck.");
 					game.gameState = Game.STATE.Menu;
 					break;
