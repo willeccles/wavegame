@@ -138,7 +138,7 @@ public class Player extends GameObject {
 					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss || tempObject.getId() == ID.SeparateBoss 
 					|| tempObject.getId() == ID.SeparateBoss2 || tempObject.getId() == ID.SeparateBoss3) {
 				//player invulnerability
-				//if (tempObject)
+				
 			}
 
 		}
