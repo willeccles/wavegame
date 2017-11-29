@@ -124,9 +124,7 @@ public class Player extends GameObject {
 				}
 
 			}
-			if (tempObject.getId() == ID.EnemyBoss || tempObject.getId() == ID.BossEye || tempObject.getId() == ID.RollBoss1 
-					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss || tempObject.getId() == ID.SeparateBoss 
-					|| tempObject.getId() == ID.SeparateBoss2 || tempObject.getId() == ID.SeparateBoss3) {
+			if (tempObject.getId() == ID.EnemyBoss) {
 				// Allows player time to get out of upper area where they will get hurt once the
 				// boss starts moving
 				if (this.y <= 96 && tempObject.isMoving) {
@@ -135,6 +133,12 @@ public class Player extends GameObject {
 					hud.updateScoreColor(Color.red);
 				}
 				
+			}
+			if (tempObject.getId() == ID.BossEye || tempObject.getId() == ID.RollBoss1 
+					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss || tempObject.getId() == ID.SeparateBoss 
+					|| tempObject.getId() == ID.SeparateBoss2 || tempObject.getId() == ID.SeparateBoss3) {
+				//player invulnerability
+				//if (tempObject)
 			}
 
 		}
