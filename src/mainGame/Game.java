@@ -296,7 +296,6 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
-		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
 		// SCREEN
 		if (!isPaused()) {
 			// don't worry about this it's magic
