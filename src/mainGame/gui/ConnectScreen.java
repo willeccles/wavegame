@@ -135,12 +135,9 @@ public class ConnectScreen extends JPanel {
 			}
 		});
 		this.add(connectButton);
-		this.requestFocusInWindow();
-		this.requestFocus();
 	}
 
-	public void render(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		this.paintComponents(g);
 	}
 }

@@ -278,63 +278,62 @@ public class Game extends Canvas implements Runnable {
 	 * the Graphics objects (entities, screens, HUD's, etc).
 	 */
 	private void render() {
-
-		/*
-		 * BufferStrategies are used to prevent screen tearing. In other words,
-		 * this allows for all objects to be redrawn at the same time, and not
-		 * individually
-		 */
-		BufferStrategy bs = this.getBufferStrategy();
-		if (bs == null) {
-			this.createBufferStrategy(3);
-			return;
-		}
-		Graphics g = bs.getDrawGraphics();
-
-		///////// Draw things below this/////////////
-
-		g.setColor(Color.black);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-
-		// SCREEN
-		if (!isPaused()) {
-			// don't worry about this it's magic
-			if (gameState != STATE.Join && gameState != STATE.Host) {
-				this.setEnabled(true);
-			}
-			
-			if (gameState == STATE.Wave || gameState == STATE.Multiplayer 
-					|| gameState == STATE.Bosses || gameState == STATE.Survival) {
-				// user is playing game, draw game objects
-				hud.render(g);
-			} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.Credits) {
-				// user is in help or the menu or the credits, draw the menu and help objects
-				menu.render(g);
-			} else if (gameState == STATE.Upgrade) {// user is on the upgrade
-				// screen, draw the upgrade
-				// screen
-				upgradeScreen.render(g);
-			} else if (gameState == STATE.GameOver) {// game is over, draw the game
-				// over screen
-				gameOver.render(g);
-			} else if (gameState == STATE.Leaderboard) {
-				leaderboard.paint(g);
-			} else if (gameState == STATE.Color) {
-				colorScreen.render(g);
-			} else if (gameState == STATE.Join || gameState == STATE.Host) {
-				this.setEnabled(false);
-				connectScreen.render(g);
-			} else if (gameState == STATE.LeaderboardDisplay) {
-				leaderboardDisplay.paint(g);
-			}
+		if (gameState == STATE.Join || gameState == STATE.Host) {
+			this.setVisible(false);
+			this.setEnabled(false);
 		} else {
-			pauseMenu.render(g);
+			this.setVisible(true);
+			this.setEnabled(true);
+			
+			/*
+			 * BufferStrategies are used to prevent screen tearing. In other words,
+			 * this allows for all objects to be redrawn at the same time, and not
+			 * individually
+			 */
+			BufferStrategy bs = this.getBufferStrategy();
+			if (bs == null) {
+				this.createBufferStrategy(3);
+				return;
+			}
+			Graphics g = bs.getDrawGraphics();
+
+			///////// Draw things below this/////////////
+
+			g.setColor(Color.black);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+
+			// SCREEN
+			if (!isPaused()) {
+				if (gameState == STATE.Wave || gameState == STATE.Multiplayer 
+						|| gameState == STATE.Bosses || gameState == STATE.Survival) {
+					// user is playing game, draw game objects
+					hud.render(g);
+				} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.Credits) {
+					// user is in help or the menu or the credits, draw the menu and help objects
+					menu.render(g);
+				} else if (gameState == STATE.Upgrade) {// user is on the upgrade
+					// screen, draw the upgrade
+					// screen
+					upgradeScreen.render(g);
+				} else if (gameState == STATE.GameOver) {// game is over, draw the game
+					// over screen
+					gameOver.render(g);
+				} else if (gameState == STATE.Leaderboard) {
+					leaderboard.paint(g);
+				} else if (gameState == STATE.Color) {
+					colorScreen.render(g);
+				} else if (gameState == STATE.LeaderboardDisplay) {
+					leaderboardDisplay.paint(g);
+				}
+			} else {
+				pauseMenu.render(g);
+			}
+			if(!isPaused()== true){
+				handler.render(g);} // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
+			///////// Draw things above this//////////////
+			g.dispose();
+			bs.show();
 		}
-		if(!isPaused()== true){
-			handler.render(g);} // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
-		///////// Draw things above this//////////////
-		g.dispose();
-		bs.show();
 	}
 
 	/**
