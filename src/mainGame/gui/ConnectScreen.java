@@ -100,7 +100,7 @@ public class ConnectScreen extends JPanel {
 		connectButton.addActionListener((ae) -> {
 			// because this project is for school I don't really car that much, so regexes are all "meh"
 			// check the IP
-			if (!ip.getText().matches("^[\\d.-a-zA-Z]+$")) {
+			if (!ip.getText().matches("^[0-9.a-zA-Z-]+$")) {
 				game.popup("Invalid IP address.");
 				return;
 			}
