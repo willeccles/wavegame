@@ -155,10 +155,14 @@ public class ClientConnection {
 						out.writeUTF(output);
 						out.flush();
 					} catch (Exception e) {
-						e.printStackTrace();
+						// error with the server
+						game.popup("Congrats, ur game is not connected too good.");
+						game.gameState = Game.STATE.Menu;
+						break;
 					}
 				}
 			}
+			this.close();
 		});
 
 		inputThread.start();
