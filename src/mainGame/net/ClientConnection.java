@@ -117,6 +117,12 @@ public class ClientConnection {
 					// this means that the server closed the connection
 					game.gameState = Game.STATE.GameOver;
 					break;
+				} catch (SocketException se) {
+					// this means the server shut down
+					client.close();
+					game.popup("Server died. Good luck.");
+					game.gameState = Game.STATE.Menu;
+					break;
 				} catch(IOException ioe) {
 					ioe.printStackTrace();
 					try {
