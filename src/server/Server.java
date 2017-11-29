@@ -31,7 +31,7 @@ public class Server extends Thread {
 					String roomname = args[1];
 					String roompass = args[2];
 					if (instances.containsKey(roomname)) {
-						if (instances.get(roomname).isAlive()) {
+						if (!instances.get(roomname).hasDied()) {
 							// room is in use
 							DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
 							out.writeUTF("ROOM_EXISTS");
@@ -52,7 +52,7 @@ public class Server extends Thread {
 					String roomname = args[1];
 					String roompass = args[2];
 					if (instances.containsKey(roomname)) {
-						if (instances.get(roomname).isAlive()) {
+						if (!instances.get(roomname).hasDied()) {
 							// join the user into the room if the password matches
 							if (instances.get(roomname).checkPass(roompass)) {
 								if (instances.get(roomname).getClientCount() < 2) {

@@ -210,6 +210,8 @@ public class ClientConnection {
 			if (inputThread.isAlive()) {
 				inputThread.join();
 			}
+			if (outputThread.isAlive())
+				outputThread.join();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

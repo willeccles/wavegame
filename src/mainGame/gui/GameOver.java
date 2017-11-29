@@ -55,7 +55,7 @@ public class GameOver {
 		if (handler.isMulti()) {
 			g.drawString(message, Game.WIDTH / 2 - getTextWidth(font2, message) / 2, Game.HEIGHT / 2 + 50);
 		}
-		else if(!(player.checkGame().equals("survival")) && !player.checkGame().equals("multiplayer")) {
+		else if(player != null && (!(player.checkGame().equals("survival")) && !player.checkGame().equals("multiplayer"))) {
 			text = "Level: " + hud.getLevel();
 			g.drawString(text, Game.WIDTH / 2 - getTextWidth(font2, text) / 2, Game.HEIGHT / 2 - 50);
 			text = "Score: " + hud.getScore();

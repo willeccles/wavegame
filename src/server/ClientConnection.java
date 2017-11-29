@@ -14,6 +14,7 @@ public class ClientConnection extends Thread {
 	private DataOutputStream out;
 	private Thread outputThread;
 	private ConcurrentLinkedQueue<String> outputQueue;
+	private boolean running = false;
 
 	public ClientConnection(int id, Socket clientSocket, Instance instance) throws IOException {
 		this.id = id;
@@ -25,14 +26,16 @@ public class ClientConnection extends Thread {
 		out = new DataOutputStream(socket.getOutputStream());
 		outputThread = new Thread(() -> {
 			String output;
-			while (socket.isConnected()) {
+			while (running && socket.isConnected()) {
 				output = outputQueue.poll();
 				if (output != null) {
 					// send the output to the server
 					try {
 						out.writeUTF(output);
 					} catch (Exception e) {
-						e.printStackTrace();
+						// this means that, the client connection has closed
+						// we don't want to do anything here, because it's later on in this file
+						// see catch(SocketException) in the input thread
 					}
 				}
 			}
@@ -40,10 +43,11 @@ public class ClientConnection extends Thread {
 	}
 	
 	public void run() {
+		running = true;
 		if (!outputThread.isAlive()) outputThread.start();
 		// here we should wait for things to come from the client and then send them to the instance the client is in
 		String input = "";
-		while (socket.isConnected()) {
+		while (running && socket.isConnected()) {
 			try {
 				input = in.readUTF();
 				// deal with input here
@@ -59,23 +63,25 @@ public class ClientConnection extends Thread {
 			} catch (EOFException eof) {
 				// when the socket reaches EOF before it finishes reading
 				// if this happens, it's likely an error with code, rather than a runtime-specific error
+				// however, the user should still see this as "the other person left" since it definitely can happen when the user disconnects
 				break;
 			} catch (SocketException se) {
 				// the socket is closed by the client
+				// in other words, there was a client-side issue that lead to the client disconnecting
 				break;
 			} catch (IOException ioe) {
-				// in this case this means something
-				ioe.printStackTrace();
 				break;
 			} catch (Exception e) {
-				e.printStackTrace();
+				break;
 			}
 		}
-		instance.removeClient(id);
+		if (running)
+			instance.removeClient(id);
 	}
 
 	public synchronized void close() {
 		try {
+			running = false;
 			in.close();
 			out.close();
 			socket.close();

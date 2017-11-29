@@ -49,7 +49,6 @@ public class Instance extends Thread {
 					System.out.println("only one user and they left");
 					this.join();
 				} catch (InterruptedException ie) {
-					ie.printStackTrace();
 				}
 			}
 		}
@@ -80,8 +79,13 @@ public class Instance extends Thread {
 			}
 
 			// now that the loop has stopped we can kill things
-			closeAndRemoveClient(0);
-			closeAndRemoveClient(1);
+			removeClient(0);
+			removeClient(1);
+		}
+
+		try {
+			this.join();
+		} catch (Exception e) {
 		}
 	}
 
@@ -93,11 +97,20 @@ public class Instance extends Thread {
 	}
 
 	/**
+	 * Can be used to determine if this instance is joinable. In other words, if it had died, the server can safely reuse the instance.
+	 * @return Whether or not the thread has died.
+	 */
+	public boolean hasDied() {
+		return getState() == Thread.State.TERMINATED;
+	}
+
+	/**
 	 * Run every 2s to handle game stuff.
 	 */
 	private void tick() {
 		// handle if a user has left, kill the game (assuming the other user is connected, i suppose)
 		if (getClientCount() < 2) {
+			System.out.println(roomname + " OTHER_LEFT");
 			sendToAll("OTHER_LEFT"); // this means the other player has left the game
 			close();
 		}
@@ -123,18 +136,7 @@ public class Instance extends Thread {
 	 * @return Number of clients.
 	 */
 	public synchronized int getClientCount() {
-		return clients.size();
-	}
-
-	/**
-	 * Closes a given client.
-	 * @param id The ID of the client to close.
-	 */
-	private synchronized void closeAndRemoveClient(int id) {
-		if (clients.containsKey(id)) {
-			clients.get(id).close();
-			clients.remove(id);
-		}
+		return clients.keySet().size();
 	}
 
 	/**
@@ -155,7 +157,7 @@ public class Instance extends Thread {
 	public synchronized void gameOver(int winnerID) {
 		sendToClient(winnerID, "WIN");
 		sendToClient(Math.abs(winnerID-1), "LOSE");
-		running = false;
+		close();
 	}
 
 	/**
