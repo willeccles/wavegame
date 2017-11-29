@@ -73,7 +73,7 @@ public class HUD {
 		g.setColor(Color.GRAY);
 		g.fillRect(15, 15, healthBarWidth, 64);
 		g.setColor(new Color(75, (int) greenValue, 0));
-		g.fillRect((int) 15, (int) 15, (int) health * 2, 64);
+		g.fillRect(15, 15, (int) health * 2, 64);
 		g.setColor(scoreColor);
 		g.drawRect(15, 15, healthBarWidth, 64);
 

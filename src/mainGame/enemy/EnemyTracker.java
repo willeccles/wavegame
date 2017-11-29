@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import mainGame.Game.STATE;
 import mainGame.*;
 import mainGame.gfx.*;
 
@@ -39,6 +38,7 @@ public class EnemyTracker extends GameObject {
 
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -59,6 +59,7 @@ public class EnemyTracker extends GameObject {
 		handler.addObject(new Trail(x, y, ID.Trail, enemyColor, 16, 16, 0.025, this.handler));
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(enemyColor);
 		g.fillRect((int) x, (int) y, 16, 16);

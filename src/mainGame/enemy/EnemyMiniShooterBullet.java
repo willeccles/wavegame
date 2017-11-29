@@ -24,6 +24,7 @@ public class EnemyMiniShooterBullet extends GameObject {
 		this.velY = velY;
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -38,6 +39,7 @@ public class EnemyMiniShooterBullet extends GameObject {
 
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.magenta);
 		g.fillRect((int) x, (int) y, 4, 4);

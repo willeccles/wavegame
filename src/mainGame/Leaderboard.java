@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.lang.reflect.Array;
 import java.net.URL;
 
 import javax.swing.JPanel;
@@ -13,7 +12,6 @@ import mainGame.net.LBWorker;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import mainGame.gui.*;
-import mainGame.*;
 
 /**
  * Leaderboard inpupt screen in the game
@@ -58,6 +56,7 @@ public class Leaderboard extends JPanel {
 		loc = 0;
 	}
 
+	@Override
 	public void paint (Graphics g) {
 		// TODO Auto-generated method stub
 		//1280x720

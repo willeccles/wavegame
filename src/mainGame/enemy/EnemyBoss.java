@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.util.Random;
 import mainGame.*;
-import mainGame.gfx.*;
 
 /**
  * The first boss in the game
@@ -35,6 +34,7 @@ public class EnemyBoss extends GameObject {
 		this.health = 1000;//full health is 1000
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -78,6 +78,7 @@ public class EnemyBoss extends GameObject {
 		return image;
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.LIGHT_GRAY);
 		g.drawLine(0, 96, Game.WIDTH, 96);

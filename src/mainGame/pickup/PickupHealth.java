@@ -33,18 +33,21 @@ public class PickupHealth extends Pickup {
 	}
 
 
+	@Override
 	public void tick() {
 
 
 	}
 
 
+	@Override
 	public void render(Graphics g) {
 		g.drawImage(this.img, (int)this.x, (int)this.y, 48, 48, null);
 
 	}
 
 
+	@Override
 	public Rectangle getBounds() {
 
 		return new Rectangle((int) this.x, (int) this.y, 48, 48);

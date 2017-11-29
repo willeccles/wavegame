@@ -24,6 +24,7 @@ public class EnemyBasic extends GameObject {
 		this.velY = velY;
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -37,6 +38,7 @@ public class EnemyBasic extends GameObject {
 
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.red);
 		g.fillRect((int) x, (int) y, 11, 11);

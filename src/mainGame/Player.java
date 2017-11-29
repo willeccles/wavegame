@@ -1,7 +1,6 @@
 package mainGame;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -192,18 +191,22 @@ public class Player extends GameObject {
 		this.playerWidth = size;
 		this.playerHeight = size;
 	}
+	@Override
 	public double getVelX() {
 		return velX;
 	}
 
+	@Override
 	public void setVelX(int velX) {
 		this.velX = velX;
 	}
 
+	@Override
 	public double getVelY() {
 		return velY;
 	}
 
+	@Override
 	public void setVelY(int velY) {
 		this.velY = velY;
 	}

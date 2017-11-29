@@ -36,6 +36,7 @@ public class EnemyMoveLeft extends GameObject {
 		}
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -51,6 +52,7 @@ public class EnemyMoveLeft extends GameObject {
 		x -= 10;
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.yellow);
 		g.fillRect((int) x, (int) y, this.sizeX, this.sizeY);

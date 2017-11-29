@@ -24,6 +24,7 @@ public class EnemySweep extends GameObject {
 		this.velY = velY;
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -41,6 +42,7 @@ public class EnemySweep extends GameObject {
 
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.cyan);
 		g.fillRect((int) x, (int) y, 16, 16);

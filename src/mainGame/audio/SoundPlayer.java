@@ -1,9 +1,7 @@
 package mainGame.audio;
 
 import java.io.File;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.awt.Toolkit;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -33,6 +31,7 @@ public class SoundPlayer extends Thread {
 		this(songfile, false);
 	}
 
+	@Override
 	public void run() {
 		try {
 			File f = new File(Game.class.getResource(soundfile).toURI().toString());

@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.util.Random;
 import mainGame.*;
-import mainGame.gfx.*;
 
 /**
  * @author Kyle Gorman 11/3/17
@@ -30,6 +29,7 @@ public class BossSeparates extends GameObject {
 		this.size = size;
 	}
 
+	@Override
 	public void tick() {
 		this.health -= 1;
 		attackPlayer();
@@ -47,6 +47,7 @@ public class BossSeparates extends GameObject {
 		return image;
 	}
 
+	@Override
 	public void render(Graphics g) {
 			g.drawImage(img, (int) this.x, (int) this.y, size, size, null);
 		// HEALTH BAR

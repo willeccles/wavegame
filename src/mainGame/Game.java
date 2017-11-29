@@ -9,12 +9,9 @@ import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
 import mainGame.audio.SoundPlayer;
 import mainGame.audio.SoundClip;
-import mainGame.net.ClientConnection;
 import mainGame.spawn.*;
-import mainGame.enemy.*;
 import mainGame.gui.*;
 import mainGame.input.*;
-import mainGame.gfx.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -116,7 +113,7 @@ public class Game extends Canvas implements Runnable {
 		soundplayer = new SoundPlayer("sounds/main.mp3", true);
 		soundClip = new SoundClip("sounds/damage.mp3", 1.0);
 		soundplayer.start();
-		new Window((int) WIDTH, (int) HEIGHT, "PlayerKnown's BattleLands", this);
+		new Window(WIDTH, HEIGHT, "PlayerKnown's BattleLands", this);
 		colorScreen = new ColorPickerScreen(player, this);
 		connectScreen = new ConnectScreen(this,this.spawnMultiplayer);
 		
@@ -297,7 +294,7 @@ public class Game extends Canvas implements Runnable {
 		///////// Draw things below this/////////////
 
 		g.setColor(Color.black);
-		g.fillRect(0, 0, (int) WIDTH, (int) HEIGHT);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		handler.render(g); // ALWAYS RENDER HANDLER, NO MATTER IF MENU OR GAME
 		// SCREEN

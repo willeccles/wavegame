@@ -24,6 +24,7 @@ public class EnemyFast extends GameObject {
 		velY = 9;
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -39,6 +40,7 @@ public class EnemyFast extends GameObject {
 
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.cyan);
 		g.fillRect((int) x, (int) y, 11, 11);

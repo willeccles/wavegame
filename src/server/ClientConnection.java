@@ -42,6 +42,7 @@ public class ClientConnection extends Thread {
 		});
 	}
 	
+	@Override
 	public void run() {
 		running = true;
 		if (!outputThread.isAlive()) outputThread.start();

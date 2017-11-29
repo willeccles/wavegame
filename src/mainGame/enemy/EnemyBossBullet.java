@@ -29,6 +29,7 @@ public class EnemyBossBullet extends GameObject {
 		this.y -= velY; // this ensures that the bullet spawns where it needs to
 	}
 
+	@Override
 	public void tick() {
 		this.x += velX;
 		this.y += velY;
@@ -40,6 +41,7 @@ public class EnemyBossBullet extends GameObject {
 			handler.removeObject(this);
 	}
 
+	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.red);
 		g.fillRect((int) x, (int) y, 11, 11);
