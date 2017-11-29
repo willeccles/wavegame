@@ -115,7 +115,8 @@ public class ClientConnection {
 					}
 				} catch (EOFException eof) {
 					// this means that the server closed the connection
-					game.gameState = Game.STATE.GameOver;
+					game.popup("Server died. Good luck.");
+					game.gameState = Game.STATE.Menu;
 					break;
 				} catch (SocketException se) {
 					// this means the server shut down
