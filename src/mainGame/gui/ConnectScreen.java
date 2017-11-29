@@ -133,7 +133,9 @@ public class ConnectScreen extends JPanel {
 				} else if (game.gameState == Game.STATE.Host) {
 					mpSpawn.getClient().join_game(name.getText(), password.getText());
 				}
-				game.gameState = Game.STATE.Multiplayer;
+				// otherwise this is broken
+				if (game.gameState != Game.STATE.Menu)
+					game.gameState = Game.STATE.Multiplayer;
 			} catch (Exception e) {
 				game.gameState = Game.STATE.Menu;
 			}

@@ -75,6 +75,8 @@ public class SpawnMultiplayer {
 				// there was an error connecting...
 				game.gameState = Game.STATE.Menu;
 				game.popup("There was an error connecting to the server.");
+				reset();
+				game.gameState = Game.STATE.Menu;
 			}
 		}
 	}
