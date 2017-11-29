@@ -123,6 +123,7 @@ public class ClientConnection {
 						client.close();
 					} catch (IOException e) {
 						// this means there was an issue closing the client socket
+						client = null;
 					}
 				} catch (Exception e) {
 					e.printStackTrace(); // catch any error that isn't caught above

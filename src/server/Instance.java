@@ -143,7 +143,7 @@ public class Instance extends Thread {
 	 * @param id The ID of the client to remove.
 	 */
 	public synchronized void removeClient(int id) {
-		if (clients.get(id) == null)
+		if (!clients.containsKey(id))
 			return;
 		clients.get(id).close();
 		clients.remove(id);
