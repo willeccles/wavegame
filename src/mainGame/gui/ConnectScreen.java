@@ -124,7 +124,7 @@ public class ConnectScreen extends JPanel {
 				mpSpawn.createClient(ip.getText(), Integer.parseInt(port.getText()));
 				if (game.gameState == Game.STATE.Host) {
 					mpSpawn.getClient().host_game(name.getText(), password.getText());
-				} else if (game.gameState == Game.STATE.Host) {
+				} else if (game.gameState == Game.STATE.Join) {
 					mpSpawn.getClient().join_game(name.getText(), password.getText());
 				}
 				// otherwise this is broken
