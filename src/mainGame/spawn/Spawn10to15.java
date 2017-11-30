@@ -360,20 +360,16 @@ public class Spawn10to15 {
 			}
 		}
 		else if (levelNumber == 101) {// arbitrary number for the boss
-			if (tempCounter < 1) {
-				this.hud.setLevel(101);
-				handler.addObject(new BullBoss(ID.BullBoss, handler));
-				tempCounter++;
-			} else if (tempCounter >= 1) {
-				for (int i = 0; i < handler.object.size(); i++) {
-					GameObject tempObject = handler.object.get(i);
-					if (tempObject.getId() == ID.BullBoss) {
-						if (tempObject.getHealth() <= 0) {
-							this.hud.setLevel(16);
-							handler.removeObject(tempObject);
-							Spawn1to5.LEVEL_SET ++;
-							game.gameState = STATE.Upgrade;
-						}
+			tempCounter++;
+			handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss1, handler));
+			handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss2, handler));
+		} else if (tempCounter >= 1) {
+			for (int i = 0; i < handler.object.size(); i++) {
+				GameObject tempObject = handler.object.get(i);
+				if (tempObject.getId() == ID.RollBoss1) {
+					if (tempObject.getHealth() <= 0) {
+						handler.clearEnemies();
+						this.hud.setLevel(16);
 					}
 				}
 			}
