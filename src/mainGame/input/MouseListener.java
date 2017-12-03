@@ -172,7 +172,7 @@ public class MouseListener extends MouseAdapter {
 					return;
 				}
 			} else if (game.gameState == STATE.Credits) {
-				if (mouseOver(mx, my, 566, 560, 133, 42)) {
+				if (mouseOver(mx, my, 566, 650, 133, 42)) {
 					game.gameState = STATE.Menu;
 					return;
 				}
