@@ -70,6 +70,11 @@ public class SpawnMultiplayer {
 		if (this.client == null) {
 			try {
 				this.client = new ClientConnection(addr, port, this, opponent, game);
+				opponent = new Player(0, 0, ID.Player2, this.handler, this.hud, this.game, new Color(255, 64, 64), true);
+				handler.object.clear();
+				hud.health = 100;
+				hud.setScore(0);
+				hud.setLevel(1);
 			} catch (Exception e) {
 				// there was an error connecting...
 				game.gameState = Game.STATE.Menu;

@@ -291,7 +291,7 @@ public class Menu {
 					100, 190);
 			g.drawString("Can be found benching at the gym.",
 					100, 220);
-			g.drawString("Will Eccles aka The Head Developer - Drinks a refreshing Mtn Dew every class.", 100, 275);
+			g.drawString("Will \"Head Developer\" Eccles - Drinks a refreshing Mtn Dew every class.", 100, 275);
 			g.drawString("Can be found where ever cacti are located.", 100, 305);
 			
 			g.drawString("Julio \"Pause Menu\" Argueta - He hates olives.", 100, 360);
@@ -304,7 +304,7 @@ public class Menu {
 			g.drawString("Can be found on Instagram @eamon_duffy.", 100, 560);
 			
 			g.drawString("Professor \"Manager of the Best Team\" Hoffman - \"I LOVE CHARTS AND TABLES!!\"", 100, 615);
-			g.drawString("Can be found in CCE during office hours.", 100, 640);
+			g.drawString("Can be found stealing team A1's $50 giftcards.", 100, 640);
 			
 			
 			
