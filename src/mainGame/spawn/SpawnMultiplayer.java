@@ -143,6 +143,7 @@ public class SpawnMultiplayer {
 	 * Resets the class.
 	 */
 	public void reset() {
+		playing = false;
 		opponent = null;
 		client = null;
 		handler.setMulti(false);
