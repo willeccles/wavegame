@@ -34,8 +34,9 @@ public class Spawn5to10 {
 	private Color trackerColor;
 	private int trackerTimer;
 	private int differentEnemies;
-
-	public Spawn5to10(Handler handler, HUD hud, Spawn1to5 spawner, Game game) {
+	private Player player;
+	
+	public Spawn5to10(Handler handler, HUD hud, Spawn1to5 spawner, Game game, Player player) {
 		restart();
 		this.handler = handler;
 		this.hud = hud;
@@ -50,6 +51,7 @@ public class Spawn5to10 {
 		trackerTimer = 1000;
 		differentEnemies = 9;
 		addLevels();
+		this.player = player;
 	}
 
 	public void addLevels() {
@@ -329,6 +331,7 @@ public class Spawn5to10 {
 				handler.addObject(new BossEye(Game.WIDTH / 2 - 150, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 7));
 				handler.addObject(new BossEye(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 8));
 				handler.addObject(new BossEye(Game.WIDTH / 2 + 50, Game.HEIGHT / 2 + 50, ID.BossEye, handler, 9));
+				player.resetCount();
 				tempCounter++;
 			} else if (tempCounter >= 1) {
 				for (int i = 0; i < handler.object.size(); i++) {
@@ -337,6 +340,7 @@ public class Spawn5to10 {
 						if (tempObject.getHealth() <= 0) {
 							this.hud.setLevel(11);
 							handler.clearEnemies();
+							player.resetCount();
 							Spawn1to5.LEVEL_SET ++;
 							game.gameState = STATE.Upgrade;
 						}
@@ -383,8 +387,8 @@ public class Spawn5to10 {
 		tempCounter = 0;
 		levelTimer = 150;
 		levelsLeft = 10;
-
 	}
+	
 	public int rand() {
 		return (int) (Math.random() * differentEnemies);
 	}

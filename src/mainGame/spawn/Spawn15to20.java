@@ -28,6 +28,7 @@ public class Spawn15to20 {
 	private Player player;
 
 	public Spawn15to20(Handler handler, HUD hud, Game game, Player player) {
+		restart();
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
@@ -322,8 +323,9 @@ public class Spawn15to20 {
 		}
 		else if (levelNumber == 101) {// arbitrary number for the boss
 			if (tempCounter == 0) {
-				handler.addObject(new BossSeparates(r.nextInt(Game.WIDTH-400), r.nextInt(Game.HEIGHT-400), ID.SeparateBoss, handler, player, 400, 2000, -4, -4));
+				player.resetCount();
 				this.hud.setLevel(101);
+				handler.addObject(new BossSeparates(r.nextInt(Game.WIDTH-400), r.nextInt(Game.HEIGHT-400), ID.SeparateBoss, handler, player, 400, 2000, -4, -4));
 				tempCounter++;
 			} else if (tempCounter == 1) {
 				for (int i = 0; i < handler.object.size(); i++) {
@@ -394,6 +396,7 @@ public class Spawn15to20 {
 		levelTimer = 150;
 		levelsRemaining = 5;
 	}
+	
 	public int rand() {
 		return (int) (Math.random() * differentEnemies);
 	}
