@@ -131,15 +131,23 @@ public class Player extends GameObject {
 					game.soundClip.play();
 					hud.updateScoreColor(Color.red);
 				}
-				
+
 			}
-			if (tempObject.getId() == ID.BossEye || tempObject.getId() == ID.RollBoss1 
-					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss 
+			if (tempObject.getId() == ID.RollBoss1 || tempObject.getId() == ID.RollBoss2 
+					|| tempObject.getId() == ID.BullBoss || tempObject.getId() == ID.SeparateBoss3 
 					|| tempObject.getId() == ID.SeparateBoss || tempObject.getId() == ID.EnemyBoss
-					|| tempObject.getId() == ID.SeparateBoss2 || tempObject.getId() == ID.SeparateBoss3) {
+					|| tempObject.getId() == ID.SeparateBoss2 ) {
 				//gives the player two seconds to avoid taking damage
 				count++;
 				if( getBounds().intersects(tempObject.getBounds()) && count > 120) {
+					hud.health -= damage;
+				}
+
+			}
+
+			if (tempObject.getId() == ID.BossEye) {
+				count++;
+				if( getBounds().intersects(tempObject.getBounds()) && count > 1080) {
 					hud.health -= damage;
 				}
 			}
@@ -237,7 +245,7 @@ public class Player extends GameObject {
 	public void resetCount() {
 		count = 0;
 	}
-	
+
 	public void reset() {
 		this.resetCount();
 		this.resetLoc();
