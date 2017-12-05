@@ -79,6 +79,7 @@ public class Player extends GameObject {
 		if (hud.health <= 0) {// player is dead, game over!
 
 			if (hud.getExtraLives() == 0) {
+				this.reset();
 				if(game.gameState == STATE.Survival) {
 					gameMode = "survival";
 				} else if(game.gameState == STATE.Wave) {
@@ -111,10 +112,9 @@ public class Player extends GameObject {
 			if (tempObject.getId() == ID.EnemyBasic || tempObject.getId() == ID.EnemyFast || tempObject.getId() == ID.EnemySmart 
 					|| tempObject.getId() == ID.EnemyBossBullet || tempObject.getId() == ID.EnemySweep || tempObject.getId() == ID.EnemyShooterBullet 
 					|| tempObject.getId() == ID.EnemyBurst || tempObject.getId() == ID.EnemyShooter ||tempObject.getId() == ID.EnemyTracker 
-					|| tempObject.getId() == ID.BossEye || tempObject.getId() == ID.EnemyExpand || tempObject.getId() == ID.EnemyMiniShooter 
-					|| tempObject.getId() == ID.EnemyMiniShooterBullet || tempObject.getId() == ID.EnemyPorcupine || tempObject.getId() == ID.RollBoss1 
-					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.EnemyMove || tempObject.getId() == ID.SeparateBoss || tempObject.getId() == ID.SeparateBoss2 
-					|| tempObject.getId() == ID.SeparateBoss3) {// tempObject is an enemy
+					|| tempObject.getId() == ID.EnemyExpand || tempObject.getId() == ID.EnemyMiniShooter 
+					|| tempObject.getId() == ID.EnemyMiniShooterBullet || tempObject.getId() == ID.EnemyPorcupine 
+					|| tempObject.getId() == ID.EnemyMove) {// tempObject is an enemy
 				// collision code
 				if (getBounds().intersects(tempObject.getBounds())) {// player hit an enemy
 					hud.health -= damage;
@@ -134,10 +134,14 @@ public class Player extends GameObject {
 				
 			}
 			if (tempObject.getId() == ID.BossEye || tempObject.getId() == ID.RollBoss1 
-					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss || tempObject.getId() == ID.SeparateBoss 
+					|| tempObject.getId() == ID.RollBoss2 || tempObject.getId() == ID.BullBoss 
+					|| tempObject.getId() == ID.SeparateBoss || tempObject.getId() == ID.EnemyBoss
 					|| tempObject.getId() == ID.SeparateBoss2 || tempObject.getId() == ID.SeparateBoss3) {
-				//player invulnerability
-				
+				//gives the player two seconds to avoid taking damage
+				count++;
+				if( getBounds().intersects(tempObject.getBounds()) && count > 120) {
+					hud.health -= damage;
+				}
 			}
 
 		}
@@ -228,6 +232,16 @@ public class Player extends GameObject {
 			if (tail != null)
 				this.tailcolor = tail;
 		}
+	}
+	//resets the counter after each boss
+	public void resetCount() {
+		count = 0;
+	}
+	
+	public void reset() {
+		this.resetCount();
+		this.resetLoc();
+		this.resetVel();
 	}
 
 }

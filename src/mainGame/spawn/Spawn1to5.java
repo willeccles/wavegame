@@ -359,6 +359,7 @@ public class Spawn1to5 {
 						if (tempObject.getHealth() <= 0) {
 							this.hud.setLevel(6);
 							handler.removeObject(tempObject);
+							player.resetCount();
 							LEVEL_SET++;
 							game.gameState = STATE.Upgrade;
 						}
@@ -391,9 +392,8 @@ public class Spawn1to5 {
 		tempCounter = 0;
 		levelTimer = 150;
 		levelsRemaining = 5;
-		player.resetVel();
-		player.resetLoc();
 	}
+	
 	public int rand() {
 		return r.nextInt(differentEnemies);
 	}

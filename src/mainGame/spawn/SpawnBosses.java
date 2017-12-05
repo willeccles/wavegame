@@ -62,6 +62,7 @@ public class SpawnBosses {
 					if (tempObject.getId() == ID.EnemyBoss) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
+							player.resetCount();
 							levelNumber = this.randLevel();
 							tempCounter = 0;
 						}
@@ -87,6 +88,7 @@ public class SpawnBosses {
 					if (tempObject.getId() == ID.BossEye) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
+							player.resetCount();
 							levelNumber = this.randLevel();
 							tempCounter = 0;
 							hud.setLevel(hud.getLevel()+1);
@@ -106,6 +108,7 @@ public class SpawnBosses {
 					if (tempObject.getId() == ID.RollBoss1) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
+							player.resetCount();
 							levelNumber = this.randLevel();
 							tempCounter = 0;
 							hud.setLevel(hud.getLevel()+1);
@@ -157,6 +160,7 @@ public class SpawnBosses {
 					if (tempObject.getId() == ID.SeparateBoss3) {
 						if (tempObject.getHealth() <= 0) {
 							handler.clearEnemies();
+							player.resetCount();
 							levelNumber = this.randLevel();
 							tempCounter = 0;
 							hud.setLevel(hud.getLevel()+1);
@@ -178,6 +182,7 @@ public class SpawnBosses {
 		levelTimer = 150;
 		player.resetLoc();
 		player.resetVel();
+		player.resetCount();
 	}
 
 	public int randLevel() {

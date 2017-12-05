@@ -42,7 +42,7 @@ public class BossEye extends GameObject {
 		this.handler = handler;
 		this.placement = placement;
 		this.timer = 200;
-		this.health = 2000;
+		this.health = 100;
 	}
 
 	@Override

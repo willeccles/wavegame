@@ -24,8 +24,10 @@ public class Spawn10to15 {
 	private Color trackerColor;
 	private int trackerTimer;
 	private int differentEnemies;
+	private Player player;
 
-	public Spawn10to15(Handler handler, HUD hud, Game game) {
+	public Spawn10to15(Handler handler, HUD hud, Game game, Player player) {
+		restart();
 		this.handler = handler;
 		this.hud = hud;
 		this.game = game;
@@ -42,6 +44,7 @@ public class Spawn10to15 {
 		trackerTimer = 1000;
 		differentEnemies = 9;
 		addLevels();
+		this.player = player;
 
 	}
 
@@ -62,7 +65,7 @@ public class Spawn10to15 {
 			levelTimer--;
 			if (tempCounter < 1) {// display intro game message ONE time
 				handler.addObject(new LevelText(Game.WIDTH / 2 - 675, Game.HEIGHT / 2 - 200, "Even Harder Now!!!!",
-							ID.Levels1to10Text));
+						ID.Levels1to10Text));
 				tempCounter++;
 			}
 			if (levelTimer <= 0) {// time to play!
@@ -360,16 +363,23 @@ public class Spawn10to15 {
 			}
 		}
 		else if (levelNumber == 101) {// arbitrary number for the boss
-			tempCounter++;
-			handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss1, handler));
-			handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss2, handler));
-		} else if (tempCounter >= 1) {
-			for (int i = 0; i < handler.object.size(); i++) {
-				GameObject tempObject = handler.object.get(i);
-				if (tempObject.getId() == ID.RollBoss1) {
-					if (tempObject.getHealth() <= 0) {
-						handler.clearEnemies();
-						this.hud.setLevel(16);
+			if(tempCounter < 1) {
+				hud.setLevel(101);
+				player.resetCount();
+				handler.addObject(new RollBoss1(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss1, handler));
+				handler.addObject(new RollBoss2(r.nextInt(Game.WIDTH-300), r.nextInt(Game.HEIGHT-300), 11, 11, ID.RollBoss2, handler));
+				tempCounter++;
+			} else if (tempCounter >= 1) {
+				for (int i = 0; i < handler.object.size(); i++) {
+					GameObject tempObject = handler.object.get(i);
+					if (tempObject.getId() == ID.RollBoss1) {
+						if (tempObject.getHealth() <= 0) {
+							this.hud.setLevel(16);
+							handler.clearEnemies();
+							player.resetCount();
+							Spawn1to5.LEVEL_SET++;
+							game.gameState = STATE.Upgrade;
+						}
 					}
 				}
 			}
