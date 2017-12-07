@@ -167,7 +167,6 @@ public class Leaderboard extends JPanel {
 				leaderboard[i][0] = "";
 				leaderboard[i][1] = "";
 			}
-			ioe.printStackTrace();
 			loading = false;
 		}
 		if (!isMenu) {
