@@ -8,6 +8,15 @@ Group A1's ~~Wavegame~~ Player Known's Battle Lands project.
 
 ## How to setup and play:
 
+### Command Line
+
+1. If you have `make` installed, you can just `cd` to the src directory and run `make game` or `make server`. You can do `make all` to build both, and use `make jar` to make a jar from each of the things.
+2. If you don't have `make`, you can `cd` to the src directory and then do `javac mainGame/Game.java`. After that, you can just do `java mainGame/Game`.
+
+*If you want to just play the game, there are jar files available at the Releases page.*
+
+### Eclipse
+
 1. Unzip the file.
 
 2. Open Eclipse. Press File -> Import -> General -> Exisiting Projects into Workspace -> Next
