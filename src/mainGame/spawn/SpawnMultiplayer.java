@@ -5,6 +5,7 @@ import mainGame.net.ClientConnection;
 import mainGame.enemy.*;
 import mainGame.*;
 import mainGame.gui.*;
+import mainGame.pickup.*;
 
 /**
  * A type of game mode in the game
@@ -135,6 +136,9 @@ public class SpawnMultiplayer {
 				break;
 			case EnemyMiniShooter:
 				handler.addObject(new EnemyMiniShooter(Game.clampX(x, 75), Game.clampY(y, 75), 75, 75, -10, type, handler, this.game));
+				break;
+			case PickupHealth:
+				handler.addPickup(new PickupHealth(Game.clampX(x, 35), Game.clampY(y, 75), ID.HealthPickup, "images/ham.png", this.handler));
 				break;
 		}
 	}

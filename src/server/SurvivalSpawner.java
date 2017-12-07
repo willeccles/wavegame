@@ -19,7 +19,7 @@ public class SurvivalSpawner {
 		ID.EnemyMiniShooter,
 	};
 	private static final String[] sides = {"left", "right", "top", "bottom"};
-	private ID lastEnemy = ID.PickupHealth; // since 0 is an invalid ordinal (it's ID.Player) it's a good dummy value
+	private ID lastEnemy = ID.PickupHealth;
 	private int healthCountDown = 0; // once this reaches 5 we spawn a health pickup and reset it
 
 	public SurvivalSpawner() {
