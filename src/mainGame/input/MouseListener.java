@@ -43,7 +43,6 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.leaderboardDisplay = leaderboardDisplay;
-
 	}
 
 	@Override
@@ -165,11 +164,13 @@ public class MouseListener extends MouseAdapter {
 			}
 			// Leaderboard screen
 			else if (game.gameState == STATE.Leaderboard) {
-				if (mouseOver(mx, my, 353, 490, 566, 166)) {
-					leaderboard.loadLeaderboard();
-					leaderboardDisplay.refresh();
-					game.gameState = STATE.LeaderboardDisplay;
-					return;
+				if(leaderboard.getUser() != "") {
+					if (mouseOver(mx, my, 353, 490, 566, 166)) {
+						leaderboard.loadLeaderboard();
+						leaderboardDisplay.refresh();
+						game.gameState = STATE.LeaderboardDisplay;
+						return;
+					}
 				}
 			} else if (game.gameState == STATE.Credits) {
 				if (mouseOver(mx, my, 566, 650, 133, 42)) {
@@ -237,22 +238,28 @@ public class MouseListener extends MouseAdapter {
 				//PauseMenu-> Main Menu
 			} if (mouseOver(mx, my, 445, 372, 390, 337)) {
 				// TODO: make one method in the handler for resetGame() that does all of the following things
+				// If the user clicks on "Resume" the game unpauses
 				game.unPause();
+				// If the user clicks on "Quit" the game takes you to the Main Menu Page
 				game.gameState = STATE.Menu;
+				// After the user quits survival, these methods clear the enemies, a player and resets the pickups
 				handler.clearEnemies();
 				handler.clearPlayer();
 				handler.pickups.clear();
+				// These methods reset all of the HUD items
 				hud.setScore(0);
 				hud.updateScoreColor(Color.white);
 				hud.setHealth(100);
 				hud.setLevel(1);
 				hud.setExtraLives(0);
+				// These methods make it so that when the player quits and plays survival, the player is on level 1
 				upgrades.resetUpgrades();
 				spawner.restart();
 				spawner.addLevels();
 				spawner2.restart();
 				spawner2.addLevels();
 				Spawn1to5.LEVEL_SET = 1;
+				// After the player quits boss mode, the spawn of bosses order restarts to the first one.
 				spawnBosses.restart();
 				return;
 			}
