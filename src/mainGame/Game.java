@@ -85,7 +85,7 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public Game(String op, String addr, int port, String room, String pass) {
 		handler = new Handler(this);
-		hud = new HUD(this);
+		hud = new HUD(this, handler);
 		player = new Player(WIDTH / 2 - 21, HEIGHT / 2 - 21, ID.Player, handler, this.hud, this);
 		spawner = new Spawn1to5(this.handler, this.hud, this, player);
 		spawner2 = new Spawn5to10(this.handler, this.hud, this.spawner, this, player);
