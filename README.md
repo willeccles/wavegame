@@ -1,5 +1,5 @@
-# wavegame
-Group A1's Wavegame project.
+# ~~wavegame~~ Player Known's Battle Lands
+Group A1's ~~Wavegame~~ Player Known's Battle Lands project.
 
 ## Links:
 
@@ -8,7 +8,7 @@ Group A1's Wavegame project.
 
 ## How to setup and play:
 
-1. Unzip the file Wave\_Game.zip
+1. Unzip the file.
 
 2. Open Eclipse. Press File -> Import -> General -> Exisiting Projects into Workspace -> Next
 
@@ -21,3 +21,10 @@ Group A1's Wavegame project.
 6. This file contains the main method, so you can now click the green arrow at the top toolbar to start the game.
 
 7. Information on how to play the game is located under the "Help" option in the game menu.
+
+## Known Issues (as of 12-07-2017)
+
+- Space bar advances level (left in as dev feature).
+- Going to a certain boss in Waves mode and then going back to the menu and going back into Waves mode puts you at the wrong level.
+- There is no endgame in Waves mode.
+- Certain multiplayer features need smoothing out.
