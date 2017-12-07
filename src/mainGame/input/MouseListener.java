@@ -43,7 +43,6 @@ public class MouseListener extends MouseAdapter {
 		this.leaderboard = leaderboard;
 		this.spawnBosses = spawnBosses;
 		this.leaderboardDisplay = leaderboardDisplay;
-
 	}
 
 	@Override
@@ -165,11 +164,13 @@ public class MouseListener extends MouseAdapter {
 			}
 			// Leaderboard screen
 			else if (game.gameState == STATE.Leaderboard) {
-				if (mouseOver(mx, my, 353, 490, 566, 166)) {
-					leaderboard.loadLeaderboard();
-					leaderboardDisplay.refresh();
-					game.gameState = STATE.LeaderboardDisplay;
-					return;
+				if(leaderboard.getUser() != "") {
+					if (mouseOver(mx, my, 353, 490, 566, 166)) {
+						leaderboard.loadLeaderboard();
+						leaderboardDisplay.refresh();
+						game.gameState = STATE.LeaderboardDisplay;
+						return;
+					}
 				}
 			} else if (game.gameState == STATE.Credits) {
 				if (mouseOver(mx, my, 566, 650, 133, 42)) {
