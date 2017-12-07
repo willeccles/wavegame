@@ -65,6 +65,7 @@ public class SpawnBosses {
 							player.resetCount();
 							levelNumber = this.randLevel();
 							tempCounter = 0;
+							hud.setLevel(hud.getLevel() + 1);
 						}
 					}
 				}
