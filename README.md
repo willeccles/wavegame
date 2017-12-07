@@ -40,6 +40,5 @@ Group A1's ~~Wavegame~~ Player Known's Battle Lands project.
 ## Known Issues (as of 12-07-2017)
 
 - Space bar advances level (left in as dev feature).
-- Going to a certain boss in Waves mode and then going back to the menu and going back into Waves mode puts you at the wrong level.
 - There is no endgame in Waves mode.
 - Certain multiplayer features need smoothing out.
