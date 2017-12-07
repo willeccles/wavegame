@@ -104,7 +104,7 @@ public class Menu {
 
 			g.setFont(font4);
 			g.setColor(Color.orange);
-			g.drawString("Player Known BattleLands", 140, 70);
+			g.drawString("PlayerKnown's BattleLands", 130, 70);
 
 			g.setColor(Color.orange);
 			g.drawRect(30, 90, 1220, 120);
