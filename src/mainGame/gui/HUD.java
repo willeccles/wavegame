@@ -31,8 +31,9 @@ public class HUD {
 	private Color scoreColor;
 	private int extraLives;
 	public Game game;
+	private Handler handler;
 	
-	public HUD(Game game) {
+	public HUD(Game game, Handler handler) {
 		this.game = game;
 		health = 100;
 		healthMax = 100;
@@ -80,7 +81,7 @@ public class HUD {
 		g.setFont(font);
 
 		g.drawString("Score: " + score, 15, 115);
-		if(!(game.getGameState() == STATE.Survival)) {
+		if(game.getGameState() == STATE.Wave || game.getGameState() == STATE.Bosses) {
 			if(level != 101) {
 			g.drawString("Level: " + level, 15, 150);
 			} else if (level == 101) { 
@@ -90,7 +91,7 @@ public class HUD {
 		} else {
 			g.drawString("Extra Lives: " + extraLives, 15, 150);
 		}
-
+		
 		if (ability.equals("freezeTime")) {
 			g.drawString("Time Freezes: " + abilityUses, Game.WIDTH - 300, 64);
 		} else if (ability.equals("clearScreen")) {
