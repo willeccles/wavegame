@@ -28,7 +28,7 @@ jar: all
 	@echo Main-Class: mainGame.Game >> gamemanifest.mf
 	@echo Class-Path: . >> servermanifest.mf
 	@echo Main-Class: server.Server >> servermanifest.mf
-	jar cvmf gamemanifest.mf gameclient.jar $(MAINDIR)/*.class $(AUDIO) $(NET) $(IMGDIR) $(SOUNDDIR)
+	jar cvmf gamemanifest.mf gameclient.jar $(MAINDIR)/*.class $(AUDIO) $(NET) $(IMGDIR) $(SOUNDDIR) $(ENEMY) $(SPAWN) $(GUI) $(INPUT) $(GFX) $(PICKUP)
 	jar cvmf servermanifest.mf gameserver.jar $(SERVERCLASSES)
 	@rm *.mf
 
