@@ -383,10 +383,10 @@ public class Spawn5to10 {
 
 	public void restart() {
 		timer = 10;
-		levelNumber = -10;
+		levelNumber = -5;
 		tempCounter = 0;
 		levelTimer = 150;
-		levelsLeft = 10;
+		levelsLeft = 5;
 	}
 	
 	public int rand() {
