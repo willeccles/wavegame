@@ -27,8 +27,8 @@ public class LBWorker {
 	 * @throws IOException
 	 */
 	public void exchangeInfo(String username, int score) throws IOException {
-		client.setSoTimeout(2000);
 		client = new Socket(_address, _port);
+		client.setSoTimeout(2000);
 
 		// IO streams
 		DataOutputStream out = new DataOutputStream(client.getOutputStream());
