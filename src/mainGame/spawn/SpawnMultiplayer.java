@@ -152,6 +152,7 @@ public class SpawnMultiplayer {
 		client = null;
 		handler.setMulti(false);
 		handler.object.clear();
+		handler.pickups.clear();
 		hud.health = 100;
 		hud.setScore(0);
 		player.resetVel();
